@@ -27,6 +27,11 @@ public class Dialogue : MonoBehaviour
 
     Queue<DialogueLine> lines = new();
     [SerializeField] float textSpeed = 0.5f;
+    public static Dialogue Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
