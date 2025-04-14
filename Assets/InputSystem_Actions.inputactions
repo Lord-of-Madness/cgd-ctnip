@@ -1001,7 +1001,7 @@
                 {
                     "name": "",
                     "id": "27accaac-c0a1-4a3e-930d-7a397eb560f1",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",

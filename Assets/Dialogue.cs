@@ -35,12 +35,13 @@ public class Dialogue : MonoBehaviour
 
     private void Start()
     {
-        InputSystem.actions["Skip"].performed += ctx => SkipText();
-    }
+		InputSystem.actions["Skip"].performed += ctx => SkipText();
+		InputSystem.actions["Cancel"].performed += ctx => gameObject.SetActive(false);
+	}
 
-    public void ShowCharacterWithText(DialogueLine line)
+	public void ShowCharacterWithText(DialogueLine line)
     {
-        gameObject.SetActive(true);
+		gameObject.SetActive(true);
         SpeakerName.text = line.Who;
         CharacterImage.sprite = line.Sprite;
         if (textween != null) FinishTween();
@@ -74,4 +75,16 @@ public class Dialogue : MonoBehaviour
         textween.Kill(true);
         textween = null;
     }
+
+	private void OnEnable()
+	{
+		InputSystem.actions["Jump"].actionMap.Disable();
+	}
+
+	private void OnDisable()
+	{
+        FinishTween();
+        lines.Clear();
+		InputSystem.actions["Jump"].actionMap.Enable();
+	}
 }
