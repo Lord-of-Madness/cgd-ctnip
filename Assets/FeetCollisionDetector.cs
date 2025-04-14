@@ -20,13 +20,14 @@ public class FeetCollisionDetector : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-        Debug.Log("Trigger feet stay!");
+        if (other.isTrigger) return;
+        //Debug.Log("Trigger feet stay!");
         feetTriggerStay.Invoke();
     }
 
 	private void OnTriggerExit(Collider other)
 	{
-        Debug.Log("Trigger feet exit!");
+        //Debug.Log("Trigger feet exit!");
         feetTriggerExit.Invoke();
 	}
 }

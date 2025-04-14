@@ -816,6 +816,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2040707042}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueGiver, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6202653849491957795, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
       propertyPath: m_Name
       value: Interactable
@@ -1066,6 +1094,36 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+--- !u!1 &2040707038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4556604442517772185, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
+  m_PrefabInstance: {fileID: 4214593601229081260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2040707042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040707038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7395d83865aa7f48a72b62e650c71f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - Hello!
+  - Yes
+  - I am a talking cube
+  - And you are in a test scene
+  - What were you expecting?
+  - A real character?
+  - Sadly, the author of this scene can't create anything pretty
+  - So.....
+  - I will have to suffice
+  - Have fun!
+  charName: Talking Cube
+  sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
 --- !u!1 &2133987764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1303,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7631286950751228214, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 318442601}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4556604442517772185, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2040707042}
   m_SourcePrefab: {fileID: 100100000, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

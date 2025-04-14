@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-		Debug.Log("Moving in dir: " + curVelocity.ToString());
+		//Debug.Log("Moving in dir: " + curVelocity.ToString());
         transform.position += curVelocity * Time.deltaTime;
 	}
 
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         timeSinceJump = 0;
-        Debug.Log("Fire jump");
+        //Debug.Log("Fire jump");
         curVelocity.y = jumpForce;
         isGrounded = false;
     }
