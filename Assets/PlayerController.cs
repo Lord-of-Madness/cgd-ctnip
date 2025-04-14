@@ -4,26 +4,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Jumping")]
     [SerializeField]
     float jumpForce = 10f;
-    [SerializeField]
-    float speed = 100;
-
-    InputAction moveAction;
-    InputAction jumpAction;
-    Rigidbody rb;
-
-    Vector3 curVelocity = Vector3.zero;
-
-    bool isGrounded = true;
-    float timeSinceJump = 0;
     [SerializeField]
     float minTimeBetweenJumps = 0.5f;
     [SerializeField]
     float jumpTime = 2;
 
+    bool isGrounded = true;
+    float timeSinceJump = 0;
+
+    [Header("Movement")]
+    [SerializeField]
+    float speed = 100;
     [SerializeField]
     bool isoMovement = true;
+
+    Vector3 curVelocity = Vector3.zero;
+
+    InputAction moveAction;
+    InputAction jumpAction;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,9 +34,6 @@ public class PlayerController : MonoBehaviour
 		// 3. Find the references to the "Move" and "Jump" actions
 		moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
-
-
-        rb = GetComponent<Rigidbody>();
 
         Physics.gravity = new Vector3(0, -20, 0);
     }
