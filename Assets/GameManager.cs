@@ -1,9 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+
+    private bool firstCharacterActive = true;
+
     private void Awake()
     {
         Instance = this;
@@ -24,4 +29,44 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void SwapCharacters()
+    {
+        if (firstCharacterActive) 
+        { 
+            EnableCameraFilter();
+			RenderSettings.ambientSkyColor = Color.gray;
+        }
+        else
+        {
+            DisableCameraFilter();
+            RenderSettings.ambientSkyColor = Color.black;
+		}
+
+		firstCharacterActive = !firstCharacterActive;
+    }
+
+    void DisableCameraFilter()
+    {
+        Camera camera = Camera.main;
+        if (camera == null) return;
+
+        Volume volume = camera.GetComponent<Volume>();
+
+        if (volume == null) return;
+
+        volume.enabled = false;
+    }
+
+	void EnableCameraFilter()
+	{
+		Camera camera = Camera.main;
+		if (camera == null) return;
+
+		Volume volume = camera.GetComponent<Volume>();
+
+        if (volume == null) { Debug.Log("No volume found"); return; }
+
+		volume.enabled = true;
+	}
 }

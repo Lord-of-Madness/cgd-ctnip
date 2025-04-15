@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     InputAction moveAction;
     InputAction jumpAction;
+    InputAction swapCharAction;
 
     [Header("References")]
     [SerializeField]
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
 		// 3. Find the references to the "Move" and "Jump" actions
 		moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        swapCharAction = InputSystem.actions.FindAction("SwapCharacters");
 
         Physics.gravity = new Vector3(0, -20, 0);
     }
@@ -59,6 +61,11 @@ public class PlayerController : MonoBehaviour
         Move();
         
         if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime/jumpTime) * jumpForce;
+
+        if (swapCharAction.WasPressedThisFrame())
+        {
+            GameManager.Instance.SwapCharacters();
+        }
 
 	}
 
