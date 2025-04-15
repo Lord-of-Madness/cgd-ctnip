@@ -23,13 +23,21 @@ public class PlayerController : MonoBehaviour
 
     Vector3 curVelocity = Vector3.zero;
 
-    InputAction moveAction;
-    InputAction jumpAction;
-    InputAction swapCharAction;
+    [Header("CharacterSprites")]
+    [SerializeField]
+    Sprite char1Sprite;
+    [SerializeField]
+    Sprite char2Sprite;
+
+    SpriteRenderer spriteRenderer;
 
     [Header("References")]
     [SerializeField]
     OverheadDialogue overheadDialogue;
+
+    InputAction moveAction;
+    InputAction jumpAction;
+    InputAction swapCharAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +46,8 @@ public class PlayerController : MonoBehaviour
 		moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
         swapCharAction = InputSystem.actions.FindAction("SwapCharacters");
+
+        spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
         Physics.gravity = new Vector3(0, -20, 0);
     }
@@ -65,6 +75,7 @@ public class PlayerController : MonoBehaviour
         if (swapCharAction.WasPressedThisFrame())
         {
             GameManager.Instance.SwapCharacters();
+            AssignCharSprite();
         }
 
 	}
@@ -91,6 +102,18 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Fire jump");
         curVelocity.y = jumpForce;
         isGrounded = false;
+    }
+
+    void AssignCharSprite()
+    {
+        if (GameManager.Instance.firstCharacterActive)
+        {
+            spriteRenderer.sprite = char1Sprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = char2Sprite;
+        }
     }
 
     //Called from FeetCollider

@@ -327,7 +327,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1624227479835879206}
@@ -353,6 +353,8 @@ MonoBehaviour:
   jumpTime: 1
   speed: 10
   isoMovement: 1
+  char1Sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  char2Sprite: {fileID: 21300000, guid: 9447d6e30f4f08a4fbb86905afb99dcf, type: 3}
   overheadDialogue: {fileID: 5766070773746383106}
 --- !u!54 &2618553586226422925
 Rigidbody:
@@ -407,7 +409,7 @@ Transform:
   m_GameObject: {fileID: 8318645843292226408}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 100.000015, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []

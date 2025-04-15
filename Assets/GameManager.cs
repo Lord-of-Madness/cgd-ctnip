@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
 
-    private bool firstCharacterActive = true;
+    public bool firstCharacterActive = true;
 
     private void Awake()
     {
