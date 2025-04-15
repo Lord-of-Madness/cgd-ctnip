@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class FreezeGlobalRotation : MonoBehaviour
 {
     public Vector3 fixedRotation = new Vector3(30,45,0);

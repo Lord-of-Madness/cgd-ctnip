@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+[ExecuteInEditMode]
 public class SetGlobalScale : MonoBehaviour
 {
 	public Vector3 fixedScale = new Vector3(1, 1, 1);
