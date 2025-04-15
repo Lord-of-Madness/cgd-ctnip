@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
     InputAction moveAction;
     InputAction jumpAction;
 
-
+    [Header("References")]
+    [SerializeField]
+    OverheadDialogue overheadDialogue;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -101,4 +103,11 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
 	}
 
+
+	private void OnTriggerEnter(Collider collision)
+	{
+        if (collision.CompareTag("Interactable"))
+            overheadDialogue.ShowText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
+
+    }
 }

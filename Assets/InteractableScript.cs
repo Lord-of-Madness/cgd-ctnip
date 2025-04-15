@@ -1,13 +1,17 @@
 using DG.Tweening;
+using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class InteractableScript : MonoBehaviour
 {
 	public UnityEvent OnInteract;
+
+	public List<string> commentLines = new();
     
 	
 	Collider proximity;

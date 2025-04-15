@@ -378,6 +378,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2583891461046445640, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3632587552803034242, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -430,6 +434,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7815513667489443224, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7963321509582736979, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_Name
       value: Character
@@ -437,7 +445,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2264338679684503152, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
 --- !u!1 &1259913327
 GameObject:
@@ -815,6 +826,14 @@ PrefabInstance:
     - target: {fileID: 3593776701168819361, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: commentLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
+      propertyPath: 'commentLines.Array.data[0]'
+      value: Woah, a cube! Wonder if it can talk!
       objectReference: {fileID: 0}
     - target: {fileID: 5289973781576152483, guid: c3a38f8f81a6a0743ae5026fcfd15f1a, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size
