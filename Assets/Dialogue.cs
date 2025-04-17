@@ -37,6 +37,7 @@ public class Dialogue : MonoBehaviour
     {
 		InputSystem.actions["Skip"].performed += ctx => SkipText();
 		InputSystem.actions["Cancel"].performed += ctx => gameObject.SetActive(false);
+        gameObject.SetActive(false);
 	}
 
 	public void ShowCharacterWithText(DialogueLine line)

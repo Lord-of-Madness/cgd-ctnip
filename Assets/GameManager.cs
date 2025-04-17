@@ -11,24 +11,18 @@ public class GameManager : MonoBehaviour
     public PlayerController character1;
     public PlayerController character2;
 
-    Camera camera;
+    Camera m_mainCamera;
 
     public bool firstCharacterActive = true;
 
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(Instance);
     }
     void Start()
     {
-        camera = Camera.main;
-        Dialogue.Instance.ShowCharacterWithText(new DialogueLine("Hello, world!", "Player", null));
-        Dialogue.Instance.ShowCharacterWithText(new List<DialogueLine>()
-        {
-            new ("This is a test.", "Player", null),
-            new ("How are you?", "Player", null),
-            new ("Goodbye!", "Player", null)
-        });
+        m_mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -51,7 +45,7 @@ public class GameManager : MonoBehaviour
 			character2.gameObject.GetComponent<AITarget>().enabled = false;
 			character2.gameObject.GetComponent<AgentLinkMover>().enabled = false; 
             character2.enabled = true;
-            camera.GetComponent<FollowPlayer>().player = character2.gameObject;
+            m_mainCamera.GetComponent<FollowPlayer>().player = character2.gameObject;
         }
         else
         {
@@ -65,7 +59,7 @@ public class GameManager : MonoBehaviour
 			character2.gameObject.GetComponent<AITarget>().enabled = true;
 			character2.gameObject.GetComponent<AgentLinkMover>().enabled = true;
 			character2.enabled = false;
-			camera.GetComponent<FollowPlayer>().player = character1.gameObject;
+			m_mainCamera.GetComponent<FollowPlayer>().player = character1.gameObject;
 		}
 
 		firstCharacterActive = !firstCharacterActive;
