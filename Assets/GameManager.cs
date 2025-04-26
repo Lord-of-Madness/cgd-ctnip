@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         if (activeChar == PlayerCharacter.Beth) 
         {
-            Debug.Log("Switching from Beth to Erik");
+            //Debug.Log("Switching from Beth to Erik");
             EnableCameraFilter();
 			RenderSettings.ambientSkyColor = Color.gray;
 
@@ -53,13 +53,11 @@ public class GameManager : MonoBehaviour
             erikPC.EnablePlayerControl();
 
             m_mainCamera.GetComponent<FollowPlayer>().player = erikPC.gameObject;
-			Debug.Log("Switching from Beth to Erik2 - activeChar: " + activeChar.ToString());
-            activeChar = PlayerCharacter.Erik;
-            Debug.Log("Switching from Beth to Erik3 - activeChar: " + activeChar.ToString());
-		}
+		    activeChar = PlayerCharacter.Erik;
+        }
 		else
         {
-			Debug.Log("Switching from Erik to Beth");
+			//Debug.Log("Switching from Erik to Beth");
 			DisableCameraFilter();
             RenderSettings.ambientSkyColor = Color.black;
 

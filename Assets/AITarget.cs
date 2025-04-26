@@ -20,6 +20,7 @@ public class AITarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_agent == null || !m_agent.enabled) { Debug.LogWarning("Agent null or disabled when trying to update AITarget!"); return; }
         m_distance = Vector3.Distance(m_agent.transform.position, target.position);
 
         if (m_distance < closeEnoughDistance)
