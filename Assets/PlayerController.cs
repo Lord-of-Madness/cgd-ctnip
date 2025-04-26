@@ -1,5 +1,7 @@
+using Unity.AI.Navigation.Samples;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -20,14 +22,10 @@ public class PlayerController : MonoBehaviour
     float speed = 100;
     [SerializeField]
     bool isoMovement = true;
+    [SerializeField]
+    bool controlledByPlayer = true;
 
     Vector3 curVelocity = Vector3.zero;
-
-    [Header("CharacterSprites")]
-    [SerializeField]
-    Sprite char1Sprite;
-    [SerializeField]
-    Sprite char2Sprite;
 
     SpriteRenderer spriteRenderer;
 
@@ -37,7 +35,6 @@ public class PlayerController : MonoBehaviour
 
     InputAction moveAction;
     InputAction jumpAction;
-    InputAction swapCharAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +42,6 @@ public class PlayerController : MonoBehaviour
 		// 3. Find the references to the "Move" and "Jump" actions
 		moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
-        swapCharAction = InputSystem.actions.FindAction("SwapCharacters");
 
         spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
@@ -68,15 +64,10 @@ public class PlayerController : MonoBehaviour
         }
         else timeSinceJump += Time.deltaTime;
 
-        Move();
+        if (controlledByPlayer)
+            Move();
         
         if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime/jumpTime) * jumpForce;
-
-        if (swapCharAction.WasPressedThisFrame())
-        {
-            GameManager.Instance.SwapCharacters();
-            AssignCharSprite();
-        }
 
 	}
 
@@ -104,17 +95,6 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
     }
 
-    void AssignCharSprite()
-    {
-        if (GameManager.Instance.firstCharacterActive)
-        {
-            spriteRenderer.sprite = char1Sprite;
-        }
-        else
-        {
-            spriteRenderer.sprite = char2Sprite;
-        }
-    }
 
     //Called from FeetCollider
     public void FeetTriggerStay()
@@ -139,5 +119,29 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Interactable"))
             overheadDialogue.ShowText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
 
+    }
+
+    public void StopFollowingOtherChar()
+    {
+		gameObject.GetComponent<NavMeshAgent>().enabled = false;
+		gameObject.GetComponent<AITarget>().enabled = false;
+		gameObject.GetComponent<AgentLinkMover>().enabled = false;
+	}
+
+    public void StartFollowingOtherChar()
+    {
+		gameObject.GetComponent<NavMeshAgent>().enabled = true;
+		gameObject.GetComponent<AITarget>().enabled = true;
+		gameObject.GetComponent<AgentLinkMover>().enabled = true;
+	}
+
+    public void DisablePlayerControl()
+    {
+        controlledByPlayer = false;
+    }
+
+    public void EnablePlayerControl()
+    {
+        controlledByPlayer = true;
     }
 }

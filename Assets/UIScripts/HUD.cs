@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class HUD : MonoBehaviour
 {
-    public enum PlayerCharacter
-    {
-        Beth,
-        Erik
-    }
     [SerializeField] GameObject BethHUD;
     [SerializeField] GameObject ErikHUD;
     private void Start()
     {
         BethHUD.SetActive(false);
         ErikHUD.SetActive(false);
+        GameManager.Instance.charChanged.AddListener(ShowCorrectHUD);
     }
+
+    void ShowCorrectHUD()
+    {
+        ShowHUD(GameManager.Instance.activeChar);
+    }
+
     public void ShowHUD(PlayerCharacter character)
     {
         switch (character)

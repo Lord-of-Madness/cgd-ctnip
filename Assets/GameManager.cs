@@ -3,17 +3,23 @@ using Unity.AI.Navigation.Samples;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public PlayerController character1;
-    public PlayerController character2;
+    public PlayerController bethPC;
+    public PlayerController erikPC;
 
     Camera m_mainCamera;
 
-    public bool firstCharacterActive = true;
+    public PlayerCharacter activeChar = PlayerCharacter.Beth;
+
+    InputAction swapCharAction;
+
+    public UnityEvent charChanged;
 
     private void Awake()
     {
@@ -22,65 +28,69 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+	    swapCharAction = InputSystem.actions.FindAction("SwapCharacters");
         m_mainCamera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (swapCharAction.WasPressedThisFrame()) SwapCharacters();   
     }
 
     public void SwapCharacters()
     {
-        if (firstCharacterActive) 
-        { 
+        if (activeChar == PlayerCharacter.Beth) 
+        {
+            Debug.Log("Switching from Beth to Erik");
             EnableCameraFilter();
 			RenderSettings.ambientSkyColor = Color.gray;
-			character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-			character1.gameObject.GetComponent<AITarget>().enabled = true;
-			character1.gameObject.GetComponent<AgentLinkMover>().enabled = true;
-            character1.enabled = false;
-			character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-			character2.gameObject.GetComponent<AITarget>().enabled = false;
-			character2.gameObject.GetComponent<AgentLinkMover>().enabled = false; 
-            character2.enabled = true;
-            m_mainCamera.GetComponent<FollowPlayer>().player = character2.gameObject;
-        }
-        else
-        {
-            DisableCameraFilter();
-            RenderSettings.ambientSkyColor = Color.black;
-			character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-			character1.gameObject.GetComponent<AITarget>().enabled = false;
-			character1.gameObject.GetComponent<AgentLinkMover>().enabled = false; 
-            character1.enabled = true;
-			character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-			character2.gameObject.GetComponent<AITarget>().enabled = true;
-			character2.gameObject.GetComponent<AgentLinkMover>().enabled = true;
-			character2.enabled = false;
-			m_mainCamera.GetComponent<FollowPlayer>().player = character1.gameObject;
-		}
 
-		firstCharacterActive = !firstCharacterActive;
+            bethPC.StartFollowingOtherChar();
+            bethPC.DisablePlayerControl();
+
+			erikPC.StopFollowingOtherChar();
+            erikPC.EnablePlayerControl();
+
+            m_mainCamera.GetComponent<FollowPlayer>().player = erikPC.gameObject;
+			Debug.Log("Switching from Beth to Erik2 - activeChar: " + activeChar.ToString());
+            activeChar = PlayerCharacter.Erik;
+            Debug.Log("Switching from Beth to Erik3 - activeChar: " + activeChar.ToString());
+		}
+		else
+        {
+			Debug.Log("Switching from Erik to Beth");
+			DisableCameraFilter();
+            RenderSettings.ambientSkyColor = Color.black;
+
+            bethPC.StopFollowingOtherChar();
+            bethPC.EnablePlayerControl();
+
+            erikPC.StartFollowingOtherChar();
+			erikPC.DisablePlayerControl();
+
+			m_mainCamera.GetComponent<FollowPlayer>().player = bethPC.gameObject;
+            activeChar = PlayerCharacter.Beth;
+		}
+        charChanged.Invoke();
     }
 
     void DisableCameraFilter()
     {
         Camera camera = Camera.main;
-        if (camera == null) return;
+		if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
 
-        Volume volume = camera.GetComponent<Volume>();
+		Volume volume = camera.GetComponent<Volume>();
 
-        if (volume == null) return;
+		if (volume == null) { Debug.Log("No volume found"); return; }
 
-        volume.enabled = false;
+		volume.enabled = false;
     }
 
 	void EnableCameraFilter()
 	{
 		Camera camera = Camera.main;
-		if (camera == null) return;
+        if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
 
 		Volume volume = camera.GetComponent<Volume>();
 
@@ -88,4 +98,10 @@ public class GameManager : MonoBehaviour
 
 		volume.enabled = true;
 	}
+}
+
+public enum PlayerCharacter
+{
+	Beth,
+	Erik
 }
