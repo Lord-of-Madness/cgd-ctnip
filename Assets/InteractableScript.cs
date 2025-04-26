@@ -46,11 +46,11 @@ public class InteractableScript : MonoBehaviour
 	private void TweenLabel()
 	{
 		int killed = label.transform.DOComplete();
-		Debug.Log("Killed: " + killed + " tweens");
+		//Debug.Log("Killed: " + killed + " tweens");
 		Vector3 origScale = label.transform.localScale;
-		Debug.Log("OrigScale: "+ origScale);
+		//Debug.Log("OrigScale: "+ origScale);
 		Vector3 targetScale = origScale * scaleTweenRatio;
-		Debug.Log("TargetScale: " + targetScale);
+		//Debug.Log("TargetScale: " + targetScale);
 		Sequence seq = DOTween.Sequence();
 		seq.SetTarget(label.transform);
 		seq.Append(label.transform.DOScale(origScale * scaleTweenRatio, scaleTweenDuration/2));
@@ -64,7 +64,7 @@ public class InteractableScript : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Player"))
+		if (other.gameObject.CompareTag("Player") && other.transform.parent.GetComponent<PlayerController>().IsControlledByPlayer())
 		{
 			label.SetActive(true);
 			playerInProximity = true;

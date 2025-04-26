@@ -135,6 +135,8 @@ public class PlayerController : MonoBehaviour
 		gameObject.GetComponent<AgentLinkMover>().enabled = true;
 	}
 
+    public bool IsControlledByPlayer() => controlledByPlayer;
+
     public void DisablePlayerControl()
     {
         controlledByPlayer = false;
