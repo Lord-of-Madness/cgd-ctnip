@@ -27,11 +27,11 @@ public class PlayerController : MonoBehaviour
 
     Vector3 curVelocity = Vector3.zero;
 
-    SpriteRenderer spriteRenderer;
-
     [Header("References")]
     [SerializeField]
     OverheadDialogue overheadDialogue;
+    [SerializeField]
+    GameObject bodyArmature;
 
     InputAction moveAction;
     InputAction jumpAction;
@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
 		// 3. Find the references to the "Move" and "Jump" actions
 		moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
-
-        spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
         Physics.gravity = new Vector3(0, -20, 0);
     }
@@ -65,7 +63,10 @@ public class PlayerController : MonoBehaviour
         else timeSinceJump += Time.deltaTime;
 
         if (controlledByPlayer)
+        {
             Move();
+            RotateInMoveDir();
+        }
         
         if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime/jumpTime) * jumpForce;
 
@@ -73,8 +74,26 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-		//Debug.Log("Moving in dir: " + curVelocity.ToString());
+        //Debug.Log("Moving in dir: " + curVelocity.ToString());
         transform.position += curVelocity * Time.deltaTime;
+
+        bodyArmature.GetComponent<Animator>().Play("Idle Walk Run Blend");
+	}
+
+    void RotateInMoveDir()
+    {
+		//Rotate in direction of velocity
+		if (curVelocity != Vector3.zero)
+		{
+			Quaternion bodyRot = Quaternion.FromToRotation(Vector3.forward, new Vector3(curVelocity.x,0,curVelocity.z));
+
+            //For some reason in this case the rotation was (-180,0,0) which made the character disappear -> no better fix found
+            if (Vector3.forward.normalized == -new Vector3(curVelocity.x, 0, curVelocity.z).normalized) 
+                bodyRot = Quaternion.Euler(0,-180,0);
+			
+            //Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
+			bodyArmature.transform.rotation = bodyRot.normalized;
+		}
 	}
 
 	void MoveByKeyboard(Vector2 dir)
@@ -93,11 +112,14 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Fire jump");
         curVelocity.y = jumpForce;
         isGrounded = false;
-    }
+
+		bodyArmature.GetComponent<Animator>().PlayInFixedTime("JumpStart");
+
+	}
 
 
-    //Called from FeetCollider
-    public void FeetTriggerStay()
+	//Called from FeetCollider
+	public void FeetTriggerStay()
     {
         //Debug.Log("Feet collision detected");
         //This is because collider can collider the next frame after jump and instantly enable jumping again
