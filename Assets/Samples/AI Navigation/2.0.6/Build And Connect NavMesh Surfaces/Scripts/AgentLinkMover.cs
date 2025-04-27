@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Xml.Serialization;
 
 namespace Unity.AI.Navigation.Samples
 {
@@ -21,8 +22,14 @@ namespace Unity.AI.Navigation.Samples
         public OffMeshLinkMoveMethod m_Method = OffMeshLinkMoveMethod.Parabola;
         public AnimationCurve m_Curve = new AnimationCurve();
 
+        [SerializeField]
+        private Animator m_Animator;
+        private NavMeshAgent m_Agent;
+
         IEnumerator Start()
         {
+            m_Agent = GetComponent<NavMeshAgent>();
+
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
             agent.autoTraverseOffMeshLink = false;
             while (true)
@@ -56,7 +63,12 @@ namespace Unity.AI.Navigation.Samples
 
         IEnumerator Parabola(NavMeshAgent agent, float height, float duration)
         {
-            OffMeshLinkData data = agent.currentOffMeshLinkData;
+            //Animation
+            m_Animator.SetBool("Jump", true);
+			m_Animator.SetBool("Grounded", false);
+
+
+			OffMeshLinkData data = agent.currentOffMeshLinkData;
             Vector3 startPos = agent.transform.position;
             Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
             float normalizedTime = 0.0f;
@@ -83,5 +95,15 @@ namespace Unity.AI.Navigation.Samples
                 yield return null;
             }
         }
-    }
+
+		private void Update()
+		{
+			if (m_Agent.isOnOffMeshLink == false)
+            {
+                m_Animator.SetBool("Jump", false);
+                m_Animator.SetBool("Grounded", true);
+
+            }
+		}
+	}
 }

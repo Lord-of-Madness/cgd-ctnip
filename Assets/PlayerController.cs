@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using Unity.AI.Navigation.Samples;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -36,7 +37,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject bodyArmature;
 
-    private InputActionsGen inputActions;
+    //Animation stuff
+    public Animator bodyAnimator;
+    string animSpeedID = "Speed";
+	string animJumpID = "Jump";
+	string animGroundedID = "Grounded";
+	string animFreeFallID = "FreeFall";
+	string animMotionSpeedID = "MotionSpeed";
+
+	private InputActionsGen inputActions;
     public PlayerData playerData;
     public UnityEvent onToolUsed;
     /*
@@ -59,7 +68,13 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerData = GetComponent<PlayerData>();
+        if (bodyArmature != null) { 
+            bodyAnimator = bodyArmature.GetComponent<Animator>();
+        }
+        else { Debug.LogWarning("Armature not set! Can't save the animator component"); }
+
+
+            playerData = GetComponent<PlayerData>();
         inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump();};
         inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
         inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
@@ -105,15 +120,33 @@ public class PlayerController : MonoBehaviour
         }
 
         if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime / jumpTime) * jumpForce;
+        else curVelocity.y = 0;
 
-    }
+        //Animator set values
+        if (controlledByPlayer)
+        {
+            bodyAnimator.applyRootMotion = true;
 
-    void Move()
+            bodyAnimator.SetBool(animGroundedID, isGrounded);
+            bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
+
+            if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
+            else bodyAnimator.SetFloat(animMotionSpeedID, 1);
+
+            bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 10);
+        }
+
+        else
+        {
+            bodyAnimator.applyRootMotion = false;
+		}
+	}
+
+	void Move()
     {
         //Debug.Log("Moving in dir: " + curVelocity.ToString());
         transform.position += curVelocity * Time.deltaTime;
 
-        bodyArmature.GetComponent<Animator>().Play("Idle Walk Run Blend");
     }
 
     void RotateInMoveDir()
@@ -149,7 +182,7 @@ public class PlayerController : MonoBehaviour
         curVelocity.y = jumpForce;
         isGrounded = false;
 
-        bodyArmature.GetComponent<Animator>().PlayInFixedTime("JumpStart");
+        bodyArmature.GetComponent<Animator>().SetBool("Jump", true);
 
     }
 
