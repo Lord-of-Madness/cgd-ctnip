@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerController bethPC;
     public PlayerController erikPC;
-
+    public PlayerController ActivePlayer { get => activeChar == PlayerCharacter.Beth ? bethPC : erikPC; }
     Camera m_mainCamera;
 
     public PlayerCharacter activeChar = PlayerCharacter.Beth;

@@ -1,7 +1,10 @@
+using System;
 using Unity.AI.Navigation.Samples;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -33,44 +36,77 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject bodyArmature;
 
-    InputAction moveAction;
-    InputAction jumpAction;
+    private InputActionsGen inputActions;
+    public PlayerData playerData;
+    public UnityEvent onToolUsed;
+    /*
+    public class ReloadEventData// might be useful later.
+    {
+        public int count;
+        public ReloadEventData(int count)
+        {
+            this.count = count;
+        }
+    }*/
+    public UnityEvent/*<ReloadEventData>*/ onReload;
+
+    private void Awake()
+    {
+        inputActions = new();
+        inputActions.Player.Enable();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-		// 3. Find the references to the "Move" and "Jump" actions
-		moveAction = InputSystem.actions.FindAction("Move");
-        jumpAction = InputSystem.actions.FindAction("Jump");
+        playerData = GetComponent<PlayerData>();
+        inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); else timeSinceJump += Time.deltaTime; };
+        inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
+        inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
 
         Physics.gravity = new Vector3(0, -20, 0);
+    }
+
+    private void Attack(InputAction.CallbackContext context)
+    {
+        if (playerData.TryFire())//The numerical changes are done in the PlayerData class
+        {
+            onToolUsed.Invoke();
+            //TODO firing rays/projectiles, flashing flashes, animations and stuff
+        }
+        else
+        {
+            //TODO: Play "Out of ammo!"
+        }
+    }
+    private void Reload(InputAction.CallbackContext context)
+    {
+        if (playerData.TryReload())
+        {//The numerical changes are done in the PlayerData class
+            onReload.Invoke();
+            //TODO animaèky and stuff
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-		// 4. Read the "Move" action value, which is a 2D vector
-		// and the "Jump" action state, which is a boolean value
+        // 4. Read the "Move" action value, which is a 2D vector
+        // and the "Jump" action state, which is a boolean value
 
-		Vector2 moveValue = moveAction.ReadValue<Vector2>();
-		MoveByKeyboard(moveValue);
+        Vector2 moveValue = inputActions.Player.Move.ReadValue<Vector2>();
+        MoveByKeyboard(moveValue);
 
-
-        if (jumpAction.WasPressedThisFrame() && isGrounded)
-        {
-            Jump();
-        }
-        else timeSinceJump += Time.deltaTime;
 
         if (controlledByPlayer)
         {
             Move();
             RotateInMoveDir();
         }
-        
-        if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime/jumpTime) * jumpForce;
 
-	}
+        if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime / jumpTime) * jumpForce;
+
+    }
 
     void Move()
     {
@@ -78,29 +114,29 @@ public class PlayerController : MonoBehaviour
         transform.position += curVelocity * Time.deltaTime;
 
         bodyArmature.GetComponent<Animator>().Play("Idle Walk Run Blend");
-	}
+    }
 
     void RotateInMoveDir()
     {
-		//Rotate in direction of velocity
-		if (curVelocity != Vector3.zero)
-		{
-			Quaternion bodyRot = Quaternion.FromToRotation(Vector3.forward, new Vector3(curVelocity.x,0,curVelocity.z));
+        //Rotate in direction of velocity
+        if (curVelocity != Vector3.zero)
+        {
+            Quaternion bodyRot = Quaternion.FromToRotation(Vector3.forward, new Vector3(curVelocity.x, 0, curVelocity.z));
 
             //For some reason in this case the rotation was (-180,0,0) which made the character disappear -> no better fix found
-            if (Vector3.forward.normalized == -new Vector3(curVelocity.x, 0, curVelocity.z).normalized) 
-                bodyRot = Quaternion.Euler(0,-180,0);
-			
-            //Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
-			bodyArmature.transform.rotation = bodyRot.normalized;
-		}
-	}
+            if (Vector3.forward.normalized == -new Vector3(curVelocity.x, 0, curVelocity.z).normalized)
+                bodyRot = Quaternion.Euler(0, -180, 0);
 
-	void MoveByKeyboard(Vector2 dir)
+            //Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
+            bodyArmature.transform.rotation = bodyRot.normalized;
+        }
+    }
+
+    void MoveByKeyboard(Vector2 dir)
     {
         Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y) * speed;
 
-        if (isoMovement) moveVelocity = Quaternion.Euler(0,45,0) * moveVelocity;
+        if (isoMovement) moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
 
         curVelocity.x = moveVelocity.x;
         curVelocity.z = moveVelocity.z;
@@ -113,31 +149,31 @@ public class PlayerController : MonoBehaviour
         curVelocity.y = jumpForce;
         isGrounded = false;
 
-		bodyArmature.GetComponent<Animator>().PlayInFixedTime("JumpStart");
+        bodyArmature.GetComponent<Animator>().PlayInFixedTime("JumpStart");
 
-	}
+    }
 
 
-	//Called from FeetCollider
-	public void FeetTriggerStay()
+    //Called from FeetCollider
+    public void FeetTriggerStay()
     {
         //Debug.Log("Feet collision detected");
         //This is because collider can collider the next frame after jump and instantly enable jumping again
-        if (timeSinceJump > minTimeBetweenJumps) 
+        if (timeSinceJump > minTimeBetweenJumps)
             isGrounded = true;
     }
 
-	//Called from FeetCollider
-	public void FeetTriggerExit()
-	{
+    //Called from FeetCollider
+    public void FeetTriggerExit()
+    {
         //Debug.Log("Feet collision exit detected");
         //This is because collider can collider the next frame after jump and instantly enable jumping again
         isGrounded = false;
-	}
+    }
 
 
-	private void OnTriggerEnter(Collider collision)
-	{
+    private void OnTriggerEnter(Collider collision)
+    {
         if (collision.CompareTag("Interactable"))
             overheadDialogue.ShowText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
 
@@ -145,17 +181,17 @@ public class PlayerController : MonoBehaviour
 
     public void StopFollowingOtherChar()
     {
-		gameObject.GetComponent<NavMeshAgent>().enabled = false;
-		gameObject.GetComponent<AITarget>().enabled = false;
-		gameObject.GetComponent<AgentLinkMover>().enabled = false;
-	}
+        gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        gameObject.GetComponent<AITarget>().enabled = false;
+        gameObject.GetComponent<AgentLinkMover>().enabled = false;
+    }
 
     public void StartFollowingOtherChar()
     {
-		gameObject.GetComponent<NavMeshAgent>().enabled = true;
-		gameObject.GetComponent<AITarget>().enabled = true;
-		gameObject.GetComponent<AgentLinkMover>().enabled = true;
-	}
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
+        gameObject.GetComponent<AITarget>().enabled = true;
+        gameObject.GetComponent<AgentLinkMover>().enabled = true;
+    }
 
     public bool IsControlledByPlayer() => controlledByPlayer;
 
