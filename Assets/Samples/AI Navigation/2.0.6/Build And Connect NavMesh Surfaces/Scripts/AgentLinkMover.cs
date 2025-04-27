@@ -42,7 +42,7 @@ namespace Unity.AI.Navigation.Samples
                         yield return StartCoroutine(Parabola(agent, 2.0f, 0.5f));
                     else if (m_Method == OffMeshLinkMoveMethod.Curve)
                         yield return StartCoroutine(Curve(agent, 0.5f));
-                    agent.CompleteOffMeshLink();
+                    if (agent.isActiveAndEnabled) agent.CompleteOffMeshLink();
                 }
 
                 yield return null;
