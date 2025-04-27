@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerData = GetComponent<PlayerData>();
-        inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); else timeSinceJump += Time.deltaTime; };
+        inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump();};
         inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
         inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
 
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 moveValue = inputActions.Player.Move.ReadValue<Vector2>();
         MoveByKeyboard(moveValue);
-
+        timeSinceJump += Time.deltaTime;
 
         if (controlledByPlayer)
         {
