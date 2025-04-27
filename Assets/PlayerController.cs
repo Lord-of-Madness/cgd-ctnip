@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Reload(InputAction.CallbackContext context)
     {
-        if (playerData.TryReload())
+        if (playerData.TryReload())//This is true only if there is a reason to actually reload - there is ammo to reload and the tool is not full
         {//The numerical changes are done in the PlayerData class
             onReload.Invoke();
             //TODO animaèky and stuff
