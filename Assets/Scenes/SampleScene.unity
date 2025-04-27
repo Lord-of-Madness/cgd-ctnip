@@ -534,9 +534,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e31265ce05149e47974678bcfeed284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character1: {fileID: 0}
-  character2: {fileID: 0}
-  firstCharacterActive: 1
+  bethPC: {fileID: 0}
+  erikPC: {fileID: 0}
+  activeChar: 0
+  charChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1817417724
 Transform:
   m_ObjectHideFlags: 0
@@ -725,6 +728,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8237834464644047109, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107412735118640642, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

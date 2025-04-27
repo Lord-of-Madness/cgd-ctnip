@@ -1,19 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] GameObject BethHUD;
-    [SerializeField] GameObject ErikHUD;
+    [SerializeField] private GameObject MainPortrait;
+    [SerializeField] private GameObject OffPortrait;
+    [SerializeField] Sprite BethPotrait;
+    [SerializeField] Sprite ErikPotrait;
+    Sprite MainSprite { get => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
+    Sprite OffSprite { get => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
+
+    //[SerializeField] HUD_Ammo HUD_tool;
     private void Start()
     {
-        BethHUD.SetActive(false);
-        ErikHUD.SetActive(false);
-        GameManager.Instance.charChanged.AddListener(ShowCorrectHUD);
-    }
-
-    void ShowCorrectHUD()
-    {
-        ShowHUD(GameManager.Instance.activeChar);
+        GameManager.Instance.charChanged.AddListener(()=> ShowHUD(GameManager.Instance.activeChar));
     }
 
     public void ShowHUD(PlayerCharacter character)
@@ -21,12 +21,12 @@ public class HUD : MonoBehaviour
         switch (character)
         {
             case PlayerCharacter.Beth:
-                BethHUD.SetActive(true);
-                ErikHUD.SetActive(false);
+                MainSprite = BethPotrait;
+                OffSprite = ErikPotrait;
                 break;
             case PlayerCharacter.Erik:
-                ErikHUD.SetActive(true);
-                BethHUD.SetActive(false);
+                MainSprite = ErikPotrait;
+                OffSprite = BethPotrait;
                 break;
             default:
                 Debug.LogError("Unknown character");

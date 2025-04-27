@@ -622,6 +622,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1074438972325046832, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: toolInspectorField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074438972325046832, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: 'toolInspectorField.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8947482963326015035, guid: 586b96cd5a4e47440b309c5337993c18, type: 3}
+    - target: {fileID: 1074438972325046832, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: 'toolInspectorField.Array.data[1]'
+      value: 
+      objectReference: {fileID: 327531976145100348, guid: 684be8424d3fe4b4aa1bee70fbb21d81, type: 3}
     - target: {fileID: 1624227479835879206, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
