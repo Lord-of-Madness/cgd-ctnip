@@ -370,9 +370,10 @@ MonoBehaviour:
   jumpForce: 10
   minTimeBetweenJumps: 0.2
   jumpTime: 0.5
-  speed: 10
+  speed: 3
   isoMovement: 1
   controlledByPlayer: 1
+  isRunning: 0
   overheadDialogue: {fileID: 5766070773746383106}
   bodyArmature: {fileID: 6470001187893461129}
   bodyAnimator: {fileID: 0}
@@ -421,7 +422,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 7
-  m_Acceleration: 20
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 2000
   m_StoppingDistance: 0

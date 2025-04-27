@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
 	bool isoMovement = true;
 	[SerializeField]
 	bool controlledByPlayer = true;
+	[SerializeField]
+	bool isRunning = false;
 
 	Vector3 curVelocity = Vector3.zero;
 
@@ -77,7 +79,8 @@ public class PlayerController : MonoBehaviour
 
 
 		playerData = GetComponent<PlayerData>();
-		inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump();};
+		inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
+		inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
 		inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
 		inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
 
@@ -135,7 +138,7 @@ public class PlayerController : MonoBehaviour
 			if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
 			else bodyAnimator.SetFloat(animMotionSpeedID, 1);
 
-			bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 10);
+			bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
 		}
 
 		else
@@ -171,11 +174,17 @@ public class PlayerController : MonoBehaviour
 	void MoveByKeyboard(Vector2 dir)
 	{
 		Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y) * speed;
+		if (isRunning) moveVelocity *= 2;
 
 		if (isoMovement) moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
 
 		curVelocity.x = moveVelocity.x;
 		curVelocity.z = moveVelocity.z;
+	}
+
+	void ToggleRunning()
+	{
+		isRunning = !isRunning;
 	}
 
 	void Jump()
