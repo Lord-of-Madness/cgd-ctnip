@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
 	//Called from FeetCollider
 	public void FeetTriggerStay()
 	{
-		Debug.Log("Feet collision detected in " + charName);
+		//Debug.Log("Feet collision detected in " + charName);
 		//This is because collider can collider the next frame after jump and instantly enable jumping again
 		if (timeSinceJump > minTimeBetweenJumps)
 			isGrounded = true;
