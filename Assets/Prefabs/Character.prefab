@@ -231,7 +231,7 @@ Transform:
   m_GameObject: {fileID: 2808557689789560551}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.09, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -366,9 +366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd281a5a75a42e040acaf3c7eafdcc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 20
+  charName: Beth
+  jumpForce: 10
   minTimeBetweenJumps: 0.2
-  jumpTime: 1
+  jumpTime: 0.5
   speed: 10
   isoMovement: 1
   controlledByPlayer: 1
@@ -444,7 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  closeEnoughDistance: 5
+  closeEnoughDistance: 2
   bodyAnimator: {fileID: 315801408067813449}
 --- !u!114 &8157661885121772640
 MonoBehaviour:
@@ -508,7 +509,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.464959, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3632587552803034242}
