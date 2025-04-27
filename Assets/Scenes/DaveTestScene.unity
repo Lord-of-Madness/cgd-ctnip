@@ -699,10 +699,6 @@ PrefabInstance:
       propertyPath: 'toolInspectorField.Array.data[1]'
       value: 
       objectReference: {fileID: 327531976145100348, guid: 684be8424d3fe4b4aa1bee70fbb21d81, type: 3}
-    - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1624227479835879206, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
