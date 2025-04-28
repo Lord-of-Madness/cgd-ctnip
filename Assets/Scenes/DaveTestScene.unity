@@ -619,6 +619,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3148737427850747177, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1530958315824552530}
+    - target: {fileID: 3148737427850747177, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945670758320538084, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146522124633386160, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6402621551995461251, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
       propertyPath: m_Name
       value: Beth
@@ -1742,6 +1758,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd281a5a75a42e040acaf3c7eafdcc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1530958315824552530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4225182456830000105, guid: 7a73924f922f2f24eb1dc741e14014e2, type: 3}
+  m_PrefabInstance: {fileID: 8815585753461733534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4214593601229081260
 PrefabInstance:
   m_ObjectHideFlags: 0

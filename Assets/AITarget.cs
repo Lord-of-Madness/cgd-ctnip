@@ -10,6 +10,7 @@ public class AITarget : MonoBehaviour
     
     private NavMeshAgent m_agent;
     private float m_distance;
+	private bool isFollowing = true;
 
 
 	//Animation stuff
@@ -37,15 +38,17 @@ public class AITarget : MonoBehaviour
 		if (!m_agent.isActiveAndEnabled) { Debug.LogWarning("Agent not active when trying to update AITarget!"); return; }
 		m_distance = Vector3.Distance(m_agent.transform.position, target.position);
 
-
-		if (m_distance < closeEnoughDistance)
+		if (isFollowing)
 		{
-			m_agent.isStopped = true;
-		}
-		else
-		{
-			m_agent.isStopped = false;
-			m_agent.destination = target.position;
+			if (m_distance < closeEnoughDistance)
+			{
+				m_agent.isStopped = true;
+			}
+			else
+			{
+				m_agent.isStopped = false;
+				m_agent.destination = target.position;
+			}
 		}
 
 
@@ -63,5 +66,13 @@ public class AITarget : MonoBehaviour
 			bodyAnimator.SetFloat(animSpeedID, m_agent.velocity.magnitude);
 		}
 		else Debug.LogWarning("Body animator is Null! Agent can't start animations");
+	}
+
+	public void SetFollowing(bool follow)
+	{
+		m_agent.isStopped = !follow;
+		isFollowing = follow;
+		if (!follow) bodyAnimator.SetFloat(animSpeedID, 0);
+
 	}
 }

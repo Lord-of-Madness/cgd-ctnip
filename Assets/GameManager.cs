@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     Camera m_mainCamera;
 
     public PlayerCharacter activeChar = PlayerCharacter.Beth;
+    bool followingOn = true;
 
     InputAction swapCharAction;
+    InputAction toggleFollowingAction;
 
     public UnityEvent charChanged;
 
@@ -28,17 +30,19 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-	    swapCharAction = InputSystem.actions.FindAction("SwapCharacters");
-        m_mainCamera = Camera.main;
+		swapCharAction = InputSystem.actions.FindAction("SwapCharacters");
+		toggleFollowingAction = InputSystem.actions.FindAction("ToggleFollowing");
+		m_mainCamera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (swapCharAction.WasPressedThisFrame()) SwapCharacters();   
-    }
+		if (swapCharAction.WasPressedThisFrame()) SwapCharacters();
+		if (toggleFollowingAction.WasPressedThisFrame()) ToggleFollowing();
+	}
 
-    public void SwapCharacters()
+	public void SwapCharacters()
     {
         if (activeChar == PlayerCharacter.Beth) 
         {
@@ -46,7 +50,7 @@ public class GameManager : MonoBehaviour
             EnableCameraFilter();
 			RenderSettings.ambientSkyColor = Color.gray;
 
-            bethPC.StartFollowingOtherChar();
+            if (followingOn) bethPC.StartFollowingOtherChar();
             bethPC.DisablePlayerControl();
 
 			erikPC.StopFollowingOtherChar();
@@ -64,7 +68,7 @@ public class GameManager : MonoBehaviour
             bethPC.StopFollowingOtherChar();
             bethPC.EnablePlayerControl();
 
-            erikPC.StartFollowingOtherChar();
+            if(followingOn) erikPC.StartFollowingOtherChar();
 			erikPC.DisablePlayerControl();
 
 			m_mainCamera.GetComponent<FollowPlayer>().player = bethPC.gameObject;
@@ -73,6 +77,24 @@ public class GameManager : MonoBehaviour
         charChanged.Invoke();
     }
 
+    void ToggleFollowing()
+    {
+        followingOn = !followingOn;
+        if (followingOn)
+        {
+            if (activeChar == PlayerCharacter.Beth)
+                erikPC.StartFollowingOtherChar();
+            else
+                bethPC.StartFollowingOtherChar();
+        }
+        else
+        {
+			if (activeChar == PlayerCharacter.Beth)
+				erikPC.StopFollowingOtherChar();
+			else
+				bethPC.StopFollowingOtherChar();
+		}
+    }
     void DisableCameraFilter()
     {
         Camera camera = Camera.main;

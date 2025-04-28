@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
 		inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
 
 		Physics.gravity = new Vector3(0, -20, 0);
+
+		if (controlledByPlayer) StopFollowingOtherChar();
 	}
 
 	private void Attack(InputAction.CallbackContext context)
@@ -226,16 +228,16 @@ public class PlayerController : MonoBehaviour
 
 	public void StopFollowingOtherChar()
 	{
-		gameObject.GetComponent<NavMeshAgent>().enabled = false;
-		gameObject.GetComponent<AITarget>().enabled = false;
-		gameObject.GetComponent<AgentLinkMover>().enabled = false;
+		//gameObject.GetComponent<NavMeshAgent>().enabled = false;
+		gameObject.GetComponent<AITarget>().SetFollowing(false);
+		//gameObject.GetComponent<AgentLinkMover>().enabled = false;
 	}
 
 	public void StartFollowingOtherChar()
 	{
-		gameObject.GetComponent<NavMeshAgent>().enabled = true;
-		gameObject.GetComponent<AITarget>().enabled = true;
-		gameObject.GetComponent<AgentLinkMover>().enabled = true;
+		//gameObject.GetComponent<NavMeshAgent>().enabled = true;
+		gameObject.GetComponent<AITarget>().SetFollowing(true);
+		//gameObject.GetComponent<AgentLinkMover>().enabled = true;
 	}
 
 	public bool IsControlledByPlayer() => controlledByPlayer;
