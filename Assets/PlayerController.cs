@@ -130,24 +130,22 @@ public class PlayerController : MonoBehaviour
             RotateInMoveDir();
 
             //Animator set values
-            if (controlledByPlayer)
-            {
-                bodyAnimator.applyRootMotion = true;
 
-                bodyAnimator.SetBool(animGroundedID, isGrounded);
-                bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
+            bodyAnimator.applyRootMotion = true;
 
-                if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
-                else bodyAnimator.SetFloat(animMotionSpeedID, 1);
+            bodyAnimator.SetBool(animGroundedID, isGrounded);
+            bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
 
-                bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
-            }
+            if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
+            else bodyAnimator.SetFloat(animMotionSpeedID, 1);
+
+            bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
 
 
-            else
-            {
-                bodyAnimator.applyRootMotion = false;
-            }
+        }
+        else
+        {
+            bodyAnimator.applyRootMotion = false;
         }
 
         if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime / jumpTime) * jumpForce;
@@ -257,6 +255,8 @@ public class PlayerController : MonoBehaviour
     {
         controlledByPlayer = false;
         HideLaserAim();
+        //Debug.Log("Disabling char: " + name);
+        transform.rotation = Quaternion.identity;
         bodyArmature.transform.rotation = Quaternion.identity;
     }
 
