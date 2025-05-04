@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 
 public class DialogueLine
@@ -10,12 +11,45 @@ public class DialogueLine
     public string Text { get; set; }
     public string Who { get; set; }
     public Sprite Sprite { get; set; }
-    public DialogueLine(string text, string who, Sprite sprite)
+    public string Hex { get; set; }
+    public DialogueLine(string text, string who, Sprite sprite, string colorHex)
     {
         Text = text;
         Who = who;
         Sprite = sprite;
+        Hex = colorHex;
     }
+    public DialogueLine(string text, string who, Sprite sprite, Color color)
+    {
+        Text = text;
+        Who = who;
+        Sprite = sprite;
+        Hex = color.ToHexString();
+    }
+    public DialogueLine(string text, Speaker speaker)
+    {
+        Text = text;
+        Who = speaker.Name;
+        Sprite = speaker.Portrait;
+        Hex = speaker.TextColor.ToHexString();
+    }
+    public string SpeakerAnnotation()
+    {
+        return $"<color=#{Hex}>{Who}</color>: ";
+    }
+}
+public class Speaker
+{
+    public string Name { get; set; }
+    public Sprite Portrait { get; set; }
+    public Color TextColor { get; set; } = Color.gray;
+    public Speaker(string name, Sprite portrait)
+    {
+        Name = name;
+        Portrait = portrait;
+    }
+    public static Speaker Beth => new("Elisabeth", null) {TextColor = Color.blue };
+    public static Speaker Erik => new("Erik", null) { TextColor = Color.green };//TODO add portraits
 }
 
 public class Dialogue : MonoBehaviour
@@ -27,7 +61,7 @@ public class Dialogue : MonoBehaviour
     Tween textween;
 
     Queue<DialogueLine> lines = new();
-    [SerializeField] float textSpeed = 0.5f;
+    [SerializeField] float textSpeed = 0.3f;
     public static Dialogue Instance { get; private set; }
     private InputActionsGen inputActions;
     private void Awake()
@@ -50,8 +84,9 @@ public class Dialogue : MonoBehaviour
         CharacterImage.sprite = line.Sprite;//Todo do this.
         if (textween != null) FinishTween();
         Text dialogTextLine = Instantiate(dialogTextLinePrefab, dialogueBox.transform).GetComponent<Text>();
+        Debug.Log(line.Hex);
         dialogTextLine.text = "";//If we clean up the prefab this can be removed.
-        textween = dialogTextLine.DOText(line.Text, textSpeed, true, ScrambleMode.None);
+        textween = dialogTextLine.DOText(line.SpeakerAnnotation()+line.Text, textSpeed, true, ScrambleMode.None).OnComplete(() => FinishTween());
     }
     public void ShowCharacterWithText(List<DialogueLine> lines)
     {
