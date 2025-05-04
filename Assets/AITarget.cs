@@ -70,9 +70,20 @@ public class AITarget : MonoBehaviour
 
 	public void SetFollowing(bool follow)
 	{
-		m_agent.isStopped = !follow;
+		if (follow)
+		{
+			m_agent.enabled = follow;
+			m_agent.isStopped = !follow;
+		}
+		if (!follow && m_agent.enabled)
+		{
+			m_agent.CompleteOffMeshLink();
+			bodyAnimator.SetFloat(animSpeedID, 0);
+			m_agent.isStopped = !follow;
+			m_agent.enabled = follow;
+
+		}
 		isFollowing = follow;
-		if (!follow) bodyAnimator.SetFloat(animSpeedID, 0);
 
 	}
 }
