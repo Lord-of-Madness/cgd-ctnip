@@ -21,37 +21,42 @@ public class DialogueLine
 public class Dialogue : MonoBehaviour
 {
     [SerializeField]Image CharacterImage;
-    [SerializeField]Text dialogueText;
-    [SerializeField] Text SpeakerName;
+    [SerializeField] GameObject dialogueBox;
+    [SerializeField] GameObject dialogTextLinePrefab;
+    //[SerializeField] Text SpeakerName;
     Tween textween;
 
     Queue<DialogueLine> lines = new();
     [SerializeField] float textSpeed = 0.5f;
     public static Dialogue Instance { get; private set; }
+    private InputActionsGen inputActions;
     private void Awake()
     {
         Instance = this;
+        inputActions = new();
+        inputActions.UI.Enable();
     }
 
     private void Start()
     {
-		InputSystem.actions["Skip"].performed += ctx => SkipText();
-		InputSystem.actions["Cancel"].performed += ctx => gameObject.SetActive(false);
+        inputActions.UI.Skip.performed += ctx => SkipText();
+        inputActions.UI.Cancel.performed += ctx => gameObject.SetActive(false);
         gameObject.SetActive(false);
 	}
 
-	public void ShowCharacterWithText(DialogueLine line)
-    {
-		gameObject.SetActive(true);
-        SpeakerName.text = line.Who;
-        CharacterImage.sprite = line.Sprite;
+	void ShowCharacterWithText(DialogueLine line)
+    {        
+        //SpeakerName.text = line.Who;
+        CharacterImage.sprite = line.Sprite;//Todo do this.
         if (textween != null) FinishTween();
-        dialogueText.text = "";
-        textween = dialogueText.DOText(line.Text, textSpeed, true, ScrambleMode.None);
+        Text dialogTextLine = Instantiate(dialogTextLinePrefab, dialogueBox.transform).GetComponent<Text>();
+        dialogTextLine.text = "";//If we clean up the prefab this can be removed.
+        textween = dialogTextLine.DOText(line.Text, textSpeed, true, ScrambleMode.None);
     }
     public void ShowCharacterWithText(List<DialogueLine> lines)
     {
-        gameObject.SetActive(true);
+        Show();
+        PurgeChildren(dialogueBox.transform);
         this.lines = new(lines);
         NextLine();
     }
@@ -66,26 +71,29 @@ public class Dialogue : MonoBehaviour
         {
             ShowCharacterWithText(lines.Dequeue());
         }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        else Hide();
     }
     void FinishTween()
     {
         textween.Kill(true);
         textween = null;
     }
-
-	private void OnEnable()
-	{
-		InputSystem.actions["Jump"].actionMap.Disable();
-	}
-
-	private void OnDisable()
-	{
+    void Show(){
+        gameObject.SetActive(true);
+        GameManager.Instance.inputActions.Player.Disable();
+    }
+    void Hide()
+    {
         FinishTween();
         lines.Clear();
-		InputSystem.actions["Jump"].actionMap.Enable();
-	}
+        GameManager.Instance.inputActions.Player.Enable();
+        gameObject.SetActive(false);
+    }
+    void PurgeChildren(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

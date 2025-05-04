@@ -18,7 +18,7 @@ public class InteractableScript : MonoBehaviour
 	GameObject label;
 	bool playerInProximity;
 
-	InputAction interactAction;
+	//InputAction interactAction;
 
 	float scaleTweenRatio = 1.3f;
 	float scaleTweenDuration = 0.3f;
@@ -29,8 +29,9 @@ public class InteractableScript : MonoBehaviour
 		proximity = GetComponent<Collider>();
 		label = transform.Find("Label").gameObject;
 		label.SetActive(false);
-
-		interactAction = InputSystem.actions.FindAction("Interact");
+        //GameManager.Instance.inputActions.Player.Interact.Enable();
+        GameManager.Instance.inputActions.Player.Interact.performed += ctx => { Debug.Log(playerInProximity); if (playerInProximity) OnInteract.Invoke(); };
+        //interactAction = InputSystem.actions.FindAction("Interact");
 
 		OnInteract.AddListener(TweenLabel);
 	}
@@ -38,8 +39,6 @@ public class InteractableScript : MonoBehaviour
 
 	private void Update()
 	{
-		if (playerInProximity && interactAction.WasPressedThisFrame())
-			OnInteract.Invoke();
 	}
 
 
@@ -64,7 +63,8 @@ public class InteractableScript : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Player") && other.transform.parent.GetComponent<PlayerController>().IsControlledByPlayer())
+        PlayerController player = other.gameObject.GetComponentInParent<PlayerController>();
+        if (player != null && player.IsControlledByPlayer())
 		{
 			label.SetActive(true);
 			playerInProximity = true;

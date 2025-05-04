@@ -11,7 +11,7 @@ public class DialogueGiver : MonoBehaviour
     Sprite sprite;
 
     List<DialogueLine> diaLines = new();
-    
+    bool shown = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +29,8 @@ public class DialogueGiver : MonoBehaviour
 
     public void ShowDialogue()
     {
-        Dialogue.Instance.ShowCharacterWithText(diaLines);
+        if (!shown) { 
+            Dialogue.Instance.ShowCharacterWithText(diaLines);
+        shown = true;}
     }
 }
