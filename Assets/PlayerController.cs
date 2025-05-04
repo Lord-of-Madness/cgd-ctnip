@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Unity.AI.Navigation.Samples;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -80,8 +81,8 @@ public class PlayerController : MonoBehaviour
         playerData = GetComponent<PlayerData>();
         GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
         GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
-		GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer) aimLaserVisible = true; };
-		GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer) aimLaserVisible = false; };
+		GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer) ShowLaserAim(); };
+		GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer) HideLaserAim(); };
 		GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
 		GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
 
@@ -154,13 +155,8 @@ public class PlayerController : MonoBehaviour
 
 
         //DELETE THIS
-        if (hasLineRenderer)
-        {
-            if (aimLaserVisible && controlledByPlayer)
-                DrawLaserAim();
-            else
-                HideLaserAim();
-        }
+        if (hasLineRenderer && aimLaserVisible && controlledByPlayer)
+            DrawLaserAim();
     }
 
     void Move()
@@ -259,7 +255,8 @@ public class PlayerController : MonoBehaviour
     public void DisablePlayerControl()
     {
         controlledByPlayer = false;
-        //HideLaserAim();
+        HideLaserAim();
+        bodyArmature.transform.rotation = Quaternion.identity;
     }
 
     public void EnablePlayerControl()
@@ -298,6 +295,7 @@ public class PlayerController : MonoBehaviour
 
         //Set the armature rotation to face the aiming direction
         bodyArmature.transform.LookAt(transform.position + direction);
+        bodyAnimator.SetFloat(animSpeedID, 0f);
     }
 
 
@@ -305,7 +303,17 @@ public class PlayerController : MonoBehaviour
 	/// Don't call this if object doesn't have a lineRenderer assigned
 	/// </summary>
 	void HideLaserAim()
-    {
-        lineRenderer.positionCount = 0;
-    }
+	{
+        if (lineRenderer == null) return;
+		lineRenderer.positionCount = 0;
+        aimLaserVisible = false;
+	}  
+    /// <summary>
+	/// Don't call this if object doesn't have a lineRenderer assigned
+	/// </summary>
+	void ShowLaserAim()
+	{
+		if (lineRenderer == null) return;
+        aimLaserVisible = true;
+	}
 }
