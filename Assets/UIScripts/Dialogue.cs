@@ -26,10 +26,30 @@ public class DialogueLine
         Sprite = sprite;
         Hex = color.ToHexString();
     }
+    public DialogueLine(string text, Speaker speaker)
+    {
+        Text = text;
+        Who = speaker.Name;
+        Sprite = speaker.Portrait;
+        Hex = speaker.TextColor.ToHexString();
+    }
     public string SpeakerAnnotation()
     {
         return $"<color=#{Hex}>{Who}</color>: ";
     }
+}
+public class Speaker
+{
+    public string Name { get; set; }
+    public Sprite Portrait { get; set; }
+    public Color TextColor { get; set; } = Color.gray;
+    public Speaker(string name, Sprite portrait)
+    {
+        Name = name;
+        Portrait = portrait;
+    }
+    public static Speaker Beth => new("Elisabeth", null) {TextColor = Color.blue };
+    public static Speaker Erik => new("Erik", null) { TextColor = Color.green };//TODO add portraits
 }
 
 public class Dialogue : MonoBehaviour
