@@ -111,9 +111,8 @@ public class GameManager : MonoBehaviour
 		Camera camera = Camera.main;
         if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
 
-		Volume volume = camera.GetComponent<Volume>();
-
-        if (volume == null) { Debug.Log("No volume found"); return; }
+		
+        if (!camera.TryGetComponent<Volume>(out var volume)) { Debug.Log("No volume found"); return; }
 
 		volume.enabled = true;
 	}

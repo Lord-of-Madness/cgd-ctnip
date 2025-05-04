@@ -9,6 +9,14 @@ public class ToolInvData
     public int loadedAmmo = 0;
     public int stashedAmmo = 20;
 }
+public class Document
+{
+    public string name;
+    public List<Page> pages;
+}
+public class Page {
+    public string text;
+}
 public class PlayerData : MonoBehaviour
 {
     [SerializeField] List<Tool> toolInspectorField;

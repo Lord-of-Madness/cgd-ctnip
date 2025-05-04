@@ -130,6 +130,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Journal",
+                    "type": "Button",
+                    "id": "00c116d7-08ba-4460-b9f7-d1d96b4281d8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -561,6 +570,17 @@
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a474eab-def6-4132-8a4b-d647e05ed4a9",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Journal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -662,6 +682,15 @@
                     "name": "Skip",
                     "type": "Button",
                     "id": "464169cd-699b-4cc9-9af9-2f6eba08fb6c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JournalExit",
+                    "type": "Button",
+                    "id": "3253a6c6-a041-497b-8bde-79b1d2fda841",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1095,6 +1124,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62204c24-0c8d-4112-b12a-0f35d13f2e2c",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JournalExit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

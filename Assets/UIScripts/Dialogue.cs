@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using DG.Tweening;
 using Unity.VisualScripting;
 
@@ -35,7 +34,7 @@ public class DialogueLine
     }
     public string SpeakerAnnotation()
     {
-        return $"<color=#{Hex}>{Who}</color>: ";
+        return $"<color=#{Hex}>{Who}: </color>";
     }
 }
 public class Speaker
@@ -48,8 +47,8 @@ public class Speaker
         Name = name;
         Portrait = portrait;
     }
-    public static Speaker Beth => new("Elisabeth", null) {TextColor = Color.blue };
-    public static Speaker Erik => new("Erik", null) { TextColor = Color.green };//TODO add portraits
+    public static Speaker Beth => new("Elisabeth", Resources.Load<Sprite>("Placeholders/fbFoto")) {TextColor = new(1f, 0.513725f, 0.513725f) };
+    public static Speaker Erik => new("Erik", Resources.Load<Sprite>("Placeholders/Portrait mistodrzici")) { TextColor = new(0.5294f, 6.941f, 1f) };//TODO add portraits
 }
 
 public class Dialogue : MonoBehaviour
@@ -80,11 +79,10 @@ public class Dialogue : MonoBehaviour
 
 	void ShowCharacterWithText(DialogueLine line)
     {        
-        //SpeakerName.text = line.Who;
-        CharacterImage.sprite = line.Sprite;//Todo do this.
+        CharacterImage.sprite = line.Sprite;
+        if (line.Sprite==null)Debug.LogWarning($"Speaker: {line.Who} has no SpritePortrait");
         if (textween != null) FinishTween();
         Text dialogTextLine = Instantiate(dialogTextLinePrefab, dialogueBox.transform).GetComponent<Text>();
-        Debug.Log(line.Hex);
         dialogTextLine.text = "";//If we clean up the prefab this can be removed.
         textween = dialogTextLine.DOText(line.SpeakerAnnotation()+line.Text, textSpeed, true, ScrambleMode.None).OnComplete(() => FinishTween());
     }

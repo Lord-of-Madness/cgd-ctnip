@@ -216,6 +216,15 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Journal"",
+                    ""type"": ""Button"",
+                    ""id"": ""00c116d7-08ba-4460-b9f7-d1d96b4281d8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -647,6 +656,17 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a474eab-def6-4132-8a4b-d647e05ed4a9"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Journal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -748,6 +768,15 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""name"": ""Skip"",
                     ""type"": ""Button"",
                     ""id"": ""464169cd-699b-4cc9-9af9-2f6eba08fb6c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JournalExit"",
+                    ""type"": ""Button"",
+                    ""id"": ""3253a6c6-a041-497b-8bde-79b1d2fda841"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1183,6 +1212,17 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""action"": ""Skip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62204c24-0c8d-4112-b12a-0f35d13f2e2c"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JournalExit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1266,6 +1306,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_CameraFlash = m_Player.FindAction("CameraFlash", throwIfNotFound: true);
         m_Player_ToggleFollowing = m_Player.FindAction("ToggleFollowing", throwIfNotFound: true);
+        m_Player_Journal = m_Player.FindAction("Journal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1279,6 +1320,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Skip = m_UI.FindAction("Skip", throwIfNotFound: true);
+        m_UI_JournalExit = m_UI.FindAction("JournalExit", throwIfNotFound: true);
     }
 
     ~@InputActionsGen()
@@ -1374,6 +1416,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_CameraFlash;
     private readonly InputAction m_Player_ToggleFollowing;
+    private readonly InputAction m_Player_Journal;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1442,6 +1485,10 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @ToggleFollowing => m_Wrapper.m_Player_ToggleFollowing;
         /// <summary>
+        /// Provides access to the underlying input action "Player/Journal".
+        /// </summary>
+        public InputAction @Journal => m_Wrapper.m_Player_Journal;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1509,6 +1556,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @ToggleFollowing.started += instance.OnToggleFollowing;
             @ToggleFollowing.performed += instance.OnToggleFollowing;
             @ToggleFollowing.canceled += instance.OnToggleFollowing;
+            @Journal.started += instance.OnJournal;
+            @Journal.performed += instance.OnJournal;
+            @Journal.canceled += instance.OnJournal;
         }
 
         /// <summary>
@@ -1562,6 +1612,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @ToggleFollowing.started -= instance.OnToggleFollowing;
             @ToggleFollowing.performed -= instance.OnToggleFollowing;
             @ToggleFollowing.canceled -= instance.OnToggleFollowing;
+            @Journal.started -= instance.OnJournal;
+            @Journal.performed -= instance.OnJournal;
+            @Journal.canceled -= instance.OnJournal;
         }
 
         /// <summary>
@@ -1610,6 +1663,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_Skip;
+    private readonly InputAction m_UI_JournalExit;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1665,6 +1719,10 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/Skip".
         /// </summary>
         public InputAction @Skip => m_Wrapper.m_UI_Skip;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/JournalExit".
+        /// </summary>
+        public InputAction @JournalExit => m_Wrapper.m_UI_JournalExit;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1724,6 +1782,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Skip.started += instance.OnSkip;
             @Skip.performed += instance.OnSkip;
             @Skip.canceled += instance.OnSkip;
+            @JournalExit.started += instance.OnJournalExit;
+            @JournalExit.performed += instance.OnJournalExit;
+            @JournalExit.canceled += instance.OnJournalExit;
         }
 
         /// <summary>
@@ -1768,6 +1829,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Skip.started -= instance.OnSkip;
             @Skip.performed -= instance.OnSkip;
             @Skip.canceled -= instance.OnSkip;
+            @JournalExit.started -= instance.OnJournalExit;
+            @JournalExit.performed -= instance.OnJournalExit;
+            @JournalExit.canceled -= instance.OnJournalExit;
         }
 
         /// <summary>
@@ -1971,6 +2035,13 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleFollowing(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Journal" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJournal(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -2056,5 +2127,12 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSkip(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "JournalExit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJournalExit(InputAction.CallbackContext context);
     }
 }

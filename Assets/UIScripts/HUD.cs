@@ -9,11 +9,16 @@ public class HUD : MonoBehaviour
     [SerializeField] Sprite ErikPotrait;
     Sprite MainSprite { get => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
     Sprite OffSprite { get => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
+    public static HUD Instance;
 
-    //[SerializeField] HUD_Ammo HUD_tool;
+    public void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         GameManager.Instance.charChanged.AddListener(()=> ShowHUD(GameManager.Instance.activeChar));
+        
     }
 
     public void ShowHUD(PlayerCharacter character)
@@ -32,5 +37,13 @@ public class HUD : MonoBehaviour
                 Debug.LogError("Unknown character");
                 break;
         }
+    }
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }
