@@ -40,9 +40,13 @@ public class PlayerController : MonoBehaviour
     OverheadDialogue overheadDialogue;
     [SerializeField]
     GameObject bodyArmature;
+    [SerializeField]
+    LineRenderer lineRenderer;
+    bool hasLineRenderer = false;
+    bool aimLaserVisible = false;
 
     //Animation stuff
-    public Animator bodyAnimator;
+    Animator bodyAnimator;
     string animSpeedID = "Speed";
     string animJumpID = "Jump";
     string animGroundedID = "Grounded";
@@ -76,12 +80,15 @@ public class PlayerController : MonoBehaviour
         playerData = GetComponent<PlayerData>();
         GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
         GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
-        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
-        GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
+		GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer) aimLaserVisible = true; };
+		GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer) aimLaserVisible = false; };
+		GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
+		GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
 
         Physics.gravity = new Vector3(0, -20, 0);
 
         if (controlledByPlayer) StopFollowingOtherChar();
+        if (lineRenderer != null) hasLineRenderer = true;
     }
 
     private void Attack(InputAction.CallbackContext context)
@@ -115,32 +122,44 @@ public class PlayerController : MonoBehaviour
         MoveByKeyboard(moveValue);
         timeSinceJump += Time.deltaTime;
 
-        if (controlledByPlayer)
+        if (controlledByPlayer && !aimLaserVisible)
         {
             Move();
+            RotateInMoveDir();
+
+            //Animator set values
+            if (controlledByPlayer)
+            {
+                bodyAnimator.applyRootMotion = true;
+
+                bodyAnimator.SetBool(animGroundedID, isGrounded);
+                bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
+
+                if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
+                else bodyAnimator.SetFloat(animMotionSpeedID, 1);
+
+                bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
+            }
+
+
+            else
+            {
+                bodyAnimator.applyRootMotion = false;
+            }
         }
-        RotateInMoveDir();
 
         if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime / jumpTime) * jumpForce;
         else curVelocity.y = 0;
 
-        //Animator set values
-        if (controlledByPlayer)
+
+
+        //DELETE THIS
+        if (hasLineRenderer)
         {
-            bodyAnimator.applyRootMotion = true;
-
-            bodyAnimator.SetBool(animGroundedID, isGrounded);
-            bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
-
-            if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
-            else bodyAnimator.SetFloat(animMotionSpeedID, 1);
-
-            bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
-        }
-
-        else
-        {
-            bodyAnimator.applyRootMotion = false;
+            if (aimLaserVisible && controlledByPlayer)
+                DrawLaserAim();
+            else
+                HideLaserAim();
         }
     }
 
@@ -240,10 +259,53 @@ public class PlayerController : MonoBehaviour
     public void DisablePlayerControl()
     {
         controlledByPlayer = false;
+        //HideLaserAim();
     }
 
     public void EnablePlayerControl()
     {
         controlledByPlayer = true;
+    }
+
+    /// <summary>
+    /// Don't call this if object doesn't have a lineRenderer assigned
+    /// </summary>
+    void DrawLaserAim()
+    {
+        Debug.Log("Drawing laser aim");
+
+        //Get the position of the gun
+        Vector3 startPos = transform.position;
+        startPos.y += 1.3f;
+        startPos += bodyArmature.transform.forward * 0.1f;
+
+        //Get the position of mouse direciton intersecion with the plane of the gun
+        Vector3 mouseDir = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 mouseLaserToGunPlanePoint;
+        if (!Utilities.LinePlaneIntersection(out mouseLaserToGunPlanePoint, Camera.main.transform.position, mouseDir, Vector3.up, startPos))
+            mouseLaserToGunPlanePoint = startPos + Vector3.forward;
+
+        //Draw the line via saved lineRenderer
+        RaycastHit hit;
+        Vector3 direction = mouseLaserToGunPlanePoint - startPos;
+        Ray ray = new(startPos, direction);
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0,startPos);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
+            lineRenderer.SetPosition(1, hit.point);
+        else
+            lineRenderer.SetPosition(1, startPos + (direction * 100));
+
+        //Set the armature rotation to face the aiming direction
+        bodyArmature.transform.LookAt(transform.position + direction);
+    }
+
+
+	/// <summary>
+	/// Don't call this if object doesn't have a lineRenderer assigned
+	/// </summary>
+	void HideLaserAim()
+    {
+        lineRenderer.positionCount = 0;
     }
 }

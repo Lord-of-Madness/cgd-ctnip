@@ -1,0 +1,30 @@
+using UnityEngine;
+public class Utilities
+{
+	public static bool LinePlaneIntersection(out Vector3 intersection, Vector3 linePoint, Vector3 lineVec, Vector3 planeNormal, Vector3 planePoint)
+	{
+		float length;
+		float dotNumerator;
+		float dotDenominator;
+		Vector3 vector;
+		intersection = Vector3.zero;
+
+		//calculate the distance between the linePoint and the line-plane intersection point
+		dotNumerator = Vector3.Dot((planePoint - linePoint), planeNormal);
+		dotDenominator = Vector3.Dot(lineVec, planeNormal);
+
+		if (dotDenominator != 0.0f)
+		{
+			length = dotNumerator / dotDenominator;
+
+			vector = lineVec.normalized * length;
+
+			intersection = linePoint + vector;
+
+			return true;
+		}
+
+		else
+			return false;
+	}
+}
