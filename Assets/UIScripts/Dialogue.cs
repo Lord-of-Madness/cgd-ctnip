@@ -27,7 +27,7 @@ public class Dialogue : MonoBehaviour
     Tween textween;
 
     Queue<DialogueLine> lines = new();
-    [SerializeField] float textSpeed = 0.5f;
+    [SerializeField] float textSpeed = 0.3f;
     public static Dialogue Instance { get; private set; }
     private InputActionsGen inputActions;
     private void Awake()
@@ -51,7 +51,7 @@ public class Dialogue : MonoBehaviour
         if (textween != null) FinishTween();
         Text dialogTextLine = Instantiate(dialogTextLinePrefab, dialogueBox.transform).GetComponent<Text>();
         dialogTextLine.text = "";//If we clean up the prefab this can be removed.
-        textween = dialogTextLine.DOText(line.Text, textSpeed, true, ScrambleMode.None);
+        textween = dialogTextLine.DOText(line.Text, textSpeed, true, ScrambleMode.None).OnComplete(() => FinishTween());
     }
     public void ShowCharacterWithText(List<DialogueLine> lines)
     {
