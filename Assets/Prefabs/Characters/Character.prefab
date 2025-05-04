@@ -374,10 +374,12 @@ MonoBehaviour:
   isoMovement: 1
   controlledByPlayer: 1
   isRunning: 0
+  weaponOffset: {x: 0.2, y: 1}
+  bulletPrefab: {fileID: 3000684013270221699, guid: 0e6d73da6e5277a418f36478437c1cb1, type: 3}
   overheadDialogue: {fileID: 5766070773746383106}
   bodyArmature: {fileID: 6470001187893461129}
-  bodyAnimator: {fileID: 0}
-  playerData: {fileID: 0}
+  lineRenderer: {fileID: 0}
+  playerData: {fileID: 1074438972325046832}
   onToolUsed:
     m_PersistentCalls:
       m_Calls: []

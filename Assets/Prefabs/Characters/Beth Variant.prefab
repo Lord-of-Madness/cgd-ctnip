@@ -77,9 +77,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 1.8814924, y: 2.5507064, z: 0}
-  - {x: 0, y: 2, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.047922753
@@ -317,6 +315,10 @@ PrefabInstance:
     - target: {fileID: 2583891461046445640, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618553586226422925, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 3136647974889029050, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: fixedRotation.x
