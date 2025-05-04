@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 
 public class DialogueLine
@@ -10,11 +11,24 @@ public class DialogueLine
     public string Text { get; set; }
     public string Who { get; set; }
     public Sprite Sprite { get; set; }
-    public DialogueLine(string text, string who, Sprite sprite)
+    public string Hex { get; set; }
+    public DialogueLine(string text, string who, Sprite sprite, string colorHex)
     {
         Text = text;
         Who = who;
         Sprite = sprite;
+        Hex = colorHex;
+    }
+    public DialogueLine(string text, string who, Sprite sprite, Color color)
+    {
+        Text = text;
+        Who = who;
+        Sprite = sprite;
+        Hex = color.ToHexString();
+    }
+    public string SpeakerAnnotation()
+    {
+        return $"<color=#{Hex}>{Who}</color>: ";
     }
 }
 
@@ -50,8 +64,9 @@ public class Dialogue : MonoBehaviour
         CharacterImage.sprite = line.Sprite;//Todo do this.
         if (textween != null) FinishTween();
         Text dialogTextLine = Instantiate(dialogTextLinePrefab, dialogueBox.transform).GetComponent<Text>();
+        Debug.Log(line.Hex);
         dialogTextLine.text = "";//If we clean up the prefab this can be removed.
-        textween = dialogTextLine.DOText(line.Text, textSpeed, true, ScrambleMode.None).OnComplete(() => FinishTween());
+        textween = dialogTextLine.DOText(line.SpeakerAnnotation()+line.Text, textSpeed, true, ScrambleMode.None).OnComplete(() => FinishTween());
     }
     public void ShowCharacterWithText(List<DialogueLine> lines)
     {

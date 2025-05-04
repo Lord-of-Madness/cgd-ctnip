@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - Hello!
+  - <color=#FF0000>G</color><color=#E90015>e</color><color=#D4002A>l</color>
   - Yes
   - I am a talking cube
   - And you are in a test scene
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - Hello!
+  - <color=#FF0000>G</color><color=#E90015>e</color><color=#D4002A>l</color>
   - Yes
   - I am a totally disctinct talking cube
   - And you are NOT in a test scene
@@ -2079,6 +2079,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4749959909891785436, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875097373313170750, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875097373313170750, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4875097373313170750, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}

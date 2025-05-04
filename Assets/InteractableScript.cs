@@ -30,7 +30,7 @@ public class InteractableScript : MonoBehaviour
 		label = transform.Find("Label").gameObject;
 		label.SetActive(false);
         //GameManager.Instance.inputActions.Player.Interact.Enable();
-        GameManager.Instance.inputActions.Player.Interact.performed += ctx => { Debug.Log(playerInProximity); if (playerInProximity) OnInteract.Invoke(); };
+        GameManager.Instance.inputActions.Player.Interact.performed += ctx => { if (playerInProximity) OnInteract.Invoke(); };
         //interactAction = InputSystem.actions.FindAction("Interact");
 
 		OnInteract.AddListener(TweenLabel);

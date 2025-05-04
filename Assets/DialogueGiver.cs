@@ -23,7 +23,7 @@ public class DialogueGiver : MonoBehaviour
     {
 		foreach (var line in lines)
 		{
-			diaLines.Add(new DialogueLine(line, charName, sprite));
+			diaLines.Add(new DialogueLine(line, charName, sprite,Color.red));
 		}
 	}
 
