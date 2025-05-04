@@ -18,28 +18,27 @@ public class GameManager : MonoBehaviour
     public PlayerCharacter activeChar = PlayerCharacter.Beth;
     bool followingOn = true;
 
-    InputAction swapCharAction;
-    InputAction toggleFollowingAction;
+    public InputActionsGen inputActions;
 
     public UnityEvent charChanged;
 
     private void Awake()
     {
+        inputActions = new();
+        inputActions.Player.Enable();
         Instance = this;
         DontDestroyOnLoad(Instance);
     }
     void Start()
     {
-		swapCharAction = InputSystem.actions.FindAction("SwapCharacters");
-		toggleFollowingAction = InputSystem.actions.FindAction("ToggleFollowing");
+        inputActions.Player.SwapCharacters.performed += ctx => SwapCharacters();
+        inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
 		m_mainCamera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (swapCharAction.WasPressedThisFrame()) SwapCharacters();
-		if (toggleFollowingAction.WasPressedThisFrame()) ToggleFollowing();
 	}
 
 	public void SwapCharacters()
