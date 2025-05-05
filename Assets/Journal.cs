@@ -16,15 +16,15 @@ public class Journal : MonoBehaviour
         GameObject.Find("ErikPortrait").GetComponent<Button>().onClick.AddListener(() => { if(currentCharacter != PlayerCharacter.Erik) SwitchCharacter(PlayerCharacter.Erik); });
         SwitchCharacter(PlayerCharacter.Beth);
         GameManager.Instance.inputActions.Player.Journal.performed += ctx => Show();
-        GameManager.Instance.inputActions.UI.Cancel.performed += ctx => Hide();
-        //GameManager.Instance.inputActions.UI.JournalExit.performed += ctx => Hide(); TODO remove from UI and make it separate perhaps
+        GameManager.Instance.inputActions.Journal.Cancel.performed += ctx => Hide();
+        GameManager.Instance.inputActions.Journal.JournalExit.performed += ctx => Hide();
         Hide();
     }
     public void Show()
     {
         //TODO pause game
         GameManager.Instance.inputActions.Player.Disable();
-        GameManager.Instance.inputActions.UI.Enable();
+        GameManager.Instance.inputActions.Journal.Enable();
         gameObject.SetActive(true);
         HUD.Instance.Hide();
     }

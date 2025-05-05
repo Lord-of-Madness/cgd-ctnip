@@ -16,6 +16,11 @@ public class Document
     public Document(string name, List<Page> pages)
     {
         this.name = name;
+        if(pages==null ||pages.Count == 0)
+        {
+            Debug.LogWarning("Document without pages");
+            pages = new() { new("WHY DID YOU ADD EMPTY PAGE YOU SILLY BUGGER?") };
+        }
         this.pages = pages;
     }
     public Document(string name,string text)

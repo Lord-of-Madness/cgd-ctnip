@@ -691,7 +691,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""UI"",
+            ""name"": ""Dialogue"",
             ""id"": ""272f6d14-89ba-496f-b7ff-215263d3219f"",
             ""actions"": [
                 {
@@ -707,7 +707,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""7607c7b6-cd76-4816-beef-bd0341cfe950"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -788,15 +788,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""name"": ""Skip"",
                     ""type"": ""Button"",
                     ""id"": ""464169cd-699b-4cc9-9af9-2f6eba08fb6c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""JournalExit"",
-                    ""type"": ""Button"",
-                    ""id"": ""3253a6c6-a041-497b-8bde-79b1d2fda841"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1232,10 +1223,47 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""action"": ""Skip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Journal"",
+            ""id"": ""dc0ac787-2bd7-4262-83db-eadb933b228b"",
+            ""actions"": [
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""9319c8c4-03e2-4ed1-b677-8425d2e04800"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JournalExit"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6a94d8c-011b-4151-b99c-98d88dc0d964"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8f411811-5c00-4a37-a8df-a9de2791d054"",
+                    ""path"": ""*/{Cancel}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""62204c24-0c8d-4112-b12a-0f35d13f2e2c"",
+                    ""id"": ""71a5bd6d-643a-4849-9260-dd6bc10754c7"",
                     ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -1328,26 +1356,30 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         m_Player_ToggleFollowing = m_Player.FindAction("ToggleFollowing", throwIfNotFound: true);
         m_Player_Journal = m_Player.FindAction("Journal", throwIfNotFound: true);
         m_Player_ToggleCameraFollow = m_Player.FindAction("ToggleCameraFollow", throwIfNotFound: true);
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
-        m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
-        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
-        m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
-        m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
-        m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
-        m_UI_MiddleClick = m_UI.FindAction("MiddleClick", throwIfNotFound: true);
-        m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
-        m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
-        m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        m_UI_Skip = m_UI.FindAction("Skip", throwIfNotFound: true);
-        m_UI_JournalExit = m_UI.FindAction("JournalExit", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_Navigate = m_Dialogue.FindAction("Navigate", throwIfNotFound: true);
+        m_Dialogue_Submit = m_Dialogue.FindAction("Submit", throwIfNotFound: true);
+        m_Dialogue_Cancel = m_Dialogue.FindAction("Cancel", throwIfNotFound: true);
+        m_Dialogue_Point = m_Dialogue.FindAction("Point", throwIfNotFound: true);
+        m_Dialogue_Click = m_Dialogue.FindAction("Click", throwIfNotFound: true);
+        m_Dialogue_RightClick = m_Dialogue.FindAction("RightClick", throwIfNotFound: true);
+        m_Dialogue_MiddleClick = m_Dialogue.FindAction("MiddleClick", throwIfNotFound: true);
+        m_Dialogue_ScrollWheel = m_Dialogue.FindAction("ScrollWheel", throwIfNotFound: true);
+        m_Dialogue_TrackedDevicePosition = m_Dialogue.FindAction("TrackedDevicePosition", throwIfNotFound: true);
+        m_Dialogue_TrackedDeviceOrientation = m_Dialogue.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_Dialogue_Skip = m_Dialogue.FindAction("Skip", throwIfNotFound: true);
+        // Journal
+        m_Journal = asset.FindActionMap("Journal", throwIfNotFound: true);
+        m_Journal_Cancel = m_Journal.FindAction("Cancel", throwIfNotFound: true);
+        m_Journal_JournalExit = m_Journal.FindAction("JournalExit", throwIfNotFound: true);
     }
 
     ~@InputActionsGen()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActionsGen.Player.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputActionsGen.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Dialogue.enabled, "This will cause a leak and performance issues, InputActionsGen.Dialogue.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Journal.enabled, "This will cause a leak and performance issues, InputActionsGen.Journal.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1681,84 +1713,79 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
 
-    // UI
-    private readonly InputActionMap m_UI;
-    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Navigate;
-    private readonly InputAction m_UI_Submit;
-    private readonly InputAction m_UI_Cancel;
-    private readonly InputAction m_UI_Point;
-    private readonly InputAction m_UI_Click;
-    private readonly InputAction m_UI_RightClick;
-    private readonly InputAction m_UI_MiddleClick;
-    private readonly InputAction m_UI_ScrollWheel;
-    private readonly InputAction m_UI_TrackedDevicePosition;
-    private readonly InputAction m_UI_TrackedDeviceOrientation;
-    private readonly InputAction m_UI_Skip;
-    private readonly InputAction m_UI_JournalExit;
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
+    private readonly InputAction m_Dialogue_Navigate;
+    private readonly InputAction m_Dialogue_Submit;
+    private readonly InputAction m_Dialogue_Cancel;
+    private readonly InputAction m_Dialogue_Point;
+    private readonly InputAction m_Dialogue_Click;
+    private readonly InputAction m_Dialogue_RightClick;
+    private readonly InputAction m_Dialogue_MiddleClick;
+    private readonly InputAction m_Dialogue_ScrollWheel;
+    private readonly InputAction m_Dialogue_TrackedDevicePosition;
+    private readonly InputAction m_Dialogue_TrackedDeviceOrientation;
+    private readonly InputAction m_Dialogue_Skip;
     /// <summary>
-    /// Provides access to input actions defined in input action map "UI".
+    /// Provides access to input actions defined in input action map "Dialogue".
     /// </summary>
-    public struct UIActions
+    public struct DialogueActions
     {
         private @InputActionsGen m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public UIActions(@InputActionsGen wrapper) { m_Wrapper = wrapper; }
+        public DialogueActions(@InputActionsGen wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "UI/Navigate".
+        /// Provides access to the underlying input action "Dialogue/Navigate".
         /// </summary>
-        public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+        public InputAction @Navigate => m_Wrapper.m_Dialogue_Navigate;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Submit".
+        /// Provides access to the underlying input action "Dialogue/Submit".
         /// </summary>
-        public InputAction @Submit => m_Wrapper.m_UI_Submit;
+        public InputAction @Submit => m_Wrapper.m_Dialogue_Submit;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Cancel".
+        /// Provides access to the underlying input action "Dialogue/Cancel".
         /// </summary>
-        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Cancel => m_Wrapper.m_Dialogue_Cancel;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Point".
+        /// Provides access to the underlying input action "Dialogue/Point".
         /// </summary>
-        public InputAction @Point => m_Wrapper.m_UI_Point;
+        public InputAction @Point => m_Wrapper.m_Dialogue_Point;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Click".
+        /// Provides access to the underlying input action "Dialogue/Click".
         /// </summary>
-        public InputAction @Click => m_Wrapper.m_UI_Click;
+        public InputAction @Click => m_Wrapper.m_Dialogue_Click;
         /// <summary>
-        /// Provides access to the underlying input action "UI/RightClick".
+        /// Provides access to the underlying input action "Dialogue/RightClick".
         /// </summary>
-        public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
+        public InputAction @RightClick => m_Wrapper.m_Dialogue_RightClick;
         /// <summary>
-        /// Provides access to the underlying input action "UI/MiddleClick".
+        /// Provides access to the underlying input action "Dialogue/MiddleClick".
         /// </summary>
-        public InputAction @MiddleClick => m_Wrapper.m_UI_MiddleClick;
+        public InputAction @MiddleClick => m_Wrapper.m_Dialogue_MiddleClick;
         /// <summary>
-        /// Provides access to the underlying input action "UI/ScrollWheel".
+        /// Provides access to the underlying input action "Dialogue/ScrollWheel".
         /// </summary>
-        public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
+        public InputAction @ScrollWheel => m_Wrapper.m_Dialogue_ScrollWheel;
         /// <summary>
-        /// Provides access to the underlying input action "UI/TrackedDevicePosition".
+        /// Provides access to the underlying input action "Dialogue/TrackedDevicePosition".
         /// </summary>
-        public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
+        public InputAction @TrackedDevicePosition => m_Wrapper.m_Dialogue_TrackedDevicePosition;
         /// <summary>
-        /// Provides access to the underlying input action "UI/TrackedDeviceOrientation".
+        /// Provides access to the underlying input action "Dialogue/TrackedDeviceOrientation".
         /// </summary>
-        public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputAction @TrackedDeviceOrientation => m_Wrapper.m_Dialogue_TrackedDeviceOrientation;
         /// <summary>
-        /// Provides access to the underlying input action "UI/Skip".
+        /// Provides access to the underlying input action "Dialogue/Skip".
         /// </summary>
-        public InputAction @Skip => m_Wrapper.m_UI_Skip;
-        /// <summary>
-        /// Provides access to the underlying input action "UI/JournalExit".
-        /// </summary>
-        public InputAction @JournalExit => m_Wrapper.m_UI_JournalExit;
+        public InputAction @Skip => m_Wrapper.m_Dialogue_Skip;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1766,9 +1793,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="UIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="DialogueActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1776,11 +1803,11 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="UIActions" />
-        public void AddCallbacks(IUIActions instance)
+        /// <seealso cref="DialogueActions" />
+        public void AddCallbacks(IDialogueActions instance)
         {
-            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_DialogueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Add(instance);
             @Navigate.started += instance.OnNavigate;
             @Navigate.performed += instance.OnNavigate;
             @Navigate.canceled += instance.OnNavigate;
@@ -1814,9 +1841,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Skip.started += instance.OnSkip;
             @Skip.performed += instance.OnSkip;
             @Skip.canceled += instance.OnSkip;
-            @JournalExit.started += instance.OnJournalExit;
-            @JournalExit.performed += instance.OnJournalExit;
-            @JournalExit.canceled += instance.OnJournalExit;
         }
 
         /// <summary>
@@ -1825,8 +1849,8 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="UIActions" />
-        private void UnregisterCallbacks(IUIActions instance)
+        /// <seealso cref="DialogueActions" />
+        private void UnregisterCallbacks(IDialogueActions instance)
         {
             @Navigate.started -= instance.OnNavigate;
             @Navigate.performed -= instance.OnNavigate;
@@ -1861,18 +1885,15 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Skip.started -= instance.OnSkip;
             @Skip.performed -= instance.OnSkip;
             @Skip.canceled -= instance.OnSkip;
-            @JournalExit.started -= instance.OnJournalExit;
-            @JournalExit.performed -= instance.OnJournalExit;
-            @JournalExit.canceled -= instance.OnJournalExit;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIActions.UnregisterCallbacks(IUIActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="DialogueActions.UnregisterCallbacks(IDialogueActions)" />.
         /// </summary>
-        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
-        public void RemoveCallbacks(IUIActions instance)
+        /// <seealso cref="DialogueActions.UnregisterCallbacks(IDialogueActions)" />
+        public void RemoveCallbacks(IDialogueActions instance)
         {
-            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_DialogueActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1882,21 +1903,128 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
-        /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
-        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
-        public void SetCallbacks(IUIActions instance)
+        /// <seealso cref="DialogueActions.AddCallbacks(IDialogueActions)" />
+        /// <seealso cref="DialogueActions.RemoveCallbacks(IDialogueActions)" />
+        /// <seealso cref="DialogueActions.UnregisterCallbacks(IDialogueActions)" />
+        public void SetCallbacks(IDialogueActions instance)
         {
-            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_DialogueActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="UIActions" /> instance referencing this action map.
+    /// Provides a new <see cref="DialogueActions" /> instance referencing this action map.
     /// </summary>
-    public UIActions @UI => new UIActions(this);
+    public DialogueActions @Dialogue => new DialogueActions(this);
+
+    // Journal
+    private readonly InputActionMap m_Journal;
+    private List<IJournalActions> m_JournalActionsCallbackInterfaces = new List<IJournalActions>();
+    private readonly InputAction m_Journal_Cancel;
+    private readonly InputAction m_Journal_JournalExit;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Journal".
+    /// </summary>
+    public struct JournalActions
+    {
+        private @InputActionsGen m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public JournalActions(@InputActionsGen wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Journal/Cancel".
+        /// </summary>
+        public InputAction @Cancel => m_Wrapper.m_Journal_Cancel;
+        /// <summary>
+        /// Provides access to the underlying input action "Journal/JournalExit".
+        /// </summary>
+        public InputAction @JournalExit => m_Wrapper.m_Journal_JournalExit;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Journal; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="JournalActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(JournalActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="JournalActions" />
+        public void AddCallbacks(IJournalActions instance)
+        {
+            if (instance == null || m_Wrapper.m_JournalActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_JournalActionsCallbackInterfaces.Add(instance);
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @JournalExit.started += instance.OnJournalExit;
+            @JournalExit.performed += instance.OnJournalExit;
+            @JournalExit.canceled += instance.OnJournalExit;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="JournalActions" />
+        private void UnregisterCallbacks(IJournalActions instance)
+        {
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @JournalExit.started -= instance.OnJournalExit;
+            @JournalExit.performed -= instance.OnJournalExit;
+            @JournalExit.canceled -= instance.OnJournalExit;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="JournalActions.UnregisterCallbacks(IJournalActions)" />.
+        /// </summary>
+        /// <seealso cref="JournalActions.UnregisterCallbacks(IJournalActions)" />
+        public void RemoveCallbacks(IJournalActions instance)
+        {
+            if (m_Wrapper.m_JournalActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="JournalActions.AddCallbacks(IJournalActions)" />
+        /// <seealso cref="JournalActions.RemoveCallbacks(IJournalActions)" />
+        /// <seealso cref="JournalActions.UnregisterCallbacks(IJournalActions)" />
+        public void SetCallbacks(IJournalActions instance)
+        {
+            foreach (var item in m_Wrapper.m_JournalActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_JournalActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="JournalActions" /> instance referencing this action map.
+    /// </summary>
+    public JournalActions @Journal => new JournalActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2083,11 +2211,11 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         void OnToggleCameraFollow(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Dialogue" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
-    /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
-    public interface IUIActions
+    /// <seealso cref="DialogueActions.AddCallbacks(IDialogueActions)" />
+    /// <seealso cref="DialogueActions.RemoveCallbacks(IDialogueActions)" />
+    public interface IDialogueActions
     {
         /// <summary>
         /// Method invoked when associated input action "Navigate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -2166,6 +2294,21 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSkip(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Journal" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="JournalActions.AddCallbacks(IJournalActions)" />
+    /// <seealso cref="JournalActions.RemoveCallbacks(IJournalActions)" />
+    public interface IJournalActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCancel(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "JournalExit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

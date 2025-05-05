@@ -63,19 +63,16 @@ public class Dialogue : MonoBehaviour
     Queue<DialogueLine> lines = new();
     [SerializeField] float textSpeed = 0.3f;
     public static Dialogue Instance { get; private set; }
-    private InputActionsGen inputActions;
     Action callback = null;
     private void Awake()
     {
         Instance = this;
-        inputActions = new();
-        inputActions.UI.Enable();
     }
 
     private void Start()
     {
-        inputActions.UI.Skip.performed += ctx => SkipText();
-        inputActions.UI.Cancel.performed += ctx => gameObject.SetActive(false);
+        GameManager.Instance.inputActions.Dialogue.Skip.performed += ctx => SkipText();
+        GameManager.Instance.inputActions.Dialogue.Cancel.performed += ctx => Hide();
         gameObject.SetActive(false);
 	}
 
@@ -119,12 +116,14 @@ public class Dialogue : MonoBehaviour
     void Show(){
         gameObject.SetActive(true);
         GameManager.Instance.inputActions.Player.Disable();
+        GameManager.Instance.inputActions.Dialogue.Enable();
     }
     void Hide()
     {
         FinishTween();
         lines.Clear();
         GameManager.Instance.inputActions.Player.Enable();
+        GameManager.Instance.inputActions.Dialogue.Disable();
         gameObject.SetActive(false);
     }
 }
