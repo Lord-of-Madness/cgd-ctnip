@@ -39,9 +39,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Combat")]
     [SerializeField]
+    [Tooltip("This is an offset of the gun when held in hand. Set only if the character holds a gun. X = horizontal, Y = vertical")]
     Vector2 weaponOffset = new Vector2(0.2f, 1f);
     [SerializeField]
-    BulletScript bulletPrefab;
+	[Tooltip("Reference to a bullet prefab. Set only if the character can shoot with a gun")]
+	BulletScript bulletPrefab;
 
     bool hasLineRenderer = false;
 	bool aimLaserVisible = false;
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject bodyArmature;
     [SerializeField]
+    [Tooltip("This is a reference to a lineRenderer which draws a laser aim. Set only for characters which aim this way.")]
     LineRenderer lineRenderer;
 
 
