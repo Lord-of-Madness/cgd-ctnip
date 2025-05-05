@@ -9,6 +9,10 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    /// <summary>
+    /// Shorthand to get active playerData
+    /// </summary>
+    public static PlayerData APD { get=>Instance.ActivePlayer.playerData; }
 
     public PlayerController bethPC;
     public PlayerController erikPC;

@@ -21,27 +21,31 @@ public class DialogueGiver : MonoBehaviour
 
     void initDialogueLines()
     {
-        for (int i = 0; i < lines.Count; i++) {
+        for (int i = 0; i < lines.Count; i++)
+        {
             if (i % 2 == 0)
             {
                 diaLines.Add(new DialogueLine(lines[i], Speaker.Beth));
-                //lines[i] = lines[i].Replace("\\n", "\n");
             }
             else
             {
                 diaLines.Add(new DialogueLine(lines[i], Speaker.Erik));
             }
         }
-		foreach (var line in lines)
-		{
-			diaLines.Add(new DialogueLine(line, charName, sprite,Color.red));
-		}
-	}
+        foreach (var line in lines)
+        {
+            diaLines.Add(new DialogueLine(line, charName, sprite, Color.red));
+        }
+    }
 
     public void ShowDialogue()
     {
-        if (!shown) { 
-            Dialogue.Instance.ShowCharacterWithText(diaLines);
-        shown = true;}
+        if (!shown)
+        {
+            Dialogue.Instance.ShowCharacterWithText(diaLines,() => {
+                shown = true;
+                GameManager.Instance.ActivePlayer.playerData.Documents.Add(new("TestDocument", "BEHOLD THIS IS THE TEXT DOCUMENT OF DOOM!"));
+            });//Horribly se to podìlá kdyby nìco zabilo NPCèko bìhem hovoru.
+        }
     }
 }

@@ -27,4 +27,11 @@ public class Utilities
 		else
 			return false;
 	}
+    public static void PurgeChildren(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            Object.Destroy(child.gameObject);
+        }
+    }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using DG.Tweening;
 using Unity.VisualScripting;
+using System;
 
 
 public class DialogueLine
@@ -63,6 +64,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] float textSpeed = 0.3f;
     public static Dialogue Instance { get; private set; }
     private InputActionsGen inputActions;
+    Action callback = null;
     private void Awake()
     {
         Instance = this;
@@ -86,11 +88,12 @@ public class Dialogue : MonoBehaviour
         dialogTextLine.text = "";//If we clean up the prefab this can be removed.
         textween = dialogTextLine.DOText(line.SpeakerAnnotation()+line.Text, textSpeed, true, ScrambleMode.None).OnComplete(() => FinishTween());
     }
-    public void ShowCharacterWithText(List<DialogueLine> lines)
+    public void ShowCharacterWithText(List<DialogueLine> lines,Action callback=null)
     {
         Show();
-        PurgeChildren(dialogueBox.transform);
+        Utilities.PurgeChildren(dialogueBox.transform);
         this.lines = new(lines);
+        this.callback = callback;
         NextLine();
     }
     private void SkipText()
@@ -104,7 +107,9 @@ public class Dialogue : MonoBehaviour
         {
             ShowCharacterWithText(lines.Dequeue());
         }
-        else Hide();
+        else {
+            callback?.Invoke();
+            Hide(); }
     }
     void FinishTween()
     {
@@ -121,12 +126,5 @@ public class Dialogue : MonoBehaviour
         lines.Clear();
         GameManager.Instance.inputActions.Player.Enable();
         gameObject.SetActive(false);
-    }
-    void PurgeChildren(Transform parent)
-    {
-        foreach (Transform child in parent)
-        {
-            Destroy(child.gameObject);
-        }
     }
 }

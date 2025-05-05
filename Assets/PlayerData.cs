@@ -13,9 +13,23 @@ public class Document
 {
     public string name;
     public List<Page> pages;
+    public Document(string name, List<Page> pages)
+    {
+        this.name = name;
+        this.pages = pages;
+    }
+    public Document(string name,string text)
+    {
+        this.name = name;
+        pages = new() {new(text) };
+    }
 }
 public class Page {
     public string text;
+    public Page(string text)
+    {
+        this.text = text;
+    }
 }
 public class PlayerData : MonoBehaviour
 {
@@ -23,6 +37,10 @@ public class PlayerData : MonoBehaviour
     public Dictionary<Tool, ToolInvData> toolInventory = new();
     public Tool SelectedTool;
     public ToolInvData SelectedToolData => toolInventory[SelectedTool];
+
+    public List<Document> Documents = new();
+    public List<Document> Codex = new();
+    public List<Document>Inventory = new();
 
     int LoadedAmmo { get => SelectedToolData.loadedAmmo; set => SelectedToolData.loadedAmmo = value; }
     int StashedAmmo { get => SelectedToolData.stashedAmmo; set => SelectedToolData.stashedAmmo = value; }
