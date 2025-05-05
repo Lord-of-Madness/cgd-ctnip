@@ -261,7 +261,7 @@ public class PlayerController : MonoBehaviour
         curVelocity.y = jumpForce;
         isGrounded = false;
 
-        bodyArmature.GetComponent<Animator>().SetBool("Jump", true);
+        bodyAnimator.SetBool(animJumpID, true);
 
     }
 

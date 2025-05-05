@@ -274,6 +274,10 @@ PrefabInstance:
       propertyPath: m_AngularSpeed
       value: 1e+16
       objectReference: {fileID: 0}
+    - target: {fileID: 315801408067813449, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 376ea993e444d174e830b4fbed578ba0, type: 2}
     - target: {fileID: 1641409963253520129, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -391,6 +395,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6903453462179388916}
   m_SourcePrefab: {fileID: 100100000, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+--- !u!95 &1112546706822765183 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 315801408067813449, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+  m_PrefabInstance: {fileID: 797555913811614262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4141332273437101748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3632587552803034242, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
@@ -414,3 +423,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackZoneScript: {fileID: 6072977052886182121}
+  timeToAttack: 1.5
+  bodyAnimator: {fileID: 1112546706822765183}

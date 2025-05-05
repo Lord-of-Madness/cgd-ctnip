@@ -8,16 +8,28 @@ public class EnemyScript : MonoBehaviour
     EnemyAttackHitScript attackZoneScript;
 
     [SerializeField]
-    const float timeToAttack = 1f;
+    float timeToAttack = 1f;
 
     bool attacking = false;
+    bool checkedHits = false;
 
     float timeAttacking = 0f;
 
 
     int hp = 100;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    //Animation stuff
+    [SerializeField]
+	Animator bodyAnimator;
+	string animSpeedID = "Speed";
+	string animJumpID = "Jump";
+	string animGroundedID = "Grounded";
+	string animFreeFallID = "FreeFall";
+	string animMotionSpeedID = "MotionSpeed";
+    string animAttackID = "Attack";
+
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
     {
         aiTargetScript = GetComponent<AITarget>();
     }
@@ -27,22 +39,30 @@ public class EnemyScript : MonoBehaviour
     {
         SetAITargetToCloserChar();
         
+        
         if (attacking) timeAttacking += Time.deltaTime;
 
+        //Attack in middle -> check if anyone is hit
+        if (timeAttacking > timeToAttack/3 && !checkedHits)
+        {
+			foreach (Collider c in attackZoneScript.GetAllObjectsInAttackArea())
+			{
+				if (c.CompareTag("Player"))
+				{
+					//TODO: Actual kill of the player and end of game
+					Debug.LogWarning("ONE OF THE CHARACTERS HIT!! GAME OVER!! YOU ARE DEAD!!! HAHAH!!");
+				}
+			}
+            checkedHits = true;
+		}
         //Attack finished --> Resume following target
         if (timeAttacking > timeToAttack)
         {
             timeAttacking = 0;
             attacking = false;
             aiTargetScript.SetFollowing(true);
-            foreach (Collider c in attackZoneScript.GetAllObjectsInAttackArea())
-            {
-                if (c.CompareTag("Player"))
-                {
-                    //TODO: Actual kill of the player and end of game
-                    Debug.LogWarning("ONE OF THE CHARACTERS HIT!! GAME OVER!! YOU ARE DEAD!!! HAHAH!!");
-                }
-            }
+			bodyAnimator.SetBool(animAttackID, false);
+            checkedHits = false;
         }
 
         //Close enough to target --> Attack
@@ -58,7 +78,7 @@ public class EnemyScript : MonoBehaviour
             transform.LookAt(lookPos);
 
             //ATTACK --> TODO: Animation
-
+            bodyAnimator.SetBool(animAttackID, true);
         }
 
 
