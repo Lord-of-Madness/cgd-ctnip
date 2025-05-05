@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using Unity.AI.Navigation.Samples;
+using Unity.Burst;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Search;
@@ -36,15 +37,28 @@ public class PlayerController : MonoBehaviour
 
     Vector3 curVelocity = Vector3.zero;
 
-    [Header("References")]
+    [Header("Combat")]
+    [SerializeField]
+    [Tooltip("This is an offset of the gun when held in hand. Set only if the character holds a gun. X = horizontal, Y = vertical")]
+    Vector2 weaponOffset = new Vector2(0.2f, 1f);
+    [SerializeField]
+	[Tooltip("Reference to a bullet prefab. Set only if the character can shoot with a gun")]
+	BulletScript bulletPrefab;
+
+    bool hasLineRenderer = false;
+	bool aimLaserVisible = false;
+	Vector3 curAimDir = Vector3.zero;
+
+
+	[Header("References")]
     [SerializeField]
     OverheadDialogue overheadDialogue;
     [SerializeField]
     GameObject bodyArmature;
     [SerializeField]
+    [Tooltip("This is a reference to a lineRenderer which draws a laser aim. Set only for characters which aim this way.")]
     LineRenderer lineRenderer;
-    bool hasLineRenderer = false;
-    bool aimLaserVisible = false;
+
 
     //Animation stuff
     Animator bodyAnimator;
@@ -94,9 +108,36 @@ public class PlayerController : MonoBehaviour
 
     private void Attack(InputAction.CallbackContext context)
     {
-        if (playerData.TryFire())//The numerical changes are done in the PlayerData class
+        if (aimLaserVisible && playerData.TryFire())//The numerical changes are done in the PlayerData class
         {
-            onToolUsed.Invoke();
+            RaycastHit hit;
+            Vector3 gunPos = transform.position +
+                new Vector3(bodyArmature.transform.forward.x * weaponOffset.x, 
+                weaponOffset.y,
+                bodyArmature.transform.forward.z * weaponOffset.x);
+
+
+			Ray ray = new Ray(gunPos, curAimDir);
+            if (Physics.Raycast(ray, out hit)) 
+            {
+                SpawnBullet(gunPos, curAimDir, 100, (transform.position - hit.point).magnitude / 100);
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    EnemyScript enemy = hit.collider.transform.parent.GetComponent<EnemyScript>();
+                    if (enemy != null) enemy.GetHit();
+                    else Debug.Log("Collider tagged 'Enemy' didn't find EnemyScript in parent");
+                }
+            }
+            //MISS
+            else
+            {
+				SpawnBullet(gunPos, curAimDir, 100f, 10f);
+			}
+
+
+
+			onToolUsed.Invoke();
+
             //TODO firing rays/projectiles, flashing flashes, animations and stuff
         }
         else
@@ -104,6 +145,16 @@ public class PlayerController : MonoBehaviour
             //TODO: Play "Out of ammo!"
         }
     }
+
+    void SpawnBullet(Vector3 spawnPos, Vector3 dir, float speed, float duration)
+    {
+		BulletScript bullet = Instantiate(bulletPrefab);
+		bullet.Direction = dir;
+		bullet.Speed = speed;
+		bullet.Duration = duration;
+		bullet.transform.position = spawnPos;
+	}
+
     private void Reload(InputAction.CallbackContext context)
     {
         //TODO only shoot if aiming
@@ -130,34 +181,32 @@ public class PlayerController : MonoBehaviour
             RotateInMoveDir();
 
             //Animator set values
-            if (controlledByPlayer)
-            {
-                bodyAnimator.applyRootMotion = true;
 
-                bodyAnimator.SetBool(animGroundedID, isGrounded);
-                bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
+            bodyAnimator.applyRootMotion = true;
 
-                if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
-                else bodyAnimator.SetFloat(animMotionSpeedID, 1);
+            bodyAnimator.SetBool(animGroundedID, isGrounded);
+            bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
 
-                bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
-            }
+            if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
+            else bodyAnimator.SetFloat(animMotionSpeedID, 1);
+
+            bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
 
 
-            else
-            {
-                bodyAnimator.applyRootMotion = false;
-            }
+        }
+        else if (!controlledByPlayer)
+        {
+            bodyAnimator.applyRootMotion = false;
         }
 
         if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime / jumpTime) * jumpForce;
         else curVelocity.y = 0;
 
 
-
-        //DELETE THIS
-        if (hasLineRenderer && aimLaserVisible && controlledByPlayer)
+        if (hasLineRenderer && aimLaserVisible && controlledByPlayer) { 
             DrawLaserAim();
+
+        }
     }
 
     void Move()
@@ -257,6 +306,8 @@ public class PlayerController : MonoBehaviour
     {
         controlledByPlayer = false;
         HideLaserAim();
+        //Debug.Log("Disabling char: " + name);
+        transform.rotation = Quaternion.identity;
         bodyArmature.transform.rotation = Quaternion.identity;
     }
 
@@ -266,16 +317,15 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Don't call this if object doesn't have a lineRenderer assigned
+    /// Don't call this if object doesn't have a lineRenderer assigned. Sets curAimDir to a value
     /// </summary>
-    void DrawLaserAim()
+    void DrawLaserAim(out Vector3 laserDir)
     {
         Debug.Log("Drawing laser aim");
 
         //Get the position of the gun
         Vector3 startPos = transform.position;
-        startPos.y += 1.3f;
-        startPos += bodyArmature.transform.forward * 0.1f;
+        startPos += new Vector3(bodyArmature.transform.forward.x * weaponOffset.x, weaponOffset.y, bodyArmature.transform.forward.z * weaponOffset.x);
 
         //Get the position of mouse direciton intersecion with the plane of the gun
         Vector3 mouseDir = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
@@ -285,32 +335,43 @@ public class PlayerController : MonoBehaviour
 
         //Draw the line via saved lineRenderer
         RaycastHit hit;
-        Vector3 direction = mouseLaserToGunPlanePoint - startPos;
-        Ray ray = new(startPos, direction);
+        laserDir = mouseLaserToGunPlanePoint - startPos;
+        Ray ray = new(startPos, laserDir);
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0,startPos);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
             lineRenderer.SetPosition(1, hit.point);
         else
-            lineRenderer.SetPosition(1, startPos + (direction * 100));
+            lineRenderer.SetPosition(1, startPos + (laserDir * 100));
+
+        //Set current aim dir for fire to be ready
+        curAimDir = laserDir;
 
         //Set the armature rotation to face the aiming direction
-        bodyArmature.transform.LookAt(transform.position + direction);
+        bodyArmature.transform.LookAt(transform.position + laserDir);
         bodyAnimator.SetFloat(animSpeedID, 0f);
     }
 
+	/// <summary>
+	/// Don't call this if object doesn't have a lineRenderer assigned. Sets curAimDir to a value
+	/// </summary>
+	void DrawLaserAim()
+    {
+        DrawLaserAim(out _);
+    }
 
 	/// <summary>
-	/// Don't call this if object doesn't have a lineRenderer assigned
+	/// Don't call this if object doesn't have a lineRenderer assigned. Nulls the curAimDir var
 	/// </summary>
 	void HideLaserAim()
 	{
         if (lineRenderer == null) return;
 		lineRenderer.positionCount = 0;
         aimLaserVisible = false;
+        curAimDir = Vector3.zero;
 	}  
     /// <summary>
-	/// Don't call this if object doesn't have a lineRenderer assigned
+	/// Don't call this if object doesn't have a lineRenderer assigned.
 	/// </summary>
 	void ShowLaserAim()
 	{
