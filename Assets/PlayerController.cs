@@ -138,6 +138,11 @@ public class PlayerController : MonoBehaviour
 
 			onToolUsed.Invoke();
 
+            //Try to camera shake
+            CameraEffectsScript camEff = Camera.main.GetComponent<CameraEffectsScript>();
+            if (camEff != null)
+                camEff.CameraShake();
+
             //TODO firing rays/projectiles, flashing flashes, animations and stuff
         }
         else

@@ -149,7 +149,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""f1ba0d36-48eb-4cd5-b651-1c94a6531f70"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -221,6 +221,15 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""name"": ""Journal"",
                     ""type"": ""Button"",
                     ""id"": ""00c116d7-08ba-4460-b9f7-d1d96b4281d8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleCameraFollow"",
+                    ""type"": ""Button"",
+                    ""id"": ""689dd61a-2f6d-4bca-afc8-371ad99c406c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -665,6 +674,17 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Journal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a7dd293-bf7c-4c15-86c5-c24fee1654e4"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCameraFollow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1307,6 +1327,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         m_Player_CameraFlash = m_Player.FindAction("CameraFlash", throwIfNotFound: true);
         m_Player_ToggleFollowing = m_Player.FindAction("ToggleFollowing", throwIfNotFound: true);
         m_Player_Journal = m_Player.FindAction("Journal", throwIfNotFound: true);
+        m_Player_ToggleCameraFollow = m_Player.FindAction("ToggleCameraFollow", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1417,6 +1438,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraFlash;
     private readonly InputAction m_Player_ToggleFollowing;
     private readonly InputAction m_Player_Journal;
+    private readonly InputAction m_Player_ToggleCameraFollow;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1489,6 +1511,10 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Journal => m_Wrapper.m_Player_Journal;
         /// <summary>
+        /// Provides access to the underlying input action "Player/ToggleCameraFollow".
+        /// </summary>
+        public InputAction @ToggleCameraFollow => m_Wrapper.m_Player_ToggleCameraFollow;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1559,6 +1585,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Journal.started += instance.OnJournal;
             @Journal.performed += instance.OnJournal;
             @Journal.canceled += instance.OnJournal;
+            @ToggleCameraFollow.started += instance.OnToggleCameraFollow;
+            @ToggleCameraFollow.performed += instance.OnToggleCameraFollow;
+            @ToggleCameraFollow.canceled += instance.OnToggleCameraFollow;
         }
 
         /// <summary>
@@ -1615,6 +1644,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Journal.started -= instance.OnJournal;
             @Journal.performed -= instance.OnJournal;
             @Journal.canceled -= instance.OnJournal;
+            @ToggleCameraFollow.started -= instance.OnToggleCameraFollow;
+            @ToggleCameraFollow.performed -= instance.OnToggleCameraFollow;
+            @ToggleCameraFollow.canceled -= instance.OnToggleCameraFollow;
         }
 
         /// <summary>
@@ -2042,6 +2074,13 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJournal(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleCameraFollow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleCameraFollow(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
