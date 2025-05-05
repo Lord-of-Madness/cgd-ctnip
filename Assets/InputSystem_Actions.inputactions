@@ -585,7 +585,7 @@
             ]
         },
         {
-            "name": "UI",
+            "name": "Dialogue",
             "id": "272f6d14-89ba-496f-b7ff-215263d3219f",
             "actions": [
                 {
@@ -601,7 +601,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "7607c7b6-cd76-4816-beef-bd0341cfe950",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -682,15 +682,6 @@
                     "name": "Skip",
                     "type": "Button",
                     "id": "464169cd-699b-4cc9-9af9-2f6eba08fb6c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "JournalExit",
-                    "type": "Button",
-                    "id": "3253a6c6-a041-497b-8bde-79b1d2fda841",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1126,10 +1117,47 @@
                     "action": "Skip",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Journal",
+            "id": "dc0ac787-2bd7-4262-83db-eadb933b228b",
+            "actions": [
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "9319c8c4-03e2-4ed1-b677-8425d2e04800",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JournalExit",
+                    "type": "Button",
+                    "id": "c6a94d8c-011b-4151-b99c-98d88dc0d964",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8f411811-5c00-4a37-a8df-a9de2791d054",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "62204c24-0c8d-4112-b12a-0f35d13f2e2c",
+                    "id": "71a5bd6d-643a-4849-9260-dd6bc10754c7",
                     "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
