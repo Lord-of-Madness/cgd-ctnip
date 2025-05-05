@@ -18,25 +18,17 @@ public class CameraFlashScript : MonoBehaviour
     [SerializeField]
     Transform rotationTransformRef;
 
-	private InputActionsGen inputActions;
-
 	Light flashLight;
 
     Tween flashTween;
     bool flashing = false;
-
-	private void Awake()
-	{
-		inputActions = new();
-		inputActions.Player.Enable();
-	}
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         flashLight = GetComponent<Light>();
-		inputActions.Player.CameraFlash.performed += (ctx) => { Flash(); };
+		GameManager.Instance.inputActions.Player.CameraFlash.performed += (ctx) => { Flash(); };
 	}
 
 	// Update is called once per frame

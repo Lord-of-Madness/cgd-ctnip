@@ -40,11 +40,6 @@ public class GameManager : MonoBehaviour
 		m_mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-	}
-
 	public void SwapCharacters()
     {
         if (activeChar == PlayerCharacter.Beth) 
@@ -103,9 +98,8 @@ public class GameManager : MonoBehaviour
         Camera camera = Camera.main;
 		if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
 
-		Volume volume = camera.GetComponent<Volume>();
-
-		if (volume == null) { Debug.Log("No volume found"); return; }
+		
+		if (!camera.TryGetComponent<Volume>(out var volume)) { Debug.Log("No volume found"); return; }
 
 		volume.enabled = false;
     }

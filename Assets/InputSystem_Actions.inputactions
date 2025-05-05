@@ -63,7 +63,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -135,6 +135,15 @@
                     "name": "Journal",
                     "type": "Button",
                     "id": "00c116d7-08ba-4460-b9f7-d1d96b4281d8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleCameraFollow",
+                    "type": "Button",
+                    "id": "689dd61a-2f6d-4bca-afc8-371ad99c406c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -579,6 +588,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Journal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a7dd293-bf7c-4c15-86c5-c24fee1654e4",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleCameraFollow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

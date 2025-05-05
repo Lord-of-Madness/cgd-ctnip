@@ -10,7 +10,7 @@ public class DialogueGiver : MonoBehaviour
     [SerializeField]
     Sprite sprite;
 
-    List<DialogueLine> diaLines = new();
+    private readonly List<DialogueLine> diaLines = new();
     bool shown = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
