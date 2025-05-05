@@ -12,18 +12,19 @@ public class EnemyAttackHitScript : MonoBehaviour
     {
         sphereCol = GetComponent<SphereCollider>();
         boxCol = GetComponent<BoxCollider>();
-    }
+
+	}
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public List<Collider> GetAllObjectsInAttackArea()
     {
-        Collider[] colsInBox = Physics.OverlapBox(boxCol.center, boxCol.size / 2);
-        Collider[] colsInSphere = Physics.OverlapSphere(sphereCol.center, sphereCol.radius);
+        Collider[] colsInBox = Physics.OverlapBox(transform.position + (transform.rotation * boxCol.center), boxCol.size / 2);
+        Collider[] colsInSphere = Physics.OverlapSphere(transform.position + (transform.rotation * sphereCol.center), sphereCol.radius);
 
         List<Collider> colsInAttackArea = new();
         foreach (Collider col in colsInSphere) {
