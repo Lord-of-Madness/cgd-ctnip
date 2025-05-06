@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using System;
 using NUnit.Framework.Interfaces;
 using System.Linq;
+using System.IO;
+using UnityEditor.Experimental.GraphView;
 
 
 public class DialogueTreeNode
@@ -51,16 +53,47 @@ public class DialogueTreeNode
         }
         return null;
     }
-    public DialogueTreeNode DeserializeTree(string JSONPATH )
+    public static Dictionary<string,string> SpeakerHexPairToDict(List<SpeakerHexPair> speakers)
     {
-        List<DialogueNodeJSON> list = JsonUtility.FromJson<DialogueWrapper>(Resources.Load<TextAsset>(JSONPATH).text).nodes;
+        Dictionary<string, string> dict = new();
+        foreach (var speaker in speakers)
+        {
+            dict.Add(speaker.Speaker, speaker.Hex);
+        }
+        return dict;
+    }
+    public static DialogueTreeNode DeserializeTree(TextAsset json)
+    {
+        return DesTree(json.text);
+    }
+    public static DialogueTreeNode DeserializeTree(string JSONPATH )
+    {
+        string json;
+        try
+        {
+            json = File.ReadAllText(JSONPATH);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Debílku, špatnì jsi tam ten JSON dal. Èuèaj takovou ekcepšnu to hodilo: "+e);
+            return null;
+        }
+        return DesTree(json);
+    }
+    static DialogueTreeNode DesTree(string json)
+    {
+        DialogueWrapper dialogueData = JsonUtility.FromJson<DialogueWrapper>(json);
+        List<DialogueNodeJSON> list = dialogueData.nodes;
+        Dictionary<string, string> speakers = SpeakerHexPairToDict(dialogueData.speakers);
         Dictionary<int, DialogueTreeNode> nodeDict = new();
         foreach (var node in list)
         {
-            nodeDict.Add(node.id, new(new(node.Text,node.Who,Resources.Load<Sprite>($"CharacterPortraits/{node.Who}"),node.Hex) ));
+            string hex = speakers.ContainsKey(node.Who) ? speakers[node.Who] : Color.gray.ToHexString();
+            string imagePath = $"CharacterPortraits/{node.Who}";
+            nodeDict.Add(node.id, new(new(node.Text, node.Who, Resources.Load<Sprite>(imagePath), hex)));
         }
         DialogueTreeNode root = nodeDict.ContainsKey(0) ? nodeDict[0] : null;
-        if(root == null) Debug.LogError($"No root node found in {JSONPATH}");
+        if (root == null) Debug.LogError($"No root node found in json");
         foreach (var node in list)
         {
             DialogueTreeNode currentNode = nodeDict[node.id];
@@ -79,6 +112,7 @@ public class DialogueTreeNode
         }
         return root;
     }
+
     int SerializeNodeRecursion(Dictionary<int,DialogueNodeJSON> nodeList)
     {
         if (SerializationID != FUNNY_NUMBER) return SerializationID;
@@ -87,7 +121,6 @@ public class DialogueTreeNode
             id = nodeList.Count,
             Text = Line.Text,
             Who = Line.Who,
-            Hex = Line.Hex,
             children = new List<int>()
         };
         SerializationID = nodeJSON.id;
@@ -99,24 +132,36 @@ public class DialogueTreeNode
 
         return SerializationID;
     }
-    public void SerializeTree(string path)
+    public void SerializeTree(string path,List<SpeakerHexPair> speakerHexes)
     {
         Dictionary<int, DialogueNodeJSON> nodeList = new();
         SerializeNodeRecursion(nodeList);
         //WARNING/TODO: the entire tree is dirty after this and cannot be serialized again - Need to set the SerializationID back to FUNNY_NUMBER
-        Debug.Log(nodeList.Count);
-        string json = JsonUtility.ToJson(new DialogueWrapper(nodeList.Values.ToList()));
-        Debug.Log(json);
-        System.IO.File.WriteAllText(path, json);
+        string json = JsonUtility.ToJson(new DialogueWrapper(nodeList.Values.ToList(), speakerHexes));
+        File.WriteAllText(path, json);
+    }
+}
+
+[System.Serializable]
+public class SpeakerHexPair
+{
+    public string Speaker;
+    public string Hex;
+    public SpeakerHexPair(string speaker, string hex)
+    {
+        Speaker = speaker;
+        Hex = hex;
     }
 }
 [System.Serializable]
 public class DialogueWrapper
 {
     public List<DialogueNodeJSON> nodes;
-    public DialogueWrapper(List<DialogueNodeJSON> nodes)
+    public List<SpeakerHexPair> speakers;
+    public DialogueWrapper(List<DialogueNodeJSON> nodes, List<SpeakerHexPair> speakers)
     {
         this.nodes = nodes;
+        this.speakers = speakers;
     }
 }
 [System.Serializable]
@@ -126,7 +171,6 @@ public class DialogueNodeJSON
     public string Text;
     public string Who;
     //public string SpritePath { get; set; } //Lets just use Who and a concrete folder in Resources.
-    public string Hex;
     public List<int> children;
 }
 
@@ -167,18 +211,18 @@ public class Speaker
     public string Name { get; set; }
     public Sprite Portrait { get; set; }
     public Color TextColor { get; set; } = Color.gray;
-    public Speaker(string name, Sprite portrait)
+    public Speaker(string name)
     {
         Name = name;
-        Portrait = portrait;
+        Portrait = Resources.Load<Sprite>($"CharacterPortraits/{name}");
     }
-    public static Speaker Beth => new("Elisabeth", Resources.Load<Sprite>("Placeholders/fbFoto")) {TextColor = new(1f, 0.513725f, 0.513725f) };
-    public static Speaker Erik => new("Erik", Resources.Load<Sprite>("Placeholders/Portrait mistodrzici")) { TextColor = new(0.5294f, 6.941f, 1f) };//TODO add portraits
+    public static Speaker Beth => new("Elisabeth") {TextColor = new(1f, 0.513725f, 0.513725f) };
+    public static Speaker Erik => new("Erik") { TextColor = new(0.5294f, 6.941f, 1f) };
 }
 
 public class Dialogue : MonoBehaviour
 {
-    [SerializeField]Image CharacterImage;
+    [SerializeField] Image CharacterImage;
     [SerializeField] GameObject dialogueBox;
     [SerializeField] Text dialogTextLinePrefab;
     [SerializeField] Button dialogOptButtonPrefab;

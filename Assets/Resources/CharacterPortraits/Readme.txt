@@ -1,0 +1,1 @@
+If there is a speaker in a dialogue they will try to get a portrait from here.

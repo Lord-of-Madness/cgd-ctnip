@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueGiver : MonoBehaviour
@@ -9,41 +10,49 @@ public class DialogueGiver : MonoBehaviour
     string charName;
     [SerializeField]
     Sprite sprite;
-    [SerializeField] string DialogueJSON ="";
+    [SerializeField] TextAsset DialogueJSON;
 
-    private readonly List<DialogueLine> diaLines = new();
+    private DialogueTreeNode dialogueTree;
     bool shown = false;
 
-    public bool DEBUGGENERATEJSON = true;
+    /// <summary>
+    /// Toggles which source it should prefer for dialogue -> lines in inspector or json file
+    /// </summary>
+    bool PREFERJSON = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (DialogueJSON != "" && (lines==null || lines.Count==0))
+        if (DialogueJSON != null && DialogueJSON.text != "" && (PREFERJSON || (lines == null || lines.Count == 0)))//If json is valid and prefered or if the lines are empty.
         {
-            lines = JsonUtility.FromJson<List<string>>(DialogueJSON);
+            dialogueTree = DialogueTreeNode.DeserializeTree(DialogueJSON);
+            Debug.Log("I used json!");
         }
-        initDialogueLines();
-    }
-    /// <summary>
-    /// Only for testing purposes
-    /// </summary>
-    void initDialogueLines()
-    {
-        for (int i = 0; i < lines.Count; i++)//Testing explicit speakers
+        else
         {
-            if (i % 2 == 0)
+            Debug.Log("I used inspector lines!");
+            List<DialogueLine> diaLines = new();
+            for (int i = 0; i < lines.Count; i++)//Testing explicit speakers
             {
-                diaLines.Add(new DialogueLine(lines[i], Speaker.Beth));
+                if (i % 2 == 0)
+                {
+                    diaLines.Add(new DialogueLine(lines[i], Speaker.Beth));
+                }
+                else
+                {
+                    diaLines.Add(new DialogueLine(lines[i], Speaker.Erik));
+                }
             }
-            else
+            foreach (var line in lines)
             {
-                diaLines.Add(new DialogueLine(lines[i], Speaker.Erik));
+                diaLines.Add(new DialogueLine(line, charName, sprite, Color.red));
             }
-        }
-        foreach (var line in lines)
-        {
-            diaLines.Add(new DialogueLine(line, charName, sprite, Color.red));
+            const string path = "IHaveNoClueWhatThisWillDo.json";
+            DialogueTreeNode.BuildSimpleTree(diaLines).SerializeTree(path, new() {
+                    new(Speaker.Beth.Name,Speaker.Beth.TextColor.ToHexString()),
+                    new(Speaker.Erik.Name,Speaker.Erik.TextColor.ToHexString())
+                });//Application.dataPath
+            dialogueTree = DialogueTreeNode.DeserializeTree(path);
         }
     }
 
@@ -51,16 +60,8 @@ public class DialogueGiver : MonoBehaviour
     {
         if (!shown)
         {
-            DialogueTreeNode dialogueRoot = DialogueTreeNode.BuildSimpleTree(diaLines);
-            if (DEBUGGENERATEJSON)
-            {
-                dialogueRoot.SerializeTree("IHaveNoClueWhatThisWillDo.json");//Application.dataPath
-            }
-
-            Dialogue.Instance.ShowCharacterWithText(dialogueRoot /*,() => {
-                shown = true;
-                GameManager.Instance.ActivePlayer.playerData.Documents.Add(new("TestDocument", "BEHOLD THIS IS THE TEXT DOCUMENT OF DOOM!"));
-            }*/);//Horribly se to podìlá kdyby nìco zabilo NPCèko bìhem hovoru.
+            Dialogue.Instance.ShowCharacterWithText(dialogueTree);
+            shown = true;
         }
     }
     
