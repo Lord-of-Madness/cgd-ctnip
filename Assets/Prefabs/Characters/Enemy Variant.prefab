@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4532384425451228198}
   - component: {fileID: 8888589244033471897}
   - component: {fileID: 6072977052886182121}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeleeAttackHitBox
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,9 +101,9 @@ GameObject:
   - component: {fileID: 1488306027151244986}
   - component: {fileID: 3886358007091001561}
   - component: {fileID: 7645971876185016574}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,9 +187,9 @@ GameObject:
   - component: {fileID: 8901009003036206617}
   - component: {fileID: 6902645059461088153}
   - component: {fileID: 6153156119171556472}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -426,4 +426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackZoneScript: {fileID: 6072977052886182121}
   timeToAttack: 1.5
+  timeStaggeredAfterHit: 1
+  maxHp: 10
   bodyAnimator: {fileID: 1112546706822765183}

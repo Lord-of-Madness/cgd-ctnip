@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     [Tooltip("This is an offset of the gun when held in hand. Set only if the character holds a gun. X = horizontal, Y = vertical")]
     Vector2 weaponOffset = new Vector2(0.2f, 1f);
     [SerializeField]
+    int gunDamage = 10;
+    [SerializeField]
 	[Tooltip("Reference to a bullet prefab. Set only if the character can shoot with a gun")]
 	BulletScript bulletPrefab;
 
@@ -182,10 +184,12 @@ public class PlayerController : MonoBehaviour
                 //Apply force to object rigidbody (no real damage done)
                 if (c.transform.parent != null)
                 {
-                    Vector3 appliedForce = (c.transform.position - transform.position).normalized * meleeAttackForce*50000;
-                                                                                                     //50000 is the magic constant which make the enemy rigibody fly a bit
-					c.transform.parent.GetComponent<Rigidbody>().AddForce(appliedForce);
+                    EnemyScript enemy = c.transform.parent.GetComponent<EnemyScript>();
+                    Vector3 appliedForce = (enemy.transform.position - transform.position).normalized * meleeAttackForce*50000;
+					                                                            //50000 is the magic constant which make the enemy rigibody fly a bit
 
+					enemy.GetComponent<Rigidbody>().AddForce(appliedForce);
+                    enemy.GetHit(0);
                 }
             }
 		}
@@ -204,21 +208,21 @@ public class PlayerController : MonoBehaviour
 
     void ShootFromGun()
     {
-		RaycastHit hit;
-		Vector3 gunPos = transform.position +
-			new Vector3(bodyArmature.transform.forward.x * weaponOffset.x,
-			weaponOffset.y,
-			bodyArmature.transform.forward.z * weaponOffset.x);
+        RaycastHit hit;
+        Vector3 gunPos = transform.position +
+            new Vector3(bodyArmature.transform.forward.x * weaponOffset.x,
+            weaponOffset.y,
+            bodyArmature.transform.forward.z * weaponOffset.x);
 
 
-		Ray ray = new Ray(gunPos, curAimDir);
-		if (Physics.Raycast(ray, out hit))
+        Ray ray = new Ray(gunPos, curAimDir);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
 		{
 			SpawnBullet(gunPos, curAimDir, 100, (transform.position - hit.point).magnitude / 100);
 			if (hit.collider.CompareTag("Enemy"))
 			{
 				EnemyScript enemy = hit.collider.transform.parent.GetComponent<EnemyScript>();
-				if (enemy != null) enemy.GetHit();
+				if (enemy != null) enemy.GetHit(gunDamage);
 				else Debug.Log("Collider tagged 'Enemy' didn't find EnemyScript in parent");
 			}
 		}

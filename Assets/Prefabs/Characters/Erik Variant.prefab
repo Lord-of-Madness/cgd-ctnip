@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 742987430595526058}
   - component: {fileID: 6666298788524622847}
   - component: {fileID: 5647713346725270934}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeleeAttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 42648945357723420}
   - component: {fileID: 4601554223935858233}
   - component: {fileID: 8712743598952293714}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 2837286256756721626}
   - component: {fileID: 3287841283496153348}
   - component: {fileID: 7198555236892510120}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

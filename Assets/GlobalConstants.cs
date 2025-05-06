@@ -10,6 +10,8 @@ public static class GlobalConstants
 	public static string animFreeFallID = "FreeFall";
 	public static string animMotionSpeedID = "MotionSpeed";
 	public static string animAttackID = "Attack";
+	public static string animGotHitID = "GotHit";
+	public static string animHpID = "HP";
 
 	//TOOLS
 	public static string pipeToolName = "Pipe";
