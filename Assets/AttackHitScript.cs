@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class EnemyAttackHitScript : MonoBehaviour
+public class AttackHitScript : MonoBehaviour
 {
     SphereCollider sphereCol;
     BoxCollider boxCol;

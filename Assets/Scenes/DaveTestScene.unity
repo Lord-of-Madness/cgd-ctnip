@@ -571,6 +571,8 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  DialogueJSON: 
+  DEBUGGENERATEJSON: 1
 --- !u!1001 &1040829215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1099,6 +1101,8 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  DialogueJSON: 
+  DEBUGGENERATEJSON: 1
 --- !u!4 &1295520340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7631286950751228214, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
@@ -1563,6 +1567,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.4375
       objectReference: {fileID: 0}
+    - target: {fileID: 5591336283755008924, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591336283755008924, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591336283755008924, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591336283755008924, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591336283755008924, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591336283755008924, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6409070038788276616, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1630,6 +1658,8 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  DialogueJSON: 
+  DEBUGGENERATEJSON: 1
 --- !u!1001 &2063093696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2037,10 +2067,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1476601136340618310, guid: 0b98476ec9ef95743b923b46a2ef32ff, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b98476ec9ef95743b923b46a2ef32ff, type: 3}
 --- !u!1001 &8815585753461733534
 PrefabInstance:
@@ -2097,6 +2124,10 @@ PrefabInstance:
     - target: {fileID: 4225182456830000105, guid: 7a73924f922f2f24eb1dc741e14014e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573955596414575623, guid: 7a73924f922f2f24eb1dc741e14014e2, type: 3}
+      propertyPath: m_Name
+      value: Right_HandProp
       objectReference: {fileID: 0}
     - target: {fileID: 7370194203548901688, guid: 7a73924f922f2f24eb1dc741e14014e2, type: 3}
       propertyPath: m_Name

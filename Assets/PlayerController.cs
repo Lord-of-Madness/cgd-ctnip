@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     Vector3 curVelocity = Vector3.zero;
 
     [Header("Combat")]
+    [Header("Beth")]
     [SerializeField]
     [Tooltip("This is an offset of the gun when held in hand. Set only if the character holds a gun. X = horizontal, Y = vertical")]
     Vector2 weaponOffset = new Vector2(0.2f, 1f);
@@ -48,6 +49,20 @@ public class PlayerController : MonoBehaviour
     bool hasLineRenderer = false;
 	bool aimLaserVisible = false;
 	Vector3 curAimDir = Vector3.zero;
+
+    [Header("Erik")]
+    [SerializeField]
+    [Tooltip("Reference to the melee attack hit box script. Set only for characters with melee weapons")]
+    AttackHitScript meleeAttackHitScript;
+    [SerializeField]
+    float meleeAttackTime = 1.5f;
+    [SerializeField]
+    float meleeAttackForce = 10;
+
+
+	float timeAttacking = 0;
+    bool meleeAttacking = false;
+    bool dealtMeleeDamage = false;
 
 
 	[Header("References")]
@@ -62,11 +77,6 @@ public class PlayerController : MonoBehaviour
 
     //Animation stuff
     Animator bodyAnimator;
-    string animSpeedID = "Speed";
-    string animJumpID = "Jump";
-    string animGroundedID = "Grounded";
-    string animFreeFallID = "FreeFall";
-    string animMotionSpeedID = "MotionSpeed";
 
 
     public PlayerData playerData;
@@ -108,50 +118,129 @@ public class PlayerController : MonoBehaviour
 
     private void Attack(InputAction.CallbackContext context)
     {
-        if (aimLaserVisible && playerData.TryFire())//The numerical changes are done in the PlayerData class
+        if (playerData.CanUseTool())
         {
-            RaycastHit hit;
-            Vector3 gunPos = transform.position +
-                new Vector3(bodyArmature.transform.forward.x * weaponOffset.x, 
-                weaponOffset.y,
-                bodyArmature.transform.forward.z * weaponOffset.x);
-
-
-			Ray ray = new Ray(gunPos, curAimDir);
-            if (Physics.Raycast(ray, out hit)) 
+            if (playerData.SelectedTool.toolName == GlobalConstants.revolverToolName)
             {
-                SpawnBullet(gunPos, curAimDir, 100, (transform.position - hit.point).magnitude / 100);
-                if (hit.collider.CompareTag("Enemy"))
+                if (aimLaserVisible)//The numerical changes are done in the PlayerData class
                 {
-                    EnemyScript enemy = hit.collider.transform.parent.GetComponent<EnemyScript>();
-                    if (enemy != null) enemy.GetHit();
-                    else Debug.Log("Collider tagged 'Enemy' didn't find EnemyScript in parent");
+                    if (playerData.TryFire())
+                        ShootFromGun();
                 }
+
             }
-            //MISS
+            //Something else than gun with which you must aim
             else
             {
-				SpawnBullet(gunPos, curAimDir, 100f, 10f);
-			}
+                if (playerData.TryFire())
+                {
+                    if (playerData.SelectedTool.toolName == GlobalConstants.pipeToolName)
+                    {
+                        MeleeAttack();
+                    }
+                }
+            }
 
-
-
-			onToolUsed.Invoke();
-
-            //Try to camera shake
-            CameraEffectsScript camEff = Camera.main.GetComponent<CameraEffectsScript>();
-            if (camEff != null)
-                camEff.CameraShake();
-
-            //TODO firing rays/projectiles, flashing flashes, animations and stuff
         }
+        //OUT OF AMMO
         else
         {
+            Debug.Log("Out of ammo");
             //TODO: Play "Out of ammo!"
         }
     }
 
-    void SpawnBullet(Vector3 spawnPos, Vector3 dir, float speed, float duration)
+    void MeleeAttack()
+    {
+		//Stop following target
+		meleeAttacking = true;
+
+        //Attack animation
+		bodyAnimator.SetBool(GlobalConstants.animAttackID, true);
+	}
+
+	void MeleeAttackTimingManagment()
+    {
+		if (meleeAttacking)
+			timeAttacking += Time.deltaTime;
+
+		if (timeAttacking > meleeAttackTime / 3 && !dealtMeleeDamage)
+			DealMeleeDamage();
+
+		if (timeAttacking > meleeAttackTime)
+			FinishMeleeAttack();
+
+	}
+
+	void DealMeleeDamage()
+    {
+		foreach (Collider c in meleeAttackHitScript.GetAllObjectsInAttackArea())
+		{
+            if (c.CompareTag("Enemy"))
+            {
+                //Debug.Log("Applying force to an enemy!");
+                //Apply force to object rigidbody (no real damage done)
+                if (c.transform.parent != null)
+                {
+                    Vector3 appliedForce = (c.transform.position - transform.position).normalized * meleeAttackForce*50000;
+                                                                                                     //50000 is the magic constant which make the enemy rigibody fly a bit
+					c.transform.parent.GetComponent<Rigidbody>().AddForce(appliedForce);
+
+                }
+            }
+		}
+
+		dealtMeleeDamage = true;
+
+    }
+
+    void FinishMeleeAttack()
+    {
+        timeAttacking = 0;
+        dealtMeleeDamage = false;
+        meleeAttacking = false;
+        bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
+    }
+
+    void ShootFromGun()
+    {
+		RaycastHit hit;
+		Vector3 gunPos = transform.position +
+			new Vector3(bodyArmature.transform.forward.x * weaponOffset.x,
+			weaponOffset.y,
+			bodyArmature.transform.forward.z * weaponOffset.x);
+
+
+		Ray ray = new Ray(gunPos, curAimDir);
+		if (Physics.Raycast(ray, out hit))
+		{
+			SpawnBullet(gunPos, curAimDir, 100, (transform.position - hit.point).magnitude / 100);
+			if (hit.collider.CompareTag("Enemy"))
+			{
+				EnemyScript enemy = hit.collider.transform.parent.GetComponent<EnemyScript>();
+				if (enemy != null) enemy.GetHit();
+				else Debug.Log("Collider tagged 'Enemy' didn't find EnemyScript in parent");
+			}
+		}
+		//MISS
+		else
+		{
+			SpawnBullet(gunPos, curAimDir, 100f, 10f);
+		}
+
+
+
+		onToolUsed.Invoke();
+
+		//Try to camera shake
+		CameraEffectsScript camEff = Camera.main.GetComponent<CameraEffectsScript>();
+		if (camEff != null)
+			camEff.CameraShake();
+
+		//TODO animations and stuff
+	}
+
+	void SpawnBullet(Vector3 spawnPos, Vector3 dir, float speed, float duration)
     {
 		BulletScript bullet = Instantiate(bulletPrefab);
 		bullet.Direction = dir;
@@ -178,24 +267,20 @@ public class PlayerController : MonoBehaviour
 
         Vector2 moveValue = GameManager.Instance.inputActions.Player.Move.ReadValue<Vector2>();
         MoveByKeyboard(moveValue);
+
         timeSinceJump += Time.deltaTime;
 
-        if (controlledByPlayer && !aimLaserVisible)
+        if (controlledByPlayer)
+            MeleeAttackTimingManagment();
+
+
+        if (controlledByPlayer && !aimLaserVisible && !meleeAttacking)
         {
             Move();
             RotateInMoveDir();
 
-            //Animator set values
+            SetAnimatorValuesMovement();
 
-            bodyAnimator.applyRootMotion = true;
-
-            bodyAnimator.SetBool(animGroundedID, isGrounded);
-            bodyAnimator.SetBool(animJumpID, curVelocity.y > 0);
-
-            if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
-            else bodyAnimator.SetFloat(animMotionSpeedID, 1);
-
-            bodyAnimator.SetFloat(animSpeedID, curVelocity.magnitude * 1);
 
 
         }
@@ -214,6 +299,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void SetAnimatorValuesMovement()
+    {
+
+		bodyAnimator.applyRootMotion = true;
+
+		bodyAnimator.SetBool(GlobalConstants.animGroundedID, isGrounded);
+		bodyAnimator.SetBool(GlobalConstants.animJumpID, curVelocity.y > 0);
+
+		if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+		else bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+
+		bodyAnimator.SetFloat(GlobalConstants.animSpeedID, curVelocity.magnitude * 1);
+	}
     void Move()
     {
         //Debug.Log("Moving in dir: " + curVelocity.ToString());
@@ -261,7 +359,7 @@ public class PlayerController : MonoBehaviour
         curVelocity.y = jumpForce;
         isGrounded = false;
 
-        bodyAnimator.SetBool(animJumpID, true);
+        bodyAnimator.SetBool(GlobalConstants.animJumpID, true);
 
     }
 
@@ -354,7 +452,7 @@ public class PlayerController : MonoBehaviour
 
         //Set the armature rotation to face the aiming direction
         bodyArmature.transform.LookAt(transform.position + laserDir);
-        bodyAnimator.SetFloat(animSpeedID, 0f);
+        bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0f);
     }
 
 	/// <summary>

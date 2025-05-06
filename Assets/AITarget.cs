@@ -16,11 +16,6 @@ public class AITarget : MonoBehaviour
 	//Animation stuff
 	[SerializeField]
 	Animator bodyAnimator;
-	string animSpeedID = "Speed";
-	string animJumpID = "Jump";
-	string animGroundedID = "Grounded";
-	string animFreeFallID = "FreeFall";
-	string animMotionSpeedID = "MotionSpeed";
 
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -61,10 +56,10 @@ public class AITarget : MonoBehaviour
 			//bodyAnimator.SetBool(animGroundedID, m_agent.velocity.y == 0);
 			//bodyAnimator.SetBool(animJumpID, m_agent.velocity.y > 0);
 			//bodyAnimator.SetBool(animFreeFallID, m_agent.velocity.y < 0);
-			if (m_agent.velocity.magnitude > 0) bodyAnimator.SetFloat(animMotionSpeedID, 1);
-			else bodyAnimator.SetFloat(animMotionSpeedID, 1);
+			if (m_agent.velocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+			else bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
 
-			bodyAnimator.SetFloat(animSpeedID, m_agent.velocity.magnitude);
+			bodyAnimator.SetFloat(GlobalConstants.animSpeedID, m_agent.velocity.magnitude);
 		}
 		else Debug.LogWarning("Body animator is Null! Agent can't start animations");
 	}
@@ -79,7 +74,7 @@ public class AITarget : MonoBehaviour
 		if (!follow && m_agent.enabled)
 		{
 			m_agent.CompleteOffMeshLink();
-			bodyAnimator.SetFloat(animSpeedID, 0);
+			bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0);
 			m_agent.isStopped = !follow;
 			m_agent.enabled = follow;
 

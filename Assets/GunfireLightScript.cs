@@ -49,11 +49,11 @@ public class GunfireLightScript : MonoBehaviour
 
 	public void Flash()
 	{
-		Debug.Log("Gunfire flash called");
+		//Debug.Log("Gunfire flash called");
 		if (flashing || (flashTween != null && flashTween.active)) return;
 
 		//Check if the used tool is actually a gun -> could be checked elsewhere, but idk how rn
-		if (playerController.playerData.SelectedTool.toolName != "Revolver") return;
+		if (playerController.playerData.SelectedTool.toolName != GlobalConstants.revolverToolName) return;
 
 		gunfireLight.intensity = flashIntesity;
 		gunfireLight.range = flashRange;

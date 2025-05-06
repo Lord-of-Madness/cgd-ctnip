@@ -71,6 +71,7 @@ public class PlayerData : MonoBehaviour
             Debug.Log("No tool selected");
             return false;
         }
+        if (SelectedTool.maxLoadedAmmo == 0) return true; //Melee weapon doesn't have any ammo whatsoever
         return SelectedToolData.loadedAmmo > 0;
     }
 
@@ -93,7 +94,7 @@ public class PlayerData : MonoBehaviour
         }
         else
         {
-            Debug.Log("No ammo");
+            Debug.Log("Can't use tool -> didn't fire");
             return false;
         }
     }
