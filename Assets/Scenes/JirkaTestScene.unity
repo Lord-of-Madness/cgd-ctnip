@@ -812,6 +812,7 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  DialogueJSON: {fileID: 0}
 --- !u!1001 &1040829215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1320,6 +1321,7 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  DialogueJSON: {fileID: 4900000, guid: 3ccaaf5ffe6b78941abd843652f36144, type: 3}
 --- !u!4 &1295520340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7631286950751228214, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
@@ -1483,6 +1485,7 @@ MonoBehaviour:
     faucibus vel, interdum nec, diam.
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  DialogueJSON: {fileID: 0}
 --- !u!4 &1513704714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7631286950751228214, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
@@ -1920,6 +1923,10 @@ PrefabInstance:
     - target: {fileID: 2366288804977296244, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399742097311789739, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.379028
       objectReference: {fileID: 0}
     - target: {fileID: 2506436055787129964, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_Enabled
@@ -3144,6 +3151,7 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
+  DialogueJSON: {fileID: 0}
 --- !u!1001 &2063093696
 PrefabInstance:
   m_ObjectHideFlags: 0
