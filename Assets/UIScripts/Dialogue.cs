@@ -8,6 +8,7 @@ using NUnit.Framework.Interfaces;
 using System.Linq;
 using System.IO;
 using UnityEditor.Experimental.GraphView;
+using TMPro;
 
 
 public class DialogueTreeNode
@@ -239,7 +240,7 @@ public class Dialogue : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.inputActions.Dialogue.Skip.performed += ctx => SkipText();
-        GameManager.Instance.inputActions.Dialogue.Cancel.performed += ctx => Hide();
+        GameManager.Instance.inputActions.Dialogue.Cancel.performed += ctx => Hide();//Perhaps remove - callbacks would get called multiple times.
         gameObject.SetActive(false);
 	}
 
@@ -270,12 +271,28 @@ public class Dialogue : MonoBehaviour
         {
             if (lines.IsChoice)
             {
-                Debug.Log("TODOChoice");//TODO
+                GameManager.Instance.inputActions.Dialogue.Skip.Disable();
+                ShowCharacterWithText(lines.Line);
+                lines.callback?.Invoke();
+                List<Button> buttons = new();
+                foreach (var child in lines.children)
+                {
+                    Button button = Instantiate(dialogOptButtonPrefab, dialogueBox.transform);
+                    buttons.Add(button);
+                    button.GetComponent<TextMeshProUGUI>().text = child.Line.SpeakerAnnotation() + child.Line.Text;
+                    button.onClick.AddListener(() => {
+                        buttons.ForEach((c) => Destroy(c.gameObject));
+                        child.callback?.Invoke();
+                        lines = child;
+                        GameManager.Instance.inputActions.Dialogue.Skip.Enable();
+                        NextLine();
+                    });
+                }
             }
             else {
                 ShowCharacterWithText(lines.Line);
                 lines.callback?.Invoke();
-                lines = lines.children[0];
+                lines = lines.children.First();
             }
         }
         else

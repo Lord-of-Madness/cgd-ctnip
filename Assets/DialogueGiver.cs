@@ -18,7 +18,7 @@ public class DialogueGiver : MonoBehaviour
     /// <summary>
     /// Toggles which source it should prefer for dialogue -> lines in inspector or json file
     /// </summary>
-    bool PREFERJSON = true;
+    readonly bool PREFERJSON = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
