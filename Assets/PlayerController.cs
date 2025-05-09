@@ -473,6 +473,7 @@ public class PlayerController : MonoBehaviour
         //Set the armature rotation to face the aiming direction
         bodyArmature.transform.LookAt(transform.position + laserDir);
         bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0f);
+        bodyAnimator.SetBool(GlobalConstants.animAimID, true);
     }
 
 	/// <summary>
@@ -492,8 +493,9 @@ public class PlayerController : MonoBehaviour
 		lineRenderer.positionCount = 0;
         aimLaserVisible = false;
         curAimDir = Vector3.zero;
-	}  
-    /// <summary>
+		bodyAnimator.SetBool(GlobalConstants.animAimID, false);
+	}
+	/// <summary>
 	/// Don't call this if object doesn't have a lineRenderer assigned.
 	/// </summary>
 	void ShowLaserAim()
