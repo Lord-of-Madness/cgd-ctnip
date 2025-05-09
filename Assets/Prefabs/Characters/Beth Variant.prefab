@@ -429,6 +429,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 315801408067813449, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 27b0fe82b1684f7419e714b535df3da2, type: 2}
     - target: {fileID: 1074438972325046832, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: toolInspectorField.Array.size
       value: 2
