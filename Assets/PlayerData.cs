@@ -12,22 +12,31 @@ public class ToolInvData
 [Serializable]
 public class Document
 {
+    public enum DocumentType
+    {
+        Documents,
+        Codex,
+        Inventory
+    }
     public string name;
     public List<Page> pages;
-    public Document(string name, List<Page> pages)
+    public DocumentType type;
+    public Document(string name, List<Page> pages, DocumentType type)
     {
         this.name = name;
-        if(pages==null ||pages.Count == 0)
+        if (pages == null || pages.Count == 0)
         {
             Debug.LogWarning("Document without pages");
             pages = new() { new("WHY DID YOU ADD EMPTY PAGE YOU SILLY BUGGER?") };
         }
         this.pages = pages;
+        this.type = type;
     }
-    public Document(string name,string text)
+    public Document(string name,string text, DocumentType type)
     {
         this.name = name;
         pages = new() {new(text) };
+        this.type = type;
     }
 }
 [Serializable]

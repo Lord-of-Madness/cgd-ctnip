@@ -27,7 +27,14 @@ public class DialogueTreeNode
         if(line.Document!=null)
         {
             callback += () => {
-                GameManager.APD.Documents.Add(line.Document);
+                if (line.Document.type == Document.DocumentType.Documents) GameManager.APD.Documents.Add(line.Document);
+                else if (line.Document.type == Document.DocumentType.Codex) GameManager.APD.Codex.Add(line.Document);
+                else if (line.Document.type == Document.DocumentType.Inventory) GameManager.APD.Inventory.Add(line.Document);
+                else
+                {
+                    Debug.LogWarning($"Document type {line.Document.type} not recognized. Adding to Documents.");
+                    GameManager.APD.Documents.Add(line.Document);
+                }
             };
         }
     }

@@ -20,8 +20,8 @@ public class DialogueGiver : MonoBehaviour
     /// Toggles which source it should prefer for dialogue -> lines in inspector or json file
     /// </summary>
     readonly bool PREFERJSON = true;
-    const bool GENERATEJSON = false;
-    const bool GENERATEDocJSON = false;
+    readonly bool GENERATEJSON = false;
+    readonly bool GENERATEDocJSON = false;
 
     void Start()
     {
@@ -53,9 +53,9 @@ public class DialogueGiver : MonoBehaviour
             {
                 const string path = "IHaveNoClueWhatThisWillDo.json";
                 DialogueTreeNode root = DialogueTreeNode.BuildSimpleTree(diaLines);
-                root.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") });
+                root.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") },Document.DocumentType.Documents);
                 if (GENERATEDocJSON) File.WriteAllText("TestJSON.json", JsonUtility.ToJson(root.Line.Document));
-                root.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") });
+                root.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") }, Document.DocumentType.Codex);
                 if (GENERATEDocJSON) File.WriteAllText("TestJSON2.json", JsonUtility.ToJson(root.Children[0].Line.Document));
                 root.SerializeTree(path, new() {
                     new(Speaker.Beth.Name,Speaker.Beth.TextColor.ToHexString()),
@@ -66,8 +66,8 @@ public class DialogueGiver : MonoBehaviour
             else
             {
                 dialogueTree = DialogueTreeNode.BuildSimpleTree(diaLines);
-                dialogueTree.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") });
-                dialogueTree.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") });
+                dialogueTree.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") }, Document.DocumentType.Documents);
+                dialogueTree.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") }, Document.DocumentType.Codex);
             }
         }
     }
