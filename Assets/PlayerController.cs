@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
 
         playerData = GetComponent<PlayerData>();
-        GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
+        //GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
         GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
         GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer) ShowLaserAim(); };
         GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer) HideLaserAim(); };
