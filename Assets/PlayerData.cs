@@ -57,7 +57,7 @@ public class PlayerData : MonoBehaviour
 
     public List<Document> Documents = new();
     public List<Document> Codex = new();
-    public List<Document>Inventory = new();
+    public List<Document> Inventory = new();
 
     int LoadedAmmo { get => SelectedToolData.loadedAmmo; set => SelectedToolData.loadedAmmo = value; }
     int StashedAmmo { get => SelectedToolData.stashedAmmo; set => SelectedToolData.stashedAmmo = value; }

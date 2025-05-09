@@ -17,9 +17,17 @@ PrefabInstance:
       value: Camera flash
       objectReference: {fileID: 0}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ffd3f03710d72f242b12545e0e665603, type: 3}
+    - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: reloadBatch
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 37bbd0b94a8e313499b7addef1046d2d, type: 3}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: maxLoadedAmmo
       value: 10
