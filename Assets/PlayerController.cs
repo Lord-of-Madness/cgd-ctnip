@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
 					                                                            //50000 is the magic constant which make the enemy rigibody fly a bit
 
 					enemy.GetComponent<Rigidbody>().AddForce(appliedForce);
-                    enemy.GetHit(0);
+                    enemy.GetStaggered();
                 }
             }
 		}
@@ -416,6 +416,9 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Disabling char: " + name);
         transform.rotation = Quaternion.identity;
         bodyArmature.transform.rotation = Quaternion.identity;
+
+        //Otherwise there is bug if switching in the middle of attack
+        bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
     }
 
     public void EnablePlayerControl()

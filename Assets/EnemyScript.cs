@@ -37,10 +37,12 @@ public class EnemyScript : MonoBehaviour
         hp = maxHp;
 
         aiTargetScript = GetComponent<AITarget>();
-    }
+		bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
 
-    // Update is called once per frame
-    void Update()
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         SetAITargetToCloserChar();
 
@@ -55,7 +57,7 @@ public class EnemyScript : MonoBehaviour
         //Attack finished --> Resume following target
         if (timeAttacking > timeToAttack)
         {
-            ResumeFollowingTarget();
+            FinishAttacking();
         }
 
         //Close enough to target --> Attack
@@ -85,20 +87,23 @@ public class EnemyScript : MonoBehaviour
 		checkedHits = true;
 	}
 
-    void ResumeFollowingTarget()
+    void StopFollowingTarget()
 	{
-		timeAttacking = 0;
-		attacking = false;
-		aiTargetScript.SetFollowing(true);
-		bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
-		checkedHits = false;
+		aiTargetScript.SetFollowing(false);
 
 	}
 
-    void Attack()
+	void ResumeFollowingTarget()
+	{
+		aiTargetScript.SetFollowing(true);
+		bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
+		bodyAnimator.SetBool(GlobalConstants.animGotHitID, false);
+	}
+
+
+	void Attack()
     {
-		//Stop following target
-		aiTargetScript.SetFollowing(false);
+		StopFollowingTarget();
 		attacking = true;
 
 		//Rotate directly to the target
@@ -109,25 +114,42 @@ public class EnemyScript : MonoBehaviour
 		//ATTACK --> TODO: Animation
 		bodyAnimator.SetBool(GlobalConstants.animAttackID, true);
 	}
+	void FinishAttacking()
+	{
+		timeAttacking = 0;
+		attacking = false;
+        ResumeFollowingTarget();
+        checkedHits = false;
+
+	}
 
     public void GetHit(int damage)
     {
         hp -= damage;
 
-        staggered = true;
-
-        bodyAnimator.SetBool(GlobalConstants.animGotHitID, true);
         bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
+        GetStaggered();
 
         Debug.Log("I GOT HIT!! Only " +  hp + "left"); 
     }
 
-    void RecoverFromStagger()
+    public void GetStaggered()
+    {
+        Debug.Log("I got staggered");
+		
+        if (attacking) FinishAttacking();
+        
+        staggered = true;
+		bodyAnimator.SetBool(GlobalConstants.animGotHitID, true);
+        StopFollowingTarget();
+	}
+
+	void RecoverFromStagger()
     {
         Debug.Log("Recovered from stagger");
         timeStaggered = 0;
         staggered = false;
-		bodyAnimator.SetBool(GlobalConstants.animGotHitID, false);
+        ResumeFollowingTarget();
 	}
 
     void SetAITargetToCloserChar()
