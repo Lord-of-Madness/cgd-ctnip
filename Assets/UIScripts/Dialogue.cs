@@ -9,25 +9,34 @@ using System.Linq;
 using System.IO;
 using UnityEditor.Experimental.GraphView;
 using TMPro;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 
 public class DialogueTreeNode
 {
-    public List<DialogueTreeNode> children = new();
-    public DialogueLine Line { get; set; }
-    public bool IsLeaf => children.Count == 0;
-    public bool IsChoice => children.Count > 1;
+    public List<DialogueTreeNode> Children { get; private set; } = new();
+    public DialogueLine Line { get; private set; }
+    public bool IsLeaf => Children.Count == 0;
+    public bool IsChoice => Children.Count > 1;
     public Action callback;
     private const int FUNNY_NUMBER = 69420; //Haha funny. Once you stop being utterly hilarious you can replace it with -1 or something.
     private int SerializationID = FUNNY_NUMBER;
     public DialogueTreeNode(DialogueLine line)
     {
         Line = line;
+        if(line.Document!=null)
+        {
+            callback = () => {
+                Debug.Log("Callbacking");
+                GameManager.APD.Documents.Add(line.Document);
+            };
+            if (callback != null) Debug.Log("Callback is not null here");
+        }
     }
 
     internal void AddChild(DialogueTreeNode dialogueTreeNode)
     {
-        children.Add(dialogueTreeNode);
+        Children.Add(dialogueTreeNode);
     }
     public static DialogueTreeNode BuildSimpleTree(List<DialogueLine> lines)
     {
@@ -46,7 +55,7 @@ public class DialogueTreeNode
         if (IsLeaf) return this;
         else
         {
-            foreach (var child in children)
+            foreach (var child in Children)
             {
                 if (child.IsLeaf) return child;
                 else return child.GetFirstLeaf();
@@ -91,7 +100,8 @@ public class DialogueTreeNode
         {
             string hex = speakers.ContainsKey(node.Who) ? speakers[node.Who] : Color.gray.ToHexString();
             string imagePath = $"CharacterPortraits/{node.Who}";
-            nodeDict.Add(node.id, new(new(node.Text, node.Who, Resources.Load<Sprite>(imagePath), hex)));
+            string documentPath = $"Documents/{node.DocumentName}";
+            nodeDict.Add(node.id, new(new(node.Text, node.Who, Resources.Load<Sprite>(imagePath), hex,Resources.Load<TextAsset>(documentPath))));
         }
         DialogueTreeNode root = nodeDict.ContainsKey(0) ? nodeDict[0] : null;
         if (root == null) Debug.LogError($"No root node found in json");
@@ -122,11 +132,12 @@ public class DialogueTreeNode
             id = nodeList.Count,
             Text = Line.Text,
             Who = Line.Who,
+            DocumentName = Line.Document?.name,
             children = new List<int>()
         };
         SerializationID = nodeJSON.id;
         nodeList.Add(nodeJSON.id, nodeJSON);
-        foreach (var child in children)
+        foreach (var child in Children)
         {
             nodeJSON.children.Add(child.SerializeNodeRecursion(nodeList));
         }
@@ -171,7 +182,10 @@ public class DialogueNodeJSON
     public int id;
     public string Text;
     public string Who;
-    //public string SpritePath { get; set; } //Lets just use Who and a concrete folder in Resources.
+    /// <summary>
+    /// If the dialogue node is supposed to give a document the path will be here. Will be loaded as such: Resources.Load<TextAsset>(Documents/DocumentName) to load it.
+    /// </summary>
+    public string DocumentName;
     public List<int> children;
 }
 
@@ -181,12 +195,14 @@ public class DialogueLine
     public string Who { get; set; }
     public Sprite Sprite { get; set; }
     public string Hex { get; set; }
-    public DialogueLine(string text, string who, Sprite sprite, string colorHex)
+    public Document Document { get; set; }
+    public DialogueLine(string text, string who, Sprite sprite, string colorHex, TextAsset document)// TODO
     {
         Text = text;
         Who = who;
         Sprite = sprite;
         Hex = colorHex;
+        Document = document != null ? JsonUtility.FromJson<Document>(document.text ): null;
     }
     public DialogueLine(string text, string who, Sprite sprite, Color color)
     {
@@ -273,9 +289,10 @@ public class Dialogue : MonoBehaviour
             {
                 GameManager.Instance.inputActions.Dialogue.Skip.Disable();
                 ShowCharacterWithText(lines.Line);
+                if (lines.callback != null) Debug.Log("Callback is not null");
                 lines.callback?.Invoke();
                 List<Button> buttons = new();
-                foreach (var child in lines.children)
+                foreach (var child in lines.Children)
                 {
                     Button button = Instantiate(dialogOptButtonPrefab, dialogueBox.transform);
                     buttons.Add(button);
@@ -292,7 +309,7 @@ public class Dialogue : MonoBehaviour
             else {
                 ShowCharacterWithText(lines.Line);
                 lines.callback?.Invoke();
-                lines = lines.children.First();
+                lines = lines.Children.First();
             }
         }
         else

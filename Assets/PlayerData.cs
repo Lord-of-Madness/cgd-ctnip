@@ -9,6 +9,7 @@ public class ToolInvData
     public int loadedAmmo = 0;
     public int stashedAmmo = 20;
 }
+[Serializable]
 public class Document
 {
     public string name;
@@ -29,6 +30,7 @@ public class Document
         pages = new() {new(text) };
     }
 }
+[Serializable]
 public class Page {
     public string text;
     public Page(string text)

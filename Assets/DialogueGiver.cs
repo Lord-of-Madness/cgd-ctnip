@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,7 +21,6 @@ public class DialogueGiver : MonoBehaviour
     /// </summary>
     readonly bool PREFERJSON = true;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (DialogueJSON != null && DialogueJSON.text != "" && (PREFERJSON || (lines == null || lines.Count == 0)))//If json is valid and prefered or if the lines are empty.
@@ -48,7 +48,12 @@ public class DialogueGiver : MonoBehaviour
                 diaLines.Add(new DialogueLine(line, charName, sprite, Color.red));
             }
             const string path = "IHaveNoClueWhatThisWillDo.json";
-            DialogueTreeNode.BuildSimpleTree(diaLines).SerializeTree(path, new() {
+            DialogueTreeNode root = DialogueTreeNode.BuildSimpleTree(diaLines);
+            root.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") });
+            File.WriteAllText("TestJSON.json", JsonUtility.ToJson(root.Line.Document));
+            root.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") });
+            File.WriteAllText("TestJSON2.json", JsonUtility.ToJson(root.Children[0].Line.Document));
+            root.SerializeTree(path, new() {
                     new(Speaker.Beth.Name,Speaker.Beth.TextColor.ToHexString()),
                     new(Speaker.Erik.Name,Speaker.Erik.TextColor.ToHexString())
                 });//Application.dataPath

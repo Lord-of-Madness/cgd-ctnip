@@ -4,6 +4,7 @@
             "id": 0,
             "Text": "Hello!",
             "Who": "Elisabeth",
+            "DocumentName": "TestJSON",
             "children": [
                 1
             ]
@@ -12,6 +13,7 @@
             "id": 1,
             "Text": "Will You choose Red pill or blue Pill?",
             "Who": "Elisabeth",
+            "DocumentName": "TestJSON2",
             "children": [
                 2,
                 3
