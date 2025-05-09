@@ -114,15 +114,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CameraFlash",
-                    "type": "Button",
-                    "id": "0fc884ae-ea03-46cb-87c1-211aabd878c2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ToggleFollowing",
                     "type": "Button",
                     "id": "dfb9c38d-0228-46e3-8834-49ed37395678",
@@ -144,6 +135,15 @@
                     "name": "ToggleCameraFollow",
                     "type": "Button",
                     "id": "689dd61a-2f6d-4bca-afc8-371ad99c406c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwapTools",
+                    "type": "Button",
+                    "id": "fbf02e27-dfbb-41b8-8abd-5299537e0bfd",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -549,17 +549,6 @@
                 },
                 {
                     "name": "",
-                    "id": "73880c12-e0e9-42ef-9ef6-b8d60c791cc4",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraFlash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "dd5310f7-13ab-41b9-9596-1d720c47e851",
                     "path": "<Keyboard>/y",
                     "interactions": "",
@@ -599,6 +588,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleCameraFollow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b06b5405-e84a-4127-bf4f-444947e1c47f",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapTools",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

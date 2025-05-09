@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackZoneScript: {fileID: 6072977052886182121}
-  timeToAttack: 1.5
-  timeStaggeredAfterHit: 1
+  partOfAnimationToPopAttack: 0.25
+  timeStaggeredAfterHit: 1.5
   maxHp: 10
   bodyAnimator: {fileID: 1112546706822765183}
