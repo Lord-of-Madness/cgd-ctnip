@@ -571,8 +571,7 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
-  DialogueJSON: 
-  DEBUGGENERATEJSON: 1
+  DialogueJSON: {fileID: 0}
 --- !u!1001 &1040829215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1101,8 +1100,7 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
-  DialogueJSON: 
-  DEBUGGENERATEJSON: 1
+  DialogueJSON: {fileID: 0}
 --- !u!4 &1295520340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7631286950751228214, guid: 141869553a4f71446a58f156fd5c2acd, type: 3}
@@ -1658,8 +1656,7 @@ MonoBehaviour:
   - Have fun!
   charName: Talking Cube
   sprite: {fileID: 21300000, guid: 150955e0519059c45938b5f208e9541d, type: 3}
-  DialogueJSON: 
-  DEBUGGENERATEJSON: 1
+  DialogueJSON: {fileID: 0}
 --- !u!1001 &2063093696
 PrefabInstance:
   m_ObjectHideFlags: 0

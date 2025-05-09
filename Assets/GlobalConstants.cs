@@ -1,5 +1,6 @@
 using System.Numerics;
 using UnityEditor.Search;
+using UnityEngine;
 
 public static class GlobalConstants
 {
@@ -12,6 +13,9 @@ public static class GlobalConstants
 	public static string animAttackID = "Attack";
 	public static string animGotHitID = "GotHit";
 	public static string animHpID = "HP";
+
+	public static int animAttackStateHash = Animator.StringToHash("Base Layer.Attack");
+	public static int animStaggerStateHash = Animator.StringToHash("Base Layer.GetHit");
 
 	//TOOLS
 	public static string pipeToolName = "Pipe";

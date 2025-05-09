@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -7,13 +8,16 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     AttackHitScript attackZoneScript;
 
-    [SerializeField]
-    float timeToAttack = 1f;
+    //[SerializeField]
+    float timeToAttack = 2f;
 
     bool attacking = false;
     bool checkedHits = false;
 
     float timeAttacking = 0f;
+
+    [SerializeField]
+    float partOfAnimationToPopAttack = 0.5f;
 
 	[SerializeField]
 	float timeStaggeredAfterHit = 1f;
@@ -46,18 +50,27 @@ public class EnemyScript : MonoBehaviour
     {
         SetAITargetToCloserChar();
 
-
-		if (attacking) timeAttacking += Time.deltaTime;
-
-		//Attack in middle -> check if anyone is hit
-		if (timeAttacking > timeToAttack/3 && !checkedHits)
+        if (hp <= 0)
         {
-            CheckHitsAndKill();
-		}
-        //Attack finished --> Resume following target
-        if (timeAttacking > timeToAttack)
-        {
-            FinishAttacking();
+            Die();
+        }
+
+
+        var animInfo = bodyAnimator.GetCurrentAnimatorStateInfo(0);
+        if (attacking) {
+            timeAttacking += Time.deltaTime;
+            //Attack in middle -> check if anyone is hit
+		    if (animInfo.fullPathHash == GlobalConstants.animAttackStateHash && animInfo.normalizedTime > partOfAnimationToPopAttack  && !checkedHits)
+            {
+                CheckHitsAndKill();
+                timeToAttack = animInfo.length; //Update timeToAttack based on animation
+		    }
+
+            //Attack finished --> Resume following target
+            if (timeAttacking > timeToAttack)
+            {
+                FinishAttacking();
+            }
         }
 
         //Close enough to target --> Attack
@@ -66,9 +79,17 @@ public class EnemyScript : MonoBehaviour
             Attack();
         }
 
-		if (staggered) timeStaggered += Time.deltaTime;
+        if (staggered)
+        {
+            timeStaggered += Time.deltaTime;
+            
+            //After half the stagger animation -> reset the flag so it doesn't cycle
+            if (animInfo.fullPathHash == GlobalConstants.animStaggerStateHash && bodyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f) 
+                bodyAnimator.SetBool(GlobalConstants.animGotHitID, false);
 
-        if (timeStaggered > timeStaggeredAfterHit)
+		}
+
+		if (timeStaggered > timeStaggeredAfterHit)
             RecoverFromStagger();
 
 
@@ -84,7 +105,8 @@ public class EnemyScript : MonoBehaviour
 				Debug.LogWarning("ONE OF THE CHARACTERS HIT!! GAME OVER!! YOU ARE DEAD!!! HAHAH!!");
 			}
 		}
-		checkedHits = true;
+        bodyAnimator.SetBool(GlobalConstants.animAttackID, false); //Set to false to enable trans back
+        checkedHits = true;
 	}
 
     void StopFollowingTarget()
@@ -96,9 +118,9 @@ public class EnemyScript : MonoBehaviour
 	void ResumeFollowingTarget()
 	{
 		aiTargetScript.SetFollowing(true);
-		bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
-		bodyAnimator.SetBool(GlobalConstants.animGotHitID, false);
-	}
+        bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
+        bodyAnimator.SetBool(GlobalConstants.animGotHitID, false);
+    }
 
 
 	void Attack()
@@ -140,7 +162,7 @@ public class EnemyScript : MonoBehaviour
         if (attacking) FinishAttacking();
         
         staggered = true;
-		bodyAnimator.SetBool(GlobalConstants.animGotHitID, true);
+        bodyAnimator.SetBool(GlobalConstants.animGotHitID, true);
         StopFollowingTarget();
 	}
 
@@ -159,5 +181,11 @@ public class EnemyScript : MonoBehaviour
             target = GameManager.Instance.erikPC.transform;
         }
         aiTargetScript.target = target;
+    }
+
+    void Die()
+    {
+        StopFollowingTarget();
+        enabled = false;
     }
 }
