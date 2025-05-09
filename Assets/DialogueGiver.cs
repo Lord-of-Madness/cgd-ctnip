@@ -20,6 +20,8 @@ public class DialogueGiver : MonoBehaviour
     /// Toggles which source it should prefer for dialogue -> lines in inspector or json file
     /// </summary>
     readonly bool PREFERJSON = true;
+    const bool GENERATEJSON = false;
+    const bool GENERATEDocJSON = false;
 
     void Start()
     {
@@ -47,17 +49,26 @@ public class DialogueGiver : MonoBehaviour
             {
                 diaLines.Add(new DialogueLine(line, charName, sprite, Color.red));
             }
-            const string path = "IHaveNoClueWhatThisWillDo.json";
-            DialogueTreeNode root = DialogueTreeNode.BuildSimpleTree(diaLines);
-            root.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") });
-            File.WriteAllText("TestJSON.json", JsonUtility.ToJson(root.Line.Document));
-            root.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") });
-            File.WriteAllText("TestJSON2.json", JsonUtility.ToJson(root.Children[0].Line.Document));
-            root.SerializeTree(path, new() {
+            if (GENERATEJSON)
+            {
+                const string path = "IHaveNoClueWhatThisWillDo.json";
+                DialogueTreeNode root = DialogueTreeNode.BuildSimpleTree(diaLines);
+                root.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") });
+                if (GENERATEDocJSON) File.WriteAllText("TestJSON.json", JsonUtility.ToJson(root.Line.Document));
+                root.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") });
+                if (GENERATEDocJSON) File.WriteAllText("TestJSON2.json", JsonUtility.ToJson(root.Children[0].Line.Document));
+                root.SerializeTree(path, new() {
                     new(Speaker.Beth.Name,Speaker.Beth.TextColor.ToHexString()),
                     new(Speaker.Erik.Name,Speaker.Erik.TextColor.ToHexString())
                 });//Application.dataPath
-            dialogueTree = DialogueTreeNode.DeserializeTree(path);
+                dialogueTree = DialogueTreeNode.DeserializeTree(path);
+            }
+            else
+            {
+                dialogueTree = DialogueTreeNode.BuildSimpleTree(diaLines);
+                dialogueTree.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") });
+                dialogueTree.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") });
+            }
         }
     }
 
@@ -69,5 +80,5 @@ public class DialogueGiver : MonoBehaviour
             shown = true;
         }
     }
-    
+
 }

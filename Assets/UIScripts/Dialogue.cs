@@ -26,11 +26,9 @@ public class DialogueTreeNode
         Line = line;
         if(line.Document!=null)
         {
-            callback = () => {
-                Debug.Log("Callbacking");
+            callback += () => {
                 GameManager.APD.Documents.Add(line.Document);
             };
-            if (callback != null) Debug.Log("Callback is not null here");
         }
     }
 
