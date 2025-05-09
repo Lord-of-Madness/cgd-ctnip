@@ -28,7 +28,6 @@ public class CameraFlashScript : MonoBehaviour
     void Start()
     {
         flashLight = GetComponent<Light>();
-		GameManager.Instance.inputActions.Player.CameraFlash.performed += (ctx) => { Flash(); };
 	}
 
 	// Update is called once per frame

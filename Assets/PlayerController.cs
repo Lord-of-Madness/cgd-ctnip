@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
 	[Tooltip("Reference to a bullet prefab. Set only if the character can shoot with a gun")]
 	BulletScript bulletPrefab;
+    [SerializeField]
+    [Tooltip("Reference to the object with camer flash -> only if the character can use such object")]
+    CameraFlashScript cameraFlashScript;
 
     bool hasLineRenderer = false;
 	bool aimLaserVisible = false;
@@ -124,7 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             if (playerData.SelectedTool.toolName == GlobalConstants.revolverToolName)
             {
-                if (aimLaserVisible)//The numerical changes are done in the PlayerData class
+                if (aimLaserVisible)
                 {
                     if (playerData.TryFire())
                         ShootFromGun();
@@ -136,11 +139,21 @@ public class PlayerController : MonoBehaviour
             {
                 if (playerData.TryFire())
                 {
-                    if (playerData.SelectedTool.toolName == GlobalConstants.pipeToolName)
-                    {
-                        MeleeAttack();
-                    }
-                }
+					if (playerData.SelectedTool.toolName == GlobalConstants.pipeToolName)
+					{
+						MeleeAttack();
+					}
+					if (playerData.SelectedTool.toolName == GlobalConstants.cameraToolName)
+					{
+                        if (cameraFlashScript == null)
+                        {
+                            Debug.LogWarning("Trying to flash with a camera, while no cameraFlashScript was set");
+                            return;
+                        }
+                        cameraFlashScript.Flash();
+                        
+					}
+				}
             }
 
         }

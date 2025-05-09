@@ -41,6 +41,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] List<Tool> toolInspectorField;
     public Dictionary<Tool, ToolInvData> toolInventory = new();
     public Tool SelectedTool;
+    int selectedToolIndex = 0;
     public ToolInvData SelectedToolData => toolInventory[SelectedTool];
 
     public List<Document> Documents = new();
@@ -54,13 +55,16 @@ public class PlayerData : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => SwitchTool();
+
         if(toolInspectorField != null && toolInspectorField.Count != 0)
         {
             SelectedTool = toolInspectorField[0];
+            selectedToolIndex = 0;
         }
         foreach (var tool in toolInspectorField)
         {
-            toolInventory.Add(tool, new());
+            toolInventory.Add(tool, new() { loadedAmmo = tool.maxLoadedAmmo, stashedAmmo = 2* tool.maxLoadedAmmo});
         }
     }
 
@@ -128,5 +132,16 @@ public class PlayerData : MonoBehaviour
                 return false;
             }
         }
+    }
+
+    internal void SwitchTool()
+    {
+        Debug.Log("Switching tools)");
+        selectedToolIndex++;
+        if (selectedToolIndex >= toolInspectorField.Count)
+        {
+            selectedToolIndex = 0;
+        }
+        SelectedTool = toolInspectorField[selectedToolIndex];
     }
 }

@@ -200,15 +200,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CameraFlash"",
-                    ""type"": ""Button"",
-                    ""id"": ""0fc884ae-ea03-46cb-87c1-211aabd878c2"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""ToggleFollowing"",
                     ""type"": ""Button"",
                     ""id"": ""dfb9c38d-0228-46e3-8834-49ed37395678"",
@@ -230,6 +221,15 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""name"": ""ToggleCameraFollow"",
                     ""type"": ""Button"",
                     ""id"": ""689dd61a-2f6d-4bca-afc8-371ad99c406c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwapTools"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbf02e27-dfbb-41b8-8abd-5299537e0bfd"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -635,17 +635,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""73880c12-e0e9-42ef-9ef6-b8d60c791cc4"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraFlash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""dd5310f7-13ab-41b9-9596-1d720c47e851"",
                     ""path"": ""<Keyboard>/y"",
                     ""interactions"": """",
@@ -685,6 +674,17 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleCameraFollow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b06b5405-e84a-4127-bf4f-444947e1c47f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapTools"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1352,10 +1352,10 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_SwapCharacters = m_Player.FindAction("SwapCharacters", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
-        m_Player_CameraFlash = m_Player.FindAction("CameraFlash", throwIfNotFound: true);
         m_Player_ToggleFollowing = m_Player.FindAction("ToggleFollowing", throwIfNotFound: true);
         m_Player_Journal = m_Player.FindAction("Journal", throwIfNotFound: true);
         m_Player_ToggleCameraFollow = m_Player.FindAction("ToggleCameraFollow", throwIfNotFound: true);
+        m_Player_SwapTools = m_Player.FindAction("SwapTools", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_Navigate = m_Dialogue.FindAction("Navigate", throwIfNotFound: true);
@@ -1467,10 +1467,10 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_SwapCharacters;
     private readonly InputAction m_Player_Reload;
-    private readonly InputAction m_Player_CameraFlash;
     private readonly InputAction m_Player_ToggleFollowing;
     private readonly InputAction m_Player_Journal;
     private readonly InputAction m_Player_ToggleCameraFollow;
+    private readonly InputAction m_Player_SwapTools;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1531,10 +1531,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         /// <summary>
-        /// Provides access to the underlying input action "Player/CameraFlash".
-        /// </summary>
-        public InputAction @CameraFlash => m_Wrapper.m_Player_CameraFlash;
-        /// <summary>
         /// Provides access to the underlying input action "Player/ToggleFollowing".
         /// </summary>
         public InputAction @ToggleFollowing => m_Wrapper.m_Player_ToggleFollowing;
@@ -1546,6 +1542,10 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ToggleCameraFollow".
         /// </summary>
         public InputAction @ToggleCameraFollow => m_Wrapper.m_Player_ToggleCameraFollow;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwapTools".
+        /// </summary>
+        public InputAction @SwapTools => m_Wrapper.m_Player_SwapTools;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1608,9 +1608,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
-            @CameraFlash.started += instance.OnCameraFlash;
-            @CameraFlash.performed += instance.OnCameraFlash;
-            @CameraFlash.canceled += instance.OnCameraFlash;
             @ToggleFollowing.started += instance.OnToggleFollowing;
             @ToggleFollowing.performed += instance.OnToggleFollowing;
             @ToggleFollowing.canceled += instance.OnToggleFollowing;
@@ -1620,6 +1617,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @ToggleCameraFollow.started += instance.OnToggleCameraFollow;
             @ToggleCameraFollow.performed += instance.OnToggleCameraFollow;
             @ToggleCameraFollow.canceled += instance.OnToggleCameraFollow;
+            @SwapTools.started += instance.OnSwapTools;
+            @SwapTools.performed += instance.OnSwapTools;
+            @SwapTools.canceled += instance.OnSwapTools;
         }
 
         /// <summary>
@@ -1667,9 +1667,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
-            @CameraFlash.started -= instance.OnCameraFlash;
-            @CameraFlash.performed -= instance.OnCameraFlash;
-            @CameraFlash.canceled -= instance.OnCameraFlash;
             @ToggleFollowing.started -= instance.OnToggleFollowing;
             @ToggleFollowing.performed -= instance.OnToggleFollowing;
             @ToggleFollowing.canceled -= instance.OnToggleFollowing;
@@ -1679,6 +1676,9 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
             @ToggleCameraFollow.started -= instance.OnToggleCameraFollow;
             @ToggleCameraFollow.performed -= instance.OnToggleCameraFollow;
             @ToggleCameraFollow.canceled -= instance.OnToggleCameraFollow;
+            @SwapTools.started -= instance.OnSwapTools;
+            @SwapTools.performed -= instance.OnSwapTools;
+            @SwapTools.canceled -= instance.OnSwapTools;
         }
 
         /// <summary>
@@ -2182,13 +2182,6 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnReload(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "CameraFlash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCameraFlash(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "ToggleFollowing" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -2209,6 +2202,13 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleCameraFollow(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwapTools" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwapTools(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Dialogue" which allows adding and removing callbacks.
