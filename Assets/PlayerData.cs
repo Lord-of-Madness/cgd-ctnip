@@ -66,9 +66,7 @@ public class PlayerData : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => SwitchTool();
-
-        if(toolInspectorField != null && toolInspectorField.Count != 0)
+        if (toolInspectorField != null && toolInspectorField.Count != 0)
         {
             SelectedTool = toolInspectorField[0];
             selectedToolIndex = 0;
@@ -147,7 +145,6 @@ public class PlayerData : MonoBehaviour
 
     internal void SwitchTool()
     {
-        Debug.Log("Switching tools)");
         selectedToolIndex++;
         if (selectedToolIndex >= toolInspectorField.Count)
         {

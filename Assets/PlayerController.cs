@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     public PlayerData playerData;
     public UnityEvent onToolUsed;
+    public UnityEvent onToolSwitched;
     /*
 	public class ReloadEventData// might be useful later.
 	{
@@ -114,11 +115,18 @@ public class PlayerController : MonoBehaviour
 		GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer) HideLaserAim(); };
 		GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
 		GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
+        GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) =>{ if (controlledByPlayer) SwitchTool();};
 
         Physics.gravity = new Vector3(0, -20, 0);
 
         if (controlledByPlayer) StopFollowingOtherChar();
         if (lineRenderer != null) hasLineRenderer = true;
+    }
+
+    private void SwitchTool()
+    {
+        playerData.SwitchTool();
+        onToolSwitched?.Invoke();
     }
 
     private void Attack(InputAction.CallbackContext context)
@@ -129,8 +137,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (aimLaserVisible)
                 {
-                    if (playerData.TryFire())
+                    if (playerData.TryFire()) { 
                         ShootFromGun();
+                        onToolUsed.Invoke();
+                    }
                 }
 
             }
@@ -151,8 +161,9 @@ public class PlayerController : MonoBehaviour
                             return;
                         }
                         cameraFlashScript.Flash();
-                        
-					}
+                        onToolUsed.Invoke();
+
+                    }
 				}
             }
 
@@ -244,10 +255,6 @@ public class PlayerController : MonoBehaviour
 		{
 			SpawnBullet(gunPos, curAimDir, 100f, 10f);
 		}
-
-
-
-		onToolUsed.Invoke();
 
 		//Try to camera shake
 		CameraEffectsScript camEff = Camera.main.GetComponent<CameraEffectsScript>();
@@ -444,7 +451,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void DrawLaserAim(out Vector3 laserDir)
     {
-        Debug.Log("Drawing laser aim");
+        //Debug.Log("Drawing laser aim");
 
         //Get the position of the gun
         Vector3 startPos = transform.position;

@@ -9,9 +9,12 @@ public class HUD_Ammo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI StashedAmmo;
     void UpdateAmmoLabel()
     {
+        Debug.Log(GameManager.APD.SelectedTool.name);
+        image.sprite =
+            GameManager.APD.SelectedTool.toolIcon;
         PrimaryAmmo.text = 
-            GameManager.Instance.ActivePlayer.playerData.SelectedToolData.loadedAmmo.ToString() + "/" +
-            GameManager.Instance.ActivePlayer.playerData.SelectedTool.maxLoadedAmmo;
+            GameManager.APD.SelectedToolData.loadedAmmo.ToString() + "/" +
+            GameManager.APD.SelectedTool.maxLoadedAmmo;
         StashedAmmo.text = GameManager.Instance.ActivePlayer.playerData.SelectedToolData.stashedAmmo.ToString();
     }
     void Start()
@@ -20,5 +23,7 @@ public class HUD_Ammo : MonoBehaviour
         GameManager.Instance.erikPC.onToolUsed.AddListener(UpdateAmmoLabel);
         GameManager.Instance.bethPC.onReload.AddListener(UpdateAmmoLabel);
         GameManager.Instance.erikPC.onReload.AddListener(UpdateAmmoLabel);
+        GameManager.Instance.bethPC.onToolSwitched.AddListener(UpdateAmmoLabel);
+        GameManager.Instance.erikPC.onToolSwitched.AddListener(UpdateAmmoLabel);
     }
 }
