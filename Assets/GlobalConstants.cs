@@ -13,6 +13,7 @@ public static class GlobalConstants
 	public const string animAttackID = "Attack";
 	public const string animGotHitID = "GotHit";
 	public const string animHpID = "HP";
+	public static string animAimID = "IsAiming";
 
 	public static int animAttackStateHash = Animator.StringToHash("Base Layer.Attack");
 	public static int animStaggerStateHash = Animator.StringToHash("Base Layer.GetHit");

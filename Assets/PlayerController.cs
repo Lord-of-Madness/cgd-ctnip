@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         if (playerData.TryReload())//This is true only if there is a reason to actually reload - there is ammo to reload and the tool is not full
         {//The numerical changes are done in the PlayerData class
             onReload.Invoke();
-            //TODO animaèky and stuff
+            //TODO animaï¿½ky and stuff
         }
     }
 
@@ -474,6 +474,7 @@ public class PlayerController : MonoBehaviour
         //Set the armature rotation to face the aiming direction
         bodyArmature.transform.LookAt(transform.position + laserDir);
         bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0f);
+        bodyAnimator.SetBool(GlobalConstants.animAimID, true);
     }
 
     /// <summary>
@@ -493,13 +494,14 @@ public class PlayerController : MonoBehaviour
         lineRenderer.positionCount = 0;
         aimLaserVisible = false;
         curAimDir = Vector3.zero;
-    }
-    /// <summary>
-    /// Don't call this if object doesn't have a lineRenderer assigned.
-    /// </summary>
-    void ShowLaserAim()
-    {
-        if (lineRenderer == null) return;
+		bodyAnimator.SetBool(GlobalConstants.animAimID, false);
+	}
+	/// <summary>
+	/// Don't call this if object doesn't have a lineRenderer assigned.
+	/// </summary>
+	void ShowLaserAim()
+	{
+		if (lineRenderer == null) return;
         aimLaserVisible = true;
     }
 }
