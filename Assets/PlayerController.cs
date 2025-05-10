@@ -149,9 +149,8 @@ public class PlayerController : MonoBehaviour
         onToolSwitched?.Invoke();
     }
 
-    private void Attack(InputAction.CallbackContext ctx )
+    private void Attack()
     {
-        Debug.Log(ctx.action.name + " pressed");
         if (playerData.TryFire())
         {
             actionCooldown = playerData.SelectedTool.actionTime;
@@ -159,7 +158,7 @@ public class PlayerController : MonoBehaviour
             {
                 case GlobalConstants.revolverToolName: ShootFromGun(); break;
                 case GlobalConstants.pipeToolName: MeleeAttack(); break;
-                case GlobalConstants.cameraToolName: cameraFlashScript.Flash(); break;
+                case GlobalConstants.cameraToolName: FlashCamera(); ; break;
                 default: Debug.LogError("WHAT THE HELL DID YOU JUST USE? I have no idea what this acursed tool is!"); break;
             }
             onToolUsed.Invoke();
@@ -173,7 +172,6 @@ public class PlayerController : MonoBehaviour
 
     void MeleeAttack()
     {
-        Debug.Log("Melee attack started");
         //Stop following target
         meleeAttacking = true;
 
@@ -266,6 +264,13 @@ public class PlayerController : MonoBehaviour
         bullet.transform.position = spawnPos;
     }
 
+    void FlashCamera()
+    {
+        bodyAnimator.SetBool(GlobalConstants.animCameraFlashID, true);
+        cameraFlashScript.Flash();
+
+    }
+
     private void Reload()
     {
         //TODO only shoot if aiming
@@ -324,7 +329,7 @@ public class PlayerController : MonoBehaviour
 
         bodyAnimator.applyRootMotion = true;
 
-        bodyAnimator.SetBool(GlobalConstants.animGroundedID, isGrounded);
+        //bodyAnimator.SetBool(GlobalConstants.animGroundedID, isGrounded);
         bodyAnimator.SetBool(GlobalConstants.animJumpID, curVelocity.y > 0);
 
         if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
@@ -467,7 +472,7 @@ public class PlayerController : MonoBehaviour
 
         //Draw the line via saved lineRenderer
         RaycastHit hit;
-        laserDir = mouseLaserToGunPlanePoint - startPos;
+        laserDir = mouseLaserToGunPlanePoint - new Vector3(bodyArmature.transform.position.x, startPos.y, bodyArmature.transform.position.z);
         Ray ray = new(startPos, laserDir);
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, startPos);
@@ -480,7 +485,7 @@ public class PlayerController : MonoBehaviour
         curAimDir = laserDir;
 
         //Set the armature rotation to face the aiming direction
-        bodyArmature.transform.LookAt(transform.position + laserDir);
+        bodyArmature.transform.LookAt(bodyArmature.transform.position + laserDir);
         bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0f);
         bodyAnimator.SetBool(GlobalConstants.animAimID, true);
     }

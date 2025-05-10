@@ -65,7 +65,7 @@ namespace Unity.AI.Navigation.Samples
         {
             //Animation
             m_Animator.SetBool("Jump", true);
-			m_Animator.SetBool("Grounded", false);
+			//m_Animator.SetBool("Grounded", false);
 
 
 			OffMeshLinkData data = agent.currentOffMeshLinkData;
@@ -101,7 +101,7 @@ namespace Unity.AI.Navigation.Samples
 			if (m_Agent.isOnOffMeshLink == false)
             {
                 m_Animator.SetBool("Jump", false);
-                m_Animator.SetBool("Grounded", true);
+                //m_Animator.SetBool("Grounded", true);
 
             }
 		}
