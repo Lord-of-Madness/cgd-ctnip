@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
             {
                 case GlobalConstants.revolverToolName: ShootFromGun(); break;
                 case GlobalConstants.pipeToolName: MeleeAttack(); break;
-                case GlobalConstants.cameraToolName: cameraFlashScript.Flash(); ; break;
+                case GlobalConstants.cameraToolName: FlashCamera(); ; break;
                 default: Debug.LogError("WHAT THE HELL DID YOU JUST USE? I have no idea what this acursed tool is!"); break;
             }
             onToolUsed.Invoke();
@@ -261,7 +261,14 @@ public class PlayerController : MonoBehaviour
         bullet.transform.position = spawnPos;
     }
 
-    private void Reload()
+    void FlashCamera()
+    {
+        bodyAnimator.SetBool(GlobalConstants.animCameraFlashID, true);
+        cameraFlashScript.Flash();
+
+    }
+
+	private void Reload()
     {
         //TODO only shoot if aiming
         if (playerData.TryReload())//This is true only if there is a reason to actually reload - there is ammo to reload and the tool is not full
