@@ -628,6 +628,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2550944644890873266, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: weaponOffset.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550944644890873266, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: weaponOffset.y
+      value: 1.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3148737427850747177, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
       propertyPath: target
       value: 

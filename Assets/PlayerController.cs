@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour
 
         bodyAnimator.applyRootMotion = true;
 
-        bodyAnimator.SetBool(GlobalConstants.animGroundedID, isGrounded);
+        //bodyAnimator.SetBool(GlobalConstants.animGroundedID, isGrounded);
         bodyAnimator.SetBool(GlobalConstants.animJumpID, curVelocity.y > 0);
 
         if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
@@ -459,7 +459,7 @@ public class PlayerController : MonoBehaviour
 
         //Draw the line via saved lineRenderer
         RaycastHit hit;
-        laserDir = mouseLaserToGunPlanePoint - startPos;
+        laserDir = mouseLaserToGunPlanePoint - new Vector3(bodyArmature.transform.position.x, startPos.y, bodyArmature.transform.position.z);
         Ray ray = new(startPos, laserDir);
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, startPos);
@@ -472,7 +472,7 @@ public class PlayerController : MonoBehaviour
         curAimDir = laserDir;
 
         //Set the armature rotation to face the aiming direction
-        bodyArmature.transform.LookAt(transform.position + laserDir);
+        bodyArmature.transform.LookAt(bodyArmature.transform.position + laserDir);
         bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0f);
         bodyAnimator.SetBool(GlobalConstants.animAimID, true);
     }
