@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     bool controlledByPlayer = true;
     [SerializeField]
     bool isRunning = false;
+    [SerializeField]
+    float rotationSpeed = 8.0f;
 
     Vector3 curVelocity = Vector3.zero;
 
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
     CameraFlashScript cameraFlashScript;
 
     bool hasLineRenderer = false;
-    bool aimLaserVisible = false;
+    public bool aimLaserVisible = false;
     Vector3 curAimDir = Vector3.zero;
 
     [Header("Erik")]
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource FootstepsSound;
     //Animation stuff
     Animator bodyAnimator;
-
+    Quaternion desiredRotation = Quaternion.identity;
 
     public PlayerData playerData;
     public UnityEvent onToolUsed;
@@ -108,15 +110,19 @@ public class PlayerController : MonoBehaviour
             bodyAnimator = bodyArmature.GetComponent<Animator>();
         }
         else { Debug.LogWarning("Armature not set! Can't save the animator component"); }
-
+        if (cameraFlashScript == null)
+        {
+            Debug.LogWarning("Trying to flash with a camera, while no cameraFlashScript was set");
+            return;
+        }
 
         playerData = GetComponent<PlayerData>();
         //GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
         GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
         GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer) ShowLaserAim(); };
         GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer) HideLaserAim(); };
-        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(ctx); };
-        GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(ctx); };
+        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(); };
+        GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(); };
         GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => { if (controlledByPlayer) SwitchTool(); };
 
         Physics.gravity = new Vector3(0, -20, 0);
@@ -141,43 +147,22 @@ public class PlayerController : MonoBehaviour
         onToolSwitched?.Invoke();
     }
 
-    private void Attack(InputAction.CallbackContext context)
+    private void Attack()
     {
-        if (playerData.CanUseTool())
+        if (playerData.TryFire())
         {
-            if (playerData.SelectedTool.toolName == GlobalConstants.revolverToolName)
+            switch (playerData.SelectedTool.toolName)
             {
-                if (aimLaserVisible && playerData.TryFire())
-                {
-                    ShootFromGun();
-                    onToolUsed.Invoke();
-                }
-
+                case GlobalConstants.revolverToolName: ShootFromGun(); break;
+                case GlobalConstants.pipeToolName: MeleeAttack(); break;
+                case GlobalConstants.cameraToolName: cameraFlashScript.Flash(); ; break;
+                default: Debug.LogError("WHAT THE HELL DID YOU JUST USE? I have no idea what this acursed tool is!"); break;
             }
-            //Something else than gun with which you must aim
-            else if (playerData.SelectedTool.toolName == GlobalConstants.pipeToolName)
-            {
-                if (playerData.TryFire()) MeleeAttack();
-            }
-            else if (playerData.SelectedTool.toolName == GlobalConstants.cameraToolName)
-            {
-                if (cameraFlashScript == null)
-                {
-                    Debug.LogWarning("Trying to flash with a camera, while no cameraFlashScript was set");
-                    return;
-                }
-                if (playerData.TryFire())
-                {
-                    cameraFlashScript.Flash();
-                    onToolUsed.Invoke();
-                }
-            }
-
+            onToolUsed.Invoke();
         }
-        //OUT OF AMMO
         else
         {
-            Debug.Log("Out of ammo");
+            Debug.Log("Cannot use tool rn. Try reloading or aiming first");
             //TODO: Play "Out of ammo!"
         }
     }
@@ -238,21 +223,19 @@ public class PlayerController : MonoBehaviour
 
     void ShootFromGun()
     {
-        RaycastHit hit;
         Vector3 gunPos = transform.position +
             new Vector3(bodyArmature.transform.forward.x * weaponOffset.x,
             weaponOffset.y,
             bodyArmature.transform.forward.z * weaponOffset.x);
 
 
-        Ray ray = new Ray(gunPos, curAimDir);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
+        Ray ray = new(gunPos, curAimDir);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
         {
             SpawnBullet(gunPos, curAimDir, 100, (transform.position - hit.point).magnitude / 100);
             if (hit.collider.CompareTag("Enemy"))
             {
-                EnemyScript enemy = hit.collider.transform.parent.GetComponent<EnemyScript>();
-                if (enemy != null) enemy.GetHit(gunDamage);
+                if (hit.collider.transform.parent.TryGetComponent<EnemyScript>(out var enemy)) enemy.GetHit(gunDamage);
                 else Debug.Log("Collider tagged 'Enemy' didn't find EnemyScript in parent");
             }
         }
@@ -263,8 +246,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Try to camera shake
-        CameraEffectsScript camEff = Camera.main.GetComponent<CameraEffectsScript>();
-        if (camEff != null)
+        if (Camera.main.TryGetComponent<CameraEffectsScript>(out var camEff))
             camEff.CameraShake();
 
         //TODO animations and stuff
@@ -279,13 +261,13 @@ public class PlayerController : MonoBehaviour
         bullet.transform.position = spawnPos;
     }
 
-    private void Reload(InputAction.CallbackContext context)
+    private void Reload()
     {
         //TODO only shoot if aiming
         if (playerData.TryReload())//This is true only if there is a reason to actually reload - there is ammo to reload and the tool is not full
         {//The numerical changes are done in the PlayerData class
             onReload.Invoke();
-            //TODO animaèky and stuff
+            //TODO animaï¿½ky and stuff
         }
     }
 
@@ -308,7 +290,6 @@ public class PlayerController : MonoBehaviour
         {
             Move();
             RotateInMoveDir();
-
             SetAnimatorValuesMovement();
 
 
@@ -363,7 +344,13 @@ public class PlayerController : MonoBehaviour
                 bodyRot = Quaternion.Euler(0, -180, 0);
 
             //Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
-            bodyArmature.transform.rotation = bodyRot.normalized;
+            desiredRotation = bodyRot.normalized;
+            if (Quaternion.Angle(transform.rotation, desiredRotation) < 0.1f)
+            {
+                bodyArmature.transform.rotation = desiredRotation;
+            }
+            else
+                bodyArmature.transform.rotation = Quaternion.Slerp(bodyArmature.transform.rotation, desiredRotation, rotationSpeed);
         }
     }
 
@@ -487,6 +474,7 @@ public class PlayerController : MonoBehaviour
         //Set the armature rotation to face the aiming direction
         bodyArmature.transform.LookAt(transform.position + laserDir);
         bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0f);
+        bodyAnimator.SetBool(GlobalConstants.animAimID, true);
     }
 
     /// <summary>
@@ -506,13 +494,14 @@ public class PlayerController : MonoBehaviour
         lineRenderer.positionCount = 0;
         aimLaserVisible = false;
         curAimDir = Vector3.zero;
-    }
-    /// <summary>
-    /// Don't call this if object doesn't have a lineRenderer assigned.
-    /// </summary>
-    void ShowLaserAim()
-    {
-        if (lineRenderer == null) return;
+		bodyAnimator.SetBool(GlobalConstants.animAimID, false);
+	}
+	/// <summary>
+	/// Don't call this if object doesn't have a lineRenderer assigned.
+	/// </summary>
+	void ShowLaserAim()
+	{
+		if (lineRenderer == null) return;
         aimLaserVisible = true;
     }
 }

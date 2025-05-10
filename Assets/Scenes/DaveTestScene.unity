@@ -624,6 +624,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 614921748654456924, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3148737427850747177, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
       propertyPath: target
       value: 
@@ -640,12 +644,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.213
       objectReference: {fileID: 0}
+    - target: {fileID: 4680963886367590346, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012269507102967254, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6402621551995461251, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
       propertyPath: m_Name
       value: Beth
       objectReference: {fileID: 0}
+    - target: {fileID: 7697082931033948266, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8039988651513729113, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2969355196089403040, guid: 46e5d15c6b6bf5f478854d5e1b62bfef, type: 3}
@@ -1559,7 +1576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5034820248550353245, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1113.75
+      value: -1080
       objectReference: {fileID: 0}
     - target: {fileID: 5351501119770682477, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y

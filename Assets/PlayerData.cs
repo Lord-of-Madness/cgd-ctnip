@@ -84,6 +84,11 @@ public class PlayerData : MonoBehaviour
             Debug.Log("No tool selected");
             return false;
         }
+        if(SelectedTool.hasToAim && !GameManager.Instance.ActivePlayer.aimLaserVisible)
+        {
+            Debug.Log("Tool has to be aimed");
+            return false;
+        }
         if (SelectedTool.maxLoadedAmmo == 0) return true; //Melee weapon doesn't have any ammo whatsoever
         return SelectedToolData.loadedAmmo > 0;
     }
