@@ -57,7 +57,7 @@ public class PlayerData : MonoBehaviour
 
     public List<Document> Documents = new();
     public List<Document> Codex = new();
-    public List<Document>Inventory = new();
+    public List<Document> Inventory = new();
 
     int LoadedAmmo { get => SelectedToolData.loadedAmmo; set => SelectedToolData.loadedAmmo = value; }
     int StashedAmmo { get => SelectedToolData.stashedAmmo; set => SelectedToolData.stashedAmmo = value; }
@@ -66,9 +66,7 @@ public class PlayerData : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => SwitchTool();
-
-        if(toolInspectorField != null && toolInspectorField.Count != 0)
+        if (toolInspectorField != null && toolInspectorField.Count != 0)
         {
             SelectedTool = toolInspectorField[0];
             selectedToolIndex = 0;
@@ -147,7 +145,6 @@ public class PlayerData : MonoBehaviour
 
     internal void SwitchTool()
     {
-        Debug.Log("Switching tools)");
         selectedToolIndex++;
         if (selectedToolIndex >= toolInspectorField.Count)
         {
