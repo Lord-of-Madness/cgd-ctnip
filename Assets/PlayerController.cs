@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     CameraFlashScript cameraFlashScript;
 
     bool hasLineRenderer = false;
-    bool aimLaserVisible = false;
+    public bool aimLaserVisible = false;
     Vector3 curAimDir = Vector3.zero;
 
     [Header("Erik")]
@@ -110,7 +110,11 @@ public class PlayerController : MonoBehaviour
             bodyAnimator = bodyArmature.GetComponent<Animator>();
         }
         else { Debug.LogWarning("Armature not set! Can't save the animator component"); }
-
+        if (cameraFlashScript == null)
+        {
+            Debug.LogWarning("Trying to flash with a camera, while no cameraFlashScript was set");
+            return;
+        }
 
         playerData = GetComponent<PlayerData>();
         //GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
@@ -145,41 +149,20 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (playerData.CanUseTool())
+        if (playerData.TryFire())
         {
-            if (playerData.SelectedTool.toolName == GlobalConstants.revolverToolName)
+            switch (playerData.SelectedTool.toolName)
             {
-                if (aimLaserVisible && playerData.TryFire())
-                {
-                    ShootFromGun();
-                    onToolUsed.Invoke();
-                }
-
+                case GlobalConstants.revolverToolName: ShootFromGun(); break;
+                case GlobalConstants.pipeToolName: MeleeAttack(); break;
+                case GlobalConstants.cameraToolName: cameraFlashScript.Flash(); ; break;
+                default: Debug.LogError("WHAT THE HELL DID YOU JUST USE? I have no idea what this acursed tool is!"); break;
             }
-            //Something else than gun with which you must aim
-            else if (playerData.SelectedTool.toolName == GlobalConstants.pipeToolName)
-            {
-                if (playerData.TryFire()) MeleeAttack();
-            }
-            else if (playerData.SelectedTool.toolName == GlobalConstants.cameraToolName)
-            {
-                if (cameraFlashScript == null)
-                {
-                    Debug.LogWarning("Trying to flash with a camera, while no cameraFlashScript was set");
-                    return;
-                }
-                if (playerData.TryFire())
-                {
-                    cameraFlashScript.Flash();
-                    onToolUsed.Invoke();
-                }
-            }
-
+            onToolUsed.Invoke();
         }
-        //OUT OF AMMO
         else
         {
-            Debug.Log("Out of ammo");
+            Debug.Log("Cannot use tool rn. Try reloading or aiming first");
             //TODO: Play "Out of ammo!"
         }
     }
@@ -361,7 +344,7 @@ public class PlayerController : MonoBehaviour
                 bodyRot = Quaternion.Euler(0, -180, 0);
 
             //Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
-            desiredRotation  = bodyRot.normalized;
+            desiredRotation = bodyRot.normalized;
             if (Quaternion.Angle(transform.rotation, desiredRotation) < 0.1f)
             {
                 bodyArmature.transform.rotation = desiredRotation;
