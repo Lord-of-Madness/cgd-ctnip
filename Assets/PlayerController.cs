@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}*/
     public UnityEvent/*<ReloadEventData>*/ onReload;
+    float actionCooldown = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -113,17 +114,18 @@ public class PlayerController : MonoBehaviour
         if (cameraFlashScript == null)
         {
             Debug.LogWarning("Trying to flash with a camera, while no cameraFlashScript was set");
-            return;
         }
 
         playerData = GetComponent<PlayerData>();
         //GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
         GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
-        GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer) ShowLaserAim(); };
-        GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer) HideLaserAim(); };
-        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => { if (controlledByPlayer) Attack(); };
-        GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer) Reload(); };
-        GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => { if (controlledByPlayer) SwitchTool(); };
+        GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer && actionCooldown<=0) ShowLaserAim(); };
+        GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) HideLaserAim(); };
+        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => {
+            Debug.Log("Controlled by player: " + controlledByPlayer);
+            if (controlledByPlayer && actionCooldown <= 0) Attack(ctx); };
+        GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) Reload(); };
+        GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) SwitchTool(); };
 
         Physics.gravity = new Vector3(0, -20, 0);
 
@@ -147,15 +149,17 @@ public class PlayerController : MonoBehaviour
         onToolSwitched?.Invoke();
     }
 
-    private void Attack()
+    private void Attack(InputAction.CallbackContext ctx )
     {
+        Debug.Log(ctx.action.name + " pressed");
         if (playerData.TryFire())
         {
+            actionCooldown = playerData.SelectedTool.actionTime;
             switch (playerData.SelectedTool.toolName)
             {
                 case GlobalConstants.revolverToolName: ShootFromGun(); break;
                 case GlobalConstants.pipeToolName: MeleeAttack(); break;
-                case GlobalConstants.cameraToolName: cameraFlashScript.Flash(); ; break;
+                case GlobalConstants.cameraToolName: cameraFlashScript.Flash(); break;
                 default: Debug.LogError("WHAT THE HELL DID YOU JUST USE? I have no idea what this acursed tool is!"); break;
             }
             onToolUsed.Invoke();
@@ -169,6 +173,7 @@ public class PlayerController : MonoBehaviour
 
     void MeleeAttack()
     {
+        Debug.Log("Melee attack started");
         //Stop following target
         meleeAttacking = true;
 
@@ -266,6 +271,7 @@ public class PlayerController : MonoBehaviour
         //TODO only shoot if aiming
         if (playerData.TryReload())//This is true only if there is a reason to actually reload - there is ammo to reload and the tool is not full
         {//The numerical changes are done in the PlayerData class
+            actionCooldown = playerData.SelectedTool.reloadTime;
             onReload.Invoke();
             //TODO anima�ky and stuff
         }
@@ -309,6 +315,8 @@ public class PlayerController : MonoBehaviour
             DrawLaserAim();
 
         }
+        actionCooldown -= Time.deltaTime;
+        actionCooldown = Mathf.Max(actionCooldown, 0);
     }
 
     void SetAnimatorValuesMovement()

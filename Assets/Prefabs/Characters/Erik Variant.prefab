@@ -315,6 +315,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7831575153084041036, guid: 934c80c4f920c564583ed698f1b70511, type: 3}
     - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: charName
+      value: Erik
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}

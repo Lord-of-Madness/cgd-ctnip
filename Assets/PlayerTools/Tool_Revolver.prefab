@@ -25,6 +25,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 4a25707050bb60e44ae37eb00a40989a, type: 3}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
+      propertyPath: actionTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
+      propertyPath: reloadTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: reloadBatch
       value: 1
       objectReference: {fileID: 0}

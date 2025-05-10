@@ -8,6 +8,7 @@ public class Tool : MonoBehaviour
     public int maxLoadedAmmo;
     public int reloadBatch;
     public float reloadTime;
+    public float actionTime;
     public AudioClip reloadSound;
     public AudioClip fireSound;
     public bool hasToAim;
