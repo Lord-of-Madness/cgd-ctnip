@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) HideLaserAim(); };
         GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => {
             Debug.Log("Controlled by player: " + controlledByPlayer);
-            if (controlledByPlayer && actionCooldown <= 0) Attack(ctx); };
+            if (controlledByPlayer && actionCooldown <= 0) Attack(); };
         GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) Reload(); };
         GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) SwitchTool(); };
 
