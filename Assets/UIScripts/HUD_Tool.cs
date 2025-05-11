@@ -7,6 +7,8 @@ public class HUD_Ammo : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI PrimaryAmmo;
     [SerializeField] private TextMeshProUGUI StashedAmmo;
+
+    bool firstUpdate = true;
     void UpdateAmmoLabel()
     {
         Debug.Log(GameManager.APD.SelectedTool.name);
@@ -25,6 +27,14 @@ public class HUD_Ammo : MonoBehaviour
         GameManager.Instance.erikPC.onReload.AddListener(UpdateAmmoLabel);
         GameManager.Instance.bethPC.onToolSwitched.AddListener(UpdateAmmoLabel);
         GameManager.Instance.erikPC.onToolSwitched.AddListener(UpdateAmmoLabel);
-        UpdateAmmoLabel();
     }
+
+	private void Update()
+	{
+		if (firstUpdate)
+        {
+            UpdateAmmoLabel();
+            firstUpdate = false;
+        }
+	}
 }
