@@ -69,8 +69,8 @@ MonoBehaviour:
   m_text: Button with a lot of randomasss thext hust to addoy the heck out of the
     godddamn programmer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e8c9faa90a7d62a4e99657434ff84085, type: 2}
+  m_sharedMaterial: {fileID: 7978816560145389638, guid: e8c9faa90a7d62a4e99657434ff84085, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
