@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-public class ReleaseEnemiesOnEnter : MonoBehaviour
+public class MansionReleaseEnemiesOnEnter : MonoBehaviour
 {
 	[SerializeField]
 	EnemyScript[] enemiesToBeReleased;
@@ -9,6 +9,11 @@ public class ReleaseEnemiesOnEnter : MonoBehaviour
 	{
 		if (!Utilities.ActivePlayerCheck(other.gameObject))
 			return;
+
+		if (!(MansionSceneManager.KeyPickedUp && !MansionSceneManager.EnemiesReleased))
+			return;
+
+		MansionSceneManager.EnemiesReleased = true;
 
 		foreach (EnemyScript enemy in enemiesToBeReleased) { 
 			enemy.ResumeFollowingTarget();
