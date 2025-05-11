@@ -414,7 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exposureTime: 0.5
   flashIntesity: 400
-  flashRange: 20
+  flashRange: 10
   tweenEase: 32
   rotationTransformRef: {fileID: 6443311990929036482}
 --- !u!1001 &3916382188380819664

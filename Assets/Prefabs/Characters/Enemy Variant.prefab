@@ -449,6 +449,11 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 3927820485873268442, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
   m_PrefabInstance: {fileID: 797555913811614262}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &4618148952752886478 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5406442580612040952, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+  m_PrefabInstance: {fileID: 797555913811614262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7318941311596811365 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7963321509582736979, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
@@ -467,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackZoneScript: {fileID: 6072977052886182121}
+  myCollider: {fileID: 4618148952752886478}
   partOfAnimationToPopAttack: 0.25
   timeStaggeredAfterHit: 1.5
   maxHp: 10

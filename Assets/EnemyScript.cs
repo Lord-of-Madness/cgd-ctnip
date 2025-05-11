@@ -221,7 +221,7 @@ public class EnemyScript : MonoBehaviour
     {
         DeathAudioSource.Play();
         StopFollowingTarget();
-        myCollider.gameObject.SetActive(false);
+        //myCollider.gameObject.SetActive(false);
         enabled = false;
     }
     public void Bark()

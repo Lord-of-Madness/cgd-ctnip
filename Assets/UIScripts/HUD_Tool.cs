@@ -21,12 +21,18 @@ public class HUD_Ammo : MonoBehaviour
     }
     void Start()
     {
-        GameManager.Instance.bethPC.onToolUsed.AddListener(UpdateAmmoLabel);
-        GameManager.Instance.erikPC.onToolUsed.AddListener(UpdateAmmoLabel);
-        GameManager.Instance.bethPC.onReload.AddListener(UpdateAmmoLabel);
-        GameManager.Instance.erikPC.onReload.AddListener(UpdateAmmoLabel);
-        GameManager.Instance.bethPC.onToolSwitched.AddListener(UpdateAmmoLabel);
-        GameManager.Instance.erikPC.onToolSwitched.AddListener(UpdateAmmoLabel);
+        if (GameManager.Instance.bethPC != null)
+        {
+            GameManager.Instance.bethPC.onToolUsed.AddListener(UpdateAmmoLabel);
+            GameManager.Instance.bethPC.onReload.AddListener(UpdateAmmoLabel);
+            GameManager.Instance.bethPC.onToolSwitched.AddListener(UpdateAmmoLabel);
+        }
+        if (GameManager.Instance.erikPC != null)
+        {
+            GameManager.Instance.erikPC.onToolUsed.AddListener(UpdateAmmoLabel);
+            GameManager.Instance.erikPC.onReload.AddListener(UpdateAmmoLabel);
+            GameManager.Instance.erikPC.onToolSwitched.AddListener(UpdateAmmoLabel);
+        }
     }
 
 	private void Update()
