@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
+    [SerializeField]
+    string loadedSceneName = "GramofonScene";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,6 +20,6 @@ public class SceneTransition : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-        SceneManager.LoadScene("GramofonScene");
+        SceneManager.LoadScene(loadedSceneName);
 	}
 }
