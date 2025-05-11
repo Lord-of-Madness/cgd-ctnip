@@ -39,6 +39,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] AudioSource SoundsAudioSource;
     [SerializeField] AudioSource FootstepsAudioSource;
 
+    float barkdelay;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,8 +49,9 @@ public class EnemyScript : MonoBehaviour
 
         aiTargetScript = GetComponent<AITarget>();
 		bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
+        barkdelay = Random.Range(2f, 10f);
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -97,6 +100,12 @@ public class EnemyScript : MonoBehaviour
 		if (timeStaggered > timeStaggeredAfterHit)
             RecoverFromStagger();
 
+        if (barkdelay > 0) barkdelay-= Time.deltaTime;
+        else
+        {
+            Bark();
+            barkdelay = Random.Range(2f, 10f);
+        }
 
     }
 
@@ -197,5 +206,10 @@ public class EnemyScript : MonoBehaviour
         DeathAudioSource.Play();
         StopFollowingTarget();
         enabled = false;
+    }
+    public void Bark()
+    {
+        SoundsAudioSource.Play();
+        barkdelay = Random.Range(2f, 10f);
     }
 }
