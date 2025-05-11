@@ -205,10 +205,15 @@ public class EnemyScript : MonoBehaviour
 
     void SetAITargetToCloserChar()
     {
-        Transform target = GameManager.Instance.bethPC.transform;
-        if ((GameManager.Instance.erikPC.transform.position - transform.position).magnitude <= (GameManager.Instance.bethPC.transform.position - transform.position).magnitude) { 
+        Transform target;
+        if (GameManager.Instance.bethPC == null) target = GameManager.Instance.erikPC.transform;
+        else if (GameManager.Instance.erikPC == null) target = GameManager.Instance.bethPC.transform;
+        else if ((GameManager.Instance.erikPC.transform.position - transform.position).magnitude <= (GameManager.Instance.bethPC.transform.position - transform.position).magnitude)
+        {
             target = GameManager.Instance.erikPC.transform;
         }
+        else
+            target = GameManager.Instance.bethPC.transform;
         aiTargetScript.target = target;
     }
 

@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -66,6 +67,11 @@ public class AITarget : MonoBehaviour
 
 	public void SetFollowing(bool follow)
 	{
+		if (m_agent == null)
+		{
+			isFollowing = follow;
+			return;
+		}
 		if (follow)
 		{
 			m_agent.enabled = follow;
