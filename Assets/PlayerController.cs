@@ -372,8 +372,13 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y) * speed;
         if (isRunning) moveVelocity *= 2;
 
-        if (isoMovement) moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
-
+        if (isoMovement)
+        {
+            if (Camera.main != null)
+                moveVelocity = Camera.main.transform.rotation * moveVelocity;
+            else //If no camera -> basic iso movement
+                moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
+        }
         curVelocity.x = moveVelocity.x;
         curVelocity.z = moveVelocity.z;
     }

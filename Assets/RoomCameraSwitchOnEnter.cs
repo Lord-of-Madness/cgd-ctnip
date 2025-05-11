@@ -18,8 +18,13 @@ public class RoomCameraSwitchOnEnter : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-        Debug.Log("Enter room");
-        Camera.main.enabled = false;
+        //Active player check
+        if (!(other.CompareTag("Player") && other.transform.parent.GetComponent<PlayerController>().IsControlledByPlayer()))
+            return;
+
+		Debug.Log("Enter room");
+        if (Camera.main != null)
+            Camera.main.enabled = false;
 		targetCamera.enabled = true;
 	}
 }
