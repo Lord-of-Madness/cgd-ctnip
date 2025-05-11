@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a059b9aeb2b8c4488b42984733c2b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setBasedOnCamera: 1
   fixedRotation: {x: 30, y: 45, z: 0}
 --- !u!114 &6892993898490015851
 MonoBehaviour:

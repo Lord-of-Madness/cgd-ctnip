@@ -53,7 +53,7 @@ public class AITarget : MonoBehaviour
 		if (bodyAnimator != null)
 		{
 
-			//bodyAnimator.SetBool(animGroundedID, m_agent.velocity.y == 0);
+			bodyAnimator.SetBool(GlobalConstants.animGroundedID, m_agent.velocity.y == 0);
 			//bodyAnimator.SetBool(animJumpID, m_agent.velocity.y > 0);
 			//bodyAnimator.SetBool(animFreeFallID, m_agent.velocity.y < 0);
 			if (m_agent.velocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);

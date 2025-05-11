@@ -9,6 +9,9 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     AttackHitScript attackZoneScript;
 
+    [SerializeField]
+    Collider myCollider;
+
     //[SerializeField]
     float timeToAttack = 2f;
 
@@ -213,6 +216,7 @@ public class EnemyScript : MonoBehaviour
     {
         DeathAudioSource.Play();
         StopFollowingTarget();
+        myCollider.gameObject.SetActive(false);
         enabled = false;
     }
     public void Bark()
