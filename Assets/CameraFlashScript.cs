@@ -1,4 +1,5 @@
 using DG.Tweening;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
@@ -17,6 +18,7 @@ public class CameraFlashScript : MonoBehaviour
     [Header("References")]
     [SerializeField]
     Transform rotationTransformRef;
+
 
 	Light flashLight;
 
@@ -47,5 +49,26 @@ public class CameraFlashScript : MonoBehaviour
         flashTween = flashLight.DOIntensity(0, exposureTime).SetEase(tweenEase);
         flashing = true;
         flashTween.OnComplete(() => flashing = false);
+        StaggerAllEnemiesInFront();
+    }
+
+
+    void StaggerAllEnemiesInFront()
+    {
+        Collider[] hits = Physics.OverlapBox(transform.position + rotationTransformRef.forward.normalized * (flashRange / 2f), 
+            new Vector3(flashRange / 2, 2, flashRange / 2));
+
+
+		foreach (Collider hit in hits)
+        {
+            if (hit.gameObject.CompareTag("Enemy") && !hit.isTrigger)
+            {
+                EnemyScript enemy = hit.transform.parent.GetComponent<EnemyScript>();
+                if (enemy != null)
+                    enemy.GetStaggered();
+            } 
+        }
+
+
     }
 }
