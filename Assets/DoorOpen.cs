@@ -38,13 +38,13 @@ public class DoorOpen : MonoBehaviour
         else OpenDoor();
     }
 
-    void OpenDoor()
+    public void OpenDoor()
     {
         transform.DORotate(new Vector3(0, openAngle, 0), openDuration);
         isOpen = true;
     }
 
-    void CloseDoor()
+    public void CloseDoor()
     {
         transform.DORotate(new Vector3(0, defaultAngle, 0), openDuration);
         isOpen = false;

@@ -109,13 +109,13 @@ public class EnemyScript : MonoBehaviour
         checkedHits = true;
 	}
 
-    void StopFollowingTarget()
+    public void StopFollowingTarget()
 	{
 		aiTargetScript.SetFollowing(false);
 
 	}
 
-	void ResumeFollowingTarget()
+	public void ResumeFollowingTarget()
 	{
 		aiTargetScript.SetFollowing(true);
         bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
