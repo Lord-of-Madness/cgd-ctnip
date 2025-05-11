@@ -73,8 +73,9 @@ public class InteractableScript : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.CompareTag("Player") && other.transform.parent.GetComponent<PlayerController>().IsControlledByPlayer())
+		if (Utilities.ActivePlayerCheck(other.gameObject))
 		{
+			label.transform.DOComplete();
 			label.SetActive(false);
 			playerInProximity = false;
 		}

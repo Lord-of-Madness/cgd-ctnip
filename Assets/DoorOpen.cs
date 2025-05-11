@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
+    [SerializeField]
+    GameObject openedPartReference;
 
     [SerializeField]
     float openAngle = 90f;
@@ -28,7 +30,7 @@ public class DoorOpen : MonoBehaviour
 
     public void InteractDoor()
     {
-        transform.DOKill();
+		openedPartReference.transform.DOKill();
         if (locked)
         {
             GameManager.Instance.ActivePlayer.ShowOverheadText(new() { "It's locked" });
@@ -40,13 +42,13 @@ public class DoorOpen : MonoBehaviour
 
     public void OpenDoor()
     {
-        transform.DORotate(new Vector3(0, openAngle, 0), openDuration);
+        openedPartReference.transform.DOLocalRotate(new Vector3(0, openAngle, 0), openDuration);
         isOpen = true;
     }
 
     public void CloseDoor()
     {
-        transform.DORotate(new Vector3(0, defaultAngle, 0), openDuration);
+		openedPartReference.transform.DOLocalRotate(new Vector3(0, defaultAngle, 0), openDuration);
         isOpen = false;
     }
 
