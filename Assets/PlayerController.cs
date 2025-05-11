@@ -1,15 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.AI.Navigation.Samples;
-using Unity.Burst;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {

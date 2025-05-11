@@ -1,5 +1,3 @@
-using System.Numerics;
-using UnityEditor.Search;
 using UnityEngine;
 
 public static class GlobalConstants
