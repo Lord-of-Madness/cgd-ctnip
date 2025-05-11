@@ -476,6 +476,8 @@ MonoBehaviour:
   DeathAudioSource: {fileID: 4436915394484808940}
   SoundsAudioSource: {fileID: 7749748000342229553}
   FootstepsAudioSource: {fileID: 7937431041547095856}
+  Enemygrowls:
+  - {fileID: 8300000, guid: c21360666757da9499d92dd3b0eba1f2, type: 3}
 --- !u!82 &7749748000342229553 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6961965102085019655, guid: dac31afa2165c4645b3b709348719ad9, type: 3}

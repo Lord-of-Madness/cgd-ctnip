@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,6 +39,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] AudioSource DeathAudioSource;
     [SerializeField] AudioSource SoundsAudioSource;
     [SerializeField] AudioSource FootstepsAudioSource;
+
+    [SerializeField] List<AudioClip> Enemygrowls;
 
     float barkdelay;
 
@@ -209,7 +212,7 @@ public class EnemyScript : MonoBehaviour
     }
     public void Bark()
     {
-        SoundsAudioSource.Play();
+        SoundsAudioSource.PlayOneShot(Enemygrowls[Random.Range(0, Enemygrowls.Count - 1)]);
         barkdelay = Random.Range(2f, 10f);
     }
 }
