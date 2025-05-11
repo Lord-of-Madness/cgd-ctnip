@@ -33,17 +33,25 @@ public class EnemyScript : MonoBehaviour
     //Animation stuff
     [SerializeField]
 	Animator bodyAnimator;
+    [SerializeField] AudioSource DamageDealtAudioSource;
+    [SerializeField] AudioSource DamageTakenAudioSource;
+    [SerializeField] AudioSource DeathAudioSource;
+    [SerializeField] AudioSource SoundsAudioSource;
+    [SerializeField] AudioSource FootstepsAudioSource;
+
+    float barkdelay;
 
 
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         hp = maxHp;
 
         aiTargetScript = GetComponent<AITarget>();
 		bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
+        barkdelay = Random.Range(2f, 10f);
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -92,6 +100,12 @@ public class EnemyScript : MonoBehaviour
 		if (timeStaggered > timeStaggeredAfterHit)
             RecoverFromStagger();
 
+        if (barkdelay > 0) barkdelay-= Time.deltaTime;
+        else
+        {
+            Bark();
+            barkdelay = Random.Range(2f, 10f);
+        }
 
     }
 
@@ -112,12 +126,13 @@ public class EnemyScript : MonoBehaviour
     public void StopFollowingTarget()
 	{
 		aiTargetScript.SetFollowing(false);
-
+        FootstepsAudioSource.Stop();
 	}
 
 	public void ResumeFollowingTarget()
 	{
-		aiTargetScript.SetFollowing(true);
+        FootstepsAudioSource.Play();
+        aiTargetScript.SetFollowing(true);
         bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
         bodyAnimator.SetBool(GlobalConstants.animGotHitID, false);
     }
@@ -138,7 +153,8 @@ public class EnemyScript : MonoBehaviour
 	}
 	void FinishAttacking()
 	{
-		timeAttacking = 0;
+        DamageDealtAudioSource.Play();
+        timeAttacking = 0;
 		attacking = false;
         ResumeFollowingTarget();
         checkedHits = false;
@@ -148,6 +164,7 @@ public class EnemyScript : MonoBehaviour
     public void GetHit(int damage)
     {
         hp -= damage;
+        DamageTakenAudioSource.Play();
 
         bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
         GetStaggered();
@@ -160,7 +177,8 @@ public class EnemyScript : MonoBehaviour
         Debug.Log("I got staggered");
 		
         if (attacking) FinishAttacking();
-        
+        DamageTakenAudioSource.Play();
+
         staggered = true;
         bodyAnimator.SetBool(GlobalConstants.animGotHitID, true);
         StopFollowingTarget();
@@ -185,7 +203,13 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {
+        DeathAudioSource.Play();
         StopFollowingTarget();
         enabled = false;
+    }
+    public void Bark()
+    {
+        SoundsAudioSource.Play();
+        barkdelay = Random.Range(2f, 10f);
     }
 }

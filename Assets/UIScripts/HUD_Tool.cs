@@ -25,5 +25,6 @@ public class HUD_Ammo : MonoBehaviour
         GameManager.Instance.erikPC.onReload.AddListener(UpdateAmmoLabel);
         GameManager.Instance.bethPC.onToolSwitched.AddListener(UpdateAmmoLabel);
         GameManager.Instance.erikPC.onToolSwitched.AddListener(UpdateAmmoLabel);
+        UpdateAmmoLabel();
     }
 }

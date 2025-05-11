@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
                 if (c.transform.parent != null)
                 {
                     EnemyScript enemy = c.transform.parent.GetComponent<EnemyScript>();
-                    Vector3 appliedForce = (enemy.transform.position - transform.position).normalized * meleeAttackForce * 50000;
+                    Vector3 appliedForce = 50000 * meleeAttackForce * (enemy.transform.position - transform.position).normalized;
                     //50000 is the magic constant which make the enemy rigibody fly a bit
 
                     enemy.GetComponent<Rigidbody>().AddForce(appliedForce);
@@ -370,6 +370,11 @@ public class PlayerController : MonoBehaviour
 
     void MoveByKeyboard(Vector2 dir)
     {
+        if (dir == Vector2.zero)
+        {
+            FootstepsSound.Stop();
+        }
+        else if(!FootstepsSound.isPlaying) FootstepsSound.Play();
         Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y) * speed;
         if (isRunning) moveVelocity *= 2;
 
