@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a059b9aeb2b8c4488b42984733c2b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setBasedOnCamera: 1
   fixedRotation: {x: 30, y: 45, z: 0}
 --- !u!1 &2808557689789560551
 GameObject:
@@ -1162,7 +1163,7 @@ GameObject:
   - component: {fileID: 5728191508341244188}
   m_Layer: 0
   m_Name: FeetCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
