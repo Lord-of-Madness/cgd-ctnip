@@ -30,6 +30,7 @@ public class OverheadDialogue : MonoBehaviour
         if (seq != null) return;
 
         gameObject.SetActive(true);
+        tmPro.text = "";
         string firstText = lines[0];
 
 

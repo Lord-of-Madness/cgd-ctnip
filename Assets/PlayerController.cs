@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.AI.Navigation.Samples;
 using Unity.Burst;
@@ -421,8 +422,13 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Interactable"))
-            overheadDialogue.ShowText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
+            ShowOverheadText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
 
+    }
+
+    public void ShowOverheadText(List<string> lines)
+    {
+        overheadDialogue.ShowText(lines);
     }
 
     public void StopFollowingOtherChar()
