@@ -34,4 +34,10 @@ public class Utilities
             Object.Destroy(child.gameObject);
         }
     }
+
+	public static bool ActivePlayerCheck(GameObject potentialPlayer)
+	{
+		return potentialPlayer.CompareTag("Player") && potentialPlayer.transform.parent.GetComponent<PlayerController>().IsControlledByPlayer();
+			
+	}
 }

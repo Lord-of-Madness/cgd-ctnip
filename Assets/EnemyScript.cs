@@ -128,14 +128,14 @@ public class EnemyScript : MonoBehaviour
         checkedHits = true;
 	}
 
-    void StopFollowingTarget()
+    public void StopFollowingTarget()
 	{
         follwing = false;
 		aiTargetScript.SetFollowing(false);
         FootstepsAudioSource.Stop();
 	}
 
-	void ResumeFollowingTarget()
+	public void ResumeFollowingTarget()
 	{
         if (hp <= 0) return;
         follwing = true;

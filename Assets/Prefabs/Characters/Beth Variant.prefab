@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239236f1e57aca541a2c12217619d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exposureTime: 0.15
+  exposureTime: 0.5
   flashIntesity: 400
   flashRange: 20
   tweenEase: 32

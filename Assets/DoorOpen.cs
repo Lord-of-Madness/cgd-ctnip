@@ -10,6 +10,8 @@ public class DoorOpen : MonoBehaviour
     float defaultAngle = 0;
     [SerializeField]
     float openDuration = 0.5f;
+    [SerializeField]
+    bool locked = false;
 
     bool isOpen = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,17 +29,22 @@ public class DoorOpen : MonoBehaviour
     public void InteractDoor()
     {
         transform.DOKill();
+        if (locked)
+        {
+            GameManager.Instance.ActivePlayer.ShowOverheadText(new() { "It's locked" });
+            return;
+        }
         if (isOpen) CloseDoor();
         else OpenDoor();
     }
 
-    void OpenDoor()
+    public void OpenDoor()
     {
         transform.DORotate(new Vector3(0, openAngle, 0), openDuration);
         isOpen = true;
     }
 
-    void CloseDoor()
+    public void CloseDoor()
     {
         transform.DORotate(new Vector3(0, defaultAngle, 0), openDuration);
         isOpen = false;
