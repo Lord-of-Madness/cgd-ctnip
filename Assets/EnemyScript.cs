@@ -43,6 +43,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] List<AudioClip> Enemygrowls;
 
     float barkdelay;
+    bool follwing=false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -103,6 +104,7 @@ public class EnemyScript : MonoBehaviour
 		if (timeStaggered > timeStaggeredAfterHit)
             RecoverFromStagger();
 
+        if(follwing)
         if (barkdelay > 0) barkdelay-= Time.deltaTime;
         else
         {
@@ -128,12 +130,15 @@ public class EnemyScript : MonoBehaviour
 
     void StopFollowingTarget()
 	{
+        follwing = false;
 		aiTargetScript.SetFollowing(false);
         FootstepsAudioSource.Stop();
 	}
 
 	void ResumeFollowingTarget()
 	{
+        if (hp <= 0) return;
+        follwing = true;
         FootstepsAudioSource.Play();
         aiTargetScript.SetFollowing(true);
         bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
