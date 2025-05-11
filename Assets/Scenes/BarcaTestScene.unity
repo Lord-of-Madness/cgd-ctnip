@@ -32297,7 +32297,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.05
+  m_Intensity: 0.01
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -36861,6 +36861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c646b33a914a9ce438f0fca216a16fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadedSceneName: GramofonScene
 --- !u!4 &1852097266
 Transform:
   m_ObjectHideFlags: 0
