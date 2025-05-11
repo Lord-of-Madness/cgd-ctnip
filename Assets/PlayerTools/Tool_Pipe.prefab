@@ -17,6 +17,10 @@ PrefabInstance:
       value: Pipe
       objectReference: {fileID: 0}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 50fd583edfa9fc948820c1d459688ae6, type: 3}
+    - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: reloadBatch
       value: 0
       objectReference: {fileID: 0}
