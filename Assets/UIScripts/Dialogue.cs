@@ -236,17 +236,17 @@ public class Speaker
         Name = name;
         Portrait = Resources.Load<Sprite>($"CharacterPortraits/{name}");
     }
-    public static Speaker Beth => new("Elisabeth") {TextColor = new(1f, 0.513725f, 0.513725f) };
-    public static Speaker Erik => new("Erik") { TextColor = new(0.5294f, 6.941f, 1f) };
+    public static Speaker Beth => new("ELISABETH") {TextColor = new(1f, 0.513725f, 0.513725f) };
+    public static Speaker Erik => new("ERIK") { TextColor = new(0.5294f, 6.941f, 1f) };
 }
 
 public class Dialogue : MonoBehaviour
 {
     [SerializeField] Image CharacterImage;
     [SerializeField] GameObject dialogueBox;
-    [SerializeField] Text dialogTextLinePrefab;
+    [SerializeField] TextMeshProUGUI dialogTextLinePrefab;
     [SerializeField] Button dialogOptButtonPrefab;
-    Tween textween;
+    //Tween textween;
 
     DialogueTreeNode lines;
     [SerializeField] float textSpeed = 0.3f;
@@ -258,7 +258,7 @@ public class Dialogue : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.inputActions.Dialogue.Skip.performed += ctx => SkipText();
+        GameManager.Instance.inputActions.Dialogue.Skip.performed += ctx => NextLine();
         GameManager.Instance.inputActions.Dialogue.Cancel.performed += ctx => Hide();//Perhaps remove - callbacks would get called multiple times.
         gameObject.SetActive(false);
 	}
@@ -267,10 +267,8 @@ public class Dialogue : MonoBehaviour
     {        
         CharacterImage.sprite = line.Sprite;
         if (line.Sprite==null)Debug.LogWarning($"Speaker: {line.Who} has no SpritePortrait");
-        if (textween != null) FinishTween();
-        Text dialogTextLine = Instantiate(dialogTextLinePrefab, dialogueBox.transform);
-        dialogTextLine.text = "";//If we clean up the prefab this can be removed.
-        textween = dialogTextLine.DOText(line.SpeakerAnnotation()+line.Text, textSpeed, true, ScrambleMode.None).OnComplete(() => FinishTween());
+        TextMeshProUGUI dialogTextLine = Instantiate(dialogTextLinePrefab, dialogueBox.transform);
+        dialogTextLine.text = line.SpeakerAnnotation() + line.Text;
     }
     public void ShowCharacterWithText(DialogueTreeNode lines)
     {
@@ -278,11 +276,6 @@ public class Dialogue : MonoBehaviour
         Utilities.PurgeChildren(dialogueBox.transform);
         this.lines = lines;
         NextLine();
-    }
-    private void SkipText()
-    {
-        if (textween != null) FinishTween();
-        else NextLine();
     }
     private void NextLine()
     {
@@ -295,11 +288,12 @@ public class Dialogue : MonoBehaviour
                 if (lines.callback != null) Debug.Log("Callback is not null");
                 lines.callback?.Invoke();
                 List<Button> buttons = new();
-                foreach (var child in lines.Children)
+                for (int i = 0; i < lines.Children.Count; i++)
                 {
+                    DialogueTreeNode child = lines.Children[i];
                     Button button = Instantiate(dialogOptButtonPrefab, dialogueBox.transform);
                     buttons.Add(button);
-                    button.GetComponent<TextMeshProUGUI>().text = child.Line.SpeakerAnnotation() + child.Line.Text;
+                    button.GetComponent<TextMeshProUGUI>().text = (1+i).ToString()+ " – " + child.Line.Text;
                     button.onClick.AddListener(() => {
                         buttons.ForEach((c) => Destroy(c.gameObject));
                         child.callback?.Invoke();
@@ -320,11 +314,6 @@ public class Dialogue : MonoBehaviour
             Hide();
         }
     }
-    void FinishTween()
-    {
-        textween.Kill(true);
-        textween = null;
-    }
     void Show(){
         gameObject.SetActive(true);
         GameManager.Instance.inputActions.Player.Disable();
@@ -332,7 +321,6 @@ public class Dialogue : MonoBehaviour
     }
     void Hide()
     {
-        FinishTween();
         lines=null;
         GameManager.Instance.inputActions.Player.Enable();
         GameManager.Instance.inputActions.Dialogue.Disable();

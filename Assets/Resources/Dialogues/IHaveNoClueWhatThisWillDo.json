@@ -3,7 +3,7 @@
         {
             "id": 0,
             "Text": "Hello!",
-            "Who": "Elisabeth",
+            "Who": "ELISABETH",
             "DocumentName": "TestJSON",
             "children": [
                 1
@@ -12,7 +12,7 @@
         {
             "id": 1,
             "Text": "Will You choose Red pill or blue Pill?",
-            "Who": "Elisabeth",
+            "Who": "ELISABETH",
             "DocumentName": "TestJSON2",
             "children": [
                 2,
@@ -22,7 +22,7 @@
         {
             "id": 2,
             "Text": "The Red Pill",
-            "Who": "Erik",
+            "Who": "ERIK",
             "children": [
                 4
             ]
@@ -30,7 +30,7 @@
         {
             "id": 3,
             "Text": "The Blue Pill",
-            "Who": "Erik",
+            "Who": "ERIK",
             "children": [
                 10
             ]
@@ -38,7 +38,7 @@
         {
             "id": 4,
             "Text": "What were you expecting?",
-            "Who": "Elisabeth",
+            "Who": "ELISABETH",
             "children": [
                 5
             ]
@@ -46,7 +46,7 @@
         {
             "id": 5,
             "Text": "An interesting testing dialogue?",
-            "Who": "Elisabeth",
+            "Who": "ELISABETH",
             "children": [
                 6,
                 7,
@@ -56,7 +56,7 @@
         {
             "id": 6,
             "Text": "Yes.",
-            "Who": "Erik",
+            "Who": "ERIK",
             "children": [
                 13
             ]
@@ -64,7 +64,7 @@
         {
             "id": 7,
             "Text": "Wait. Lemme take the other pill instead",
-            "Who": "Erik",
+            "Who": "ERIK",
             "children": [
                 11
             ]
@@ -72,7 +72,7 @@
         {
             "id": 8,
             "Text": "No",
-            "Who": "Erik",
+            "Who": "ERIK",
             "children": [
                 9
             ]
@@ -80,13 +80,13 @@
         {
             "id": 9,
             "Text": "Yeah. Thats about right",
-            "Who": "Elisabeth",
+            "Who": "ELISABETH",
             "children": [19]
         },
         {
             "id": 10,
             "Text": "Ummm Good for you I assume",
-            "Who": "Elisabeth",
+            "Who": "ELISABETH",
             "children": [19]
         },
         {
@@ -163,11 +163,11 @@
     "speakers": [
         {
             "Speaker": "ELISABETH",
-            "Hex": "FF8282FF"
+            "Hex": "9C3E3EFF"
         },
         {
             "Speaker": "ERIK",
-            "Hex": "86E9FFFF"
+            "Hex": "4980D3FF"
         }
     ]
 }

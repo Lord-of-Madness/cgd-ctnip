@@ -15,8 +15,7 @@ public class HUD_Ammo : MonoBehaviour
         image.sprite =
             GameManager.APD.SelectedTool.toolIcon;
         PrimaryAmmo.text = 
-            GameManager.APD.SelectedToolData.loadedAmmo.ToString() + "/" +
-            GameManager.APD.SelectedTool.maxLoadedAmmo;
+            GameManager.APD.SelectedToolData.loadedAmmo.ToString();
         StashedAmmo.text = GameManager.Instance.ActivePlayer.playerData.SelectedToolData.stashedAmmo.ToString();
     }
     void Start()
