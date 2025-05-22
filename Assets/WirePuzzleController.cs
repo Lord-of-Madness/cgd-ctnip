@@ -38,7 +38,10 @@ public class WirePuzzleController : MonoBehaviour
 
 		GameManager.Instance.inputActions.Player.Disable();
 		GameManager.Instance.inputActions.WirePuzzle.Enable();
+
+		//Handle camera
 		cameFromCamera = Camera.main;
+		GameManager.Instance.DisableCameraFilter();
 		cameFromCamera.enabled = false;
 		myCamera.enabled = true;
 		GameManager.Instance.UpdateCameraFilterState();
@@ -49,8 +52,13 @@ public class WirePuzzleController : MonoBehaviour
     {
 		GameManager.Instance.inputActions.Player.Enable();
 		GameManager.Instance.inputActions.WirePuzzle.Disable();
+
+		//Handle camera
+		GameManager.Instance.DisableCameraFilter();
 		cameFromCamera.enabled = true;
 		myCamera.enabled = false;
+		GameManager.Instance.UpdateCameraFilterState();
+
 		Debug.Log("CanceledPuzzle");
 	}
 

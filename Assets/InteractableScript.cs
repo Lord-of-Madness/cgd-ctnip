@@ -34,6 +34,7 @@ public class InteractableScript : MonoBehaviour
         //interactAction = InputSystem.actions.FindAction("Interact");
 
 		OnInteract.AddListener(TweenLabel);
+		GameManager.Instance.charChanged.AddListener(HideLabel);
 	}
 
 
@@ -59,25 +60,33 @@ public class InteractableScript : MonoBehaviour
 		seq.Play();
 	}
 
+	void ShowLabel()
+	{
+		label.SetActive(true);
+		playerInProximity = true;
+	}
+
+	void HideLabel()
+	{
+		label.transform.DOComplete();
+		label.SetActive(false);
+		playerInProximity = false;
+	}
 
 
 	private void OnTriggerEnter(Collider other)
 	{
-        PlayerController player = other.gameObject.GetComponentInParent<PlayerController>();
-        if (player != null && player.IsControlledByPlayer())
+        if (!other.isTrigger && Utilities.ActivePlayerCheck(other.gameObject))
 		{
-			label.SetActive(true);
-			playerInProximity = true;
+			ShowLabel();
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (Utilities.ActivePlayerCheck(other.gameObject))
+		if (!other.isTrigger && Utilities.ActivePlayerCheck(other.gameObject))
 		{
-			label.transform.DOComplete();
-			label.SetActive(false);
-			playerInProximity = false;
+			HideLabel();
 		}
 	}
 }

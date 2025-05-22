@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("Switching from Beth to Erik");
             EnableCameraFilter();
-			RenderSettings.ambientSkyColor = Color.gray;
 
             if (followingOn) bethPC.StartFollowingOtherChar();
             bethPC.DisablePlayerControl();
@@ -61,7 +60,6 @@ public class GameManager : MonoBehaviour
         {
 			//Debug.Log("Switching from Erik to Beth");
 			DisableCameraFilter();
-            RenderSettings.ambientSkyColor = Color.black;
 
             bethPC.StopFollowingOtherChar();
             bethPC.EnablePlayerControl();
@@ -101,6 +99,8 @@ public class GameManager : MonoBehaviour
 		
 		if (!camera.TryGetComponent<Volume>(out var volume)) { Debug.Log("No volume found"); return; }
 
+		RenderSettings.ambientSkyColor = Color.black;
+
 		volume.enabled = false;
     }
 
@@ -111,6 +111,8 @@ public class GameManager : MonoBehaviour
 
 		
         if (!camera.TryGetComponent<Volume>(out var volume)) { Debug.Log("No volume found"); return; }
+
+		RenderSettings.ambientSkyColor = Color.gray;
 
 		volume.enabled = true;
 	}
