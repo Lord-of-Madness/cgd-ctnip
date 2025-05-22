@@ -455,11 +455,11 @@ PrefabInstance:
       objectReference: {fileID: 171041983479413848}
     - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: weaponOffset.x
-      value: 0.75
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: weaponOffset.y
-      value: 1.4
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: cameraFlashScript

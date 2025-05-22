@@ -1273,6 +1273,54 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""WirePuzzle"",
+            ""id"": ""6d8ae562-8b3e-4f09-8d1e-634b846cf1b9"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""00f0bb55-52ef-4dbc-a929-decb306ad8bc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""545e54c7-b3b4-4b0f-a825-acd56ec8160e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0a2f7e87-c70f-4303-a0cd-097b5f07f921"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9f9ff41-8fec-43f0-9949-5d39ccd1668c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1373,6 +1421,10 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         m_Journal = asset.FindActionMap("Journal", throwIfNotFound: true);
         m_Journal_Cancel = m_Journal.FindAction("Cancel", throwIfNotFound: true);
         m_Journal_JournalExit = m_Journal.FindAction("JournalExit", throwIfNotFound: true);
+        // WirePuzzle
+        m_WirePuzzle = asset.FindActionMap("WirePuzzle", throwIfNotFound: true);
+        m_WirePuzzle_Click = m_WirePuzzle.FindAction("Click", throwIfNotFound: true);
+        m_WirePuzzle_Cancel = m_WirePuzzle.FindAction("Cancel", throwIfNotFound: true);
     }
 
     ~@InputActionsGen()
@@ -1380,6 +1432,7 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActionsGen.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Dialogue.enabled, "This will cause a leak and performance issues, InputActionsGen.Dialogue.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Journal.enabled, "This will cause a leak and performance issues, InputActionsGen.Journal.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_WirePuzzle.enabled, "This will cause a leak and performance issues, InputActionsGen.WirePuzzle.Disable() has not been called.");
     }
 
     /// <summary>
@@ -2025,6 +2078,113 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="JournalActions" /> instance referencing this action map.
     /// </summary>
     public JournalActions @Journal => new JournalActions(this);
+
+    // WirePuzzle
+    private readonly InputActionMap m_WirePuzzle;
+    private List<IWirePuzzleActions> m_WirePuzzleActionsCallbackInterfaces = new List<IWirePuzzleActions>();
+    private readonly InputAction m_WirePuzzle_Click;
+    private readonly InputAction m_WirePuzzle_Cancel;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "WirePuzzle".
+    /// </summary>
+    public struct WirePuzzleActions
+    {
+        private @InputActionsGen m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public WirePuzzleActions(@InputActionsGen wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "WirePuzzle/Click".
+        /// </summary>
+        public InputAction @Click => m_Wrapper.m_WirePuzzle_Click;
+        /// <summary>
+        /// Provides access to the underlying input action "WirePuzzle/Cancel".
+        /// </summary>
+        public InputAction @Cancel => m_Wrapper.m_WirePuzzle_Cancel;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_WirePuzzle; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="WirePuzzleActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(WirePuzzleActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="WirePuzzleActions" />
+        public void AddCallbacks(IWirePuzzleActions instance)
+        {
+            if (instance == null || m_Wrapper.m_WirePuzzleActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_WirePuzzleActionsCallbackInterfaces.Add(instance);
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="WirePuzzleActions" />
+        private void UnregisterCallbacks(IWirePuzzleActions instance)
+        {
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="WirePuzzleActions.UnregisterCallbacks(IWirePuzzleActions)" />.
+        /// </summary>
+        /// <seealso cref="WirePuzzleActions.UnregisterCallbacks(IWirePuzzleActions)" />
+        public void RemoveCallbacks(IWirePuzzleActions instance)
+        {
+            if (m_Wrapper.m_WirePuzzleActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="WirePuzzleActions.AddCallbacks(IWirePuzzleActions)" />
+        /// <seealso cref="WirePuzzleActions.RemoveCallbacks(IWirePuzzleActions)" />
+        /// <seealso cref="WirePuzzleActions.UnregisterCallbacks(IWirePuzzleActions)" />
+        public void SetCallbacks(IWirePuzzleActions instance)
+        {
+            foreach (var item in m_Wrapper.m_WirePuzzleActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_WirePuzzleActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="WirePuzzleActions" /> instance referencing this action map.
+    /// </summary>
+    public WirePuzzleActions @WirePuzzle => new WirePuzzleActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2316,5 +2476,27 @@ public partial class @InputActionsGen: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJournalExit(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "WirePuzzle" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="WirePuzzleActions.AddCallbacks(IWirePuzzleActions)" />
+    /// <seealso cref="WirePuzzleActions.RemoveCallbacks(IWirePuzzleActions)" />
+    public interface IWirePuzzleActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Click" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

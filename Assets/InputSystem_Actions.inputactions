@@ -1187,6 +1187,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "WirePuzzle",
+            "id": "6d8ae562-8b3e-4f09-8d1e-634b846cf1b9",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "00f0bb55-52ef-4dbc-a929-decb306ad8bc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "545e54c7-b3b4-4b0f-a825-acd56ec8160e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0a2f7e87-c70f-4303-a0cd-097b5f07f921",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9f9ff41-8fec-43f0-9949-5d39ccd1668c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
