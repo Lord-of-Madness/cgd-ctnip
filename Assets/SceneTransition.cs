@@ -19,6 +19,10 @@ public class SceneTransition : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-        SceneManager.LoadScene(loadedSceneName);
+        if (other.transform.parent.gameObject == GameManager.Instance.ActivePlayer.gameObject)
+        {
+            SceneManager.LoadScene(loadedSceneName);
+
+        }
 	}
 }
