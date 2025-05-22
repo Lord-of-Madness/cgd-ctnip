@@ -25,5 +25,6 @@ public class RoomCameraSwitchOnEnter : MonoBehaviour
         if (Camera.main != null)
             Camera.main.enabled = false;
 		targetCamera.enabled = true;
+        GameManager.Instance.UpdateCameraFilterState();
 	}
 }

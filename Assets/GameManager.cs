@@ -114,6 +114,12 @@ public class GameManager : MonoBehaviour
 
 		volume.enabled = true;
 	}
+
+    public void UpdateCameraFilterState()
+    {
+        if (activeChar == PlayerCharacter.Erik) EnableCameraFilter();
+        else DisableCameraFilter();
+    }
 }
 
 public enum PlayerCharacter
