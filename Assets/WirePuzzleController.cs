@@ -8,11 +8,17 @@ public class WirePuzzleController : MonoBehaviour
 	Camera myCamera;
 	
 	Camera cameFromCamera;
-	
+
+	[SerializeField]
+	FuseSwitch fuseSwitch;
+
 	OnClickMakeLine curLineDrawer;
 
 	[SerializeField]
 	bool[] matchesDone;
+
+	[SerializeField]
+	GameObject objectsParent;
 
 	public UnityEvent onComplete;
 	bool alreadyDone = false;
@@ -21,8 +27,9 @@ public class WirePuzzleController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-		GameManager.Instance.inputActions.WirePuzzle.Click.performed += (ctx) => { BeginDraw(); };
-		GameManager.Instance.inputActions.WirePuzzle.Click.canceled += (ctx) => { CancelDraw(); };
+		objectsParent.SetActive(false);
+		GameManager.Instance.inputActions.WirePuzzle.Click.performed += (ctx) => { OnClick(); };
+		GameManager.Instance.inputActions.WirePuzzle.Click.canceled += (ctx) => { OnRelease(); };
 		GameManager.Instance.inputActions.WirePuzzle.Cancel.performed += (ctx) => { CancelPuzzle(); };
 	}
 
@@ -35,6 +42,8 @@ public class WirePuzzleController : MonoBehaviour
     public void EnablePuzzle()
     {
 		if (alreadyDone) return;
+
+		objectsParent.SetActive(true);
 
 		GameManager.Instance.inputActions.Player.Disable();
 		GameManager.Instance.inputActions.WirePuzzle.Enable();
@@ -50,6 +59,8 @@ public class WirePuzzleController : MonoBehaviour
 
     public void CancelPuzzle()
     {
+		objectsParent.SetActive(false);
+
 		GameManager.Instance.inputActions.Player.Enable();
 		GameManager.Instance.inputActions.WirePuzzle.Disable();
 
@@ -59,10 +70,10 @@ public class WirePuzzleController : MonoBehaviour
 		myCamera.enabled = false;
 		GameManager.Instance.UpdateCameraFilterState();
 
-		Debug.Log("CanceledPuzzle");
+
 	}
 
-	OnClickMakeLine GetBoxUnderMouse()
+	IClickable GetClickableUnderMouse()
 	{
 		var mousePos = Input.mousePosition;
 		var mainCamera = Camera.main;
@@ -72,10 +83,10 @@ public class WirePuzzleController : MonoBehaviour
 
 		if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.NameToLayer("Clickable")))
 		{
-			OnClickMakeLine clickableBox = hit.transform.GetComponent<OnClickMakeLine>();
-			if (clickableBox != null)
+			IClickable clickable = hit.transform.GetComponent<IClickable>();
+			if (clickable != null)
 			{
-				return clickableBox;
+				return clickable;
 
 			}
 		}
@@ -121,33 +132,63 @@ public class WirePuzzleController : MonoBehaviour
 	{
 		onComplete.Invoke();
 		alreadyDone = true;
+		this.gameObject.SetActive(false);
 		CancelPuzzle();
 	}
 
-	void BeginDraw()
+	void OnClick()
 	{
-		var clickableBox = GetBoxUnderMouse();
-		if (clickableBox == null) return;
+		var clickable = GetClickableUnderMouse();
+		if (clickable == null) return;
+		
+		if (clickable is OnClickMakeLine) BeginDraw((OnClickMakeLine)clickable);
+		if (clickable is FuseSwitch) clickable.OnClick();
 
-		clickableBox.StartDrawingLine();
+	}
+
+	void BeginDraw(OnClickMakeLine clickableBox)
+	{
+		if (fuseSwitch.currentlyOn)//Can't do the puzzle with the light on 
+		{
+			//TODO: Text dialogue explaining this
+			return; 
+		}
+		if (GameManager.Instance.activeChar == PlayerCharacter.Beth)//Beth can't do this in darkness
+		{
+			//TODO: Text dialogue explaining this
+			return;
+		}
+		clickableBox.OnClick();
 		curLineDrawer = clickableBox;
 		RemoveMatch(curLineDrawer.matchID); //when clicking, you can cancel previous match
 	}
 
-	void CancelDraw()
+	void OnRelease()
 	{
-		if (curLineDrawer == null) return;
+		var finishClickable = GetClickableUnderMouse();
 
-		var finishBox = GetBoxUnderMouse();
-
-		//No match
-		if (finishBox == null)
+		//Released above another box
+		if (finishClickable != null &&
+			finishClickable is OnClickMakeLine &&
+			curLineDrawer != null)
+		{
+			CancelDraw((OnClickMakeLine)finishClickable);
+			return;
+		}
+		else if (curLineDrawer != null)
 		{
 			curLineDrawer.Cancel();
 			curLineDrawer = null;
-			return;
 		}
+		
 
+
+		return;
+
+	}
+
+	void CancelDraw(OnClickMakeLine finishBox)
+	{
 		//Some match
 		curLineDrawer.Cancel(false);
 
@@ -158,8 +199,6 @@ public class WirePuzzleController : MonoBehaviour
 		}
 		curLineDrawer = null;
 		return;
-
-
 	}
 
 }

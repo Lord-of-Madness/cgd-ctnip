@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OnClickMakeLine : MonoBehaviour
+public class OnClickMakeLine : MonoBehaviour, IClickable
 {
 	LineRenderer lineRenderer;
 
@@ -21,6 +21,15 @@ public class OnClickMakeLine : MonoBehaviour
         if (drawingLine) DrawUpdate();
     }
 
+	public void OnClick()
+	{
+		StartDrawingLine();
+	}
+
+	public void OnRelease()
+	{
+		Cancel();
+	}
 
 	public void StartDrawingLine()
 	{
