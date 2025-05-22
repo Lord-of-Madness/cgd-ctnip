@@ -7,7 +7,7 @@ public class RoomCameraSwitchOnEnter : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        GameManager.Instance.charChanged.AddListener(CheckActivePlayerInside);
     }
 
     // Update is called once per frame
@@ -21,10 +21,25 @@ public class RoomCameraSwitchOnEnter : MonoBehaviour
         if (!Utilities.ActivePlayerCheck(other.gameObject))
             return;
 
-		Debug.Log("Enter room");
-        if (Camera.main != null)
-            Camera.main.enabled = false;
-		targetCamera.enabled = true;
-        GameManager.Instance.UpdateCameraFilterState();
+        SwapToThisCamera();
 	}
+
+    void SwapToThisCamera()
+	{
+		if (Camera.main != null)
+		{
+			GameManager.Instance.DisableCameraFilter();
+			Camera.main.enabled = false;
+		}
+		targetCamera.enabled = true;
+		GameManager.Instance.UpdateCameraFilterState();
+
+	}
+
+    void CheckActivePlayerInside()
+    {
+        //BIG FAT CHEAT TO TRIGGER THE ON_TRIGGER
+        GameManager.Instance.ActivePlayer.MyCollider.enabled = false;
+        GameManager.Instance.ActivePlayer.MyCollider.enabled = true;
+    }
 }

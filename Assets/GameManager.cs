@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public PlayerController bethPC;
     public PlayerController erikPC;
     public PlayerController ActivePlayer { get => activeChar == PlayerCharacter.Beth ? bethPC : erikPC; }
-    Camera m_mainCamera;
 
     public PlayerCharacter activeChar = PlayerCharacter.Beth;
     bool followingOn = true;
@@ -37,11 +36,12 @@ public class GameManager : MonoBehaviour
     {
         inputActions.Player.SwapCharacters.performed += ctx => SwapCharacters();
         inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
-		m_mainCamera = Camera.main;
     }
 
 	public void SwapCharacters()
     {
+        var cameraFollowScript = Camera.main.GetComponent<FollowPlayer>();
+         
         if (activeChar == PlayerCharacter.Beth) 
         {
             //Debug.Log("Switching from Beth to Erik");
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 			erikPC.StopFollowingOtherChar();
             erikPC.EnablePlayerControl();
 
-            m_mainCamera.GetComponent<FollowPlayer>().player = erikPC.gameObject;
+            if (cameraFollowScript != null) cameraFollowScript.player = erikPC.gameObject;
 		    activeChar = PlayerCharacter.Erik;
         }
 		else
@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
             if(followingOn) erikPC.StartFollowingOtherChar();
 			erikPC.DisablePlayerControl();
 
-			m_mainCamera.GetComponent<FollowPlayer>().player = bethPC.gameObject;
-            activeChar = PlayerCharacter.Beth;
+			if (cameraFollowScript != null) cameraFollowScript.player = bethPC.gameObject;
+			activeChar = PlayerCharacter.Beth;
 		}
         charChanged.Invoke();
     }
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 				bethPC.StopFollowingOtherChar();
 		}
     }
-    void DisableCameraFilter()
+    public void DisableCameraFilter()
     {
         Camera camera = Camera.main;
 		if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 		volume.enabled = false;
     }
 
-	void EnableCameraFilter()
+	public void EnableCameraFilter()
 	{
 		Camera camera = Camera.main;
         if (camera == null) { Debug.LogWarning("No main camera found!"); return; }

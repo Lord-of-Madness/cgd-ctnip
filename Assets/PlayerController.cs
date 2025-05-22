@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("This is a reference to a lineRenderer which draws a laser aim. Set only for characters which aim this way.")]
     LineRenderer lineRenderer;
+    public Collider MyCollider { get; private set; }
 
     [Header("Sounds")]
     [SerializeField] AudioSource ToolSound;
@@ -98,6 +99,8 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        MyCollider = transform.Find("Capsule").GetComponent<Collider>();
+
         if (bodyArmature != null)
         {
             bodyAnimator = bodyArmature.GetComponent<Animator>();
