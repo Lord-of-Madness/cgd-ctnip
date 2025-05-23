@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float speed = 100;
     [SerializeField]
-    bool isoMovement = true;
+    MOVEMENT_OPTION moveOption = MOVEMENT_OPTION.cameraRelative;
     [SerializeField]
     bool controlledByPlayer = true;
     [SerializeField]
@@ -261,7 +261,8 @@ public class PlayerController : MonoBehaviour
 
     void FlashCamera()
     {
-        bodyAnimator.SetBool(GlobalConstants.animCameraFlashID, true);
+        if (bodyAnimator != null)
+            bodyAnimator.SetBool(GlobalConstants.animCameraFlashID, true);
         cameraFlashScript.Flash();
 
     }
@@ -372,13 +373,21 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y) * speed;
         if (isRunning) moveVelocity *= 2;
 
-        if (isoMovement)
+        switch (moveOption)
         {
-            if (Camera.main != null)
-                moveVelocity = Camera.main.transform.rotation * moveVelocity;
-            else //If no camera -> basic iso movement
-                moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
+            case MOVEMENT_OPTION.cameraRelative:
+				if (Camera.main != null)
+					moveVelocity = Camera.main.transform.rotation * moveVelocity;
+				else //If no camera -> basic iso movement
+					moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
+				break;
+            case MOVEMENT_OPTION.characterRelative:
+                moveVelocity = bodyArmature.transform.rotation * moveVelocity;
+                break;
+            default:
+                break;
         }
+
         curVelocity.x = moveVelocity.x;
         curVelocity.z = moveVelocity.z;
     }
@@ -528,3 +537,5 @@ public class PlayerController : MonoBehaviour
         aimLaserVisible = true;
     }
 }
+
+public enum MOVEMENT_OPTION { cameraRelative, characterRelative }
