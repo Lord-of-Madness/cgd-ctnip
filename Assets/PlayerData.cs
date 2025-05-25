@@ -49,9 +49,9 @@ public class Page {
 }
 public class PlayerData : MonoBehaviour
 {
-    [SerializeField] List<Tool> toolInspectorField;
+    [SerializeField] public List<Tool> toolInspectorField;
     public Dictionary<Tool, ToolInvData> toolInventory = new();
-    public Tool SelectedTool;
+    public Tool SelectedTool => toolInspectorField[selectedToolIndex];
     int selectedToolIndex = 0;
     public ToolInvData SelectedToolData => toolInventory[SelectedTool];
 
@@ -68,7 +68,6 @@ public class PlayerData : MonoBehaviour
     {
         if (toolInspectorField != null && toolInspectorField.Count != 0)
         {
-            SelectedTool = toolInspectorField[0];
             selectedToolIndex = 0;
         }
         foreach (var tool in toolInspectorField)
@@ -155,6 +154,5 @@ public class PlayerData : MonoBehaviour
         {
             selectedToolIndex = 0;
         }
-        SelectedTool = toolInspectorField[selectedToolIndex];
     }
 }

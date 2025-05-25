@@ -21,4 +21,13 @@ public static class GlobalConstants
 	public const string pipeToolName = "Pipe";
 	public const string cameraToolName = "Camera flash";
 	public const string revolverToolName = "Revolver";
+
+	//CHAR_NAMES
+	public const string bethName = "Beth";
+	public const string erikName = "Erik";
+
+
+
+	//SAVING
+	public static string savePath = Application.persistentDataPath + "/save.json";
 }

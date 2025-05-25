@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 {
     [Header("CharacterName")]
     public string charName = "Beth";
@@ -536,6 +536,59 @@ public class PlayerController : MonoBehaviour
 		if (lineRenderer == null) return;
         aimLaserVisible = true;
     }
+
+	public void Save(SaveSystem.AllSavedData dataHolder)
+	{
+        SaveSystem.CharacterData myData = new SaveSystem.CharacterData()
+        {
+            name = charName,
+            pos = transform.position
+        };
+        foreach (Tool tool in playerData.toolInspectorField)
+        {
+            SaveSystem.ToolData toolData = new SaveSystem.ToolData()
+            {
+                name = tool.toolName,
+                loadedAmmo = playerData.toolInventory[tool].loadedAmmo,
+                stashedAmmo = playerData.toolInventory[tool].stashedAmmo
+            };
+            switch (tool.toolName)
+            {
+                case GlobalConstants.cameraToolName:
+                    myData.cameraData = toolData;
+                    break;
+                case GlobalConstants.revolverToolName:
+                    myData.revolverData = toolData;
+                    break;
+                default:
+                    break;
+            }
+        }
+            
+        dataHolder.charData.Add(charName, myData);
+	}
+
+	public void Load(SaveSystem.AllSavedData data)
+	{
+        SaveSystem.CharacterData myData = data.charData[charName];
+        transform.position = myData.pos;
+
+		foreach (Tool tool in playerData.toolInspectorField)
+		{
+			switch (tool.toolName)
+			{
+				case GlobalConstants.cameraToolName:
+                    playerData.toolInventory[tool].loadedAmmo = myData.cameraData.loadedAmmo;
+                    playerData.toolInventory[tool].stashedAmmo = myData.cameraData.stashedAmmo;
+					break;
+				case GlobalConstants.revolverToolName:
+					playerData.toolInventory[tool].loadedAmmo = myData.revolverData.loadedAmmo;
+					playerData.toolInventory[tool].stashedAmmo = myData.revolverData.stashedAmmo; break;
+				default:
+					break;
+			}
+		}
+	}
 }
 
 public enum MOVEMENT_OPTION { cameraRelative, characterRelative }

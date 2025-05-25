@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MansionSceneManager : MonoBehaviour
+public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 {
 	public static bool KeyPickedUp = false;	
 	public static bool EnemiesReleased = false;
@@ -8,6 +8,7 @@ public class MansionSceneManager : MonoBehaviour
 
 	private void Start()
 	{
+		SaveSystem.AddSaveable(this);
 		if (disableSwap)
 			GameManager.Instance.inputActions.Player.SwapCharacters.Disable();
 	}
@@ -15,5 +16,14 @@ public class MansionSceneManager : MonoBehaviour
 	public static void PickUpKey()
 	{
 		KeyPickedUp = true;
+	}
+
+	public void Save(SaveSystem.AllSavedData saveData)
+	{
+		saveData.mansionLevelData = new SaveSystem.MansionLevelData { keyPickedUp = KeyPickedUp };
+	}
+	public void Load(SaveSystem.AllSavedData savedData)
+	{
+		KeyPickedUp = savedData.mansionLevelData.keyPickedUp;
 	}
 }

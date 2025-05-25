@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
     void ToggleFollowing()
     {
         followingOn = !followingOn;
+        if (bethPC == null || erikPC == null) return;
         if (followingOn)
         {
             if (activeChar == PlayerCharacter.Beth)

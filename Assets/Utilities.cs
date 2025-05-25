@@ -40,4 +40,15 @@ public class Utilities
 		return potentialPlayer.CompareTag("Player") && potentialPlayer.transform.parent.GetComponent<PlayerController>().IsControlledByPlayer();
 			
 	}
+
+	public static string GetFullPathName(GameObject obj)
+	{
+		string path = "/" + obj.name + obj.transform.GetSiblingIndex();
+		while (obj.transform.parent != null)
+		{
+			obj = obj.transform.parent.gameObject;
+			path = "/" + obj.name + obj.transform.GetSiblingIndex() + path;
+		}
+		return path;
+	}
 }

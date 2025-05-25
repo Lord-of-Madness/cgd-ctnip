@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 {
 
     AITarget aiTargetScript;
@@ -52,6 +52,8 @@ public class EnemyScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SaveSystem.AddSaveable(this);
+        
         hp = maxHp;
 
         aiTargetScript = GetComponent<AITarget>();
@@ -107,12 +109,14 @@ public class EnemyScript : MonoBehaviour
 		if (timeStaggered > timeStaggeredAfterHit)
             RecoverFromStagger();
 
-        if(follwing)
-        if (barkdelay > 0) barkdelay-= Time.deltaTime;
-        else
+        if (follwing)
         {
-            Bark();
-            barkdelay = Random.Range(2f, 10f);
+            if (barkdelay > 0) barkdelay -= Time.deltaTime;
+            else
+            {
+                Bark();
+                barkdelay = Random.Range(2f, 10f);
+            }
         }
 
     }
@@ -228,5 +232,28 @@ public class EnemyScript : MonoBehaviour
     {
         SoundsAudioSource.PlayOneShot(Enemygrowls[Random.Range(0, Enemygrowls.Count - 1)]);
         barkdelay = Random.Range(2f, 10f);
+    }
+
+	public void Save(SaveSystem.AllSavedData dataHolder)
+	{
+        SaveSystem.EnemyData myData = new SaveSystem.EnemyData
+        {
+            following = follwing,
+            hp = hp,
+            pos = transform.position
+        };
+
+        dataHolder.enemyData.Add(Utilities.GetFullPathName(gameObject), myData);
+	}
+
+	public void Load(SaveSystem.AllSavedData data)
+	{
+        SaveSystem.EnemyData myData = data.enemyData[Utilities.GetFullPathName(gameObject)];
+        if (myData.following) ResumeFollowingTarget();
+        else StopFollowingTarget();
+
+        hp = myData.hp;
+        transform.position = myData.pos;
+
     }
 }
