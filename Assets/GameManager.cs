@@ -13,6 +13,30 @@ public class GameManager : MonoBehaviour
     /// Shorthand to get active playerData
     /// </summary>
     public static PlayerData APD { get=>Instance.ActivePlayer.playerData; }
+    static Dictionary<string, string> sgd;
+    public static Dictionary<string, string> SpeakerGlobalData
+    {
+        get
+        {
+            if (sgd == null)
+            {
+                sgd = new Dictionary<string, string>();
+                string json = Resources.Load<TextAsset>("Dialogues/_SPEAKERS").text;
+                Debug.Log(json);
+                SpeakerGlobalSettings speakerGlobalSettings = JsonUtility.FromJson<SpeakerGlobalSettings>(json);
+                
+                foreach (var pair in speakerGlobalSettings.speakers)
+                {
+                    sgd[pair.Speaker] = pair.Hex;
+                }
+            }
+            return sgd;
+        }
+        set
+        {
+            sgd = value;
+        }
+    }
 
     public PlayerController bethPC;
     public PlayerController erikPC;

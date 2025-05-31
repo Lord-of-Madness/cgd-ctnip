@@ -429,7 +429,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Interactable"))
+        if (collision.CompareTag("Interactable")&&controlledByPlayer)
             ShowOverheadText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
 
     }

@@ -101,7 +101,7 @@ public class DialogueTreeNode
         Dictionary<int, DialogueTreeNode> nodeDict = new();
         foreach (var node in list)
         {
-            string hex = speakers.ContainsKey(node.Who) ? speakers[node.Who] : Color.gray.ToHexString();
+            string hex = speakers.ContainsKey(node.Who) ? speakers[node.Who] : GameManager.SpeakerGlobalData.ContainsKey(node.Who) ? GameManager.SpeakerGlobalData[node.Who] : Color.gray.ToHexString();
             string imagePath = $"CharacterPortraits/{node.Who}";
             string documentPath = $"Documents/{node.DocumentName}";
             nodeDict.Add(node.id, new(new(node.Text, node.Who, Resources.Load<Sprite>(imagePath), hex,Resources.Load<TextAsset>(documentPath))));
@@ -176,6 +176,15 @@ public class DialogueWrapper
     public DialogueWrapper(List<DialogueNodeJSON> nodes, List<SpeakerHexPair> speakers)
     {
         this.nodes = nodes;
+        this.speakers = speakers;
+    }
+}
+[System.Serializable]
+public class SpeakerGlobalSettings
+{
+    public List<SpeakerHexPair> speakers;
+    public SpeakerGlobalSettings(List<DialogueNodeJSON> nodes, List<SpeakerHexPair> speakers)
+    {
         this.speakers = speakers;
     }
 }
