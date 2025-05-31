@@ -246,6 +246,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] GameObject dialogueBox;
     [SerializeField] TextMeshProUGUI dialogTextLinePrefab;
     [SerializeField] Button dialogOptButtonPrefab;
+    [SerializeField] VerticalLayoutGroup dialogOptBoxPrefab;
     //Tween textween;
 
     DialogueTreeNode lines;
@@ -288,10 +289,11 @@ public class Dialogue : MonoBehaviour
                 if (lines.callback != null) Debug.Log("Callback is not null");
                 lines.callback?.Invoke();
                 List<Button> buttons = new();
+                VerticalLayoutGroup optbox = Instantiate(dialogOptBoxPrefab, dialogueBox.transform);
                 for (int i = 0; i < lines.Children.Count; i++)
                 {
                     DialogueTreeNode child = lines.Children[i];
-                    Button button = Instantiate(dialogOptButtonPrefab, dialogueBox.transform);
+                    Button button = Instantiate(dialogOptButtonPrefab, optbox.transform);
                     buttons.Add(button);
                     button.GetComponent<TextMeshProUGUI>().text = (1+i).ToString()+ " – " + child.Line.Text;
                     button.onClick.AddListener(() => {
