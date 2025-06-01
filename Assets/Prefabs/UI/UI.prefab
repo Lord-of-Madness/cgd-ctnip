@@ -347,7 +347,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 03bb7f689be5efa469a25dd635952d49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c229d573aefee14cb68cdb5837c1563, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4346,7 +4346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainPortrait: {fileID: 4894617555664104561}
   OffPortrait: {fileID: 5172833707029566822}
-  BethPotrait: {fileID: 21300000, guid: 03bb7f689be5efa469a25dd635952d49, type: 3}
+  BethPotrait: {fileID: 21300000, guid: 0c229d573aefee14cb68cdb5837c1563, type: 3}
   ErikPotrait: {fileID: 21300000, guid: 6803f38cb04a24d4c8f4984423e09249, type: 3}
   PromptLabel: {fileID: 577058689252842059}
 --- !u!1 &8633198521181282688

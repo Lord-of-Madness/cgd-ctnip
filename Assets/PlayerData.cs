@@ -95,7 +95,11 @@ public class PlayerData : MonoBehaviour
     internal void Reload(int ammountToReload)
     {
         LoadedAmmo += ammountToReload;
-        StashedAmmo -= ammountToReload;
+        if(!GameManager.APD.SelectedTool.infinteReloads)
+        {
+            StashedAmmo -= ammountToReload;
+        }
+        
     }
 
     internal void Fire()
@@ -133,7 +137,7 @@ public class PlayerData : MonoBehaviour
         }
         else
         {
-            int ammountToReload = SelectedTool.infinteReloads? ReloadBatch : math.min(math.min(StashedAmmo, ReloadBatch), MaxLoadedAmmo - LoadedAmmo);
+            int ammountToReload = math.min(math.min(StashedAmmo, ReloadBatch), MaxLoadedAmmo - LoadedAmmo);
             if(ammountToReload > 0)
             {
                 Reload(ammountToReload);

@@ -116,9 +116,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
         GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer && actionCooldown<=0) ShowLaserAim(); };
         GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) HideLaserAim(); };
-        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => {
-            Debug.Log("Controlled by player: " + controlledByPlayer);
-            if (controlledByPlayer && actionCooldown <= 0) Attack(); };
+        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => {if (controlledByPlayer && actionCooldown <= 0) Attack(); };
         GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) Reload(); };
         GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) SwitchTool(); };
 

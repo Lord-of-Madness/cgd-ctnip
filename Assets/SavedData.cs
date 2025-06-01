@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 public class SaveSystem
 {
 	static AllSavedData savedData;
-	static List<ISaveable> allSaveables;
+	static List<ISaveable> allSaveables = new();
 	public static void Save()
 	{
 		savedData = new AllSavedData();

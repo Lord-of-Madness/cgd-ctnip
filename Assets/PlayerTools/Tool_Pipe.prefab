@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: maxLoadedAmmo
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
+      propertyPath: infinteReloads
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1557417464397037026, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
