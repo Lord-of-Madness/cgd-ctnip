@@ -16,6 +16,7 @@ public static class GlobalConstants
 
 	public static int animAttackStateHash = Animator.StringToHash("Base Layer.Attack");
 	public static int animStaggerStateHash = Animator.StringToHash("Base Layer.GetHit");
+	public static int animIdleStateHash = Animator.StringToHash("Base Layer.Idle Walk Run Blend");
 
 	//TOOLS
 	public const string pipeToolName = "Pipe";

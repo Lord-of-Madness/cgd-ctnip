@@ -254,8 +254,15 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         if (myData.following) ResumeFollowingTarget();
         else StopFollowingTarget();
 
+        if (hp <= 0 && myData.hp > 0)
+        { //Ressurect
+            enabled = true;
+            timeStaggered = float.MaxValue;//To resume following
+        }
+
         hp = myData.hp;
         bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
+
         transform.position = myData.pos.GetVector3();
 
 	}
