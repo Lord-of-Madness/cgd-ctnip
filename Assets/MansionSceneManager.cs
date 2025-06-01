@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 {
+	public InteractableScript keyObject;
 	public static bool KeyPickedUp = false;	
 	public static bool EnemiesReleased = false;
 	public bool disableSwap = true;
@@ -24,6 +26,6 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	}
 	public void Load(SaveSystem.AllSavedData savedData)
 	{
-		KeyPickedUp = savedData.mansionLevelData.keyPickedUp;
+		if (savedData.mansionLevelData.keyPickedUp && !KeyPickedUp) keyObject.OnInteract.Invoke();
 	}
 }

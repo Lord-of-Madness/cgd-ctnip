@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 {
@@ -239,9 +240,9 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         SaveSystem.EnemyData myData = new SaveSystem.EnemyData
         {
             following = follwing,
-            hp = hp,
-            pos = transform.position
-        };
+			hp = hp,
+            pos = new Vector3JsonFriendly(transform.position)
+		};
 
         dataHolder.enemyData.Add(Utilities.GetFullPathName(gameObject), myData);
 	}
@@ -253,7 +254,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         else StopFollowingTarget();
 
         hp = myData.hp;
-        transform.position = myData.pos;
+        transform.position = myData.pos.GetVector3();
 
-    }
+	}
 }

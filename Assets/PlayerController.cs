@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
             ToolSound.clip = playerData.SelectedTool.reloadSound;
             ToolSound.Play();
         });
+        SaveSystem.AddSaveable(this);
     }
 
     private void SwitchTool()
@@ -542,8 +543,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         SaveSystem.CharacterData myData = new SaveSystem.CharacterData()
         {
             name = charName,
-            pos = transform.position
-        };
+            pos = new Vector3JsonFriendly(transform.position)
+        }; 
         foreach (Tool tool in playerData.toolInspectorField)
         {
             SaveSystem.ToolData toolData = new SaveSystem.ToolData()
@@ -571,7 +572,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 	public void Load(SaveSystem.AllSavedData data)
 	{
         SaveSystem.CharacterData myData = data.charData[charName];
-        transform.position = myData.pos;
+        transform.position = myData.pos.GetVector3();
 
 		foreach (Tool tool in playerData.toolInspectorField)
 		{

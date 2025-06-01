@@ -1,23 +1,21 @@
-using NUnit.Framework;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Windows;
-using UnityEditor.Overlays;
-using System.Xml.Serialization;
+using Newtonsoft.Json;
 
-public class SaveSystem
+public class SaveSystem:MonoBehaviour
 {
 	static AllSavedData savedData;
-	static List<ISaveable> allSaveables;
+	static List<ISaveable> allSaveables = new();
 	public static void Save()
 	{
 		savedData = new AllSavedData();
 		foreach (ISaveable s in allSaveables)
 			s.Save(savedData);
-		string json = JsonUtility.ToJson(savedData);
+		string json = JsonConvert.SerializeObject(savedData);
 		System.IO.File.WriteAllText(GlobalConstants.savePath, json);
+		Debug.Log("Data saved to " + GlobalConstants.savePath);
 	}
 
 	public static void Load()
@@ -25,7 +23,7 @@ public class SaveSystem
 		if (File.Exists(GlobalConstants.savePath))
 		{
 			string json = System.IO.File.ReadAllText(GlobalConstants.savePath);
-			savedData = JsonUtility.FromJson<AllSavedData>(json);
+			savedData = JsonConvert.DeserializeObject<AllSavedData>(json);
 
 			foreach (ISaveable s in allSaveables)
 				s.Load(savedData);
@@ -61,7 +59,7 @@ public class SaveSystem
 	public class CharacterData
 	{
 		public string name;
-		public Vector3 pos;
+		public Vector3JsonFriendly pos;
 		public ToolData revolverData;
 		public ToolData cameraData;
 	}
@@ -78,7 +76,7 @@ public class SaveSystem
 	public class EnemyData
 	{
 		public int hp;
-		public Vector3 pos;
+		public Vector3JsonFriendly pos;
 		public bool following;
 
 	}
@@ -95,4 +93,23 @@ public class SaveSystem
 		public bool keyPickedUp;
 	}
 
+}
+
+public struct Vector3JsonFriendly
+{
+	public float x;
+	public float y;
+	public float z;
+
+	public Vector3JsonFriendly(Vector3 vec)
+	{
+		x = vec.x;
+		y = vec.y;
+		z = vec.z;
+	}
+	
+	public Vector3 GetVector3()
+	{
+		return new Vector3(x, y, z);
+	}
 }
