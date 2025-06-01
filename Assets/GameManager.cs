@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        Directory.Delete(GlobalConstants.savePath, true);
         Instance = this;
         inputActions = new();
         DontDestroyOnLoad(Instance);
