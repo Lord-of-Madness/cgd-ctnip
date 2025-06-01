@@ -30,5 +30,5 @@ public static class GlobalConstants
 
 
 	//SAVING
-	public static string savePath = Application.persistentDataPath + "/save.json";
+	public static string savePath = Application.persistentDataPath + "/saves";
 }

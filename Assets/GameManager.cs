@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)//So it can be in multiple scenes for testing, but does not appear twice
         {
+            Instance.bethPC = this.bethPC;
+            Instance.erikPC = this.erikPC; //These are just references set in inspector -> have to be reinserted in each scene
             Destroy(gameObject);
             return;
         }

@@ -3,26 +3,52 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Windows;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 public class SaveSystem:MonoBehaviour
 {
+	static string completeSavePath;
 	static AllSavedData savedData;
 	static List<ISaveable> allSaveables = new();
+
+	bool firstUpdate = true;
+	private void Awake()
+	{
+		allSaveables.Clear();
+	}
+	private void Start()
+	{
+		if (!Directory.Exists(GlobalConstants.savePath))
+		{
+			Directory.CreateDirectory(GlobalConstants.savePath);
+		}
+
+
+		UpdateSavePath();
+		
+	}
+
+
+	static void UpdateSavePath()
+	{
+		completeSavePath = GlobalConstants.savePath + "/" + SceneManager.GetActiveScene().name + ".json";
+	}
+
 	public static void Save()
 	{
 		savedData = new AllSavedData();
 		foreach (ISaveable s in allSaveables)
 			s.Save(savedData);
 		string json = JsonConvert.SerializeObject(savedData);
-		System.IO.File.WriteAllText(GlobalConstants.savePath, json);
-		Debug.Log("Data saved to " + GlobalConstants.savePath);
+		System.IO.File.WriteAllText(completeSavePath, json); 
+		Debug.Log("Data saved to " + completeSavePath);
 	}
 
 	public static void Load()
 	{
-		if (File.Exists(GlobalConstants.savePath))
+		if (File.Exists(completeSavePath))
 		{
-			string json = System.IO.File.ReadAllText(GlobalConstants.savePath);
+			string json = System.IO.File.ReadAllText(completeSavePath);
 			savedData = JsonConvert.DeserializeObject<AllSavedData>(json);
 
 			foreach (ISaveable s in allSaveables)
@@ -30,6 +56,7 @@ public class SaveSystem:MonoBehaviour
 		}
 		else
 		{
+			Save();
 			Debug.LogWarning("No save file found");
 		}
 	}

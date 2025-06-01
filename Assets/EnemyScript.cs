@@ -211,6 +211,9 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     void SetAITargetToCloserChar()
     {
         Transform target;
+
+        if (GameManager.Instance == null || (GameManager.Instance.bethPC == null && GameManager.Instance.erikPC == null)) return;
+
         if (GameManager.Instance.bethPC == null) target = GameManager.Instance.erikPC.transform;
         else if (GameManager.Instance.erikPC == null) target = GameManager.Instance.bethPC.transform;
         else if ((GameManager.Instance.erikPC.transform.position - transform.position).magnitude <= (GameManager.Instance.bethPC.transform.position - transform.position).magnitude)
@@ -237,6 +240,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
 	public void Save(SaveSystem.AllSavedData dataHolder)
 	{
+        //If this is null when this is called -> probably memory leak in the allSaveables in SaveSystem
         SaveSystem.EnemyData myData = new SaveSystem.EnemyData
         {
             following = follwing,
