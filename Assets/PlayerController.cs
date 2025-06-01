@@ -429,15 +429,21 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Interactable")&&controlledByPlayer)
-            ShowOverheadText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
+        if (controlledByPlayer && collision.gameObject.TryGetComponent(out InteractableScript interactableScript)&&interactableScript.commentLines.Count>0)
+            HUD.Instance.PromptLabel.text = interactableScript.commentLines[0];
+
+    }
+    private void OnTriggerExit(Collider collision)
+    {
+        if (controlledByPlayer && collision.gameObject.TryGetComponent(out InteractableScript _))
+            HUD.Instance.PromptLabel.text = "";
 
     }
 
-    public void ShowOverheadText(List<string> lines)
+    /*public void ShowOverheadText(List<string> lines)
     {
         overheadDialogue.ShowText(lines);
-    }
+    }*/
 
     public void StopFollowingOtherChar()
     {
