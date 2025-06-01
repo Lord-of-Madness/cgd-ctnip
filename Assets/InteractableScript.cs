@@ -16,10 +16,8 @@ public class InteractableScript : MonoBehaviour
     
 	
 	Collider proximity;
-	GameObject label;
+	//[SerializeField]GameObject label;
 	bool playerInProximity;
-
-	//InputAction interactAction;
 
 	float scaleTweenRatio = 1.3f;
 	float scaleTweenDuration = 0.3f;
@@ -28,27 +26,19 @@ public class InteractableScript : MonoBehaviour
 	private void Start()
 	{
 		proximity = GetComponent<Collider>();
-		label = transform.Find("Label").gameObject;
-		label.SetActive(false);
+		//label.SetActive(false);
         //GameManager.Instance.inputActions.Player.Interact.Enable();
         GameManager.Instance.inputActions.Player.Interact.performed += ctx => { if (playerInProximity) OnInteract.Invoke(); };
-        //interactAction = InputSystem.actions.FindAction("Interact");
 
-		OnInteract.AddListener(TweenLabel);
+		//OnInteract.AddListener(TweenLabel);
 		GameManager.Instance.charChanged.AddListener(HideLabel);
 	}
 
 
-	private void Update()
+	/*private void TweenLabel()
 	{
-	}
-
-
-	private void TweenLabel()
-	{
-		int killed = label.transform.DOComplete();
-		//Debug.Log("Killed: " + killed + " tweens");
-		Vector3 origScale = label.transform.localScale;
+		//label.transform.DOComplete();
+		//Vector3 origScale = label.transform.localScale;
 		//Debug.Log("OrigScale: "+ origScale);
 		Vector3 targetScale = origScale * scaleTweenRatio;
 		//Debug.Log("TargetScale: " + targetScale);
@@ -59,19 +49,19 @@ public class InteractableScript : MonoBehaviour
 
 		//Debug.Log("Tweening label");
 		seq.Play();
-	}
+	}*/
 
 	void ShowLabel()
 	{
-		label.SetActive(true);
+		//label.SetActive(true);
 		playerInProximity = true;
         HUD.Instance.PromptLabel.text = PromptText;
     }
 
 	void HideLabel()
 	{
-		label.transform.DOComplete();
-		label.SetActive(false);
+		//label.transform.DOComplete();
+		//label.SetActive(false);
 		playerInProximity = false;
         HUD.Instance.PromptLabel.text = "";
     }
