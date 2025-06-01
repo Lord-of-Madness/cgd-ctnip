@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +16,10 @@ public class HUD_Ammo : MonoBehaviour
             GameManager.APD.SelectedTool.toolIcon;
         PrimaryAmmo.text = 
             GameManager.APD.SelectedToolData.loadedAmmo.ToString();
-        StashedAmmo.text = GameManager.Instance.ActivePlayer.playerData.SelectedToolData.stashedAmmo.ToString();
+        if (GameManager.APD.SelectedTool.infinteReloads)
+            StashedAmmo.text = "∞";
+        else
+            StashedAmmo.text = GameManager.APD.SelectedToolData.stashedAmmo.ToString();
     }
     void Start()
     {

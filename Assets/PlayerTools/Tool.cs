@@ -12,4 +12,5 @@ public class Tool : MonoBehaviour
     public AudioClip reloadSound;
     public AudioClip fireSound;
     public bool hasToAim;
+    public bool infinteReloads;
 }
