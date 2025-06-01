@@ -764,7 +764,7 @@ MonoBehaviour:
   minTimeBetweenJumps: 0.2
   jumpTime: 0.5
   speed: 3
-  isoMovement: 1
+  moveOption: 0
   controlledByPlayer: 1
   isRunning: 0
   rotationSpeed: 0.075
@@ -853,7 +853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  closeEnoughDistance: 2
+  closeEnoughDistance: 3
   bodyAnimator: {fileID: 315801408067813449}
 --- !u!114 &8157661885121772640
 MonoBehaviour:
@@ -888,7 +888,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolInspectorField: []
-  SelectedTool: {fileID: 0}
   Documents: []
   Codex: []
   Inventory: []

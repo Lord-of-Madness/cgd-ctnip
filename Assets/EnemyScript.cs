@@ -249,11 +249,13 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
 	public void Load(SaveSystem.AllSavedData data)
 	{
+        //TODO: Enemy resurrection when loading from dead to alive
         SaveSystem.EnemyData myData = data.enemyData[Utilities.GetFullPathName(gameObject)];
         if (myData.following) ResumeFollowingTarget();
         else StopFollowingTarget();
 
         hp = myData.hp;
+        bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
         transform.position = myData.pos.GetVector3();
 
 	}
