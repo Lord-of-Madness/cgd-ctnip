@@ -52,13 +52,13 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SaveSystem.AddSaveable(this);
         
         hp = maxHp;
 
         aiTargetScript = GetComponent<AITarget>();
 		bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
         barkdelay = Random.Range(2f, 10f);
+        SaveSystem.AddSaveable(this);
 
     }
 

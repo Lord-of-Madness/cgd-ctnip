@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Shorthand to get active playerData
     /// </summary>
-    public static PlayerData APD { get=>Instance.ActivePlayer.playerData; }
+    public static PlayerData APD { get => Instance.ActivePlayer.playerData; }
     static Dictionary<string, string> sgd;
     public static Dictionary<string, string> SpeakerGlobalData
     {
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
                 string json = Resources.Load<TextAsset>("Dialogues/_SPEAKERS").text;
                 Debug.Log(json);
                 SpeakerGlobalSettings speakerGlobalSettings = JsonUtility.FromJson<SpeakerGlobalSettings>(json);
-                
+
                 foreach (var pair in speakerGlobalSettings.speakers)
                 {
                     sgd[pair.Speaker] = pair.Hex;
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public PlayerController bethPC;
     public PlayerController erikPC;
     public PlayerController ActivePlayer { get => activeChar == PlayerCharacter.Beth ? bethPC : erikPC; }
+    public PlayerController OtherPlayer { get => activeChar == PlayerCharacter.Erik ? bethPC : erikPC; }
 
     public PlayerCharacter activeChar = PlayerCharacter.Beth;
     bool followingOn = true;
@@ -51,10 +52,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        inputActions = new();
-        inputActions.Player.Enable();
+        if (Instance != null && Instance != this)//So it can be in multiple scenes for testing, but does not appear twice
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
+        inputActions = new();
         DontDestroyOnLoad(Instance);
+        inputActions.Player.Enable();//TODO this will have to be moved to some scene init, not GameManager
     }
     void Start()
     {
@@ -62,38 +68,18 @@ public class GameManager : MonoBehaviour
         inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
     }
 
-	public void SwapCharacters()
+    public void SwapCharacters()
     {
-        var cameraFollowScript = Camera.main.GetComponent<FollowPlayer>();
-         
-        if (activeChar == PlayerCharacter.Beth) 
-        {
-            //Debug.Log("Switching from Beth to Erik");
-            EnableCameraFilter();
+        if (followingOn) ActivePlayer.StartFollowingOtherChar();
+        ActivePlayer.DisablePlayerControl();
 
-            if (followingOn) bethPC.StartFollowingOtherChar();
-            bethPC.DisablePlayerControl();
+        OtherPlayer.StopFollowingOtherChar();
+        OtherPlayer.EnablePlayerControl();
 
-			erikPC.StopFollowingOtherChar();
-            erikPC.EnablePlayerControl();
+        if (Camera.main.TryGetComponent(out FollowPlayer cameraFollowScript)) cameraFollowScript.player = OtherPlayer.gameObject;
 
-            if (cameraFollowScript != null) cameraFollowScript.player = erikPC.gameObject;
-		    activeChar = PlayerCharacter.Erik;
-        }
-		else
-        {
-			//Debug.Log("Switching from Erik to Beth");
-			DisableCameraFilter();
-
-            bethPC.StopFollowingOtherChar();
-            bethPC.EnablePlayerControl();
-
-            if(followingOn) erikPC.StartFollowingOtherChar();
-			erikPC.DisablePlayerControl();
-
-			if (cameraFollowScript != null) cameraFollowScript.player = bethPC.gameObject;
-			activeChar = PlayerCharacter.Beth;
-		}
+        activeChar = activeChar == PlayerCharacter.Beth ? PlayerCharacter.Erik : PlayerCharacter.Beth;
+        UpdateCameraFilterState();
         charChanged.Invoke();
     }
 
@@ -103,44 +89,38 @@ public class GameManager : MonoBehaviour
         if (bethPC == null || erikPC == null) return;
         if (followingOn)
         {
-            if (activeChar == PlayerCharacter.Beth)
-                erikPC.StartFollowingOtherChar();
-            else
-                bethPC.StartFollowingOtherChar();
+            OtherPlayer.StartFollowingOtherChar();
         }
         else
         {
-			if (activeChar == PlayerCharacter.Beth)
-				erikPC.StopFollowingOtherChar();
-			else
-				bethPC.StopFollowingOtherChar();
-		}
+            OtherPlayer.StopFollowingOtherChar();
+        }
     }
     public void DisableCameraFilter()
     {
         Camera camera = Camera.main;
-		if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
-
-		
-		if (!camera.TryGetComponent<Volume>(out var volume)) { Debug.Log("No volume found"); return; }
-
-		RenderSettings.ambientSkyColor = Color.black;
-
-		volume.enabled = false;
-    }
-
-	public void EnableCameraFilter()
-	{
-		Camera camera = Camera.main;
         if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
 
-		
-        if (!camera.TryGetComponent<Volume>(out var volume)) { Debug.Log("No volume found"); return; }
 
-		RenderSettings.ambientSkyColor = Color.gray;
+        if (!camera.TryGetComponent(out Volume volume)) { Debug.Log("No volume found"); return; }
 
-		volume.enabled = true;
-	}
+        RenderSettings.ambientSkyColor = Color.black;
+
+        volume.enabled = false;
+    }
+
+    public void EnableCameraFilter()
+    {
+        Camera camera = Camera.main;
+        if (camera == null) { Debug.LogWarning("No main camera found!"); return; }
+
+
+        if (!camera.TryGetComponent(out Volume volume)) { Debug.Log("No volume found"); return; }
+
+        RenderSettings.ambientSkyColor = Color.gray;
+
+        volume.enabled = true;
+    }
 
     public void UpdateCameraFilterState()
     {
@@ -151,6 +131,6 @@ public class GameManager : MonoBehaviour
 
 public enum PlayerCharacter
 {
-	Beth,
-	Erik
+    Beth,
+    Erik
 }
