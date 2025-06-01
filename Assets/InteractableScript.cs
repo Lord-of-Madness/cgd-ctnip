@@ -12,6 +12,7 @@ public class InteractableScript : MonoBehaviour
 	public UnityEvent OnInteract;
 
 	public List<string> commentLines = new();
+	public string PromptText;
     
 	
 	Collider proximity;
@@ -64,14 +65,16 @@ public class InteractableScript : MonoBehaviour
 	{
 		label.SetActive(true);
 		playerInProximity = true;
-	}
+        HUD.Instance.PromptLabel.text = PromptText;
+    }
 
 	void HideLabel()
 	{
 		label.transform.DOComplete();
 		label.SetActive(false);
 		playerInProximity = false;
-	}
+        HUD.Instance.PromptLabel.text = "";
+    }
 
 
 	private void OnTriggerEnter(Collider other)

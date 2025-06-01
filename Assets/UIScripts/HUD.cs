@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private GameObject OffPortrait;
     [SerializeField] Sprite BethPotrait;
     [SerializeField] Sprite ErikPotrait;
+    public TextMeshProUGUI PromptLabel;
     Sprite MainSprite { get => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
     Sprite OffSprite { get => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
     public static HUD Instance;
