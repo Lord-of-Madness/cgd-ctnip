@@ -10,9 +10,9 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
 	private void Start()
 	{
-		SaveSystem.AddSaveable(this);
 		if (disableSwap)
 			GameManager.Instance.inputActions.Player.SwapCharacters.Disable();
+		SaveSystem.AddSaveable(this);
 	}
 
 	public static void PickUpKey()

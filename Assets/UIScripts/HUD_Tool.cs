@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +11,15 @@ public class HUD_Ammo : MonoBehaviour
     bool firstUpdate = true;
     void UpdateAmmoLabel()
     {
-        Debug.Log(GameManager.APD.SelectedTool.name);
+        //Debug.Log(GameManager.APD.SelectedTool.name);
         image.sprite =
             GameManager.APD.SelectedTool.toolIcon;
         PrimaryAmmo.text = 
+            GameManager.APD.SelectedTool.maxLoadedAmmo== 0 ? "∞" :
             GameManager.APD.SelectedToolData.loadedAmmo.ToString();
-        StashedAmmo.text = GameManager.Instance.ActivePlayer.playerData.SelectedToolData.stashedAmmo.ToString();
+        StashedAmmo.text = 
+            GameManager.APD.SelectedTool.infinteReloads ? "∞" : 
+            GameManager.APD.SelectedToolData.stashedAmmo.ToString();
     }
     void Start()
     {
@@ -32,6 +35,7 @@ public class HUD_Ammo : MonoBehaviour
             GameManager.Instance.erikPC.onReload.AddListener(UpdateAmmoLabel);
             GameManager.Instance.erikPC.onToolSwitched.AddListener(UpdateAmmoLabel);
         }
+        GameManager.Instance.charChanged.AddListener(UpdateAmmoLabel);
     }
 
 	private void Update()

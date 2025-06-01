@@ -72,7 +72,7 @@ public class PlayerData : MonoBehaviour
         }
         foreach (var tool in toolInspectorField)
         {
-            toolInventory.Add(tool, new() { loadedAmmo = tool.maxLoadedAmmo, stashedAmmo = 2* tool.maxLoadedAmmo});
+            toolInventory.Add(tool, new() { loadedAmmo = tool.maxLoadedAmmo });
         }
     }
 
@@ -95,7 +95,11 @@ public class PlayerData : MonoBehaviour
     internal void Reload(int ammountToReload)
     {
         LoadedAmmo += ammountToReload;
-        StashedAmmo -= ammountToReload;
+        if(!GameManager.APD.SelectedTool.infinteReloads)
+        {
+            StashedAmmo -= ammountToReload;
+        }
+        
     }
 
     internal void Fire()
@@ -126,7 +130,7 @@ public class PlayerData : MonoBehaviour
             Debug.Log("No tool selected");
             return false;
         }
-        else if (StashedAmmo <= 0)
+        else if (!SelectedTool.infinteReloads &&StashedAmmo <= 0)
         {
             Debug.Log("No ammo to reload");
             return false;

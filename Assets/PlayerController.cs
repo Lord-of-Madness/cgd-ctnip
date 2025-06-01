@@ -116,9 +116,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
         GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer && actionCooldown<=0) ShowLaserAim(); };
         GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) HideLaserAim(); };
-        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => {
-            Debug.Log("Controlled by player: " + controlledByPlayer);
-            if (controlledByPlayer && actionCooldown <= 0) Attack(); };
+        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => {if (controlledByPlayer && actionCooldown <= 0) Attack(); };
         GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) Reload(); };
         GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) SwitchTool(); };
 
@@ -430,15 +428,21 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Interactable")&&controlledByPlayer)
-            ShowOverheadText(collision.gameObject.GetComponent<InteractableScript>().commentLines);
+        if (controlledByPlayer && collision.gameObject.TryGetComponent(out InteractableScript interactableScript)&&interactableScript.commentLines.Count>0)
+            HUD.Instance.PromptLabel.text = interactableScript.commentLines[0];
+
+    }
+    private void OnTriggerExit(Collider collision)
+    {
+        if (controlledByPlayer && collision.gameObject.TryGetComponent(out InteractableScript _))
+            HUD.Instance.PromptLabel.text = "";
 
     }
 
-    public void ShowOverheadText(List<string> lines)
+    /*public void ShowOverheadText(List<string> lines)
     {
         overheadDialogue.ShowText(lines);
-    }
+    }*/
 
     public void StopFollowingOtherChar()
     {
