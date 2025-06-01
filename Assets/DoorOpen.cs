@@ -28,7 +28,7 @@ public class DoorOpen : MonoBehaviour
         
     }
 
-    public void InteractDoor()
+    public void InteractDoor(bool front)
     {
 		openedPartReference.transform.DOKill();
         if (locked)
@@ -37,12 +37,12 @@ public class DoorOpen : MonoBehaviour
             return;
         }
         if (isOpen) CloseDoor();
-        else OpenDoor();
+        else OpenDoor(front);
     }
 
-    public void OpenDoor()
+    public void OpenDoor(bool front)
     {
-        openedPartReference.transform.DOLocalRotate(new Vector3(0, openAngle, 0), openDuration);
+        openedPartReference.transform.DOLocalRotate(new Vector3(0, front ? openAngle : -openAngle, 0), openDuration);
         isOpen = true;
     }
 
