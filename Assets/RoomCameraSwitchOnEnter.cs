@@ -29,10 +29,13 @@ public class RoomCameraSwitchOnEnter : MonoBehaviour
 		if (Camera.main != null)
 		{
 			GameManager.Instance.DisableCameraFilter();
+            Camera.main.GetComponent<AudioListener>().enabled = false;
 			Camera.main.enabled = false;
-		}
+
+        }
+        targetCamera.GetComponent<AudioListener>().enabled = true;
 		targetCamera.enabled = true;
-		GameManager.Instance.UpdateCameraFilterState();
+        GameManager.Instance.UpdateCameraFilterState();
 
 	}
 
