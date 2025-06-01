@@ -1,0 +1,8 @@
+Save system to work requires:
+- an object in the scene with the "SaveSystem" script attached
+- all the relative objects which are saved to:
+	a) fullfill the ISaveable interface
+	b) be added via the SaveSystem.AddSaveable(object) to the SaveSystem list
+	c) have their own serializable data struct in the SaveSystem ready which is part of the SaveSystem.AllSavedData structure
+	d) in Save/Load function from the interface, handle the saving to structure and loading from it functionally
+- some button, which calls the SaveSystem.Save/Load() functions
