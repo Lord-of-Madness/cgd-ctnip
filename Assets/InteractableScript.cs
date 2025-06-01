@@ -19,8 +19,8 @@ public class InteractableScript : MonoBehaviour
 	//[SerializeField]GameObject label;
 	bool playerInProximity;
 
-	float scaleTweenRatio = 1.3f;
-	float scaleTweenDuration = 0.3f;
+	//float scaleTweenRatio = 1.3f;
+	//float scaleTweenDuration = 0.3f;
 
 
 	private void Start()

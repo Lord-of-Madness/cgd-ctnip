@@ -22,7 +22,7 @@ public class DoorOpen : MonoBehaviour
 		openedPartReference.transform.DOKill();
         if (locked)
         {
-            GameManager.Instance.ActivePlayer.ShowOverheadText(new() { "It's locked" });
+            HUD.Instance.PromptLabel.text = "It's locked";
             return;
         }
         if (isOpen) CloseDoor();
