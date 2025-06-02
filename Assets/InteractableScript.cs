@@ -51,14 +51,14 @@ public class InteractableScript : MonoBehaviour
 		seq.Play();
 	}*/
 
-	void ShowLabel()
+	public void ShowLabel()
 	{
 		//label.SetActive(true);
 		playerInProximity = true;
         HUD.Instance.PromptLabel.text = PromptText;
     }
 
-	void HideLabel()
+	public void HideLabel()
 	{
 		//label.transform.DOComplete();
 		//label.SetActive(false);
@@ -66,6 +66,10 @@ public class InteractableScript : MonoBehaviour
         HUD.Instance.PromptLabel.text = "";
     }
 
+	private void OnDisable()
+	{
+		HideLabel();
+	}
 
 	private void OnTriggerEnter(Collider other)
 	{
