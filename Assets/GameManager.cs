@@ -134,14 +134,14 @@ public class GameManager : MonoBehaviour
 
     public static void GameOver()
     {
-        Instance.inputActions.Disable();
+        Instance.inputActions.Player.Disable();
         Time.timeScale = 0;
         GameOverScreenScript.instance.Show();
     }
 
     public static void GameLoad()
     {
-		Instance.inputActions.Enable();
+		Instance.inputActions.Player.Enable();
 		Time.timeScale = 1;
         GameOverScreenScript.instance.Hide();
         SaveSystem.Load();
