@@ -6,3 +6,22 @@ Save system to work requires:
 	c) have their own serializable data struct in the SaveSystem ready which is part of the SaveSystem.AllSavedData structure
 	d) in Save/Load function from the interface, handle the saving to structure and loading from it functionally
 - some button, which calls the SaveSystem.Save/Load() functions
+
+
+
+
+
+EXAMPLE SAVE AND LOAD FUNCTIONS: 
+	public void Save(SaveSystem.AllSavedData dataHolder)
+	{
+		dataHolder.doorData.Add(Utilities.GetFullPathName(gameObject), new SaveSystem.DoorData() {isOpen = isOpen});
+	}
+
+	public void Load(SaveSystem.AllSavedData data)
+	{
+		bool incomingIsOpen = data.doorData[Utilities.GetFullPathName(gameObject)].isOpen;
+
+
+        if (incomingIsOpen) OpenDoor(true);
+        else CloseDoor();
+	}

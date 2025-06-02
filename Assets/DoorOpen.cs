@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class DoorOpen : MonoBehaviour
+public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
 {
     [SerializeField]
     GameObject openedPartReference;
@@ -17,7 +17,12 @@ public class DoorOpen : MonoBehaviour
 
     bool isOpen = false;
 
-    public void InteractDoor(bool front)
+	private void Awake()
+	{
+	    SaveSystem.AddSaveable(this);	
+	}
+
+	public void InteractDoor(bool front)
     {
 		openedPartReference.transform.DOKill();
         if (locked)
@@ -41,4 +46,17 @@ public class DoorOpen : MonoBehaviour
         isOpen = false;
     }
 
+	public void Save(SaveSystem.AllSavedData dataHolder)
+	{
+		dataHolder.doorData.Add(Utilities.GetFullPathName(gameObject), new SaveSystem.DoorData() {isOpen = isOpen});
+	}
+
+	public void Load(SaveSystem.AllSavedData data)
+	{
+		bool incomingIsOpen = data.doorData[Utilities.GetFullPathName(gameObject)].isOpen;
+
+
+        if (incomingIsOpen) OpenDoor(true);
+        else CloseDoor();
+	}
 }

@@ -42,6 +42,7 @@ public class SaveSystem:MonoBehaviour
 		string json = JsonConvert.SerializeObject(savedData);
 		System.IO.File.WriteAllText(completeSavePath, json); 
 		Debug.Log("Data saved to " + completeSavePath);
+		savedData = null; //Save memory
 	}
 
 	public static void Load()
@@ -57,8 +58,11 @@ public class SaveSystem:MonoBehaviour
 		else
 		{
 			Save();
-			Debug.LogWarning("No save file found");
+			Debug.LogWarning("No save file found -> saving...");
 		}
+
+		savedData = null; //Save memory
+
 	}
 
 	public static void AddSaveable(ISaveable s) => allSaveables.Add(s);
@@ -77,6 +81,7 @@ public class SaveSystem:MonoBehaviour
 	{
 		public Dictionary<string, CharacterData> charData = new();
 		public Dictionary<string, EnemyData> enemyData = new();
+		public Dictionary<string, DoorData> doorData = new();
 		public GameManagerData gameManagerData;
 		public MansionLevelData mansionLevelData;
 	}
@@ -106,6 +111,12 @@ public class SaveSystem:MonoBehaviour
 		public Vector3JsonFriendly pos;
 		public bool following;
 
+	}
+
+	[Serializable]
+	public class DoorData
+	{
+		public bool isOpen;
 	}
 
 	[Serializable]
