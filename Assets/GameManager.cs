@@ -131,6 +131,21 @@ public class GameManager : MonoBehaviour
         if (activeChar == PlayerCharacter.Erik) EnableCameraFilter();
         else DisableCameraFilter();
     }
+
+    public static void GameOver()
+    {
+        Instance.inputActions.Disable();
+        Time.timeScale = 0;
+        GameOverScreenScript.instance.Show();
+    }
+
+    public static void GameLoad()
+    {
+		Instance.inputActions.Enable();
+		Time.timeScale = 1;
+        GameOverScreenScript.instance.Hide();
+        SaveSystem.Load();
+    }
 }
 
 public enum PlayerCharacter

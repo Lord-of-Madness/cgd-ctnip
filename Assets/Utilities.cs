@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 public class Utilities
 {
@@ -31,7 +33,7 @@ public class Utilities
     {
         foreach (Transform child in parent)
         {
-            Object.Destroy(child.gameObject);
+            UnityEngine.Object.Destroy(child.gameObject);
         }
     }
 
@@ -50,5 +52,12 @@ public class Utilities
 			path = "/" + obj.name + obj.transform.GetSiblingIndex() + path;
 		}
 		return path;
+	}
+
+	public static IEnumerator CallAfterSomeTime(Action action, float time)
+	{
+		yield return new WaitForSeconds(time);
+		action.Invoke();
+		yield break;
 	}
 }

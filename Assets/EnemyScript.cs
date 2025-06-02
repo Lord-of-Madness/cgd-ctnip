@@ -128,8 +128,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 		{
 			if (c.CompareTag("Player"))
 			{
-				//TODO: Actual kill of the player and end of game
-				Debug.LogWarning("ONE OF THE CHARACTERS HIT!! GAME OVER!! YOU ARE DEAD!!! HAHAH!!");
+                GameManager.GameOver();
 			}
 		}
         bodyAnimator.SetBool(GlobalConstants.animAttackID, false); //Set to false to enable trans back
@@ -185,12 +184,12 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
         GetStaggered();
 
-        Debug.Log("I GOT HIT!! Only " +  hp + "left"); 
+        //Debug.Log("I GOT HIT!! Only " +  hp + "left"); 
     }
 
     public void GetStaggered()
     {
-        Debug.Log("I got staggered");
+        //Debug.Log("I got staggered");
 		
         if (attacking) FinishAttacking();
         DamageTakenAudioSource.Play();
@@ -202,7 +201,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
 	void RecoverFromStagger()
     {
-        Debug.Log("Recovered from stagger");
+        //Debug.Log("Recovered from stagger");
         timeStaggered = 0;
         staggered = false;
         ResumeFollowingTarget();
@@ -251,8 +250,8 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         dataHolder.enemyData.Add(Utilities.GetFullPathName(gameObject), myData);
 	}
 
-	public void Load(SaveSystem.AllSavedData data)
-	{
+    public void Load(SaveSystem.AllSavedData data)
+    {
         //TODO: Enemy resurrection when loading from dead to alive
         SaveSystem.EnemyData myData = data.enemyData[Utilities.GetFullPathName(gameObject)];
         if (myData.following) ResumeFollowingTarget();
@@ -267,7 +266,14 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         hp = myData.hp;
         bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
 
+        //Reset animation to idle
+        bodyAnimator.SetBool(GlobalConstants.animRestartId, true);
+
+        StartCoroutine(
+            Utilities.CallAfterSomeTime(() => bodyAnimator.SetBool(GlobalConstants.animRestartId, false), 0.2f)
+            );
+
         transform.position = myData.pos.GetVector3();
 
-	}
+        }
 }
