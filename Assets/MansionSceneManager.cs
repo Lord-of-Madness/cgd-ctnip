@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,12 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	public static bool EnemiesReleased = false;
 	public bool disableSwap = true;
 
+	[SerializeField]
+	SceneLightsTurnOff lightsToBeTurnedOff;
+
+	[SerializeField]
+	DoorOpen[] doorsToBeOpened;
+
 	private void Start()
 	{
 		if (disableSwap)
@@ -15,9 +22,20 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		SaveSystem.AddSaveable(this);
 	}
 
-	public static void PickUpKey()
+	public void PickUpKey()
 	{
 		KeyPickedUp = true;
+		lightsToBeTurnedOff.TurnOffAllChildLights();
+		foreach (var door in doorsToBeOpened) door.OpenDoor(true);
+		keyObject.gameObject.SetActive(false);
+	}
+
+	public void RevertKeyPickUp()
+	{
+		KeyPickedUp = false;
+		lightsToBeTurnedOff.TurnOnAllChildLights();
+		foreach (var door in doorsToBeOpened) door.CloseDoor();
+		keyObject.gameObject.SetActive(true);
 	}
 
 	public void Save(SaveSystem.AllSavedData saveData)
@@ -26,6 +44,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	}
 	public void Load(SaveSystem.AllSavedData savedData)
 	{
-		if (savedData.mansionLevelData.keyPickedUp && !KeyPickedUp) keyObject.OnInteract.Invoke();
+		if (savedData.mansionLevelData.keyPickedUp && !KeyPickedUp) PickUpKey();
+		else if (!savedData.mansionLevelData.keyPickedUp && KeyPickedUp) RevertKeyPickUp();
 	}
 }

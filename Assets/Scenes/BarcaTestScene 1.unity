@@ -12195,6 +12195,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 6
       objectReference: {fileID: 0}
@@ -12205,34 +12213,42 @@ PrefabInstance:
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1215311925}
+      objectReference: {fileID: 1770965289}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1770965289}
+      objectReference: {fileID: 451145591}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 451145591}
+      objectReference: {fileID: 1240712819}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1240712819}
+      objectReference: {fileID: 1145913079}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
-      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PickUpKey
       objectReference: {fileID: 0}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
-      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: OpenDoor
       objectReference: {fileID: 0}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
-      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MansionSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
-      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: DoorOpen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7819351080968979762, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24808,6 +24824,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7270412, y: 0.18294495, z: 0.43714172}
   m_Center: {x: -0.3479552, y: 0.69325805, z: 0.7520875}
+--- !u!1 &1145913079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 374289202576707483, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
+  m_PrefabInstance: {fileID: 411039684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1152132472
 GameObject:
   m_ObjectHideFlags: 0
@@ -35587,6 +35608,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyObject: {fileID: 2034034653}
   disableSwap: 0
+  lightsToBeTurnedOff: {fileID: 1215311925}
+  doorsToBeOpened:
+  - {fileID: 451145591}
+  - {fileID: 1240712819}
 --- !u!114 &1770965290
 MonoBehaviour:
   m_ObjectHideFlags: 0
