@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: toolIcon
       value: 
-      objectReference: {fileID: 21300000, guid: fcbb8eb434dfb8645a25708bc212d72e, type: 3}
+      objectReference: {fileID: 21300000, guid: 400871841af7b6d44a16419ec5d780b7, type: 3}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: toolName
       value: Revolver

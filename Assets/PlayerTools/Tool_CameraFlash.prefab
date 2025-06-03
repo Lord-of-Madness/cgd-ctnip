@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: toolIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 56c8a373373d7bb4b9ee61570eb2308d, type: 3}
+      objectReference: {fileID: 21300000, guid: 14484f89aba715e44b8134ebc84addae, type: 3}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: toolName
       value: Camera flash
