@@ -26940,17 +26940,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 374289202576707483, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
   m_PrefabInstance: {fileID: 1604196258}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1604196261 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4753195727861713523, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
-  m_PrefabInstance: {fileID: 1604196258}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6d1c02664095dc4fbeeb411224e9430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1604770676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29776,7 +29765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc5345193f9fb44d82fa2c09c254cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyObject: {fileID: 1604196261}
+  keyObject: {fileID: 1604196260}
   disableSwap: 1
   lightsToBeTurnedOff: {fileID: 278990927}
   doorsToBeOpened:
