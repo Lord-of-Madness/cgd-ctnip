@@ -1,1 +1,9 @@
-{"name":"TestJSON","pages":[{"text":"Test"},{"text":"TestPage2"}],"type":0}
+{
+    "name": "Fragment of a log",
+    "pages": [
+        {
+            "text": "September 21st, 2016 \n Previous dosage saw no effect apart from what I ascribe to placebo. As per B. Johnson (1992), I recommended the providing subjects be fed 1977 vegan calories per day, motivated to exercise and have a stable sleep cycle under simulated conditions. I truly believe we will see progress soon, but we just have to be very, very patient. \n \n September 27th, 2016 \n Maleček approached me again with his stupid ideas. Says the subjects \"need to be properly scared\" so the correct chemicals get produced in their blood. Where is he getting that nonsense? He's a doctor of law, for lord's sake. Ah well, like any of that matters in this world... \n \n October 1st, 2016 \n Upon Maleček's urging, I mixed 200mg of... \n [the rest of the document is destroyed by water]"
+        }
+    ],
+    "type": 2
+}
