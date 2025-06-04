@@ -36,6 +36,7 @@ public class SaveSystem:MonoBehaviour
 
 	public static void Save()
 	{
+		UpdateSavePath();
 		savedData = new AllSavedData();
 		foreach (ISaveable s in allSaveables)
 			s.Save(savedData);
@@ -47,6 +48,7 @@ public class SaveSystem:MonoBehaviour
 
 	public static void Load()
 	{
+		UpdateSavePath();
 		if (File.Exists(completeSavePath))
 		{
 			string json = System.IO.File.ReadAllText(completeSavePath);

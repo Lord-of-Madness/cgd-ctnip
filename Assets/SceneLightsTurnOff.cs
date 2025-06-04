@@ -7,20 +7,20 @@ public class SceneLightsTurnOff : MonoBehaviour
     {
     }
 
-    public void TurnOffAllChildLights()
+    public void TurnOffAllChildren()
     {
         foreach (Transform child in transform)
         {
-            if (child.GetComponent<Light>() != null)
+            //if (child.GetComponent<Light>() != null)
                 child.gameObject.SetActive(false);
         }
     }
 
-    public void TurnOnAllChildLights()
+    public void TurnOnAllChildren()
     {
 		foreach (Transform child in transform)
 		{
-			if (child.GetComponent<Light>() != null)
+			//if (child.GetComponent<Light>() != null)
 				child.gameObject.SetActive(true);
 		}
 	}

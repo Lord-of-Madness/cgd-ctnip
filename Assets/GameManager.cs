@@ -70,7 +70,16 @@ public class GameManager : MonoBehaviour
     {
         inputActions.Player.SwapCharacters.performed += ctx => SwapCharacters();
         inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
-    }
+		
+        //Player actions set here -> just to always use current activePlayer -> avoid referencing Players unloaded in other scene
+        //inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
+		inputActions.Player.Sprint.performed += (ctx) => { ActivePlayer.ToggleRunningCommand(); };
+		inputActions.Player.Aim.started += (ctx) => { ActivePlayer.ShowLaserAimCommand(); };
+		inputActions.Player.Aim.canceled += (ctx) => { ActivePlayer.HideLaserAimCommand(); };
+		inputActions.Player.Attack.performed += (ctx) => { ActivePlayer.AttackCommand(); };
+		inputActions.Player.Reload.performed += (ctx) => { ActivePlayer.ReloadCommand(); };
+		inputActions.Player.SwapTools.performed += (ctx) => { ActivePlayer.SwitchToolCommand(); };
+	}
 
     public void SwapCharacters()
     {

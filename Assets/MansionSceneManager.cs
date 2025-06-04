@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 {
-	public InteractableScript keyObject;
+	public GameObject keyObject;
 	public static bool KeyPickedUp = false;	
 	public static bool EnemiesReleased = false;
 	public bool disableSwap = true;
@@ -25,7 +25,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	public void PickUpKey()
 	{
 		KeyPickedUp = true;
-		lightsToBeTurnedOff.TurnOffAllChildLights();
+		lightsToBeTurnedOff.TurnOffAllChildren();
 		foreach (var door in doorsToBeOpened) door.OpenDoor(true);
 		keyObject.gameObject.SetActive(false);
 	}
@@ -33,7 +33,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	public void RevertKeyPickUp()
 	{
 		KeyPickedUp = false;
-		lightsToBeTurnedOff.TurnOnAllChildLights();
+		lightsToBeTurnedOff.TurnOnAllChildren();
 		foreach (var door in doorsToBeOpened) door.CloseDoor();
 		keyObject.gameObject.SetActive(true);
 	}

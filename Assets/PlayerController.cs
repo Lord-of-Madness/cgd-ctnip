@@ -112,13 +112,6 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         }
 
         playerData = GetComponent<PlayerData>();
-        //GameManager.Instance.inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
-        GameManager.Instance.inputActions.Player.Sprint.performed += (ctx) => { if (controlledByPlayer) ToggleRunning(); };
-        GameManager.Instance.inputActions.Player.Aim.started += (ctx) => { if (controlledByPlayer && actionCooldown<=0) ShowLaserAim(); };
-        GameManager.Instance.inputActions.Player.Aim.canceled += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) HideLaserAim(); };
-        GameManager.Instance.inputActions.Player.Attack.performed += (ctx) => {if (controlledByPlayer && actionCooldown <= 0) Attack(); };
-        GameManager.Instance.inputActions.Player.Reload.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) Reload(); };
-        GameManager.Instance.inputActions.Player.SwapTools.performed += (ctx) => { if (controlledByPlayer && actionCooldown <= 0) SwitchTool(); };
 
         Physics.gravity = new Vector3(0, -20, 0);
 
@@ -137,7 +130,35 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         SaveSystem.AddSaveable(this);
     }
 
-    private void SwitchTool()
+
+    public void ToggleRunningCommand()
+    {
+		if (controlledByPlayer) ToggleRunning();
+	}
+
+    public void ShowLaserAimCommand()
+    {
+		if (controlledByPlayer && actionCooldown <= 0) ShowLaserAim();
+	}
+    public void HideLaserAimCommand()
+    {
+		if (controlledByPlayer && actionCooldown <= 0) HideLaserAim();
+	}
+    public void AttackCommand()
+    {
+		if (controlledByPlayer && actionCooldown <= 0) Attack();
+	}
+    public void ReloadCommand()
+    {
+		if (controlledByPlayer && actionCooldown <= 0) Reload();
+	}
+    public void SwitchToolCommand()
+    {
+		if (controlledByPlayer && actionCooldown <= 0) SwitchTool();
+	}
+
+
+	private void SwitchTool()
     {
         playerData.SwitchTool();
         onToolSwitched?.Invoke();
