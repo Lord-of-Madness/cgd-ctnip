@@ -48,6 +48,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
     float barkdelay;
     bool follwing=false;
+    public bool aggroed = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -144,7 +145,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
 	public void ResumeFollowingTarget()
 	{
-        if (hp <= 0) return;
+        if (hp <= 0 || !aggroed) return;
         follwing = true;
         FootstepsAudioSource.Play();
         aiTargetScript.SetFollowing(true);
@@ -178,6 +179,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
     public void GetHit(int damage)
     {
+        aggroed = true;
         hp -= damage;
         DamageTakenAudioSource.Play();
 

@@ -15,7 +15,8 @@ public class MansionReleaseEnemiesOnEnter : MonoBehaviour
 
 		MansionSceneManager.EnemiesReleased = true;
 
-		foreach (EnemyScript enemy in enemiesToBeReleased) { 
+		foreach (EnemyScript enemy in enemiesToBeReleased) {
+			enemy.aggroed = true;
 			enemy.ResumeFollowingTarget();
 		}
 	}
