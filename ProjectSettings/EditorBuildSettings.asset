@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/AlzbetaScene.unity
-    guid: 48188380aae0119408a3226f76b55a03
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0b43909e115c6de46819ecc5b643830f
+  - enabled: 1
+    path: Assets/Scenes/StartGameVoiceover.unity
+    guid: b72062bc037dac042a60113d91484963
   - enabled: 1
     path: Assets/Scenes/GramofonScene.unity
     guid: e70933a6cae29e447b1a1f757b09bdf1
+  - enabled: 1
+    path: Assets/Scenes/AlzbetaScene.unity
+    guid: 48188380aae0119408a3226f76b55a03
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6714d1ac7cc3a5a46bef56b67fc373de, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

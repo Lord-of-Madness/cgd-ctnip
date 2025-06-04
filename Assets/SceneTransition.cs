@@ -10,7 +10,7 @@ public class SceneTransition : MonoBehaviour
 	private void Start()
 	{
 		//Wait for 2 secs after scene load beforea transitioning back
-		StartCoroutine(Utilities.CallAfterSomeTime(() => readyToTrans = true, 2));
+		StartCoroutine(Utilities.CallAfterSomeTime(() => readyToTrans = true, 2));//Víš, že staèí použít Invoke(nameof(fce),èas) right?
 	}
 
 
