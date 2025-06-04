@@ -343,7 +343,12 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         actionCooldown = Mathf.Max(actionCooldown, 0);
     }
 
-    void SetAnimatorValuesMovement()
+	private void OnDestroy()
+	{
+        Debug.Log("Destroying character....");
+	}
+
+	void SetAnimatorValuesMovement()
     {
 
         bodyAnimator.applyRootMotion = true;

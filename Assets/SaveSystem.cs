@@ -35,6 +35,12 @@ public class SaveSystem:MonoBehaviour
 		completeSavePath = GlobalConstants.savePath + "/" + SceneManager.GetActiveScene().name + ".json";
 	}
 
+	public static void DeleteCurrentSave()
+	{
+		UpdateSavePath();
+		File.Delete(completeSavePath);
+	}
+
 	public static void Save()
 	{
 		UpdateSavePath();
@@ -87,6 +93,7 @@ public class SaveSystem:MonoBehaviour
 		public Dictionary<string, DoorData> doorData = new();
 		public GameManagerData gameManagerData;
 		public MansionLevelData mansionLevelData;
+		public GramophoneLevelData gramophoneLevelData;
 	}
 
 
@@ -132,6 +139,12 @@ public class SaveSystem:MonoBehaviour
 	public class MansionLevelData
 	{
 		public bool keyPickedUp;
+	}
+	
+	[Serializable]
+	public class GramophoneLevelData
+	{
+		public bool generatorFixed;
 	}
 
 }

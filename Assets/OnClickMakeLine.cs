@@ -51,7 +51,7 @@ public class OnClickMakeLine : MonoBehaviour, IClickable
 
     public void Cancel(bool removeLine = true)
     {
-		if (removeLine) lineRenderer.positionCount = 0;
+		if (removeLine && lineRenderer!=null) lineRenderer.positionCount = 0;
 		
 		drawingLine=false;
     }

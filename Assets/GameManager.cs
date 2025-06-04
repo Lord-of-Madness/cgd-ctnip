@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     //Scene specific information
     public bool MansionKeyPickedUp { get; set; } = false;
     public bool GramophoneGenFixed { get; set; } = true;
+    public bool GramophoneSceneExternalChange { get; set; } = false;
 
     private void Awake()
     {
@@ -74,7 +75,6 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     }
     void Start()
     {
-
         inputActions.Player.SwapCharacters.performed += ctx => SwapCharacters();
         inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
 

@@ -22,12 +22,21 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		SaveSystem.AddSaveable(this);
 	}
 
+	private void OnDestroy()
+	{
+		if (disableSwap) 
+			GameManager.Instance.inputActions.Player.SwapCharacters.Enable();
+	}
+
 	public void PickUpKey()
 	{
 		KeyPickedUp = true;
 		lightsToBeTurnedOff.TurnOffAllChildren();
 		foreach (var door in doorsToBeOpened) door.OpenDoor(true);
 		keyObject.gameObject.SetActive(false);
+		GameManager.Instance.MansionKeyPickedUp = true;
+		GameManager.Instance.GramophoneGenFixed = false;
+		GameManager.Instance.GramophoneSceneExternalChange = true;
 	}
 
 	public void RevertKeyPickUp()
@@ -36,6 +45,9 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		lightsToBeTurnedOff.TurnOnAllChildren();
 		foreach (var door in doorsToBeOpened) door.CloseDoor();
 		keyObject.gameObject.SetActive(true);
+		GameManager.Instance.MansionKeyPickedUp = false;
+		GameManager.Instance.GramophoneGenFixed = true;
+		GameManager.Instance.GramophoneSceneExternalChange = false;
 	}
 
 	public void Save(SaveSystem.AllSavedData saveData)
@@ -44,7 +56,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	}
 	public void Load(SaveSystem.AllSavedData savedData)
 	{
-		if (savedData.mansionLevelData.keyPickedUp && !KeyPickedUp) PickUpKey();
-		else if (!savedData.mansionLevelData.keyPickedUp && KeyPickedUp) RevertKeyPickUp();
+		if (savedData.mansionLevelData.keyPickedUp) PickUpKey();
+		else RevertKeyPickUp();
 	}
 }

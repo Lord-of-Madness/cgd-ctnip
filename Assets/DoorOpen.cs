@@ -17,7 +17,7 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
 
     bool isOpen = false;
 
-	private void Awake()
+	private void Start()
 	{
 	    SaveSystem.AddSaveable(this);	
 	}

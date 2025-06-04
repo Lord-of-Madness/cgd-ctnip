@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,17 +21,21 @@ public class WirePuzzleController : MonoBehaviour
 	[SerializeField]
 	GameObject objectsParent;
 
+	[SerializeField]
+	GameObject cubesParent;
+
 	public UnityEvent onComplete;
-	bool alreadyDone = false;
+	public bool currentlyActive = false;
+	public bool alreadyDone = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 		objectsParent.SetActive(false);
-		GameManager.Instance.inputActions.WirePuzzle.Click.performed += (ctx) => { OnClick(); };
-		GameManager.Instance.inputActions.WirePuzzle.Click.canceled += (ctx) => { OnRelease(); };
-		GameManager.Instance.inputActions.WirePuzzle.Cancel.performed += (ctx) => { CancelPuzzle(); };
+		GameManager.Instance.inputActions.WirePuzzle.Click.performed += (ctx) => { if (this != null) OnClick(); };
+		GameManager.Instance.inputActions.WirePuzzle.Click.canceled += (ctx) => { if (this != null) OnRelease(); };
+		GameManager.Instance.inputActions.WirePuzzle.Cancel.performed += (ctx) => { if (this != null) CancelPuzzle(); };
 	}
 
     // Update is called once per frame
@@ -41,7 +46,9 @@ public class WirePuzzleController : MonoBehaviour
 
     public void EnablePuzzle()
     {
-		if (alreadyDone) return;
+		if (alreadyDone || currentlyActive) return;
+
+		currentlyActive = true;
 
 		objectsParent.SetActive(true);
 
@@ -59,17 +66,25 @@ public class WirePuzzleController : MonoBehaviour
 
     public void CancelPuzzle()
     {
+		if (!currentlyActive) return; 
+		
+		currentlyActive = false;
+
 		objectsParent.SetActive(false);
 
 		GameManager.Instance.inputActions.Player.Enable();
 		GameManager.Instance.inputActions.WirePuzzle.Disable();
 
 		//Handle camera
-		GameManager.Instance.DisableCameraFilter();
-		cameFromCamera.enabled = true;
-		myCamera.enabled = false;
-		GameManager.Instance.UpdateCameraFilterState();
+		if (cameFromCamera != null)
+		{
+			GameManager.Instance.DisableCameraFilter();
+			cameFromCamera.enabled = true;
+			myCamera.enabled = false;
+			GameManager.Instance.UpdateCameraFilterState();
+		}
 
+		cameFromCamera = null;
 
 	}
 
@@ -106,7 +121,7 @@ public class WirePuzzleController : MonoBehaviour
 	void AddMatch(int matchID)
 	{
 		if (!CheckOutOfBoundsID(matchID)) return;
-		matchesDone[curLineDrawer.matchID] = true;
+		matchesDone[matchID] = true;
 
 		if (CheckComplete()) Complete();
 		
@@ -116,7 +131,7 @@ public class WirePuzzleController : MonoBehaviour
 	void RemoveMatch(int matchID)
 	{
 		if (!CheckOutOfBoundsID(matchID)) return;
-		matchesDone[curLineDrawer.matchID] = false; 
+		matchesDone[matchID] = false; 
 	}
 
 	bool CheckComplete()
@@ -131,9 +146,34 @@ public class WirePuzzleController : MonoBehaviour
 	void Complete()
 	{
 		onComplete.Invoke();
+		Finish();
+	}
+
+	public void Finish()
+	{
 		alreadyDone = true;
 		this.gameObject.SetActive(false);
 		CancelPuzzle();
+	}
+
+	public void UnComplete()
+	{
+		OnRelease(); //To cancel drawing right away
+		for (int i = 0; i < matchesDone.Count(); i++)
+		{
+			matchesDone[i] = false;
+		}
+		alreadyDone = false;
+		gameObject.SetActive(true);
+
+		foreach (Transform cube in cubesParent.transform)
+		{
+			OnClickMakeLine lineDrawer = cube.GetComponent<OnClickMakeLine>();
+			if (lineDrawer != null) lineDrawer.Cancel(true);
+		}
+
+		if (fuseSwitch.currentlyOn) fuseSwitch.OnClick();
+		
 	}
 
 	void OnClick()

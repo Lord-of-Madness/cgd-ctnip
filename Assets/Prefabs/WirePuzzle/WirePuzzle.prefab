@@ -193,9 +193,11 @@ MonoBehaviour:
   fuseSwitch: {fileID: 6399473266095198712}
   matchesDone: 000000
   objectsParent: {fileID: 8720919116455943026}
+  cubesParent: {fileID: 7901255567819815694}
   onComplete:
     m_PersistentCalls:
       m_Calls: []
+  alreadyDone: 0
 --- !u!1 &1593506740875604052
 GameObject:
   m_ObjectHideFlags: 0
