@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField]
     float meleeAttackTime = 1.5f;
     [SerializeField]
+    float attackPopPartOfAnim = 0.33f;
+    [SerializeField]
     float meleeAttackForce = 10;
 
 
@@ -199,7 +201,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         if (meleeAttacking)
             timeAttacking += Time.deltaTime;
 
-        if (timeAttacking > meleeAttackTime / 3 && !dealtMeleeDamage)
+        if (timeAttacking > meleeAttackTime*attackPopPartOfAnim && !dealtMeleeDamage)
             DealMeleeDamage();
 
         if (timeAttacking > meleeAttackTime)
@@ -211,7 +213,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     {
         foreach (Collider c in meleeAttackHitScript.GetAllObjectsInAttackArea())
         {
-            if (c.CompareTag("Enemy"))
+            if (c.CompareTag("Enemy") && !c.isTrigger)
             {
                 //Debug.Log("Applying force to an enemy!");
                 //Apply force to object rigidbody (no real damage done)
@@ -220,6 +222,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
                     EnemyScript enemy = c.transform.parent.GetComponent<EnemyScript>();
                     Vector3 appliedForce = 50000 * meleeAttackForce * (enemy.transform.position - transform.position).normalized;
                     //50000 is the magic constant which make the enemy rigibody fly a bit
+                    appliedForce.y = 0;
 
                     enemy.GetComponent<Rigidbody>().AddForce(appliedForce);
                     enemy.GetStaggered();
