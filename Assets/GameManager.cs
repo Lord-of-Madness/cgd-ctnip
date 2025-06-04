@@ -51,6 +51,11 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 
     public UnityEvent charChanged;
 
+
+    //Scene specific information
+    public bool MansionKeyPickedUp { get; set; } = false;
+    public bool GramophoneGenFixed { get; set; } = true;
+
     private void Awake()
     {
 
@@ -72,19 +77,47 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 
         inputActions.Player.SwapCharacters.performed += ctx => SwapCharacters();
         inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
-		
-        //Player actions set here -> just to always use current activePlayer -> avoid referencing Players unloaded in other scene
-        //inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) Jump(); };
-		inputActions.Player.Sprint.performed += (ctx) => { ActivePlayer.ToggleRunningCommand(); };
-		inputActions.Player.Aim.started += (ctx) => { ActivePlayer.ShowLaserAimCommand(); };
-		inputActions.Player.Aim.canceled += (ctx) => { ActivePlayer.HideLaserAimCommand(); };
-		inputActions.Player.Attack.performed += (ctx) => { ActivePlayer.AttackCommand(); };
-		inputActions.Player.Reload.performed += (ctx) => { ActivePlayer.ReloadCommand(); };
-		inputActions.Player.SwapTools.performed += (ctx) => { ActivePlayer.SwitchToolCommand(); };
+
+		//Player actions set here -> just to always use current activePlayer -> avoid referencing Players unloaded in other scene
+		//inputActions.Player.Jump.performed += (ctx) => { if (isGrounded && controlledByPlayer) GiveCommandToActivePlayer(CharacterCommand.JUMP); };
+		inputActions.Player.Sprint.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.TOGGLE_RUN); };
+		inputActions.Player.Aim.started += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.SHOW_LASER); };
+		inputActions.Player.Aim.canceled += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.HIDE_LASER); };
+		inputActions.Player.Attack.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.ATTACK); };
+		inputActions.Player.Reload.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.RELOAD); };
+		inputActions.Player.SwapTools.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.SWITCH_TOOL); };
 	}
+
+    void GiveCommandToActivePlayer(CharacterCommand cmd)
+    {
+        switch (cmd)
+        {
+            case CharacterCommand.TOGGLE_RUN:
+                ActivePlayer.ToggleRunningCommand();
+				break;
+            case CharacterCommand.SHOW_LASER:
+                ActivePlayer.ShowLaserAimCommand();
+                break;
+            case CharacterCommand.HIDE_LASER:
+                ActivePlayer.HideLaserAimCommand();
+                break;
+            case CharacterCommand.ATTACK:
+                ActivePlayer.AttackCommand();
+                break;
+            case CharacterCommand.RELOAD:
+                ActivePlayer.ReloadCommand();
+                break;
+            case CharacterCommand.SWITCH_TOOL:
+                ActivePlayer.SwitchToolCommand();
+                break;
+            default:
+                break;
+        }
+    }
 
     public void SwapCharacters()
     {
+        if (OtherPlayer == null) return;
         if (followingOn) ActivePlayer.StartFollowingOtherChar();
         ActivePlayer.DisablePlayerControl();
 
@@ -174,4 +207,14 @@ public enum PlayerCharacter
 {
     Beth,
     Erik
+}
+
+public enum CharacterCommand
+{
+    TOGGLE_RUN,
+    SHOW_LASER,
+    HIDE_LASER,
+    ATTACK,
+    RELOAD,
+    SWITCH_TOOL
 }
