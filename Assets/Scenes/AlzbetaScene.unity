@@ -32810,7 +32810,7 @@ MonoBehaviour:
   documentName: Rat poison box
   documentType: 0
   UseJSON: 1
-  DocumentJSON: {fileID: 4900000, guid: 7cc62eb4464294a449ca6b23baaa9e61, type: 3}
+  DocumentJSON: {fileID: 4900000, guid: 40db19f9e8e96a34d9288aa3c6939ddd, type: 3}
 --- !u!1001 &1920118492
 PrefabInstance:
   m_ObjectHideFlags: 0
