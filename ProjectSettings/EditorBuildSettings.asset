@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StartGameVoiceover.unity
     guid: b72062bc037dac042a60113d91484963
   - enabled: 1
+    path: Assets/Scenes/Exterior.unity
+    guid: 9c8aea3c65184144fb171cd95f794fd7
+  - enabled: 1
     path: Assets/Scenes/GramofonScene.unity
     guid: e70933a6cae29e447b1a1f757b09bdf1
   - enabled: 1
