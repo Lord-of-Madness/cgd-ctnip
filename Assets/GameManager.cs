@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using System.IO;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 {
     public static GameManager Instance { get; private set; }
     /// <summary>
@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)//So it can be in multiple scenes for testing, but does not appear twice
+
+		if (Instance != null && Instance != this)//So it can be in multiple scenes for testing, but does not appear twice
         {
             Instance.bethPC = this.bethPC;
             Instance.erikPC = this.erikPC; //These are just references set in inspector -> have to be reinserted in each scene
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+
         inputActions.Player.SwapCharacters.performed += ctx => SwapCharacters();
         inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
 		
@@ -155,6 +157,17 @@ public class GameManager : MonoBehaviour
         GameOverScreenScript.instance.Hide();
         SaveSystem.Load();
     }
+
+	public void Save(SaveSystem.AllSavedData dataHolder)
+	{
+        dataHolder.gameManagerData = new SaveSystem.GameManagerData() { activePlayer = (int)activeChar };
+	}
+
+	public void Load(SaveSystem.AllSavedData data)
+	{
+        if (activeChar != (PlayerCharacter)data.gameManagerData.activePlayer)
+            SwapCharacters();
+	}
 }
 
 public enum PlayerCharacter

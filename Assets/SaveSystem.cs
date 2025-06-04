@@ -23,6 +23,7 @@ public class SaveSystem:MonoBehaviour
 			Directory.CreateDirectory(GlobalConstants.savePath);
 		}
 
+		AddSaveable(GameManager.Instance);
 
 		UpdateSavePath();
 		
@@ -124,7 +125,7 @@ public class SaveSystem:MonoBehaviour
 	[Serializable]
 	public class GameManagerData
 	{
-
+		public int activePlayer;
 	}
 
 	[Serializable]
