@@ -617,6 +617,14 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 					break;
 			}
 		}
+
+        //Restart ERIK Melee animation
+        if (charName == "Erik")
+        {
+            bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
+            bodyAnimator.SetBool(GlobalConstants.animRestartId, true);
+            StartCoroutine(Utilities.CallAfterSomeTime(() => bodyAnimator.SetBool(GlobalConstants.animRestartId, false), 0.5f));
+        }
 	}
 }
 
