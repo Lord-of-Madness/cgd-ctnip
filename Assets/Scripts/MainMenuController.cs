@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public static class DOTweenExtensin
+public static class DOTweenExtension
 {
     public static Sequence TweenLight(this Sequence s,Material lightstick,Light light,Color c, float i,float interval,float speed = 0.01f)
     {
