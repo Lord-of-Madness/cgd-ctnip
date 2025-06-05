@@ -1,0 +1,110 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "Almost a year ago, a woman reported her son missing. She couldn't muster even a thousand crowns together, so I...spent my time on more profitable ventures.",
+            "Who": "ELISABETH",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "How long is a year?",
+            "Who": "ERIK",
+            "children": [
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "Text": "Well over three hundren shifts.",
+            "Who": "ELISABETH",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "Anyway, later, that very area, over...here on the map started having a serious rat problem.",
+            "Who": "ELISABETH",
+            "children": [
+                4
+            ]
+        },
+        {
+            "id": 4,
+            "Text": "Hey, I heard about that. Man-eating rats. I thought that was just a rumor. Even if it is true, how does it connect to anything?",
+            "Who": "ERIK",
+            "children": [
+                5
+            ]
+        },
+        {
+            "id": 5,
+            "Text": "Get this. Turns out, other people from my line of work did a couple missing person cases back then as well - all cold now, not a single one solved...",
+            "Who": "ELISABETH",
+            "children": [
+                6
+            ]
+        },
+        {
+            "id": 6,
+            "Text": "I sense a \"but\".",
+            "Who": "ERIK",
+            "children": [
+                7
+            ]
+        },
+        {
+            "id": 7,
+            "Text": "...but, a shift ago, this came in the mail.",
+            "Who": "ELISABETH",
+            "children": [
+                8
+            ]
+        },
+        {
+            "id": 8,
+            "Text": "What the hell is that? Who sent it?",
+            "Who": "ERIK",
+            "DocumentName": "envelope.json",
+            "children": [
+                9
+            ]
+        },
+        {
+            "id": 9,
+            "Text": "No idea. But look at these photos. This guy is on the city council. This woman's sister is on the waterworks' board of directors. And for some reason, they all meet here, it this house.",
+            "Who": "ELISABETH",
+            "children": [
+                10
+            ]
+        },
+        {
+            "id": 10,
+            "Text": "Are you saying that people from the city council use that place as a staging ground for death squads like the one we saw at the gallery?",
+            "Who": "ERIK",
+            "children": [
+                11
+            ]
+        },
+        {
+            "id": 11,
+            "Text": "Only one way to find out. But I tell you, there's definitely something really wrong about this place. Let's go.",
+            "Who": "ELISABETH",
+            "children": []
+        },
+
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}

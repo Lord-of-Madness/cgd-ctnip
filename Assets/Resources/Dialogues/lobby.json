@@ -1,0 +1,173 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "Hello!",
+            "Who": "ELISABETH",
+            "DocumentName": "TestJSON",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "Will You choose Red pill or blue Pill?",
+            "Who": "ELISABETH",
+            "DocumentName": "TestJSON2",
+            "children": [
+                2,
+                3
+            ]
+        },
+        {
+            "id": 2,
+            "Text": "The Red Pill",
+            "Who": "ERIK",
+            "children": [
+                4
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "The Blue Pill",
+            "Who": "ERIK",
+            "children": [
+                10
+            ]
+        },
+        {
+            "id": 4,
+            "Text": "What were you expecting?",
+            "Who": "ELISABETH",
+            "children": [
+                5
+            ]
+        },
+        {
+            "id": 5,
+            "Text": "An interesting testing dialogue?",
+            "Who": "ELISABETH",
+            "children": [
+                6,
+                7,
+                8
+            ]
+        },
+        {
+            "id": 6,
+            "Text": "Yes.",
+            "Who": "ERIK",
+            "children": [
+                13
+            ]
+        },
+        {
+            "id": 7,
+            "Text": "Wait. Lemme take the other pill instead",
+            "Who": "ERIK",
+            "children": [
+                11
+            ]
+        },
+        {
+            "id": 8,
+            "Text": "No",
+            "Who": "ERIK",
+            "children": [
+                9
+            ]
+        },
+        {
+            "id": 9,
+            "Text": "Yeah. Thats about right",
+            "Who": "ELISABETH",
+            "children": [19]
+        },
+        {
+            "id": 10,
+            "Text": "Ummm Good for you I assume",
+            "Who": "ELISABETH",
+            "children": [19]
+        },
+        {
+            "id": 11,
+            "Text": "You took the Blue pill",
+            "Who": "Talking Cube",
+            "children": [
+                10
+            ]
+        },
+        {
+            "id": 12,
+            "Text": "I am a talking cube",
+            "Who": "Talking Cube",
+            "children": [
+                15
+            ]
+        },
+        {
+            "id": 13,
+            "Text": "And what did you expect?",
+            "Who": "Talking Cube",
+            "children": [
+                12
+            ]
+        },
+        {
+            "id": 14,
+            "Text": "What were you expecting?",
+            "Who": "Talking Cube",
+            "children": [
+                15
+            ]
+        },
+        {
+            "id": 15,
+            "Text": "I am not even a real character",
+            "Who": "Talking Cube",
+            "children": [
+                16
+            ]
+        },
+        {
+            "id": 16,
+            "Text": "Sadly, thats how Dave made me.",
+            "Who": "Talking Cube",
+            "children": [
+                17
+            ]
+        },
+        {
+            "id": 17,
+            "Text": "So.....",
+            "Who": "Talking Cube",
+            "children": [
+                18
+            ]
+        },
+        {
+            "id": 18,
+            "Text": "I will have to suffice",
+            "Who": "Talking Cube",
+            "children": [
+                19
+            ]
+        },
+        {
+            "id": 19,
+            "Text": "--KONEC--",
+            "Who": "Talking Cube",
+            "children": []
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}
