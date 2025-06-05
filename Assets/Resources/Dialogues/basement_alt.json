@@ -1,0 +1,80 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "Y-you! Demon!",
+            "Who": "SURVIVOR",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "Calm down...",
+            "Who": "ELISABETH",
+            "children": [
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "Text": "You're here to kill me!",
+            "Who": "SURVIVOR",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "Nobody's going to hurt you.",
+            "Who": "ERIK",
+            "children": [
+                4
+            ]
+        },
+        {
+            "id": 4,
+            "Text": "I heard you killing them upstairs! They sent you to take them all to hell!",
+            "Who": "SURVIVOR",
+            "children": [
+                5
+            ]
+        },
+        {
+            "id": 5,
+            "Text": "What?",
+            "Who": "ELISABETH",
+            "children": [
+                6
+            ]
+        },
+        {
+            "id": 6,
+            "Text": "You're not taking me to hell!!",
+            "Who": "SURVIVOR",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "",
+            "children": []
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        },
+        {
+            "Speaker": "SURVIVOR",
+            "Hex": "5F5A56FF"
+        }
+    ]
+}
