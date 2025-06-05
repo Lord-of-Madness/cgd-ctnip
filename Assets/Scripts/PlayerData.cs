@@ -49,6 +49,14 @@ public class Page {
 }
 public class PlayerData : MonoBehaviour
 {
+    public enum ToolUseExcuses
+    {
+        OutOfAmmo,
+        GottaAim,
+        AllClear,
+        NoToolSelected
+    }
+
     [SerializeField] public List<Tool> toolInspectorField;
     public Dictionary<Tool, ToolInvData> toolInventory = new();
     public Tool SelectedTool => toolInspectorField[selectedToolIndex];
@@ -76,20 +84,21 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public bool CanUseTool()
+    public ToolUseExcuses CanUseTool()
     {
         if(SelectedTool == null)
         {
             Debug.Log("No tool selected");
-            return false;
+            return ToolUseExcuses.NoToolSelected;
         }
         if(SelectedTool.hasToAim && !GameManager.Instance.ActivePlayer.aimLaserVisible)
         {
             Debug.Log("Tool has to be aimed");
-            return false;
+            return ToolUseExcuses.GottaAim;
         }
-        if (SelectedTool.maxLoadedAmmo == 0) return true; //Melee weapon doesn't have any ammo whatsoever
-        return SelectedToolData.loadedAmmo > 0;
+        if (SelectedTool.maxLoadedAmmo == 0) return ToolUseExcuses.AllClear; //Melee weapon doesn't have any ammo whatsoever
+        if( SelectedToolData.loadedAmmo > 0)return ToolUseExcuses.AllClear; //We have ammo to use the tool
+        else return ToolUseExcuses.OutOfAmmo; //We have no ammo to use the tool
     }
 
     internal void Reload(int ammountToReload)
@@ -106,18 +115,14 @@ public class PlayerData : MonoBehaviour
     {
         LoadedAmmo--;
     }
-    public bool TryFire()
+    public ToolUseExcuses TryFire()
     {
-        if (CanUseTool())
+        ToolUseExcuses toolUseExcuses = CanUseTool();
+        if (toolUseExcuses == ToolUseExcuses.AllClear)
         {
             Fire();
-            return true;
         }
-        else
-        {
-            Debug.Log("Can't use tool -> didn't fire");
-            return false;
-        }
+        return toolUseExcuses;
     }
     /// <summary>
     /// Load no more than fits in the tool and no more than we own and no more than we can reload at one time.

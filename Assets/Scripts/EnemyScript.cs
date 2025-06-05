@@ -190,7 +190,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     public void GetStaggered()
     {
         //Debug.Log("I got staggered");
-		
+        if (!enabled) return;
         if (attacking) FinishAttacking();
         DamageTakenAudioSource.Play();
 

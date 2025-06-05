@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static PlayerData;
 
 public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 {
@@ -79,6 +81,11 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     [Header("Sounds")]
     [SerializeField] AudioSource ToolSound;
     [SerializeField] AudioSource FootstepsSound;
+    public AudioSource VoiceSource;
+    [SerializeField] AudioClip OutOfAmmo;
+    [SerializeField] AudioClip HaveToAim;
+    [SerializeField] AudioClip NoToolSelected;
+    [SerializeField] AudioClip NopeCantDoThat;
     //Animation stuff
     Animator bodyAnimator;
     Quaternion desiredRotation = Quaternion.identity;
@@ -168,7 +175,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
     private void Attack()
     {
-        if (playerData.TryFire())
+        ToolUseExcuses toolUseExcuses = playerData.TryFire();
+        if (toolUseExcuses == ToolUseExcuses.AllClear)
         {
             actionCooldown = playerData.SelectedTool.actionTime;
             switch (playerData.SelectedTool.toolName)
@@ -182,8 +190,23 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         }
         else
         {
-            Debug.Log("Cannot use tool rn. Try reloading or aiming first");
-            //TODO: Play "Out of ammo!"
+            switch (toolUseExcuses)
+            {
+                case ToolUseExcuses.OutOfAmmo:
+                    Debug.Log("Out of ammo!");
+                    VoiceSource.PlayOneShot(OutOfAmmo);
+                    break;
+                case ToolUseExcuses.GottaAim:
+                    Debug.Log("Gotta aim first!");
+                    VoiceSource.PlayOneShot(HaveToAim);
+                    break;
+                case ToolUseExcuses.NoToolSelected:
+                    Debug.Log("No tool selected!"); VoiceSource.PlayOneShot(NoToolSelected);
+                    break;
+                default:
+                    Debug.LogError("Unknown tool use excuse: " + toolUseExcuses);
+                    break;
+            }
         }
     }
 
@@ -631,6 +654,11 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
             StartCoroutine(Utilities.CallAfterSomeTime(() => bodyAnimator.SetBool(GlobalConstants.animRestartId, false), 0.5f));
         }
 	}
+
+    internal void PlayNope()
+    {
+        VoiceSource.PlayOneShot(NopeCantDoThat);
+    }
 }
 
 public enum MOVEMENT_OPTION { cameraRelative, characterRelative }

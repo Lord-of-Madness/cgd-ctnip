@@ -775,12 +775,18 @@ MonoBehaviour:
   aimLaserVisible: 0
   meleeAttackHitScript: {fileID: 0}
   meleeAttackTime: 1.5
+  attackPopPartOfAnim: 0.33
   meleeAttackForce: 10
   overheadDialogue: {fileID: 8230692496003440667}
   bodyArmature: {fileID: 6470001187893461129}
   lineRenderer: {fileID: 0}
   ToolSound: {fileID: 4526518720661360780}
   FootstepsSound: {fileID: 7293042599446844678}
+  VoiceSource: {fileID: 6961965102085019655}
+  OutOfAmmo: {fileID: 8300000, guid: 82b3760950f2be740af0784894a4a254, type: 3}
+  HaveToAim: {fileID: 0}
+  NoToolSelected: {fileID: 0}
+  NopeCantDoThat: {fileID: 8300000, guid: 756a324d7a8c5b74986492124107737f, type: 3}
   playerData: {fileID: 1074438972325046832}
   onToolUsed:
     m_PersistentCalls:

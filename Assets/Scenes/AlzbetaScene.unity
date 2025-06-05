@@ -10363,10 +10363,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3335658714585154557, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 0c229d573aefee14cb68cdb5837c1563, type: 3}
     - target: {fileID: 3456709992155120825, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10553,6 +10549,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8466824825202507957, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633198521181282688, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -33422,7 +33422,7 @@ MonoBehaviour:
   documentName: Rat poison box
   documentType: 0
   UseJSON: 1
-  DocumentJSON: {fileID: 4900000, guid: 40db19f9e8e96a34d9288aa3c6939ddd, type: 3}
+  DocumentJSON: {fileID: 4900000, guid: 410579951dc697b46b27f4463ced5e89, type: 3}
 --- !u!1001 &1920118492
 PrefabInstance:
   m_ObjectHideFlags: 0
