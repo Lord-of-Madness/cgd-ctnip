@@ -1,0 +1,36 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "Doesn't look like anybody's home.",
+            "Who": "ELISABETH",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "Someone lives here for sure, though. Place like this would be torn apart for scraps otherwise.",
+            "Who": "ERIK",
+            "children": [
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "Text": "Here, help me with the door.",
+            "Who": "ELISABETH",
+            "children": []
+        },
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}

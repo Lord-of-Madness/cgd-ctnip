@@ -2,42 +2,39 @@
     "nodes": [
         {
             "id": 0,
-            "Text": "Hello!",
-            "Who": "ELISABETH",
-            "DocumentName": "TestJSON",
+            "Text": "Look, a generator. Looks like it's still running, power's on.",
+            "Who": "ERIK",
             "children": [
                 1
             ]
         },
         {
             "id": 1,
-            "Text": "Will You choose Red pill or blue Pill?",
+            "Text": "Just barely. Whoever filled it might not be around anymore.",
             "Who": "ELISABETH",
-            "DocumentName": "TestJSON2",
             "children": [
-                2,
-                3
+                2
             ]
         },
         {
             "id": 2,
-            "Text": "The Red Pill",
+            "Text": "Is that blood?",
             "Who": "ERIK",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "Sure is.",
+            "Who": "ELISABETH",
             "children": [
                 4
             ]
         },
         {
-            "id": 3,
-            "Text": "The Blue Pill",
-            "Who": "ERIK",
-            "children": [
-                10
-            ]
-        },
-        {
             "id": 4,
-            "Text": "What were you expecting?",
+            "Text": "Damn, door's locked. Fireproof. Can't kick that down.",
             "Who": "ELISABETH",
             "children": [
                 5
@@ -45,118 +42,72 @@
         },
         {
             "id": 5,
-            "Text": "An interesting testing dialogue?",
-            "Who": "ELISABETH",
+            "Text": "Maybe the key's somewhere around?",
+            "Who": "ERIK",
             "children": [
-                6,
-                7,
-                8
+                6
             ]
         },
         {
             "id": 6,
-            "Text": "Yes.",
-            "Who": "ERIK",
+            "Text": "Check around here. I'll look upstairs.",
+            "Who": "ELISABETH",
             "children": [
-                13
+                7
             ]
         },
         {
             "id": 7,
-            "Text": "Wait. Lemme take the other pill instead",
+            "Text": "That's a horrible idea.",
             "Who": "ERIK",
             "children": [
-                11
+                8
             ]
         },
         {
             "id": 8,
-            "Text": "No",
-            "Who": "ERIK",
+            "Text": "I'll be fine, I have a gun.",
+            "Who": "ELISABETH",
             "children": [
                 9
             ]
         },
         {
             "id": 9,
-            "Text": "Yeah. Thats about right",
-            "Who": "ELISABETH",
-            "children": [19]
-        },
-        {
-            "id": 10,
-            "Text": "Ummm Good for you I assume",
-            "Who": "ELISABETH",
-            "children": [19]
-        },
-        {
-            "id": 11,
-            "Text": "You took the Blue pill",
-            "Who": "Talking Cube",
+            "Text": "What about me? Why don't I get a gun?'",
+            "Who": "ERIK",
             "children": [
                 10
             ]
         },
         {
-            "id": 12,
-            "Text": "I am a talking cube",
-            "Who": "Talking Cube",
+            "id": 10,
+            "Text": "Firearms do not belong in the hands of children.",
+            "Who": "ELISABETH",
             "children": [
-                15
+                11
             ]
         },
         {
-            "id": 13,
-            "Text": "And what did you expect?",
-            "Who": "Talking Cube",
+            "id": 11,
+            "Text": "Fuck you.",
+            "Who": "ERIK",
             "children": [
                 12
             ]
         },
         {
-            "id": 14,
-            "Text": "What were you expecting?",
-            "Who": "Talking Cube",
+            "id": 12,
+            "Text": "Off you go. Good luck.",
+            "Who": "ELISABETH",
             "children": [
-                15
+                13
             ]
         },
         {
-            "id": 15,
-            "Text": "I am not even a real character",
-            "Who": "Talking Cube",
-            "children": [
-                16
-            ]
-        },
-        {
-            "id": 16,
-            "Text": "Sadly, thats how Dave made me.",
-            "Who": "Talking Cube",
-            "children": [
-                17
-            ]
-        },
-        {
-            "id": 17,
-            "Text": "So.....",
-            "Who": "Talking Cube",
-            "children": [
-                18
-            ]
-        },
-        {
-            "id": 18,
-            "Text": "I will have to suffice",
-            "Who": "Talking Cube",
-            "children": [
-                19
-            ]
-        },
-        {
-            "id": 19,
-            "Text": "--KONEC--",
-            "Who": "Talking Cube",
+            "id": 13,
+            "Text": "...you too.",
+            "Who": "ERIK",
             "children": []
         }
     ],
