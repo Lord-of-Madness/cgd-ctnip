@@ -2,161 +2,178 @@
     "nodes": [
         {
             "id": 0,
-            "Text": "Hello!",
-            "Who": "ELISABETH",
-            "DocumentName": "TestJSON",
+            "Text": "Y-you! Demon!",
+            "Who": "SURVIVOR",
             "children": [
                 1
             ]
         },
         {
             "id": 1,
-            "Text": "Will You choose Red pill or blue Pill?",
+            "Text": "Calm down...",
             "Who": "ELISABETH",
-            "DocumentName": "TestJSON2",
             "children": [
-                2,
-                3
+                2
             ]
         },
         {
             "id": 2,
-            "Text": "The Red Pill",
+            "Text": "You're here to kill me!",
+            "Who": "SURVIVOR",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "Nobody's going to hurt you.",
             "Who": "ERIK",
             "children": [
                 4
             ]
         },
         {
-            "id": 3,
-            "Text": "The Blue Pill",
-            "Who": "ERIK",
-            "children": [
-                10
-            ]
-        },
-        {
             "id": 4,
-            "Text": "What were you expecting?",
-            "Who": "ELISABETH",
+            "Text": "I heard you killing them upstairs! They sent you to take them all to hell!",
+            "Who": "SURVIVOR",
             "children": [
                 5
             ]
         },
         {
             "id": 5,
-            "Text": "An interesting testing dialogue?",
+            "Text": "I know what they did to you.",
             "Who": "ELISABETH",
             "children": [
-                6,
-                7,
-                8
+                6
             ]
         },
         {
             "id": 6,
-            "Text": "Yes.",
-            "Who": "ERIK",
+            "Text": "Y-you do?!",
+            "Who": "SURVIVOR",
             "children": [
-                13
+                7
             ]
         },
         {
             "id": 7,
-            "Text": "Wait. Lemme take the other pill instead",
+            "Text": "We took care of them. Don't worry, noone will hurt you anymore.",
             "Who": "ERIK",
             "children": [
-                11
+                8
             ]
         },
         {
             "id": 8,
-            "Text": "No",
-            "Who": "ERIK",
+            "Text": "Please, you gotta help me! This, this...THING! This thing with the hat! It could be anywhere! It comes here to pull my teeth out!",
+            "Who": "SURVIVOR",
             "children": [
                 9
             ]
         },
         {
             "id": 9,
-            "Text": "Yeah. Thats about right",
-            "Who": "ELISABETH",
-            "children": [19]
-        },
-        {
-            "id": 10,
-            "Text": "Ummm Good for you I assume",
-            "Who": "ELISABETH",
-            "children": [19]
-        },
-        {
-            "id": 11,
-            "Text": "You took the Blue pill",
-            "Who": "Talking Cube",
+            "Text": "What is he talking about?",
+            "Who": "ERIK",
             "children": [
                 10
             ]
         },
         {
-            "id": 12,
-            "Text": "I am a talking cube",
-            "Who": "Talking Cube",
+            "id": 10,
+            "Text": "Lingering effect of the poisoning. Who knows how they'll persist. Could be permanent.",
+            "Who": "ELISABETH",
             "children": [
-                15
+                11
+            ]
+        },
+        {
+            "id": 11,
+            "Text": "We can't just leave him here like that.",
+            "Who": "ERIK",
+            "children": [
+                12,
+                13,
+                14
+            ]
+        },
+        {
+            "id": 12,
+            "Text": "MERCY KILL",
+            "Who": "",
+            "children": [
+                99
             ]
         },
         {
             "id": 13,
-            "Text": "And what did you expect?",
-            "Who": "Talking Cube",
-            "children": [
-                12
-            ]
-        },
-        {
-            "id": 14,
-            "Text": "What were you expecting?",
-            "Who": "Talking Cube",
+            "Text": "LEAVE HIM",
+            "Who": "",
             "children": [
                 15
             ]
         },
         {
+            "id": 14,
+            "Text": "HELP HIM",
+            "Who": "",
+            "children": [
+                99
+            ]
+        },
+        {
             "id": 15,
-            "Text": "I am not even a real character",
-            "Who": "Talking Cube",
+            "Text": "Sure we can.",
+            "Who": "ELISABETH",
             "children": [
                 16
             ]
         },
         {
             "id": 16,
-            "Text": "Sadly, thats how Dave made me.",
-            "Who": "Talking Cube",
+            "Text": "Please! Don't leave me here!",
+            "Who": "SURVIVOR",
             "children": [
                 17
             ]
         },
         {
             "id": 17,
-            "Text": "So.....",
-            "Who": "Talking Cube",
+            "Text": "Don't worry, we'll be right back.",
+            "Who": "ELISABETH",
             "children": [
                 18
             ]
         },
         {
             "id": 18,
-            "Text": "I will have to suffice",
-            "Who": "Talking Cube",
+            "Text": "Erik, that grate over there. Pry it open.",
+            "Who": "ELISABETH",
             "children": [
                 19
             ]
         },
         {
             "id": 19,
+            "Text": "But-",
+            "Who": "ERIK",
+            "children": [
+                20
+            ]
+        },
+        {
+            "id": 20,
+            "Text": "Do it.",
+            "Who": "ELISABETH",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
             "Text": "--KONEC--",
-            "Who": "Talking Cube",
+            "Who": "",
             "children": []
         }
     ],
@@ -168,6 +185,10 @@
         {
             "Speaker": "ERIK",
             "Hex": "4980D3FF"
+        },
+        {
+            "Speaker": "SURVIVOR",
+            "Hex": "5F5A56FF"
         }
     ]
 }
