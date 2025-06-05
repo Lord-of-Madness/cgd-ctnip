@@ -532,8 +532,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     /// <summary>
     /// Don't call this if object doesn't have a lineRenderer assigned. Sets curAimDir to a value
     /// </summary>
-    void DrawLaserAim(out Vector3 laserDir)
+    Vector3 DrawLaserAim()
     {
+        Vector3 laserDir;
         //Debug.Log("Drawing laser aim");
 
         //Get the position of the gun
@@ -542,17 +543,15 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
         //Get the position of mouse direciton intersecion with the plane of the gun
         Vector3 mouseDir = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
-        Vector3 mouseLaserToGunPlanePoint;
-        if (!Utilities.LinePlaneIntersection(out mouseLaserToGunPlanePoint, Camera.main.transform.position, mouseDir, Vector3.up, startPos))
+        if (!Utilities.LinePlaneIntersection(out Vector3 mouseLaserToGunPlanePoint, Camera.main.transform.position, mouseDir, Vector3.up, startPos))
             mouseLaserToGunPlanePoint = startPos + Vector3.forward;
 
         //Draw the line via saved lineRenderer
-        RaycastHit hit;
         laserDir = mouseLaserToGunPlanePoint - new Vector3(bodyArmature.transform.position.x, startPos.y, bodyArmature.transform.position.z);
         Ray ray = new(startPos, laserDir);
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, startPos);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
             lineRenderer.SetPosition(1, hit.point);
         else
             lineRenderer.SetPosition(1, startPos + (laserDir * 100));
@@ -564,14 +563,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         bodyArmature.transform.LookAt(bodyArmature.transform.position + laserDir);
         bodyAnimator.SetFloat(GlobalConstants.animSpeedID, 0f);
         bodyAnimator.SetBool(GlobalConstants.animAimID, true);
-    }
-
-    /// <summary>
-    /// Don't call this if object doesn't have a lineRenderer assigned. Sets curAimDir to a value
-    /// </summary>
-    void DrawLaserAim()
-    {
-        DrawLaserAim(out _);
+        return laserDir;
     }
 
     /// <summary>
@@ -603,7 +595,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         }; 
         foreach (Tool tool in playerData.toolInspectorField)
         {
-            SaveSystem.ToolData toolData = new SaveSystem.ToolData()
+            SaveSystem.ToolData toolData = new()
             {
                 name = tool.toolName,
                 loadedAmmo = playerData.toolInventory[tool].loadedAmmo,

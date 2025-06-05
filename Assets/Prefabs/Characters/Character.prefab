@@ -784,8 +784,8 @@ MonoBehaviour:
   FootstepsSound: {fileID: 7293042599446844678}
   VoiceSource: {fileID: 6961965102085019655}
   OutOfAmmo: {fileID: 8300000, guid: 82b3760950f2be740af0784894a4a254, type: 3}
-  HaveToAim: {fileID: 0}
-  NoToolSelected: {fileID: 0}
+  HaveToAim: {fileID: 8300000, guid: 635ee51777907a64eb6db519ee05c4b8, type: 3}
+  NoToolSelected: {fileID: 8300000, guid: af9b52213c7e7d24cbd3956a64cec61d, type: 3}
   NopeCantDoThat: {fileID: 8300000, guid: 756a324d7a8c5b74986492124107737f, type: 3}
   playerData: {fileID: 1074438972325046832}
   onToolUsed:
