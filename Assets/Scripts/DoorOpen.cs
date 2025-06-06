@@ -46,6 +46,9 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
         isOpen = false;
     }
 
+    public void Lock() => locked = true;
+    public void Unlock() => locked = false;
+
 	public void Save(SaveSystem.AllSavedData dataHolder)
 	{
 		dataHolder.doorData.Add(Utilities.GetFullPathName(gameObject), new SaveSystem.DoorData() {isOpen = isOpen});

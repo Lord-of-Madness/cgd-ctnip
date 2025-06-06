@@ -9,6 +9,9 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField]
     WirePuzzleController wirePuzzle;
 
+    [SerializeField]
+    DoorOpen[] doorsToBeUnlockedAfterGenFix;
+
     public bool GeneratorFixed { get; set; } = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,7 +45,9 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     public void TurnGeneratorOff()
     {
         //if (!GeneratorFixed) return;
-        
+
+        foreach (DoorOpen door in doorsToBeUnlockedAfterGenFix) door.Lock();
+
         lightsAffectedByGenerator.TurnOffAllChildren();
         wirePuzzle.UnComplete();
         GeneratorFixed = false;
@@ -52,8 +57,11 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     public void TurnGeneratorOn()
 	{
 		//if (GeneratorFixed) return;
-		
-        lightsAffectedByGenerator.TurnOnAllChildren();
+
+        if (GameManager.Instance.MansionKeyPickedUp)
+		    foreach (DoorOpen door in doorsToBeUnlockedAfterGenFix) door.Unlock();
+
+		lightsAffectedByGenerator.TurnOnAllChildren();
         wirePuzzle.Finish();
         GeneratorFixed = true;
         GameManager.Instance.GramophoneGenFixed = true;
