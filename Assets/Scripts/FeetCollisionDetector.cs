@@ -20,7 +20,7 @@ public class FeetCollisionDetector : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-        if (other.isTrigger) return;
+        if (other.isTrigger || other.CompareTag("Player")) return;
         //Debug.Log("Trigger feet stay!");
         feetTriggerStay.Invoke();
     }

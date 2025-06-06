@@ -42,7 +42,7 @@ public class RoomCameraSwitchOnEnter : MonoBehaviour
     void CheckActivePlayerInside()
     {
         //BIG FAT CHEAT TO TRIGGER THE ON_TRIGGER
-        GameManager.Instance.ActivePlayer.MyCollider.enabled = false;
-        GameManager.Instance.ActivePlayer.MyCollider.enabled = true;
+        GameManager.Instance.ActivePlayer.MyCharController.enabled = false;
+        GameManager.Instance.ActivePlayer.MyCharController.enabled = true;
     }
 }

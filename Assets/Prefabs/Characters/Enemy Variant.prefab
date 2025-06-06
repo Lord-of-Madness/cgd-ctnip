@@ -323,6 +323,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2808557689789560551, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808557689789560551, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -425,6 +429,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
     - {fileID: 1074438972325046832, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+    - {fileID: 5765555330024419335, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2264338679684503152, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
     - {fileID: 8715123957470399877, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
@@ -433,6 +438,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6449510107693877826}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7963321509582736979, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1502824341324400934}
     - targetCorrespondingSourceObject: {fileID: 7963321509582736979, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6903453462179388916}
@@ -467,6 +475,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7963321509582736979, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
   m_PrefabInstance: {fileID: 797555913811614262}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1502824341324400934
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7318941311596811365}
+  serializedVersion: 4
+  m_Mass: 100
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!114 &6903453462179388916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +527,7 @@ MonoBehaviour:
   FootstepsAudioSource: {fileID: 7937431041547095856}
   Enemygrowls:
   - {fileID: 8300000, guid: c21360666757da9499d92dd3b0eba1f2, type: 3}
+  aggroed: 0
 --- !u!82 &7749748000342229553 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6961965102085019655, guid: dac31afa2165c4645b3b709348719ad9, type: 3}

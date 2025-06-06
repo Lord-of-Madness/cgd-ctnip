@@ -67,7 +67,9 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
             Destroy(gameObject);
             return;
         }
-        Directory.Delete(GlobalConstants.savePath, true);
+        if (Directory.Exists(GlobalConstants.savePath))
+            Directory.Delete(GlobalConstants.savePath, true);
+
         Instance = this;
         inputActions = new();
         DontDestroyOnLoad(Instance);
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     }
     void Start()
     {
+
         inputActions.Player.SwapCharacters.performed += ctx => SwapCharacters();
         inputActions.Player.ToggleFollowing.performed += ctx => ToggleFollowing();
 

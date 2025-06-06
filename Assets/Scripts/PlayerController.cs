@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField]
     [Tooltip("This is a reference to a lineRenderer which draws a laser aim. Set only for characters which aim this way.")]
     LineRenderer lineRenderer;
-    public Collider MyCollider { get; private set; }
+    public CharacterController MyCharController { get; private set; }
 
     [Header("Sounds")]
     [SerializeField] AudioSource ToolSound;
@@ -109,7 +109,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        MyCollider = transform.Find("Capsule").GetComponent<Collider>();
+        //MyCollider = transform.Find("Capsule").GetComponent<Collider>();
+        
+        MyCharController = GetComponent<CharacterController>();
 
         if (bodyArmature != null)
         {
@@ -331,6 +333,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
         Vector2 moveValue = GameManager.Instance.inputActions.Player.Move.ReadValue<Vector2>();
         MoveByKeyboard(moveValue);
+        SetVerticalVelocity();
 
         timeSinceJump += Time.deltaTime;
 
@@ -344,16 +347,11 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
             RotateInMoveDir();
             SetAnimatorValuesMovement();
 
-
-
         }
         else if (!controlledByPlayer)
         {
             bodyAnimator.applyRootMotion = false;
         }
-
-        if (curVelocity.y > 0) curVelocity.y -= (Time.deltaTime / jumpTime) * jumpForce;
-        else curVelocity.y = 0;
 
 
         if (hasLineRenderer && aimLaserVisible && controlledByPlayer)
@@ -372,23 +370,30 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
 	void SetAnimatorValuesMovement()
     {
+        Vector3 horizontalVelocity = new Vector3(curVelocity.x, 0, curVelocity.z);
 
         bodyAnimator.applyRootMotion = true;
 
         //bodyAnimator.SetBool(GlobalConstants.animGroundedID, isGrounded);
         bodyAnimator.SetBool(GlobalConstants.animJumpID, curVelocity.y > 0);
 
-        if (curVelocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+        if (horizontalVelocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
         else bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
 
-        bodyAnimator.SetFloat(GlobalConstants.animSpeedID, curVelocity.magnitude * 1);
+
+
+		bodyAnimator.SetFloat(GlobalConstants.animSpeedID, horizontalVelocity.magnitude * 1);
     }
     void Move()
     {
         //Debug.Log("Moving in dir: " + curVelocity.ToString());
-        transform.position += curVelocity * Time.deltaTime;
+        //transform.position += curVelocity * Time.deltaTime;
 
-    }
+		//CharaController version
+		// move the player
+		MyCharController.Move(curVelocity * Time.deltaTime);
+
+	}
 
     void RotateInMoveDir()
     {
@@ -440,6 +445,24 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
         curVelocity.x = moveVelocity.x;
         curVelocity.z = moveVelocity.z;
+	}
+
+    void SetVerticalVelocity()
+    {
+		//Vertical velocity
+		if (isGrounded)
+			curVelocity.y = -2;
+        else curVelocity.y += Physics.gravity.y * Time.deltaTime;
+	}
+
+    /// <summary>
+    /// This has to be done after each transform.position change -> otherwise CharacterController resets the position back
+    /// </summary>
+    void SetCharControllerPosition(Vector3 pos)
+    {
+        MyCharController.enabled = false;
+        MyCharController.transform.position = pos;
+        MyCharController.enabled = true;
     }
 
     void ToggleRunning()
@@ -620,7 +643,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 	public void Load(SaveSystem.AllSavedData data)
 	{
         SaveSystem.CharacterData myData = data.charData[charName];
-        transform.position = myData.pos.GetVector3();
+        SetCharControllerPosition(myData.pos.GetVector3());
 
 		foreach (Tool tool in playerData.toolInspectorField)
 		{
