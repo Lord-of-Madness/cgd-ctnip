@@ -10,6 +10,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
     [SerializeField]
     Collider myCollider;
+    Rigidbody myRb;
 
     //[SerializeField]
     float timeToAttack = 2f;
@@ -52,6 +53,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        myRb = GetComponent<Rigidbody>();   
         
         hp = maxHp;
 
@@ -230,8 +232,20 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         StopFollowingTarget();
         //myCollider.gameObject.SetActive(false);
         enabled = false;
+        myRb.constraints = RigidbodyConstraints.FreezeAll; //Freeze pos and rot
+        myCollider.enabled = false;
     }
-    public void Bark()
+
+    void UnDie()
+    {
+		enabled = true;
+		timeStaggered = float.MaxValue;//To resume following
+        myCollider.enabled = true;
+		myRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX; //Unfree pos and rotY
+
+	}
+
+	public void Bark()
     {
         SoundsAudioSource.PlayOneShot(Enemygrowls[Random.Range(0, Enemygrowls.Count - 1)]);
         barkdelay = Random.Range(2f, 10f);
@@ -262,8 +276,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
         if (hp <= 0 && myData.hp > 0)
         { //Ressurect
-            enabled = true;
-            timeStaggered = float.MaxValue;//To resume following
+            UnDie();
         }
 
         hp = myData.hp;
