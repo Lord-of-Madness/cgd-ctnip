@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using static PlayerData;
@@ -315,12 +316,10 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
     private void Reload()
     {
-        //TODO only shoot if aiming
         if (playerData.TryReload())//This is true only if there is a reason to actually reload - there is ammo to reload and the tool is not full
         {//The numerical changes are done in the PlayerData class
             actionCooldown = playerData.SelectedTool.reloadTime;
             onReload.Invoke();
-            //TODO anima�ky and stuff
         }
     }
 
@@ -526,6 +525,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
     public void EnablePlayerControl()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
         controlledByPlayer = true;
     }
 
