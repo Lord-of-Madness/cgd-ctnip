@@ -5260,6 +5260,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneTransitionBasement
       objectReference: {fileID: 0}
+    - target: {fileID: 1537823484508614118, guid: b3c45f6772a872a4a8150243974cc4e4, type: 3}
+      propertyPath: loadedSceneName
+      value: BasementScene
+      objectReference: {fileID: 0}
     - target: {fileID: 1871717088033366489, guid: b3c45f6772a872a4a8150243974cc4e4, type: 3}
       propertyPath: m_Size.x
       value: 4
