@@ -48,7 +48,7 @@ public class SaveSystem:MonoBehaviour
 		foreach (ISaveable s in allSaveables)
 			s.Save(savedData);
 		string json = JsonConvert.SerializeObject(savedData);
-		System.IO.File.WriteAllText(completeSavePath, json); 
+		File.WriteAllText(completeSavePath, json); 
 		Debug.Log("Data saved to " + completeSavePath);
 		savedData = null; //Save memory
 	}
@@ -120,6 +120,7 @@ public class SaveSystem:MonoBehaviour
 		public int hp;
 		public Vector3JsonFriendly pos;
 		public bool following;
+		public bool aggroed;
 
 	}
 

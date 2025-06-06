@@ -244,7 +244,8 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         {
             following = follwing,
 			hp = hp,
-            pos = new Vector3JsonFriendly(transform.position)
+            pos = new Vector3JsonFriendly(transform.position),
+            aggroed = aggroed,
 		};
 
         dataHolder.enemyData.Add(Utilities.GetFullPathName(gameObject), myData);
@@ -253,6 +254,9 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     public void Load(SaveSystem.AllSavedData data)
     {
         SaveSystem.EnemyData myData = data.enemyData[Utilities.GetFullPathName(gameObject)];
+        
+        aggroed = myData.aggroed;
+
         if (myData.following) ResumeFollowingTarget();
         else StopFollowingTarget();
 
