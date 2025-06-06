@@ -10505,7 +10505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5034820248550353245, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1122.0653
+      value: -881.19257
       objectReference: {fileID: 0}
     - target: {fileID: 5591336283755008924, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -17511,7 +17511,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.1
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: ff07559ee79e99342940d4bc37df62a3, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 545cd63e9128e03439c666cfa3c2bf07, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1011928254
 Transform:

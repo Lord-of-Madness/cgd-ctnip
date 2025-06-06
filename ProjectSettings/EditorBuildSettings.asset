@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlzbetaScene.unity
     guid: 48188380aae0119408a3226f76b55a03
+  - enabled: 1
+    path: Assets/Scenes/ErikScene.unity
+    guid: 66632455541bf8c4193ced8ae4a2138a
+  - enabled: 1
+    path: Assets/Scenes/BasementScene.unity
+    guid: d6f166431c344214d9087a545f7303bd
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6714d1ac7cc3a5a46bef56b67fc373de, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
