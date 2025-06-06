@@ -254,7 +254,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     public void Load(SaveSystem.AllSavedData data)
     {
         SaveSystem.EnemyData myData = data.enemyData[Utilities.GetFullPathName(gameObject)];
-        
+
         aggroed = myData.aggroed;
 
         if (myData.following) ResumeFollowingTarget();
@@ -271,9 +271,13 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
         //Reset animation to idle
         bodyAnimator.SetBool(GlobalConstants.animRestartId, true);
+		bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 999); //To speed up all animation to get to the desired end state
 
-        StartCoroutine(
-            Utilities.CallAfterSomeTime(() => bodyAnimator.SetBool(GlobalConstants.animRestartId, false), 0.2f)
+		StartCoroutine(
+            Utilities.CallAfterSomeTime(() => { 
+                bodyAnimator.SetBool(GlobalConstants.animRestartId, false);
+                bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+            }, 0.2f) 
             );
 
         transform.position = myData.pos.GetVector3();
