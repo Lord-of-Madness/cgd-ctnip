@@ -711,11 +711,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3632587552803034242}
   - component: {fileID: 1530958316274769250}
-  - component: {fileID: 2618553586226422925}
   - component: {fileID: 42817731452244276}
   - component: {fileID: 2155914547219549689}
   - component: {fileID: 8157661885121772640}
   - component: {fileID: 1074438972325046832}
+  - component: {fileID: 5765555330024419335}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -797,33 +797,6 @@ MonoBehaviour:
   onReload:
     m_PersistentCalls:
       m_Calls: []
---- !u!54 &2618553586226422925
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7963321509582736979}
-  serializedVersion: 4
-  m_Mass: 10
-  m_Drag: 0.5
-  m_AngularDrag: 0.9
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!195 &42817731452244276
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -897,6 +870,31 @@ MonoBehaviour:
   Documents: []
   Codex: []
   Inventory: []
+--- !u!143 &5765555330024419335
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963321509582736979}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.8
+  m_Radius: 0.3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &8356136036495978082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8643584728566771717}
   - component: {fileID: 3526478249739755505}
+  - component: {fileID: 1783217099895016873}
   - component: {fileID: 5728191508341244188}
   m_Layer: 0
   m_Name: FeetCollider
@@ -1230,6 +1229,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!54 &1783217099895016873
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8715123957470399877}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &5728191508341244188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1249,7 +1275,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Size: {x: 0.3, y: 0.2, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6128103992182701528
 PrefabInstance:
