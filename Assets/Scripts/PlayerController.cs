@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 	}
     public void HideLaserAimCommand()
     {
-		if (controlledByPlayer && actionCooldown <= 0) HideLaserAim();
+		if (controlledByPlayer) HideLaserAim();
 	}
     public void AttackCommand()
     {

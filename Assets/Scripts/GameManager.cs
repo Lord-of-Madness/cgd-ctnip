@@ -181,6 +181,10 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     public static void GameOver()
     {
         Instance.inputActions.Player.Disable();
+        
+        //Fixes the player still rotating after death
+        Instance.GiveCommandToActivePlayer(CharacterCommand.HIDE_LASER); 
+        
         Time.timeScale = 0;
         GameOverScreenScript.instance.Show();
     }
