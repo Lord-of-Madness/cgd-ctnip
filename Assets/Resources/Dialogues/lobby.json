@@ -108,6 +108,14 @@
             "id": 13,
             "Text": "...you too.",
             "Who": "ERIK",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "",
             "children": []
         }
     ],

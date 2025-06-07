@@ -68,7 +68,7 @@
             "id": 8,
             "Text": "What the hell is that? Who sent it?",
             "Who": "ERIK",
-            "DocumentName": "envelope.json",
+            "DocumentName": "envelope",
             "children": [
                 9
             ]
@@ -93,8 +93,16 @@
             "id": 11,
             "Text": "Only one way to find out. But I tell you, there's definitely something really wrong about this place. Let's go.",
             "Who": "ELISABETH",
-            "children": []
+            "children": [
+                99
+            ]
         },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "",
+            "children": []
+        }
 
     ],
     "speakers": [
