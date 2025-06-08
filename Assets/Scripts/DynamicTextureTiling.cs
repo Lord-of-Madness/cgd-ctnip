@@ -10,6 +10,7 @@ public class DynamicTextureTiling : MonoBehaviour
 {
     // Reference to the original material with the texture
      Material originalMaterial;
+    [SerializeField] float density = 1;
 
     void Start()
     {
@@ -41,6 +42,6 @@ public class DynamicTextureTiling : MonoBehaviour
         Vector2 tiling = new Vector2(scale.x, scale.y);
 
         // Apply tiling to the material
-        material.mainTextureScale = tiling;
+        material.mainTextureScale = tiling*density;
     }
 }
