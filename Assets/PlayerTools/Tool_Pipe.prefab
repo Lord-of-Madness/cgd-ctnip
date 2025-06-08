@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: toolIcon
       value: 
-      objectReference: {fileID: 21300000, guid: fa785446e730302418f6ba3021143cb5, type: 3}
+      objectReference: {fileID: 21300000, guid: 83617f4edf15cac4787f5f6619758bbf, type: 3}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: toolName
       value: Pipe

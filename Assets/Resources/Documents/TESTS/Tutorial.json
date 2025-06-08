@@ -2,7 +2,7 @@
     "name": "Controls",
     "pages": [
         {
-            "text": "WSAD - Movement\nE - Interact with objects\nQ - Swap tools (Elisabeth only)\nRMB - Aim tool (if applicable)\nLMB - Use tool\nC - Switch characters (If they are together)"
+            "text": "WSAD - Movement\nE - Interact with objects\nQ - Swap tools (Elisabeth only)\nRMB - Aim tool (if applicable)\nLMB - Use tool\nC - Switch characters (If they are together)\nJ - open/close Journal"
         }
     ],
     "type": 0
