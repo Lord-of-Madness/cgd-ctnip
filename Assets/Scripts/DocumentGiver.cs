@@ -18,6 +18,7 @@ public class DocumentGiver : MonoBehaviour
         else document = new(documentName, pages, documentType);
     }
     public void GiveDocument() {
+        GameManager.APD.lastTypeAdded = document.type;
         if (document.type == Document.DocumentType.Documents) GameManager.APD.Documents.Add(document);
         else if (document.type == Document.DocumentType.Codex) GameManager.APD.Codex.Add(document);
         else if (document.type == Document.DocumentType.Inventory) GameManager.APD.Inventory.Add(document);
