@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Journal : MonoBehaviour
 {
-    Image Backcover;
+    //Image Backcover;
     [SerializeField] DocumentUI documentUI;
     [SerializeField] Transform LabelBox;
     [SerializeField] Button JournalLabelPrefab;
     bool SwapWasEnabled;
     void Start()
     {
-        Backcover = GameObject.Find("Backcover").GetComponent<Image>();
+        //Backcover = GameObject.Find("Backcover").GetComponent<Image>();
         GameObject.Find("BethPortrait").GetComponent<Button>().onClick.AddListener(() => { if(GameManager.Instance.activeChar != PlayerCharacter.Beth) SwitchCharacter(); });
         GameObject.Find("ErikPortrait").GetComponent<Button>().onClick.AddListener(() => { if(GameManager.Instance.activeChar != PlayerCharacter.Erik) SwitchCharacter(); });
         GameManager.Instance.inputActions.Player.Journal.performed += ctx => Show();
@@ -63,7 +64,7 @@ public class Journal : MonoBehaviour
     void OnBookmarkPressed()
     {
         Utilities.PurgeChildren(LabelBox);
-        documentUI.CloseDocument();
+        documentUI.CloseDocument();/*
         if(GameManager.Instance.activeChar == PlayerCharacter.Beth)
         {
             Backcover.color = Speaker.Beth.TextColor;
@@ -71,14 +72,16 @@ public class Journal : MonoBehaviour
         else
         {
             Backcover.color = Speaker.Erik.TextColor;
-        }
+        }*/
         //Debug.Log("Záložkavìc");
     }
     void FillLabels(List<Document> documents)
     {
         foreach (var document in documents)
         {
-             Instantiate(JournalLabelPrefab, LabelBox).onClick.AddListener(() => documentUI.ShowDocument(document));
+            Button b = Instantiate(JournalLabelPrefab, LabelBox);
+            b.onClick.AddListener(() => documentUI.ShowDocument(document));
+            b.GetComponentInChildren<TextMeshProUGUI>().text = document.name;
         }
     }
 }
