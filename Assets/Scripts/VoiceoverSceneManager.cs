@@ -1,17 +1,55 @@
+using DG.Tweening;
+using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VoiceoverSceneManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] Image MainImage;
+    [SerializeField] List<Sprite> MainImageSprites;
+    [SerializeField] List<AudioClip> Voicelines;
+    AudioSource audioSource;
     void Start()
     {
-        AudioSource audioSource = GetComponent<AudioSource>();
-        Invoke(nameof(Trasition), audioSource.clip.length+3);
+        audioSource = GetComponent<AudioSource>();
+        ChangeImage();
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (MainImageSprites.Count > 0)
+            {
+                MainImageSprites.Clear();
+                Voicelines.Clear();
+                audioSource.Stop();
+                DOTween.KillAll();
+            }
+            Trasition();
+        }
+    }
     void Trasition()
     {
         SceneManager.LoadScene("Exterior", LoadSceneMode.Single);
+    }
+    void ChangeImage()
+    {
+        if (MainImageSprites.Count > 0)
+        {
+            audioSource.PlayOneShot(Voicelines[0]);
+            DOTween.To(() => MainImage.color, x => MainImage.color = x, Color.black, 0.2f)
+                .OnComplete(() =>
+                {
+                    MainImage.sprite = MainImageSprites[0];
+                    MainImageSprites.RemoveAt(0);
+                    DOTween.To(() => MainImage.color, x => MainImage.color = x, Color.white, 0.2f);
+                });
+            Invoke(nameof(ChangeImage), Voicelines[0].length);
+            Voicelines.RemoveAt(0);
+        }
+        else Trasition();
     }
 }

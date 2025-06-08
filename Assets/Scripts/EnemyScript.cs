@@ -179,6 +179,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
     public void GetHit(int damage)
     {
+        DamageTakenAudioSource.Play();
         aggroed = true;
         hp -= damage;
         DamageTakenAudioSource.Play();
@@ -254,7 +255,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 	public void Save(SaveSystem.AllSavedData dataHolder)
 	{
         //If this is null when this is called -> probably memory leak in the allSaveables in SaveSystem
-        SaveSystem.EnemyData myData = new SaveSystem.EnemyData
+        SaveSystem.EnemyData myData = new()
         {
             following = follwing,
 			hp = hp,
