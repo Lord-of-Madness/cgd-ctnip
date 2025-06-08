@@ -324,14 +324,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 246aacf82c9ded9469072875d6faee5f, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -377,8 +377,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f45b4f8db12a83c45acfc95fc77f81b3, type: 3}
-  m_Resource: {fileID: 8300000, guid: f45b4f8db12a83c45acfc95fc77f81b3, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainImage: {fileID: 670385459}
   MainImageSprites:
-  - {fileID: 21300000, guid: 0d1eff6dc52dd0d44ac2ba64f9a14aea, type: 3}
+  - {fileID: 21300000, guid: 5497a8bc30108fc44b5a151f1d6b3c12, type: 3}
   - {fileID: 21300000, guid: 246aacf82c9ded9469072875d6faee5f, type: 3}
   - {fileID: 21300000, guid: 7c24532da9db4384eb4351742b48f2b8, type: 3}
   - {fileID: 21300000, guid: e185519938d984d439a86583e17694d4, type: 3}
