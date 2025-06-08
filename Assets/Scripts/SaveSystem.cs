@@ -102,8 +102,15 @@ public class SaveSystem:MonoBehaviour
 	{
 		public string name;
 		public Vector3JsonFriendly pos;
+		
+		
 		public ToolData revolverData;
 		public ToolData cameraData;
+
+
+		public List<Document> Documents = new();
+		public List<Document> Codex = new();
+		public List<Document> Inventory = new();
 	}
 
 	[Serializable]
@@ -147,6 +154,7 @@ public class SaveSystem:MonoBehaviour
 	{
 		public bool generatorFixed;
 	}
+
 
 }
 
