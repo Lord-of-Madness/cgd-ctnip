@@ -398,8 +398,11 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     void RotateInMoveDir()
     {
         if (!controlledByPlayer) { bodyArmature.transform.localRotation = Quaternion.Euler(0f, 0f, 0f); return; }
-        //Rotate in direction of velocity
-        if (curVelocity != Vector3.zero)
+
+		Vector3 horizontalVelocity = new Vector3(curVelocity.x, 0, curVelocity.z);
+
+		//Rotate in direction of velocity
+		if (horizontalVelocity != Vector3.zero)
         {
             Quaternion bodyRot = Quaternion.FromToRotation(Vector3.forward, new Vector3(curVelocity.x, 0, curVelocity.z));
 
@@ -636,8 +639,12 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
                     break;
             }
         }
-            
-        dataHolder.charData.Add(charName, myData);
+
+		myData.Documents = playerData.Documents;
+		myData.Codex = playerData.Codex;
+		myData.Inventory = playerData.Inventory;
+
+		dataHolder.charData.Add(charName, myData);
 	}
 
 	public void Load(SaveSystem.AllSavedData data)
@@ -660,6 +667,10 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 					break;
 			}
 		}
+
+        playerData.Documents = new(myData.Documents);
+        playerData.Codex = new(myData.Codex);
+        playerData.Inventory = new(myData.Inventory);
 
         //Restart ERIK Melee animation
         if (charName == "Erik")

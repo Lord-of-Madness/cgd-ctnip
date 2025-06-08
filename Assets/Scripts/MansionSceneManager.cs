@@ -45,6 +45,8 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		lightsToBeTurnedOff.TurnOnAllChildren();
 		foreach (var door in doorsToBeOpened) door.CloseDoor();
 		keyObject.gameObject.SetActive(true);
+		
+		EnemiesReleased = false;
 		GameManager.Instance.MansionKeyPickedUp = false;
 		GameManager.Instance.GramophoneGenFixed = true;
 		GameManager.Instance.GramophoneSceneExternalChange = false;
