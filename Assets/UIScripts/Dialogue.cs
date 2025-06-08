@@ -259,7 +259,7 @@ public class Dialogue : MonoBehaviour
     //Tween textween;
 
     DialogueTreeNode lines;
-    [SerializeField] float textSpeed = 0.3f;
+    //[SerializeField] float textSpeed = 0.3f;
     public static Dialogue Instance { get; private set; }
     private void Awake()
     {
