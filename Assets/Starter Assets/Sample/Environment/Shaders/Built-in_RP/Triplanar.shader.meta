@@ -9,8 +9,8 @@ ShaderImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 267961
-  packageName: 'Starter Assets: Character Controllers | URP'
-  packageVersion: 2.0.2
+  productId: 181470
+  packageName: Survivalist character
+  packageVersion: 1.2
   assetPath: Assets/Starter Assets/Sample/Environment/Shaders/Built-in_RP/Triplanar.shader
-  uploadId: 721456
+  uploadId: 762486
