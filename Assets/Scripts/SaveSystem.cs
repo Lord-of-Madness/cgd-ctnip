@@ -38,6 +38,12 @@ public class SaveSystem:MonoBehaviour
 		allGenSaveables.Remove(saveable);
 	}
 
+	public static void RemoveAllSavedData()
+	{
+		if (Directory.Exists(GlobalConstants.savePath))
+			Directory.Delete(GlobalConstants.savePath, true);
+	}
+
 	static void UpdateSceneSavePath()
 	{
 		completeSceneSavePath = GlobalConstants.savePath + "/" + SceneManager.GetActiveScene().name + ".json";
@@ -60,6 +66,27 @@ public class SaveSystem:MonoBehaviour
 	{
 		LoadGenData();
 		LoadSceneData();
+	}
+
+	public static void LoadLastActiveScene()
+	{
+		UpdateSceneSavePath();
+		if (File.Exists(completeGenericSavePath))
+		{
+			string json = System.IO.File.ReadAllText(completeGenericSavePath);
+			savedGenData = JsonConvert.DeserializeObject<AllSavedData>(json);
+
+			SceneTransitionManager.LoadNewScene(savedGenData.lastActiveScene);
+
+		}
+
+		else
+		{
+			Debug.LogError("No save file found -> loading exterior");
+
+			SceneTransitionManager.LoadNewScene(GlobalConstants.exteriorSceneName);
+
+		}
 	}
 
 	public static void SaveSceneData()
@@ -118,6 +145,9 @@ public class SaveSystem:MonoBehaviour
 
 		foreach (ISaveable s in allGenSaveables)
 			s.SaveGeneric(savedGenData);
+
+		savedGenData.lastActiveScene = SceneManager.GetActiveScene().name;
+
 		string json = JsonConvert.SerializeObject(savedGenData);
 		File.WriteAllText(completeGenericSavePath, json);
 		Debug.Log("Data saved to " + completeGenericSavePath);
@@ -162,6 +192,8 @@ public class SaveSystem:MonoBehaviour
 	[Serializable]
 	public class AllSavedData
 	{
+		public string lastActiveScene;
+
 		public Dictionary<string, CharacterSceneData> charSceneData = new();
 		public Dictionary<string, CharacterGenData> charGenData = new();
 		public Dictionary<string, EnemyData> enemyData = new();

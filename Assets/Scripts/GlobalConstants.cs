@@ -28,7 +28,8 @@ public static class GlobalConstants
 	public const string bethName = "Beth";
 	public const string erikName = "Erik";
 
-
+	//SCENE_NAMES
+	public const string exteriorSceneName = "Exterior";
 
 	//SAVING
 	public static string savePath = Application.persistentDataPath + "/saves";

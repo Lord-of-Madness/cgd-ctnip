@@ -72,8 +72,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
             Destroy(gameObject);
             return;
         }
-        if (Directory.Exists(GlobalConstants.savePath))
-            Directory.Delete(GlobalConstants.savePath, true);
+
         Instance = this;
         inputActions = new();
         DontDestroyOnLoad(Instance);
