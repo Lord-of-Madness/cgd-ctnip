@@ -93,6 +93,8 @@ public class WirePuzzleController : MonoBehaviour
 		var mousePos = Input.mousePosition;
 		var mainCamera = Camera.main;
 
+		if (mainCamera == null) return null; 
+
 		Ray ray = mainCamera.ScreenPointToRay(mousePos);
 
 

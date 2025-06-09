@@ -11,7 +11,9 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     WirePuzzleController wirePuzzle;
 
     [SerializeField]
-    DoorOpen[] doorsToBeUnlockedAfterGenFix;
+    DoorOpen doorsToBeDisabledAfterGenFix;
+    [SerializeField]
+    GameObject sceneTransitionToBeEnableAfterGenFix;
 
     public bool GeneratorFixed { get; set; } = true;
 
@@ -47,9 +49,10 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     {
         //if (!GeneratorFixed) return;
 
-        foreach (DoorOpen door in doorsToBeUnlockedAfterGenFix) door.Lock();
+        doorsToBeDisabledAfterGenFix.enabled = true;
+		sceneTransitionToBeEnableAfterGenFix.SetActive(false);
 
-        lightsAffectedByGenerator.TurnOffAllChildren();
+		lightsAffectedByGenerator.TurnOffAllChildren();
         wirePuzzle.UnComplete();
         GeneratorFixed = false;
         GameManager.Instance.GramophoneGenFixed = false;
@@ -57,19 +60,27 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
     public void TurnGeneratorOn()
 	{
-		//if (GeneratorFixed) return;
+        //if (GeneratorFixed) return;
 
         if (GameManager.Instance.MansionKeyPickedUp)
-		    foreach (DoorOpen door in doorsToBeUnlockedAfterGenFix) door.Unlock();
+        {
+            doorsToBeDisabledAfterGenFix.enabled = false;
+			sceneTransitionToBeEnableAfterGenFix.SetActive(true);
+        }
+        else
+        {
+			doorsToBeDisabledAfterGenFix.enabled = true;
+			sceneTransitionToBeEnableAfterGenFix.SetActive(false);
+		}
 
-		lightsAffectedByGenerator.TurnOnAllChildren();
+            lightsAffectedByGenerator.TurnOnAllChildren();
         wirePuzzle.Finish();
         GeneratorFixed = true;
         GameManager.Instance.GramophoneGenFixed = true;
     }
-    public void GoToErikScene()
+    public void GoToBasementScene()
     {
-        SceneManager.LoadScene("ErikScene");
+        SceneManager.LoadScene("BasementScene");
     }
 
     public void Save(SaveSystem.AllSavedData dataHolder)

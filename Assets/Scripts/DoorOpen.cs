@@ -14,6 +14,8 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
     float openDuration = 0.5f;
     [SerializeField]
     bool locked = false;
+    [SerializeField]
+    string lockedText = "It's locked";
 
     bool isOpen = false;
 
@@ -27,7 +29,7 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
 		openedPartReference.transform.DOKill();
         if (locked)
         {
-            HUD.Instance.PromptLabel.text = "It's locked";
+            HUD.Instance.PromptLabel.text = lockedText;
             return;
         }
         if (isOpen) CloseDoor();

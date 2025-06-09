@@ -277,7 +277,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
 
         Ray ray = new(gunPos, curAimDir);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.NameToLayer("UI") | LayerMask.NameToLayer("Ignore Raycast")))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
         {
             SpawnBullet(gunPos, curAimDir, 100, (transform.position - hit.point).magnitude / 100);
             if (hit.collider.CompareTag("Enemy"))
@@ -577,7 +577,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         Ray ray = new(startPos, laserDir);
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, startPos);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.NameToLayer("UI") | LayerMask.NameToLayer("Ignore Raycast")))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.NameToLayer("UI")))
             lineRenderer.SetPosition(1, hit.point);
         else
             lineRenderer.SetPosition(1, startPos + (laserDir * 100));
