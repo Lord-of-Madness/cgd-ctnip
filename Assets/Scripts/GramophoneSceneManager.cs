@@ -21,6 +21,8 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField] Transform generatorPosition;
     [SerializeField] TextAsset DoorDialogueJSON;
     [SerializeField] Transform doorPosition;
+    [SerializeField] Trigger trigger;
+    [SerializeField] bool cinematicMode =false;
     public bool GeneratorFixed { get; set; } = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,6 +49,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
             audioSource.clip = ambientMusicIntro;
             TurnGeneratorOn();
             audioSource.Play();
+            if(cinematicMode) trigger.gameObject.SetActive(true);
         }
     }
 
