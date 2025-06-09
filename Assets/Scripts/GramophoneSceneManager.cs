@@ -17,6 +17,10 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip ambientMusicIntro;
     [SerializeField] AudioClip ambientMusicFinale;
+    [SerializeField] TextAsset GeneratorDialogueJSON;
+    [SerializeField] Transform generatorPosition;
+    [SerializeField] TextAsset DoorDialogueJSON;
+    [SerializeField] Transform doorPosition;
     public bool GeneratorFixed { get; set; } = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -114,4 +118,34 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		return; //All info in this manager should transition to all other scenes 
 	}
+    public void CinematicStart()
+    {
+        GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = true;
+        GameManager.Instance.ActivePlayer.DisablePlayerControl();
+        GameManager.Instance.ActivePlayer.gameObject.GetComponent<AITarget>().target = generatorPosition;
+        GameManager.Instance.ActivePlayer.StartFollowingOtherChar();
+
+
+    }
+    public void GeneratorReached()
+    {
+        Dialogue.Instance.dialogueEnded.AddListener(() =>
+        {
+            GameManager.Instance.ActivePlayer.gameObject.GetComponent<AITarget>().target = doorPosition;
+            Dialogue.Instance.dialogueEnded.RemoveAllListeners();
+        });
+        Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(GeneratorDialogueJSON));
+    }
+    public void DoorReached()
+    {
+        Dialogue.Instance.dialogueEnded.AddListener(() =>
+        {
+            GameManager.Instance.ActivePlayer.StopFollowingOtherChar();
+            GameManager.Instance.ActivePlayer.gameObject.GetComponent<AITarget>().target = GameManager.Instance.OtherPlayer.transform;
+            GameManager.Instance.ActivePlayer.EnablePlayerControl();
+            GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = false;
+            Dialogue.Instance.dialogueEnded.RemoveAllListeners();
+        });
+        Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(DoorDialogueJSON));
+    }
 }
