@@ -1,8 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
