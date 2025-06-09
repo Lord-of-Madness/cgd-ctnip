@@ -560,7 +560,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4336139240521320935}
   m_HandleRect: {fileID: 4050558101443588152}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4385,7 +4385,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -984.314}
+  m_AnchoredPosition: {x: 0, y: -984.3141}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3510293900988239819
@@ -4744,8 +4744,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainPortrait: {fileID: 4894617555664104561}
   OffPortrait: {fileID: 5172833707029566822}
-  BethPotrait: {fileID: 21300000, guid: b92cd790b2c510441aeeb1456afe24e4, type: 3}
-  ErikPotrait: {fileID: 21300000, guid: 549c9d14e1747a0419e03bd994001ced, type: 3}
+  BethPotrait:
+  - {fileID: 21300000, guid: 105c662210b397341be2228c8dcdd33e, type: 3}
+  - {fileID: 21300000, guid: df82e1f45def09b4d8b6957f78ae18be, type: 3}
+  - {fileID: 21300000, guid: bcdf247f5b18eb94083183148e7d7f21, type: 3}
+  - {fileID: 21300000, guid: b92cd790b2c510441aeeb1456afe24e4, type: 3}
+  ErikPotrait:
+  - {fileID: 21300000, guid: 1276b9d15688f5f41b941dcc1a2cf257, type: 3}
+  - {fileID: 21300000, guid: f909c9d81e894644789c5731f3b53587, type: 3}
+  - {fileID: 21300000, guid: 262ee7c5ff82e6c4abd2652209d48e9b, type: 3}
+  - {fileID: 21300000, guid: 549c9d14e1747a0419e03bd994001ced, type: 3}
   PromptLabel: {fileID: 577058689252842059}
 --- !u!1 &8633198521181282688
 GameObject:

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +7,8 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] private GameObject MainPortrait;
     [SerializeField] private GameObject OffPortrait;
-    [SerializeField] Sprite BethPotrait;
-    [SerializeField] Sprite ErikPotrait;
+    [SerializeField] List<Sprite> BethPotrait;
+    [SerializeField] List<Sprite> ErikPotrait;
     public TextMeshProUGUI PromptLabel;
     Sprite MainSprite { get => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => MainPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
     Sprite OffSprite { get => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite; set => OffPortrait.transform.GetChild(0).GetComponent<Image>().sprite = value; }
@@ -21,11 +22,20 @@ public class HUD : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.charChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
+        BindHPChanged();
+
+
         GameManager.Instance.charsReassigned.AddListener(() => {
             if (GameManager.Instance.OtherPlayer == null) OffPortrait.SetActive(false);
+            BindHPChanged();
             ShowHUD(GameManager.Instance.activeChar); });
         if (GameManager.Instance.OtherPlayer == null) OffPortrait.SetActive(false);
         
+    }
+    public void BindHPChanged()
+    {
+        GameManager.Instance.erikPC.playerData.OnHPChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
+        GameManager.Instance.bethPC.playerData.OnHPChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
     }
 
 
@@ -34,12 +44,12 @@ public class HUD : MonoBehaviour
         switch (character)
         {
             case PlayerCharacter.Beth:
-                MainSprite = BethPotrait;
-                OffSprite = ErikPotrait;
+                MainSprite = BethPotrait[GameManager.Instance.bethPC.playerData.HP];
+                OffSprite = ErikPotrait[GameManager.Instance.erikPC.playerData.HP];
                 break;
             case PlayerCharacter.Erik:
-                MainSprite = ErikPotrait;
-                OffSprite = BethPotrait;
+                MainSprite = ErikPotrait[GameManager.Instance.erikPC.playerData.HP];
+                OffSprite = BethPotrait[GameManager.Instance.bethPC.playerData.HP];
                 break;
             default:
                 Debug.LogError("Unknown character");
