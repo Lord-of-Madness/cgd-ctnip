@@ -14,10 +14,4 @@ public class UIScript : MonoBehaviour
 		Instance = this;
 		DontDestroyOnLoad(Instance);
 	}
-
-	// Update is called once per frame
-	void Update()
-    {
-        
-    }
 }

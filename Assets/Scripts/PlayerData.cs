@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public class ToolInvData
@@ -74,6 +75,19 @@ public class PlayerData : MonoBehaviour
     int StashedAmmo { get => SelectedToolData.stashedAmmo; set => SelectedToolData.stashedAmmo = value; }
     public int MaxLoadedAmmo => SelectedTool.maxLoadedAmmo;
     public int ReloadBatch => SelectedTool.reloadBatch;
+    public UnityEvent OnHPChanged;
+
+    [SerializeField] int startingHealth = 3;
+    private int hp;
+    public int HP { get=>hp; internal set {
+            hp = value;
+            OnHPChanged?.Invoke();
+            if (hp <= 0)
+            {
+                Debug.Log(hp);
+                GameManager.GameOver();
+            }
+        } }
 
     private void Start()
     {
@@ -85,6 +99,7 @@ public class PlayerData : MonoBehaviour
         {
             toolInventory.Add(tool, new() { loadedAmmo = tool.maxLoadedAmmo });
         }
+        hp = startingHealth;
     }
 
     public ToolUseExcuses CanUseTool()

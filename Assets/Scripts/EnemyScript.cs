@@ -128,9 +128,9 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     {
 		foreach (Collider c in attackZoneScript.GetAllObjectsInAttackArea())
 		{
-			if (c.CompareTag("Player"))
+			if (c.TryGetComponent(out PlayerData playerData))
 			{
-                GameManager.GameOver();
+                playerData.HP--;
 			}
 		}
         bodyAnimator.SetBool(GlobalConstants.animAttackID, false); //Set to false to enable trans back
