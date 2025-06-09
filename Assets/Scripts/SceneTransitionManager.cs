@@ -11,7 +11,7 @@ public class SceneTransitionManager : MonoBehaviour
 	{
 		if (Instance != null && Instance != this)//So it can be in multiple scenes for testing, but does not appear twice
 		{
-			Destroy(gameObject);
+			//Destroy(gameObject);
 			return;
 		}
 		Instance = this;

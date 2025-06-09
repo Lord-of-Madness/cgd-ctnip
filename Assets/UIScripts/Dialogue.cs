@@ -8,6 +8,7 @@ using System.Linq;
 using System.IO;
 using TMPro;
 using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
+using UnityEngine.Events;
 
 
 public class DialogueTreeNode
@@ -261,8 +262,14 @@ public class Dialogue : MonoBehaviour
     DialogueTreeNode lines;
     //[SerializeField] float textSpeed = 0.3f;
     public static Dialogue Instance { get; private set; }
+    public UnityEvent dialogueEnded;
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
     }
 
@@ -323,6 +330,7 @@ public class Dialogue : MonoBehaviour
         else
         {
             Hide();
+            dialogueEnded?.Invoke();
         }
     }
     void Show(){

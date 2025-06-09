@@ -269,6 +269,8 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
     public void LoadSceneSpecific(SaveSystem.AllSavedData data)
     {
+        if (!data.enemyData.ContainsKey(Utilities.GetFullPathName(gameObject))) return;
+
         SaveSystem.EnemyData myData = data.enemyData[Utilities.GetFullPathName(gameObject)];
 
         aggroed = myData.aggroed;
