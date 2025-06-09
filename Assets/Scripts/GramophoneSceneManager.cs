@@ -46,7 +46,12 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
         }
     }
 
-    public void TurnGeneratorOff()
+	private void OnDestroy()
+	{
+        SaveSystem.RemoveGenSaveable(this);
+	}
+
+	public void TurnGeneratorOff()
     {
         //if (!GeneratorFixed) return;
         doorsToBeDisabledAfterGenFix.enabled = true;

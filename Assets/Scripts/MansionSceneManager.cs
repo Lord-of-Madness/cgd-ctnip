@@ -29,6 +29,8 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		if (disableSwap) 
 			GameManager.Instance.inputActions.Player.SwapCharacters.Enable();
+
+		SaveSystem.RemoveGenSaveable(this);
 	}
 	public void OnFlashed()
 	{
@@ -77,8 +79,19 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		//First entry of this scene
 		if (savedData.mansionLevelData == null) return;
-		
-		if (savedData.mansionLevelData.keyPickedUp) PickUpKey();
+
+		if (savedData.mansionLevelData.keyPickedUp)
+		{
+			if (savedData.gramophoneLevelData.generatorFixed) //If generator already fixed -> only delete the keyItemObject
+			{
+				EnemiesReleased = true;
+				lightsToBeTurnedOff.TurnOnAllChildren();
+				KeyPickedUp = true;
+				keyObject.SetActive(false);
+			}
+			else
+				PickUpKey();
+		}
 		else RevertKeyPickUp();
 	}
 	public void ScaryMoment()
