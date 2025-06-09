@@ -809,6 +809,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -663878003808475861, guid: 526c4e8252ab1bf47a2b6ae88e703bba, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ed52e97b1fbcdd4a8362522046b6838, type: 2}
     - target: {fileID: 919132149155446097, guid: 526c4e8252ab1bf47a2b6ae88e703bba, type: 3}
       propertyPath: m_Name
       value: ArmatureNew
