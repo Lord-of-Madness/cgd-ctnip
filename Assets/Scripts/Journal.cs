@@ -44,7 +44,19 @@ public class Journal : MonoBehaviour
             ErikPortrait.SetActive(true);
         }
         SetCharLabelOrder();
-        OnNotesPressed();
+        switch (GameManager.APD.lastTypeAdded)
+        {
+            case Document.DocumentType.Inventory:
+                OnInventoryPressed();
+                break;
+            case Document.DocumentType.Codex:
+                OnCodexPressed();
+                break;
+            case Document.DocumentType.Documents:
+            default:
+                OnNotesPressed();
+                break;
+        }
         GameManager.Instance.inputActions.Player.Disable();
         GameManager.Instance.inputActions.Journal.Enable();
         //Debug.Log(GameManager.Instance.inputActions.Journal.enabled);

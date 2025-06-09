@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -63,6 +64,7 @@ public class PlayerData : MonoBehaviour
     int selectedToolIndex = 0;
     public ToolInvData SelectedToolData => toolInventory[SelectedTool];
 
+    public Document.DocumentType lastTypeAdded = Document.DocumentType.Documents;
     public List<Document> Documents = new();
     public List<Document> Codex = new();
     public List<Document> Inventory = new();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 {
@@ -66,8 +67,12 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
         GeneratorFixed = true;
         GameManager.Instance.GramophoneGenFixed = true;
     }
+    public void GoToErikScene()
+    {
+        SceneManager.LoadScene("ErikScene");
+    }
 
-	public void Save(SaveSystem.AllSavedData dataHolder)
+    public void Save(SaveSystem.AllSavedData dataHolder)
 	{
         dataHolder.gramophoneLevelData = new SaveSystem.GramophoneLevelData { generatorFixed = GeneratorFixed };
 	}
