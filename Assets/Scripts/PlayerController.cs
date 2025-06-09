@@ -621,6 +621,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 	{
         SaveSystem.CharacterGenData myData = new SaveSystem.CharacterGenData();
 
+        myData.HP = playerData.HP;
+
         foreach (Tool tool in playerData.toolInspectorField)
         {
             SaveSystem.ToolData toolData = new()
@@ -655,6 +657,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 	public void LoadGeneric(SaveSystem.AllSavedData data)
 	{
         SaveSystem.CharacterGenData myData = data.charGenData[charName];
+
+        playerData.HP = myData.HP;
 
 		foreach (Tool tool in playerData.toolInspectorField)
 		{
