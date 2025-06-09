@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 {
@@ -19,7 +17,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		if (disableSwap)
 			GameManager.Instance.inputActions.Player.SwapCharacters.Disable();
-		SaveSystem.AddSaveable(this);
+		SaveSystem.AddGeneralSaveable(this);
 	}
 
 	private void OnDestroy()
@@ -52,13 +50,27 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		GameManager.Instance.GramophoneSceneExternalChange = false;
 	}
 
-	public void Save(SaveSystem.AllSavedData saveData)
+	public void SaveGeneric(SaveSystem.AllSavedData saveData)
 	{
 		saveData.mansionLevelData = new SaveSystem.MansionLevelData { keyPickedUp = KeyPickedUp };
 	}
-	public void Load(SaveSystem.AllSavedData savedData)
+	public void LoadGeneric(SaveSystem.AllSavedData savedData)
 	{
+		//First entry of this scene
+		if (savedData.mansionLevelData == null) return;
+		
 		if (savedData.mansionLevelData.keyPickedUp) PickUpKey();
 		else RevertKeyPickUp();
+	}
+
+	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
+	{
+		return; //All info in this manager should transition to all other scenes 
+	}
+
+	public void LoadSceneSpecific(SaveSystem.AllSavedData data)
+	{
+		return; //All info in this manager should transition to all other scenes 
+
 	}
 }

@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 
     public UnityEvent charChanged;
 
+    bool onStartChangeChar = false;
+
 
     //Scene specific information
     public bool MansionKeyPickedUp { get; set; } = false;
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
         {
             Instance.bethPC = this.bethPC;
             Instance.erikPC = this.erikPC; //These are just references set in inspector -> have to be reinserted in each scene
+            if (Instance.activeChar != activeChar) { Instance.activeChar = activeChar; Instance.onStartChangeChar = true; }
             Destroy(gameObject);
             return;
         }
@@ -87,6 +90,8 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 		inputActions.Player.Attack.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.ATTACK); };
 		inputActions.Player.Reload.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.RELOAD); };
 		inputActions.Player.SwapTools.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.SWITCH_TOOL); };
+
+        if (onStartChangeChar) { SwapCharacters(); onStartChangeChar = false; }
 	}
 
     void GiveCommandToActivePlayer(CharacterCommand cmd)
@@ -127,7 +132,8 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
         OtherPlayer.StopFollowingOtherChar();
         OtherPlayer.EnablePlayerControl();
 
-        if (Camera.main.TryGetComponent(out FollowPlayer cameraFollowScript)) cameraFollowScript.player = OtherPlayer.gameObject;
+        if (Camera.main != null && Camera.main.TryGetComponent(out FollowPlayer cameraFollowScript)) 
+            cameraFollowScript.player = OtherPlayer.gameObject;
 
         activeChar = activeChar == PlayerCharacter.Beth ? PlayerCharacter.Erik : PlayerCharacter.Beth;
         UpdateCameraFilterState();
@@ -198,15 +204,25 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
         SaveSystem.LoadSceneData();
     }
 
-	public void Save(SaveSystem.AllSavedData dataHolder)
+	public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
 	{
         dataHolder.gameManagerData = new SaveSystem.GameManagerData() { activePlayer = (int)activeChar };
 	}
 
-	public void Load(SaveSystem.AllSavedData data)
+	public void LoadGeneric(SaveSystem.AllSavedData data)
 	{
         if (activeChar != (PlayerCharacter)data.gameManagerData.activePlayer)
             SwapCharacters();
+	}
+
+	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
+	{
+        return; //Not needed to save scene specific info in GameManager
+	}
+
+	public void LoadSceneSpecific(SaveSystem.AllSavedData data)
+	{
+		return; //Not needed to save scene specific info in GameManager
 	}
 }
 

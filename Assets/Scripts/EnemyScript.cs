@@ -60,7 +60,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         aiTargetScript = GetComponent<AITarget>();
 		bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
         barkdelay = Random.Range(2f, 10f);
-        SaveSystem.AddSaveable(this);
+        SaveSystem.AddSceneSaveable(this);
 
     }
 
@@ -252,7 +252,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         barkdelay = Random.Range(2f, 10f);
     }
 
-	public void Save(SaveSystem.AllSavedData dataHolder)
+	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
 	{
         //If this is null when this is called -> probably memory leak in the allSaveables in SaveSystem
         SaveSystem.EnemyData myData = new()
@@ -266,7 +266,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         dataHolder.enemyData.Add(Utilities.GetFullPathName(gameObject), myData);
 	}
 
-    public void Load(SaveSystem.AllSavedData data)
+    public void LoadSceneSpecific(SaveSystem.AllSavedData data)
     {
         SaveSystem.EnemyData myData = data.enemyData[Utilities.GetFullPathName(gameObject)];
 
@@ -297,4 +297,14 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         transform.position = myData.pos.GetVector3();
 
         }
+
+	public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
+	{
+        return; //Enemies are saved only in seperate scenes
+    }
+
+	public void LoadGeneric(SaveSystem.AllSavedData data)
+	{
+		return; //Enemies are saved only in seperate scenes
+	}
 }

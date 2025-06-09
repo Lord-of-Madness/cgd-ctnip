@@ -20,7 +20,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SaveSystem.AddSaveable(this);
+        SaveSystem.AddGeneralSaveable(this);
 
         if (GameManager.Instance.MansionKeyPickedUp)
         {
@@ -80,18 +80,33 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     }
     public void GoToBasementScene()
     {
-        SceneManager.LoadScene("BasementScene");
+        SceneTransitionManager.LoadNewScene("BasementScene");
     }
 
-    public void Save(SaveSystem.AllSavedData dataHolder)
+    public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
 	{
         dataHolder.gramophoneLevelData = new SaveSystem.GramophoneLevelData { generatorFixed = GeneratorFixed };
 	}
 
-	public void Load(SaveSystem.AllSavedData data)
+	public void LoadGeneric(SaveSystem.AllSavedData data)
 	{
+        //First gramophone entry
+        if (data.gramophoneLevelData == null) { TurnGeneratorOn(); return; }
+
+        //State changed externally -> don't count on the saved data
         if (GameManager.Instance.GramophoneSceneExternalChange) { GameManager.Instance.GramophoneSceneExternalChange = false;  return; }
+
         if (data.gramophoneLevelData.generatorFixed && !GeneratorFixed) TurnGeneratorOn();
         else if (!data.gramophoneLevelData.generatorFixed && GeneratorFixed) TurnGeneratorOff();
+	}
+
+	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
+	{
+		return; //All info in this manager should transition to all other scenes 
+	}
+
+	public void LoadSceneSpecific(SaveSystem.AllSavedData data)
+	{
+		return; //All info in this manager should transition to all other scenes 
 	}
 }

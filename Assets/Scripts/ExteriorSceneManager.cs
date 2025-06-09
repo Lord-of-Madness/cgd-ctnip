@@ -20,7 +20,7 @@ public class ExteriorSceneManager : MonoBehaviour
     }
     public void EnterMansion()
     {
-        SceneManager.LoadScene("GramofonScene");
+        SceneTransitionManager.LoadNewScene("GramofonScene");
     }
     public void ShowOutsideDialogue()
     {

@@ -21,7 +21,7 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
 
 	private void Start()
 	{
-	    SaveSystem.AddSaveable(this);	
+	    SaveSystem.AddSceneSaveable(this);	
 	}
 
 	public void InteractDoor(bool front)
@@ -51,17 +51,27 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
     public void Lock() => locked = true;
     public void Unlock() => locked = false;
 
-	public void Save(SaveSystem.AllSavedData dataHolder)
+	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
 	{
 		dataHolder.doorData.Add(Utilities.GetFullPathName(gameObject), new SaveSystem.DoorData() {isOpen = isOpen});
 	}
 
-	public void Load(SaveSystem.AllSavedData data)
+	public void LoadSceneSpecific(SaveSystem.AllSavedData data)
 	{
 		bool incomingIsOpen = data.doorData[Utilities.GetFullPathName(gameObject)].isOpen;
 
 
         if (incomingIsOpen) OpenDoor(true);
         else CloseDoor();
+	}
+
+	public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
+	{
+        return; //All doors are only scene specific
+	}
+
+	public void LoadGeneric(SaveSystem.AllSavedData data)
+	{
+		return; //All doors are only scene specific
 	}
 }

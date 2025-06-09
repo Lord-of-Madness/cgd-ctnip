@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -21,6 +22,7 @@ public class Document
     public string name;
     public List<Page> pages;
     public DocumentType type;
+    [JsonConstructor]
     public Document(string name, List<Page> pages, DocumentType type)
     {
         this.name = name;

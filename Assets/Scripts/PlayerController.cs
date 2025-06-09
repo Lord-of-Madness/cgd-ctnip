@@ -139,7 +139,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
             ToolSound.clip = playerData.SelectedTool.reloadSound;
             ToolSound.Play();
         });
-        SaveSystem.AddSaveable(this);
+        SaveSystem.AddSceneSaveable(this);
+        SaveSystem.AddGeneralSaveable(this);
     }
 
 
@@ -365,7 +366,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
 	private void OnDestroy()
 	{
-        Debug.Log("Destroying character....");
+        //Debug.Log("Destroying character....");
+        SaveSystem.RemoveGenSaveable(this);
 	}
 
 	void SetAnimatorValuesMovement()
@@ -546,7 +548,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         bodyArmature.transform.rotation = Quaternion.identity;
 
         //Otherwise there is bug if switching in the middle of attack
-        bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
+        if (bodyAnimator != null)
+            bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
     }
 
     public void EnablePlayerControl()
@@ -601,7 +604,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         lineRenderer.positionCount = 0;
         aimLaserVisible = false;
         curAimDir = Vector3.zero;
-		bodyAnimator.SetBool(GlobalConstants.animAimID, false);
+
+        if (bodyAnimator != null)
+		    bodyAnimator.SetBool(GlobalConstants.animAimID, false);
 	}
 	/// <summary>
 	/// Don't call this if object doesn't have a lineRenderer assigned.
@@ -612,13 +617,10 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         aimLaserVisible = true;
     }
 
-	public void Save(SaveSystem.AllSavedData dataHolder)
+	public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
 	{
-        SaveSystem.CharacterData myData = new SaveSystem.CharacterData()
-        {
-            name = charName,
-            pos = new Vector3JsonFriendly(transform.position)
-        }; 
+        SaveSystem.CharacterGenData myData = new SaveSystem.CharacterGenData();
+
         foreach (Tool tool in playerData.toolInspectorField)
         {
             SaveSystem.ToolData toolData = new()
@@ -644,13 +646,15 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 		myData.Codex = playerData.Codex;
 		myData.Inventory = playerData.Inventory;
 
-		dataHolder.charData.Add(charName, myData);
+        if (!dataHolder.charGenData.ContainsKey(charName))
+            dataHolder.charGenData.Add(charName, myData);
+        else
+            dataHolder.charGenData[charName] = myData;
 	}
 
-	public void Load(SaveSystem.AllSavedData data)
+	public void LoadGeneric(SaveSystem.AllSavedData data)
 	{
-        SaveSystem.CharacterData myData = data.charData[charName];
-        SetCharControllerPosition(myData.pos.GetVector3());
+        SaveSystem.CharacterGenData myData = data.charGenData[charName];
 
 		foreach (Tool tool in playerData.toolInspectorField)
 		{
@@ -680,6 +684,33 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
             StartCoroutine(Utilities.CallAfterSomeTime(() => bodyAnimator.SetBool(GlobalConstants.animRestartId, false), 0.5f));
         }
 	}
+
+
+	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
+	{
+		SaveSystem.CharacterSceneData myData = new SaveSystem.CharacterSceneData()
+		{
+			name = charName,
+			pos = new Vector3JsonFriendly(transform.position)
+		};
+
+		dataHolder.charSceneData.Add(charName, myData);
+	}
+
+	public void LoadSceneSpecific(SaveSystem.AllSavedData data)
+	{
+		SaveSystem.CharacterSceneData myData = data.charSceneData[charName];
+		SetCharControllerPosition(myData.pos.GetVector3());
+
+		//Restart ERIK Melee animation
+		if (charName == "Erik")
+		{
+			bodyAnimator.SetBool(GlobalConstants.animAttackID, false);
+			bodyAnimator.SetBool(GlobalConstants.animRestartId, true);
+			StartCoroutine(Utilities.CallAfterSomeTime(() => bodyAnimator.SetBool(GlobalConstants.animRestartId, false), 0.5f));
+		}
+	}
+
 
     internal void PlayNope()
     {
