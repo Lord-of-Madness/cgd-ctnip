@@ -120,6 +120,8 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	}
     public void CinematicStart()
     {
+        generatorPosition.gameObject.SetActive(true);
+        doorPosition.gameObject.SetActive(true);
         GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = true;
         GameManager.Instance.ActivePlayer.DisablePlayerControl();
         GameManager.Instance.ActivePlayer.gameObject.GetComponent<AITarget>().target = generatorPosition;
