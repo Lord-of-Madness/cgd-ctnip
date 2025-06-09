@@ -27,6 +27,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 	float timeStaggeredAfterHit = 1f;
 
 	bool staggered = false;
+    [SerializeField] bool staggerable = true;
 
 	float timeStaggered = 0f;
 
@@ -193,7 +194,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     public void GetStaggered()
     {
         //Debug.Log("I got staggered");
-        if (!enabled) return;
+        if (!enabled ||!staggerable) return;
         if (attacking) FinishAttacking();
         DamageTakenAudioSource.Play();
 

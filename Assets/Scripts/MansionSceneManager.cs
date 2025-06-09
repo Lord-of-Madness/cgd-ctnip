@@ -15,6 +15,9 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	[SerializeField] EnemyScript scaryEnemy;
 	[SerializeField] Trigger scaryTrigger;
 
+	bool ScaryTriggerTriggered = false;
+	bool ScareHappened = false;
+
 	private void Start()
 	{
 		if (disableSwap)
@@ -26,6 +29,19 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		if (disableSwap) 
 			GameManager.Instance.inputActions.Player.SwapCharacters.Enable();
+	}
+	public void OnFlashed()
+	{
+		if (ScareHappened)
+		{
+			scaryEnemy.gameObject.SetActive(false);
+        }
+		if (ScaryTriggerTriggered)
+		{
+			ScaryTriggerTriggered = false;
+			scaryEnemy.Bark();
+			ScareHappened = true;
+        }
 	}
 
 	public void PickUpKey()
@@ -65,5 +81,6 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	public void ScaryMoment()
 	{
 		scaryEnemy.gameObject.SetActive(true);
+        ScaryTriggerTriggered = true;
     }
 }
