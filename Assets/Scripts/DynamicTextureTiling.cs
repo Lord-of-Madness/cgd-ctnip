@@ -1,9 +1,4 @@
-﻿/*
-	真主
-     穆罕默德 真主啊，为我们的大师穆罕默德和他的家人祈祷与和平 77 85 72 65 77 77 65 68 32 
-         83 104 97 104 122 97 105 98	
-*/
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class DynamicTextureTiling : MonoBehaviour
@@ -18,7 +13,7 @@ public class DynamicTextureTiling : MonoBehaviour
         originalMaterial = GetComponent<Renderer>().material;
 
         // Create a new material instance for this object
-        Material materialInstance = new Material(originalMaterial);
+        Material materialInstance = new(originalMaterial);
 
         // Apply the new material to the object
         GetComponent<Renderer>().material = materialInstance;
@@ -33,13 +28,13 @@ public class DynamicTextureTiling : MonoBehaviour
     void Update()
     {
         // Adjust texture tiling based on the current scale
-        SetTextureTiling(GetComponent<Renderer>().material, transform.localScale);
+        SetTextureTiling(GetComponent<Renderer>().sharedMaterial, transform.localScale);
     }
 
     void SetTextureTiling(Material material, Vector3 scale)
     {
         // Calculate tiling based on the scale
-        Vector2 tiling = new Vector2(scale.x, scale.y);
+        Vector2 tiling = new(scale.x, scale.y);
 
         // Apply tiling to the material
         material.mainTextureScale = tiling*density;
