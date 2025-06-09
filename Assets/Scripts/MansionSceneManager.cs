@@ -12,6 +12,11 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
 	[SerializeField]
 	DoorOpen[] doorsToBeOpened;
+	[SerializeField] EnemyScript scaryEnemy;
+	[SerializeField] Trigger scaryTrigger;
+
+	bool ScaryTriggerTriggered = false;
+	bool ScareHappened = false;
 
 	private void Start()
 	{
@@ -25,24 +30,38 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		if (disableSwap) 
 			GameManager.Instance.inputActions.Player.SwapCharacters.Enable();
 	}
+	public void OnFlashed()
+	{
+		if (ScareHappened)
+		{
+			scaryEnemy.gameObject.SetActive(false);
+        }
+		if (ScaryTriggerTriggered)
+		{
+			ScaryTriggerTriggered = false;
+			scaryEnemy.Bark();
+			ScareHappened = true;
+        }
+	}
 
 	public void PickUpKey()
 	{
 		KeyPickedUp = true;
 		lightsToBeTurnedOff.TurnOffAllChildren();
 		foreach (var door in doorsToBeOpened) door.OpenDoor(true);
-		keyObject.gameObject.SetActive(false);
+		keyObject.SetActive(false);
 		GameManager.Instance.MansionKeyPickedUp = true;
 		GameManager.Instance.GramophoneGenFixed = false;
 		GameManager.Instance.GramophoneSceneExternalChange = true;
-	}
+		scaryTrigger.gameObject.SetActive(true);
+    }
 
 	public void RevertKeyPickUp()
 	{
 		KeyPickedUp = false;
 		lightsToBeTurnedOff.TurnOnAllChildren();
 		foreach (var door in doorsToBeOpened) door.CloseDoor();
-		keyObject.gameObject.SetActive(true);
+		keyObject.SetActive(true);
 		
 		EnemiesReleased = false;
 		GameManager.Instance.MansionKeyPickedUp = false;
@@ -62,6 +81,11 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		if (savedData.mansionLevelData.keyPickedUp) PickUpKey();
 		else RevertKeyPickUp();
 	}
+	public void ScaryMoment()
+	{
+		scaryEnemy.gameObject.SetActive(true);
+        ScaryTriggerTriggered = true;
+    }
 
 	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
 	{
