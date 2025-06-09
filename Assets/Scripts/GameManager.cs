@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
         {
             Instance.bethPC = bethPC;
             Instance.erikPC = erikPC; //These are just references set in inspector -> have to be reinserted in each scene
-            Instance.charsReassigned.Invoke();
             if (Instance.activeChar != activeChar) { Instance.activeChar = activeChar; Instance.onStartChangeChar = true; }
+            Instance.charsReassigned.Invoke();
             Destroy(gameObject);
             return;
         }
