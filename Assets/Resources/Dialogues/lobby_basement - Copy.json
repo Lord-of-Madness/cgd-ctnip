@@ -1,0 +1,116 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "Is that blood?",
+            "Who": "ERIK",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "Sure is.",
+            "Who": "ELISABETH",
+            "children": [
+                4
+            ]
+        },
+        {
+            "id": 4,
+            "Text": "Damn, door's locked. Fireproof. Can't kick that down.",
+            "Who": "ELISABETH",
+            "children": [
+                5
+            ]
+        },
+        {
+            "id": 5,
+            "Text": "Maybe the key's somewhere around?",
+            "Who": "ERIK",
+            "children": [
+                6
+            ]
+        },
+        {
+            "id": 6,
+            "Text": "Check around here. I'll look upstairs.",
+            "Who": "ELISABETH",
+            "children": [
+                7
+            ]
+        },
+        {
+            "id": 7,
+            "Text": "That's a horrible idea.",
+            "Who": "ERIK",
+            "children": [
+                8
+            ]
+        },
+        {
+            "id": 8,
+            "Text": "I'll be fine, I have a gun.",
+            "Who": "ELISABETH",
+            "children": [
+                9
+            ]
+        },
+        {
+            "id": 9,
+            "Text": "What about me? Why don't I get a gun?'",
+            "Who": "ERIK",
+            "children": [
+                10
+            ]
+        },
+        {
+            "id": 10,
+            "Text": "Firearms do not belong in the hands of children.",
+            "Who": "ELISABETH",
+            "children": [
+                11
+            ]
+        },
+        {
+            "id": 11,
+            "Text": "Fuck you.",
+            "Who": "ERIK",
+            "children": [
+                12
+            ]
+        },
+        {
+            "id": 12,
+            "Text": "Off you go. Good luck.",
+            "Who": "ELISABETH",
+            "children": [
+                13
+            ]
+        },
+        {
+            "id": 13,
+            "Text": "...you too.",
+            "Who": "ERIK",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "",
+            "children": []
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}
