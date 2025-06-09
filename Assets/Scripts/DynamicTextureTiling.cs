@@ -33,8 +33,11 @@ public class DynamicTextureTiling : MonoBehaviour
 
     void SetTextureTiling(Material material, Vector3 scale)
     {
+
         // Calculate tiling based on the scale
         Vector2 tiling = new(scale.x, scale.y);
+        if (scale.y==1) tiling = new(scale.x, scale.z);
+
 
         // Apply tiling to the material
         material.mainTextureScale = tiling*density;
