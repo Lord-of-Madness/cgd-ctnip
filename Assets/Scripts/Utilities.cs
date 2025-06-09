@@ -39,7 +39,7 @@ public class Utilities
 
 	public static bool ActivePlayerCheck(GameObject potentialPlayer)
 	{
-		return potentialPlayer.TryGetComponent(out PlayerController playerController) && playerController.IsControlledByPlayer() || playerController.unlessIFuckingWantTo;
+		return potentialPlayer.TryGetComponent(out PlayerController playerController) && (playerController.IsControlledByPlayer() || playerController.unlessIFuckingWantTo);
 			
 	}
 
