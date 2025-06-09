@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField]
     bool isRunning = false;
     [SerializeField]
-    float rotationSpeed = 8.0f;
+    float rotationSpeed = 0.8f;
+    [SerializeField]
+    float rotationSpeedTankControls = 0.035f;
 
     Vector3 curVelocity = Vector3.zero;
 
@@ -420,7 +422,19 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
                 bodyArmature.transform.rotation = desiredRotation;
             }
             else
-                bodyArmature.transform.rotation = Quaternion.Slerp(bodyArmature.transform.rotation, desiredRotation, rotationSpeed);
+            {
+                switch (moveOption)
+                {
+                    case MOVEMENT_OPTION.cameraRelative:
+                        bodyArmature.transform.rotation = Quaternion.Slerp(bodyArmature.transform.rotation, desiredRotation, rotationSpeed);
+                        break;
+                    case MOVEMENT_OPTION.characterRelative:
+						bodyArmature.transform.rotation = Quaternion.Slerp(bodyArmature.transform.rotation, desiredRotation, rotationSpeedTankControls);
+						break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 
