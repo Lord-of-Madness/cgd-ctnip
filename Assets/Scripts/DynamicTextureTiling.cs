@@ -10,7 +10,7 @@ public class DynamicTextureTiling : MonoBehaviour
     void Start()
     {
         // Ensure we have a material
-        originalMaterial = GetComponent<Renderer>().material;
+        originalMaterial = GetComponent<Renderer>().sharedMaterial;
 
         // Create a new material instance for this object
         Material materialInstance = new(originalMaterial);
