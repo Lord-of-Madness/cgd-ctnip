@@ -169,6 +169,8 @@ public class SaveSystem:MonoBehaviour
 		public GameManagerData gameManagerData;
 		public MansionLevelData mansionLevelData;
 		public GramophoneLevelData gramophoneLevelData;
+
+		public Dictionary<string, RemovableObjectData> remObjData = new();
 	}
 
 
@@ -209,6 +211,12 @@ public class SaveSystem:MonoBehaviour
 		public bool following;
 		public bool aggroed;
 
+	}
+
+	[Serializable]
+	public class RemovableObjectData
+	{
+		public bool isRemoved;
 	}
 
 	[Serializable]
