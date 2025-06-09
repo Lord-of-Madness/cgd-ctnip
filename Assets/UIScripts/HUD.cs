@@ -25,17 +25,22 @@ public class HUD : MonoBehaviour
         BindHPChanged();
 
 
-        GameManager.Instance.charsReassigned.AddListener(() => {
+        GameManager.Instance.charsReassigned.AddListener(() =>
+        {
             if (GameManager.Instance.OtherPlayer == null) OffPortrait.SetActive(false);
             BindHPChanged();
-            ShowHUD(GameManager.Instance.activeChar); });
+            ShowHUD(GameManager.Instance.activeChar);
+        });
         if (GameManager.Instance.OtherPlayer == null) OffPortrait.SetActive(false);
-        
+
     }
     public void BindHPChanged()
     {
-        GameManager.Instance.erikPC.playerData.OnHPChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
-        GameManager.Instance.bethPC.playerData.OnHPChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
+        if (GameManager.Instance.erikPC != null)
+            GameManager.Instance.erikPC.playerData.OnHPChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
+
+        if (GameManager.Instance.bethPC != null)
+            GameManager.Instance.bethPC.playerData.OnHPChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
     }
 
 
@@ -45,11 +50,11 @@ public class HUD : MonoBehaviour
         {
             case PlayerCharacter.Beth:
                 MainSprite = BethPotrait[GameManager.Instance.bethPC.playerData.HP];
-                OffSprite = ErikPotrait[GameManager.Instance.erikPC.playerData.HP];
+                if (GameManager.Instance.OtherPlayer != null) OffSprite = ErikPotrait[GameManager.Instance.erikPC.playerData.HP];
                 break;
             case PlayerCharacter.Erik:
                 MainSprite = ErikPotrait[GameManager.Instance.erikPC.playerData.HP];
-                OffSprite = BethPotrait[GameManager.Instance.bethPC.playerData.HP];
+                if (GameManager.Instance.OtherPlayer != null) OffSprite = BethPotrait[GameManager.Instance.bethPC.playerData.HP];
                 break;
             default:
                 Debug.LogError("Unknown character");
