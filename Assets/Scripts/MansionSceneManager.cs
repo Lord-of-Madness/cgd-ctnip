@@ -29,6 +29,8 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		if (disableSwap) 
 			GameManager.Instance.inputActions.Player.SwapCharacters.Enable();
+
+		SaveSystem.RemoveGenSaveable(this);
 	}
 	public void OnFlashed()
 	{
