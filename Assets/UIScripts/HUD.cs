@@ -21,9 +21,13 @@ public class HUD : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.charChanged.AddListener(() => ShowHUD(GameManager.Instance.activeChar));
+        GameManager.Instance.charsReassigned.AddListener(() => {
+            if (GameManager.Instance.OtherPlayer == null) OffPortrait.SetActive(false);
+            ShowHUD(GameManager.Instance.activeChar); });
         if (GameManager.Instance.OtherPlayer == null) OffPortrait.SetActive(false);
         
     }
+
 
     public void ShowHUD(PlayerCharacter character)
     {

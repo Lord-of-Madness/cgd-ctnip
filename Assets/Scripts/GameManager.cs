@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     public InputActionsGen inputActions;
 
     public UnityEvent charChanged;
+    public UnityEvent charsReassigned;
 
     bool onStartChangeChar = false;
 
@@ -64,8 +65,9 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 
 		if (Instance != null && Instance != this)//So it can be in multiple scenes for testing, but does not appear twice
         {
-            Instance.bethPC = this.bethPC;
-            Instance.erikPC = this.erikPC; //These are just references set in inspector -> have to be reinserted in each scene
+            Instance.bethPC = bethPC;
+            Instance.erikPC = erikPC; //These are just references set in inspector -> have to be reinserted in each scene
+            Instance.charsReassigned.Invoke();
             if (Instance.activeChar != activeChar) { Instance.activeChar = activeChar; Instance.onStartChangeChar = true; }
             Destroy(gameObject);
             return;
