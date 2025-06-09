@@ -29569,6 +29569,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: cooldown
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: Lighttime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: lightstick
+      value: 
+      objectReference: {fileID: 2100000, guid: 080a43a67b5fbab4bba0daeebb1b1537, type: 2}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: flickerEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906746148250170697, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 080a43a67b5fbab4bba0daeebb1b1537, type: 2}
     - target: {fileID: 6431640633730123917, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
       propertyPath: m_Name
       value: Street_Light_A_06
@@ -30196,6 +30216,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: Darktime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: cooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: lightstick
+      value: 
+      objectReference: {fileID: 2100000, guid: e4d4c7e0e4ec9e14298cafd90c64a93f, type: 2}
+    - target: {fileID: 3461638191468608257, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: flickerEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906746148250170697, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e4d4c7e0e4ec9e14298cafd90c64a93f, type: 2}
     - target: {fileID: 6431640633730123917, guid: bde2a622d06ff1a41a155d6e61fb9a7b, type: 3}
       propertyPath: m_Name
       value: Street_Light_A_06 (5)
@@ -47875,7 +47915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5034820248550353245, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -785.50653
+      value: -984.314
       objectReference: {fileID: 0}
     - target: {fileID: 5172833707029566822, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_StaticEditorFlags
