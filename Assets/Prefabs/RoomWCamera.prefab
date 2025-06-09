@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3904316386019687442}
   - component: {fileID: 580718318195657189}
   - component: {fileID: 1128790815600076943}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RoomWCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 2239970391074569434}
   - component: {fileID: 9219766303424294971}
   - component: {fileID: 8346319231165281554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
