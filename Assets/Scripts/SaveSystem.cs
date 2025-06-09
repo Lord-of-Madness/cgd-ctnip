@@ -106,7 +106,16 @@ public class SaveSystem:MonoBehaviour
 	public static void SaveGenData()
 	{
 		UpdateSceneSavePath();
-		savedGenData = new AllSavedData();
+
+		//Load all the data from previous save to avoid losing data
+		if (File.Exists(completeGenericSavePath))
+		{
+			string jsonSave = System.IO.File.ReadAllText(completeGenericSavePath);
+			savedGenData = JsonConvert.DeserializeObject<AllSavedData>(jsonSave);
+		}
+		else
+			savedGenData = new AllSavedData();
+
 		foreach (ISaveable s in allGenSaveables)
 			s.SaveGeneric(savedGenData);
 		string json = JsonConvert.SerializeObject(savedGenData);
