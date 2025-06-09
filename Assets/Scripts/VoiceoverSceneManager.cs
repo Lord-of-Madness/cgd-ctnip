@@ -31,7 +31,7 @@ public class VoiceoverSceneManager : MonoBehaviour
     }
     void Trasition()
     {
-        SceneManager.LoadScene("Exterior", LoadSceneMode.Single);
+        SceneTransitionManager.LoadNewScene("Exterior");
     }
     void ChangeImage()
     {

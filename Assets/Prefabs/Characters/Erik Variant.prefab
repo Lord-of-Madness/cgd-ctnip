@@ -421,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 8157661885121772640, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_Animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6681384696238500434}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6470001187893461129, guid: dac31afa2165c4645b3b709348719ad9, type: 3}

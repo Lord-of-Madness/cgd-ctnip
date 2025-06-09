@@ -28,6 +28,9 @@ public class MainMenuController : MonoBehaviour
         {
             Debug.Log(item);
         }*/
+
+        SaveSystem.RemoveAllSavedData();
+        SaveSystem.CreateSaveDir();
         
         Light light = audioSource.GetComponent<Light>();
         float baseintensity = light.intensity;
@@ -52,12 +55,12 @@ public class MainMenuController : MonoBehaviour
             }, startGameClip.length));
         }, FLICKERTIME));
 
-        
     }
     
     public void Load()
     {
         Debug.Log("Load");
+        SaveSystem.LoadLastActiveScene();
     }
     public void QuitGame()
     {

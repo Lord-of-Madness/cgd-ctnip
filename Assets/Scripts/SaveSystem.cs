@@ -21,16 +21,22 @@ public class SaveSystem:MonoBehaviour
 	}
 	private void Start()
 	{
+		CreateSaveDir();
+
+		if (!allGenSaveables.Contains(GameManager.Instance) && GameManager.Instance != null)
+			AddGeneralSaveable(GameManager.Instance);
+
+		UpdateSceneSavePath();
+		
+	}
+
+	public static void CreateSaveDir()
+	{
 		if (!Directory.Exists(GlobalConstants.savePath))
 		{
 			Directory.CreateDirectory(GlobalConstants.savePath);
 		}
 
-		if (!allGenSaveables.Contains(GameManager.Instance))
-			AddGeneralSaveable(GameManager.Instance);
-
-		UpdateSceneSavePath();
-		
 	}
 
 	public static void RemoveGenSaveable(ISaveable saveable)
@@ -82,9 +88,9 @@ public class SaveSystem:MonoBehaviour
 
 		else
 		{
-			Debug.LogError("No save file found -> loading exterior");
+			Debug.LogWarning("No save file found -> doing nothing");
 
-			SceneTransitionManager.LoadNewScene(GlobalConstants.exteriorSceneName);
+			//SceneTransitionManager.LoadNewScene(GlobalConstants.exteriorSceneName);
 
 		}
 	}
@@ -132,6 +138,8 @@ public class SaveSystem:MonoBehaviour
 
 	public static void SaveGenData()
 	{
+		if (allGenSaveables.Count <= 0) return;
+
 		UpdateSceneSavePath();
 
 		//Load all the data from previous save to avoid losing data
