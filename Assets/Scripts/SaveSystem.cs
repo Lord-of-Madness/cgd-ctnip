@@ -182,6 +182,7 @@ public class SaveSystem:MonoBehaviour
 	[Serializable]
 	public class CharacterGenData
 	{
+		public int HP;
 
 		public ToolData revolverData;
 		public ToolData cameraData;
