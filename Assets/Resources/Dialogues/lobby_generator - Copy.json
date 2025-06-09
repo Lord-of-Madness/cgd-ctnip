@@ -1,0 +1,36 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "Look, a generator. Looks like it's still running, power's on.",
+            "Who": "ERIK",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "Just barely. Whoever filled it might not be around anymore.",
+            "Who": "ELISABETH",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "",
+            "children": []
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}

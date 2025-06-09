@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 		Instance.inputActions.Player.Enable();
 		Time.timeScale = 1;
         GameOverScreenScript.instance.Hide();
-        SaveSystem.Load();
+        SaveSystem.LoadSceneData();
     }
 
 	public void Save(SaveSystem.AllSavedData dataHolder)

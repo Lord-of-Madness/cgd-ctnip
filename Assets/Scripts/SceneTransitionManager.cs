@@ -32,7 +32,7 @@ public class SceneTransitionManager : MonoBehaviour
 
 	public static void LoadNewScene(string sceneName)
 	{
-		SaveSystem.Save();
+		SaveSystem.SaveSceneData();
 		Instance.StartCoroutine(LoadNewSceneAndThenLoadSave(sceneName));
 	}
 
@@ -45,7 +45,7 @@ public class SceneTransitionManager : MonoBehaviour
 			yield return null;
 		}
 
-        SaveSystem.Load();
+        SaveSystem.LoadSceneData();
         Debug.Log("Called load in the new scene");
         yield break;
 	}

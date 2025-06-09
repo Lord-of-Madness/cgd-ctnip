@@ -7,14 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class SaveSystem:MonoBehaviour
 {
-	static string completeSavePath;
-	static AllSavedData savedData;
-	static List<ISaveable> allSaveables = new();
+	static string completeGenericSavePath;
+	static string completeSceneSavePath;
+	static AllSavedData savedSceneData;
+	static List<ISaveable> allSceneSaveables = new();
 
 	bool firstUpdate = true;
 	private void Awake()
 	{
-		allSaveables.Clear();
+		allSceneSaveables.Clear();
 	}
 	private void Start()
 	{
@@ -25,56 +26,57 @@ public class SaveSystem:MonoBehaviour
 
 		AddSaveable(GameManager.Instance);
 
-		UpdateSavePath();
+		UpdateSceneSavePath();
 		
 	}
 
 
-	static void UpdateSavePath()
+	static void UpdateSceneSavePath()
 	{
-		completeSavePath = GlobalConstants.savePath + "/" + SceneManager.GetActiveScene().name + ".json";
+		completeSceneSavePath = GlobalConstants.savePath + "/" + SceneManager.GetActiveScene().name + ".json";
+		completeGenericSavePath = GlobalConstants.savePath + "/generalSave.json";
 	}
 
-	public static void DeleteCurrentSave()
+	public static void DeleteCurrentSceneSave()
 	{
-		UpdateSavePath();
-		File.Delete(completeSavePath);
+		UpdateSceneSavePath();
+		File.Delete(completeSceneSavePath);
 	}
 
-	public static void Save()
+	public static void SaveSceneData()
 	{
-		UpdateSavePath();
-		savedData = new AllSavedData();
-		foreach (ISaveable s in allSaveables)
-			s.Save(savedData);
-		string json = JsonConvert.SerializeObject(savedData);
-		File.WriteAllText(completeSavePath, json); 
-		Debug.Log("Data saved to " + completeSavePath);
-		savedData = null; //Save memory
+		UpdateSceneSavePath();
+		savedSceneData = new AllSavedData();
+		foreach (ISaveable s in allSceneSaveables)
+			s.Save(savedSceneData);
+		string json = JsonConvert.SerializeObject(savedSceneData);
+		File.WriteAllText(completeSceneSavePath, json); 
+		Debug.Log("Data saved to " + completeSceneSavePath);
+		savedSceneData = null; //Save memory
 	}
 
-	public static void Load()
+	public static void LoadSceneData()
 	{
-		UpdateSavePath();
-		if (File.Exists(completeSavePath))
+		UpdateSceneSavePath();
+		if (File.Exists(completeSceneSavePath))
 		{
-			string json = System.IO.File.ReadAllText(completeSavePath);
-			savedData = JsonConvert.DeserializeObject<AllSavedData>(json);
+			string json = System.IO.File.ReadAllText(completeSceneSavePath);
+			savedSceneData = JsonConvert.DeserializeObject<AllSavedData>(json);
 
-			foreach (ISaveable s in allSaveables)
-				s.Load(savedData);
+			foreach (ISaveable s in allSceneSaveables)
+				s.Load(savedSceneData);
 		}
 		else
 		{
-			Save();
+			SaveSceneData();
 			Debug.LogWarning("No save file found -> saving...");
 		}
 
-		savedData = null; //Save memory
+		savedSceneData = null; //Save memory
 
 	}
 
-	public static void AddSaveable(ISaveable s) => allSaveables.Add(s);
+	public static void AddSaveable(ISaveable s) => allSceneSaveables.Add(s);
 
 
 
