@@ -633,6 +633,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: attackPopPartOfAnim
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: meleeAttackHitScript
       value: 
       objectReference: {fileID: 2723644682306155440}
