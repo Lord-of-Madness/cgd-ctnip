@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 {
@@ -14,6 +12,8 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
 	[SerializeField]
 	DoorOpen[] doorsToBeOpened;
+	[SerializeField] EnemyScript scaryEnemy;
+	[SerializeField] Trigger scaryTrigger;
 
 	private void Start()
 	{
@@ -33,18 +33,19 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		KeyPickedUp = true;
 		lightsToBeTurnedOff.TurnOffAllChildren();
 		foreach (var door in doorsToBeOpened) door.OpenDoor(true);
-		keyObject.gameObject.SetActive(false);
+		keyObject.SetActive(false);
 		GameManager.Instance.MansionKeyPickedUp = true;
 		GameManager.Instance.GramophoneGenFixed = false;
 		GameManager.Instance.GramophoneSceneExternalChange = true;
-	}
+		scaryTrigger.gameObject.SetActive(true);
+    }
 
 	public void RevertKeyPickUp()
 	{
 		KeyPickedUp = false;
 		lightsToBeTurnedOff.TurnOnAllChildren();
 		foreach (var door in doorsToBeOpened) door.CloseDoor();
-		keyObject.gameObject.SetActive(true);
+		keyObject.SetActive(true);
 		
 		EnemiesReleased = false;
 		GameManager.Instance.MansionKeyPickedUp = false;
@@ -61,4 +62,8 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		if (savedData.mansionLevelData.keyPickedUp) PickUpKey();
 		else RevertKeyPickUp();
 	}
+	public void ScaryMoment()
+	{
+		scaryEnemy.gameObject.SetActive(true);
+    }
 }
