@@ -14,6 +14,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	DoorOpen[] doorsToBeOpened;
 	[SerializeField] EnemyScript scaryEnemy;
 	[SerializeField] Trigger scaryTrigger;
+	[SerializeField] GameObject blockadeOfTransition;
 
 	bool ScaryTriggerTriggered = false;
 	bool ScareHappened = false;
@@ -56,7 +57,9 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		GameManager.Instance.GramophoneGenFixed = false;
 		GameManager.Instance.GramophoneSceneExternalChange = true;
 		scaryTrigger.gameObject.SetActive(true);
-    }
+		blockadeOfTransition.SetActive(false);
+
+	}
 
 	public void RevertKeyPickUp()
 	{
@@ -69,6 +72,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		GameManager.Instance.MansionKeyPickedUp = false;
 		GameManager.Instance.GramophoneGenFixed = true;
 		GameManager.Instance.GramophoneSceneExternalChange = false;
+		blockadeOfTransition.SetActive(true);
 	}
 
 	public void SaveGeneric(SaveSystem.AllSavedData saveData)
@@ -88,6 +92,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 				lightsToBeTurnedOff.TurnOnAllChildren();
 				KeyPickedUp = true;
 				keyObject.SetActive(false);
+				blockadeOfTransition.SetActive(false);
 			}
 			else
 				PickUpKey();
