@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     [Header("Movement")]
     [SerializeField]
     float speed = 100;
-    [SerializeField]
+    public
     MOVEMENT_OPTION moveOption = MOVEMENT_OPTION.cameraRelative;
     [SerializeField]
     bool controlledByPlayer = true;
@@ -113,7 +113,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     void Start()
     {
         //MyCollider = transform.Find("Capsule").GetComponent<Collider>();
-        
+        if (GameManager.Instance.tankControls) { moveOption = MOVEMENT_OPTION.characterRelative; }
+        else { moveOption = MOVEMENT_OPTION.cameraRelative; }
         MyCharController = GetComponent<CharacterController>();
 
         if (bodyArmature != null)
@@ -634,9 +635,14 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
 	public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
 	{
-        SaveSystem.CharacterGenData myData = new SaveSystem.CharacterGenData();
-
-        myData.HP = playerData.HP;
+        SaveSystem.CharacterGenData myData = new()
+        {
+            HP = playerData.HP,
+            moveOption = moveOption,
+            Documents = playerData.Documents,
+            Codex = playerData.Codex,
+            Inventory = playerData.Inventory
+        };
 
         foreach (Tool tool in playerData.toolInspectorField)
         {
@@ -659,10 +665,6 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
             }
         }
 
-		myData.Documents = playerData.Documents;
-		myData.Codex = playerData.Codex;
-		myData.Inventory = playerData.Inventory;
-
         if (!dataHolder.charGenData.ContainsKey(charName))
             dataHolder.charGenData.Add(charName, myData);
         else
@@ -674,8 +676,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         SaveSystem.CharacterGenData myData = data.charGenData[charName];
 
         playerData.HP = myData.HP;
+        moveOption = myData.moveOption;
 
-		foreach (Tool tool in playerData.toolInspectorField)
+        foreach (Tool tool in playerData.toolInspectorField)
 		{
 			switch (tool.toolName)
 			{

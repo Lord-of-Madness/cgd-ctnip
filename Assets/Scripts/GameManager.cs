@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 
     bool onStartChangeChar = false;
     internal bool secretActivated = true;
-
+    public bool tankControls = false;
 
     //Scene specific information
     public bool MansionKeyPickedUp { get; set; } = false;
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
         Instance = this;
         inputActions = new();
         DontDestroyOnLoad(Instance);
-        inputActions.Player.Enable();//TODO this will have to be moved to some scene init, not GameManager
+        if(ActivePlayer!=null) inputActions.Player.Enable();//TODO this will have to be moved to some scene init, not GameManager
     }
     void Start()
     {
@@ -226,6 +226,14 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		return; //Not needed to save scene specific info in GameManager
 	}
+    public void SetTankControls()
+    {
+        tankControls = true;
+    }
+    public void SetCameraRelativeControls()
+    {
+        tankControls = false;
+    }
 }
 
 public enum PlayerCharacter

@@ -145,7 +145,7 @@ public class SaveSystem:MonoBehaviour
 		//Load all the data from previous save to avoid losing data
 		if (File.Exists(completeGenericSavePath))
 		{
-			string jsonSave = System.IO.File.ReadAllText(completeGenericSavePath);
+			string jsonSave = File.ReadAllText(completeGenericSavePath);
 			savedGenData = JsonConvert.DeserializeObject<AllSavedData>(jsonSave);
 		}
 		else
@@ -167,7 +167,7 @@ public class SaveSystem:MonoBehaviour
 		UpdateSceneSavePath();
 		if (File.Exists(completeGenericSavePath))
 		{
-			string json = System.IO.File.ReadAllText(completeGenericSavePath);
+			string json = File.ReadAllText(completeGenericSavePath);
 			savedGenData = JsonConvert.DeserializeObject<AllSavedData>(json);
 
 			foreach (ISaveable s in allGenSaveables)
@@ -228,9 +228,11 @@ public class SaveSystem:MonoBehaviour
 
 		public ToolData revolverData;
 		public ToolData cameraData;
+		public MOVEMENT_OPTION moveOption;
 
 
-		public List<Document> Documents = new();
+
+        public List<Document> Documents = new();
 		public List<Document> Codex = new();
 		public List<Document> Inventory = new();
 	}
