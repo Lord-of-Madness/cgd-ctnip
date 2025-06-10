@@ -560,7 +560,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4336139240521320935}
   m_HandleRect: {fileID: 4050558101443588152}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1796,6 +1796,9 @@ MonoBehaviour:
   dialogTextLinePrefab: {fileID: 6415195125397591190, guid: 319e190855c550846b7bb6f284602b37, type: 3}
   dialogOptButtonPrefab: {fileID: 8239617153453572211, guid: 0e662890920425942bcc86bad5c67348, type: 3}
   dialogOptBoxPrefab: {fileID: 9207176290630625546, guid: 26b820ec70132784284a9405b47d801a, type: 3}
+  dialogueEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3092515534567185311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3780,7 +3783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: J to open Journal
+  m_text: V to show Controls in Journal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8c9faa90a7d62a4e99657434ff84085, type: 2}
   m_sharedMaterial: {fileID: 7978816560145389638, guid: e8c9faa90a7d62a4e99657434ff84085, type: 2}
@@ -4385,7 +4388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -984.314}
+  m_AnchoredPosition: {x: 0, y: -984.3141}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3510293900988239819

@@ -1,4 +1,6 @@
+using Mono.Cecil.Cil;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,11 +21,12 @@ public class Journal : MonoBehaviour
         BethPortrait.GetComponent<Button>().onClick.AddListener(() => { if(GameManager.Instance.activeChar != PlayerCharacter.Beth) SwitchCharacter(); });
         ErikPortrait.GetComponent<Button>().onClick.AddListener(() => { if(GameManager.Instance.activeChar != PlayerCharacter.Erik) SwitchCharacter(); });
         GameManager.Instance.inputActions.Player.Journal.performed += ctx => Show();
+        GameManager.Instance.inputActions.Player.Controls.performed += ctx => Show("Controls");
         GameManager.Instance.inputActions.Journal.Cancel.performed += ctx => Hide();
         GameManager.Instance.inputActions.Journal.JournalExit.performed += ctx => Hide();
         Hide();
     }
-    public void Show()
+    public void Show(string docname = "")
     {
         //TODO pause game
         SwapWasEnabled = GameManager.Instance.inputActions.Player.SwapCharacters.enabled && GameManager.Instance.OtherPlayer!=null;
@@ -44,22 +47,32 @@ public class Journal : MonoBehaviour
             ErikPortrait.SetActive(true);
         }
         SetCharLabelOrder();
-        switch (GameManager.APD.lastTypeAdded)
+        if(docname != "")
         {
-            case Document.DocumentType.Inventory:
-                OnInventoryPressed();
-                break;
-            case Document.DocumentType.Codex:
-                OnCodexPressed();
-                break;
-            case Document.DocumentType.Documents:
-            default:
-                OnNotesPressed();
-                break;
+            OnNotesPressed();
+            foreach (Document document in GameManager.Instance.ActivePlayer.playerData.Documents)
+                if(docname == document.name)
+                {
+                    documentUI.ShowDocument(document);
+                    break;
+                }
         }
+        else
+            switch (GameManager.APD.lastTypeAdded)
+            {
+                case Document.DocumentType.Inventory:
+                    OnInventoryPressed();
+                    break;
+                case Document.DocumentType.Codex:
+                    OnCodexPressed();
+                    break;
+                case Document.DocumentType.Documents:
+                default:
+                    OnNotesPressed();
+                    break;
+            }
         GameManager.Instance.inputActions.Player.Disable();
         GameManager.Instance.inputActions.Journal.Enable();
-        //Debug.Log(GameManager.Instance.inputActions.Journal.enabled);
         gameObject.SetActive(true);
         HUD.Instance.Hide();
     }

@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,24 @@ public class ExteriorSceneManager : MonoBehaviour
         audioSource.clip = ambientMusic;
         audioSource.Play();
         OutsideDT = DialogueTreeNode.DeserializeTree(Outside);
-        StartCoroutine(Utilities.CallAfterSomeTime(() => Dialogue.Instance.ShowCharacterWithText(MissionBriefDT),1f));
+        StartCoroutine(Utilities.CallAfterSomeTime(
+            () =>
+        {
+
+            Dialogue.Instance.dialogueEnded.AddListener(() =>
+            {
+                foreach (Document document in GameManager.Instance.ActivePlayer.playerData.Documents)
+                    if ("Controls" == document.name)
+                    {
+                        GameManager.Instance.erikPC.playerData.Documents.Add(document);
+                        break;
+                    }
+            });
+            Dialogue.Instance.ShowCharacterWithText(MissionBriefDT);
+            
+
+        }, 1f)
+            );
     }
     public void EnterMansion()
     {

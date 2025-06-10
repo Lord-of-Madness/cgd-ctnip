@@ -276,7 +276,7 @@ public class Dialogue : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.inputActions.Dialogue.Skip.performed += ctx => NextLine();
-        GameManager.Instance.inputActions.Dialogue.Cancel.performed += ctx => Hide();//Perhaps remove - callbacks would get called multiple times.
+        //GameManager.Instance.inputActions.Dialogue.Cancel.performed += ctx => Hide();//Perhaps remove - callbacks would get called multiple times.
         gameObject.SetActive(false);
 	}
 
