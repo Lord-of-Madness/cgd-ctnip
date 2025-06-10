@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     public UnityEvent charsReassigned;
 
     bool onStartChangeChar = false;
+    internal bool secretActivated = true;
 
 
     //Scene specific information

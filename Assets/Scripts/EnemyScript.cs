@@ -230,6 +230,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 
     void Die()
     {
+        GameManager.Instance.secretActivated = false;
         DeathAudioSource.Play();
         StopFollowingTarget();
         //myCollider.gameObject.SetActive(false);
