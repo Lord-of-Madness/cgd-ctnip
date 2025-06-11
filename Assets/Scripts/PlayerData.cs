@@ -18,7 +18,8 @@ public class Document
     {
         Documents,
         Codex,
-        Inventory
+        Inventory,
+        Voiceline
     }
     public string name;
     public List<Page> pages;

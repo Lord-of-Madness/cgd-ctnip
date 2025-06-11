@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
         playerData = GetComponent<PlayerData>();
 
-        Physics.gravity = new Vector3(0, -20, 0);
+        Physics.gravity = new(0, -20, 0);
 
         if (controlledByPlayer) StopFollowingOtherChar();
         if (lineRenderer != null) hasLineRenderer = true;
@@ -178,6 +178,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 	private void SwitchTool()
     {
         playerData.SwitchTool();
+        VoiceSource.PlayOneShot(playerData.SelectedTool.equipSound);
         onToolSwitched?.Invoke();
     }
 

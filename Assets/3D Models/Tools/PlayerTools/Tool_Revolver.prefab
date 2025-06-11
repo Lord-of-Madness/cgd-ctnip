@@ -29,6 +29,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
+      propertyPath: equipSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c9042bf40faa59a42805c45aed675ec9, type: 3}
+    - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: reloadTime
       value: 0.4
       objectReference: {fileID: 0}

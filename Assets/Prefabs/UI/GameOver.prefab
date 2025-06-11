@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 7671402677966301128}
   - component: {fileID: 3250806758477621635}
   - component: {fileID: 2319798491130409094}
+  - component: {fileID: 4908079954808767709}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -349,9 +350,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SaveSystem, Assembly-CSharp
-        m_MethodName: Load
+      - m_Target: {fileID: 4908079954808767709}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: LoadAfterDeath
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -361,3 +362,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4908079954808767709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3024070410367518255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c70ed7122f5f74e9b1bf671aa52805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
