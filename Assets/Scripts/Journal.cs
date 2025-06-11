@@ -14,6 +14,7 @@ public class Journal : MonoBehaviour
     [SerializeField] GameObject BethPortrait;
     [SerializeField] GameObject ErikPortrait;
     [SerializeField] GameObject JournalPaper;
+    [SerializeField] List<AudioClip> PageRustleSound;
     bool SwapWasEnabled;
     void Start()
     {
@@ -29,6 +30,7 @@ public class Journal : MonoBehaviour
     public void Show(string docname = "")
     {
         //TODO pause game
+        GameManager.Instance.ActivePlayer.VoiceSource.PlayOneShot(PageRustleSound[Random.Range(0,PageRustleSound.Count)]);
         SwapWasEnabled = GameManager.Instance.inputActions.Player.SwapCharacters.enabled && GameManager.Instance.OtherPlayer!=null;
         if (!SwapWasEnabled )
         {
@@ -84,6 +86,7 @@ public class Journal : MonoBehaviour
     }
     public void SwitchCharacter() {
         if (!SwapWasEnabled) return;
+        GameManager.Instance.ActivePlayer.VoiceSource.PlayOneShot(PageRustleSound[Random.Range(0, PageRustleSound.Count)]);
         GameManager.Instance.SwapCharacters();
         SetCharLabelOrder();
         OnNotesPressed();
@@ -110,6 +113,7 @@ public class Journal : MonoBehaviour
     }
     void OnBookmarkPressed()
     {
+        GameManager.Instance.ActivePlayer.VoiceSource.PlayOneShot(PageRustleSound[Random.Range(0, PageRustleSound.Count)]);
         Utilities.PurgeChildren(LabelBox);
         documentUI.CloseDocument();/*
         if(GameManager.Instance.activeChar == PlayerCharacter.Beth)
@@ -127,7 +131,7 @@ public class Journal : MonoBehaviour
         foreach (var document in documents)
         {
             Button b = Instantiate(JournalLabelPrefab, LabelBox);
-            b.onClick.AddListener(() => documentUI.ShowDocument(document));
+            b.onClick.AddListener(() => { GameManager.Instance.ActivePlayer.VoiceSource.PlayOneShot(PageRustleSound[Random.Range(0, PageRustleSound.Count)]); documentUI.ShowDocument(document); });
             b.GetComponentInChildren<TextMeshProUGUI>().text = document.name;
         }
     }
