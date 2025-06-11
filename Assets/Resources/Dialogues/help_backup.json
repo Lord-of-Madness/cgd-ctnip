@@ -1,0 +1,594 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "Here, lie down, I can help you.",
+            "Who": "ELISABETH",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "O-okay.",
+            "Who": "SURVIVOR",
+            "children": [
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "Text": "I'm gonna need you to tell me something at times, so I know the cure is working.",
+            "Who": "ELISABETH",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "Alright...",
+            "Who": "SURVIVOR",
+            "children": [
+                4
+            ]
+        },
+        {
+            "id": 4,
+            "Text": "Cross my heart and hope to die...",
+            "Who": "SURVIVOR",
+            "children": [
+                5
+            ]
+        },
+        {
+            "id": 5,
+            "Text": "Stick a needle in his eye",
+            "Who": "",
+            "children": [
+                6
+            ]
+        },
+        {
+            "id": 6,
+            "Text": "Wait a moment...",
+            "Who": "ERIK",
+            "children": [
+                77
+            ]
+        },
+        {
+            "id": 77,
+            "Text": "...",
+            "Who": "",
+            "children": [
+                7
+            ]
+        },
+        {
+            "id": 7,
+            "Text": "You gently push the eyeball aside. There is a moment of slight resistance and then you feel the tender, quivering tissue beyond.",
+            "Who": "MINIGAMESETUP",
+            "children": [
+                8
+            ]
+        },
+        {
+            "id": 8,
+            "Text": "...I spoke a lie...",
+            "Who": "SURVIVOR",
+            "children": [
+                901
+            ]
+        },
+        {
+            "id": 901,
+            "Text": "You're not sure which way to move the needle.",
+            "Who": "901",
+            "children": [
+                9011,
+                9014
+            ]
+        },
+        {
+            "id": 9011,
+            "Text": "Move the needle up",
+            "Who": "901",
+            "children": [
+                906
+            ]
+        },
+        {
+            "id": 9014,
+            "Text": "Push the needle deeper",
+            "Who": "901",
+            "children": [
+                902
+            ]
+        },
+        {
+            "id": 902,
+            "Text": "Something bad just went away. This seems like a good area to poke around.",
+            "Who": "902",
+            "children": [
+                9023,
+                9021,
+                9024
+            ]
+        },
+        {
+            "id": 9023,
+            "Text": "Pull the needle back",
+            "Who": "902",
+            "children": [
+                901
+            ]
+        },
+        {
+            "id": 9021,
+            "Text": "Move the needle up",
+            "Who": "902",
+            "children": [
+                907
+            ]
+        },
+        {
+            "id": 9024,
+            "Text": "Push the needle deeper",
+            "Who": "901",
+            "children": [
+                903
+            ]
+        },
+        {
+            "id": 903,
+            "Text": "The patient starts drooling. You probably shouldn't poke around here.",
+            "Who": "903",
+            "children": [
+                9033,
+                9031,
+                9034
+            ]
+        },
+        {
+            "id": 9033,
+            "Text": "Pull the needle back",
+            "Who": "903",
+            "children": [
+                902
+            ]
+        },
+        {
+            "id": 9031,
+            "Text": "Move the needle up",
+            "Who": "903",
+            "children": [
+                908
+            ]
+        },
+        {
+            "id": 9034,
+            "Text": "Push the needle deeper",
+            "Who": "903",
+            "children": [
+                904
+            ]
+        },
+        {
+            "id": 904,
+            "Text": "The patient's breathing becomes erratic. You severed something you shouldn't have.",
+            "Who": "904",
+            "children": [
+                9043,
+                9041
+            ]
+        },
+        {
+            "id": 9043,
+            "Text": "Pull the needle back",
+            "Who": "904",
+            "children": [
+                903
+            ]
+        },
+        {
+            "id": 9041,
+            "Text": "Move the needle up",
+            "Who": "904",
+            "children": [
+                909
+            ]
+        },
+        {
+            "id": 905,
+            "Text": "Bad memories, gone. This is good.",
+            "Who": "905",
+            "children": [
+                9054,
+                9051
+            ]
+        },
+        {
+            "id": 9054,
+            "Text": "Push the needle deeper",
+            "Who": "905",
+            "children": [
+                906
+            ]
+        },
+        {
+            "id": 9051,
+            "Text": "Move the needle up",
+            "Who": "905",
+            "children": [
+                9010
+            ]
+        },
+        {
+            "id": 906,
+            "Text": "The patient smiles. This feels great.",
+            "Who": "906",
+            "children": [
+                9061,
+                9062,
+                9063,
+                9064
+            ]
+        },
+        {
+            "id": 9061,
+            "Text": "Move the needle up",
+            "Who": "906",
+            "children": [
+                9011
+            ]
+        },
+        {
+            "id": 9062,
+            "Text": "Move the needle down",
+            "Who": "906",
+            "children": [
+                901
+            ]
+        },
+        {
+            "id": 9063,
+            "Text": "Pull the needle back",
+            "Who": "906",
+            "children": [
+                905
+            ]
+        },
+        {
+            "id": 9064,
+            "Text": "Push the needle deeper",
+            "Who": "906",
+            "children": [
+                907
+            ]
+        },
+        {
+            "id": 907,
+            "Text": "...I never really wanted to die...",
+            "Who": "SURVIVOR",
+            "children": [
+
+            ]
+        },
+        {
+            "id": 908,
+            "Text": "This feels good. Whatever was here, this man won't have to worry about it anymore.",
+            "Who": "908",
+            "children": [
+                9081,
+                9082,
+                9083,
+                9084
+            ]
+        },
+        {
+            "id": 9081,
+            "Text": "Move the needle up",
+            "Who": "908",
+            "children": [
+                9013
+            ]
+        },
+        {
+            "id": 9082,
+            "Text": "Move the needle down",
+            "Who": "908",
+            "children": [
+                903
+            ]
+        },
+        {
+            "id": 9083,
+            "Text": "Pull the needle back",
+            "Who": "908",
+            "children": [
+                907
+            ]
+        },
+        {
+            "id": 9084,
+            "Text": "Push the needle deeper",
+            "Who": "908",
+            "children": [
+                909
+            ]
+        },
+        {
+            "id": 909,
+            "Text": "You have no idea what to do here.",
+            "Who": "909",
+            "children": [
+                9091,
+                9092,
+                9093
+            ]
+        },
+        {
+            "id": 9091,
+            "Text": "Move the needle up",
+            "Who": "909",
+            "children": [
+                9014
+            ]
+        },
+        {
+            "id": 9092,
+            "Text": "Move the needle down",
+            "Who": "909",
+            "children": [
+                904
+            ]
+        },
+        {
+            "id": 9093,
+            "Text": "Pull the needle back",
+            "Who": "909",
+            "children": [
+                908
+            ]
+        },
+        {
+            "id": 9010,
+            "Text": "...I never really wanted to die...",
+            "Who": "SURVIVOR",
+            "children": [
+                1000
+            ]
+        },
+        {
+            "id": 9011,
+            "Text": "A wide smile appears on the patient's face.",
+            "Who": "9011",
+            "children": [
+                90111,
+                90112,
+                90113,
+                90114
+            ]
+        },
+        {
+            "id": 90111,
+            "Text": "Move the needle up",
+            "Who": "9011",
+            "children": [
+                9015
+            ]
+        },
+        {
+            "id": 90112,
+            "Text": "Move the needle down",
+            "Who": "9011",
+            "children": [
+                906
+            ]
+        },
+        {
+            "id": 90113,
+            "Text": "Pull the needle back",
+            "Who": "9011",
+            "children": [
+                9010
+            ]
+        },
+        {
+            "id": 90114,
+            "Text": "Push the needle deeper",
+            "Who": "9011",
+            "children": [
+                9012
+            ]
+        },
+        {
+            "id": 9012,
+            "Text": "This feels like a gray area. Could be very good but also very bad.",
+            "Who": "9012",
+            "children": [
+                90121,
+                90122,
+                90123,
+                90124
+            ]
+        },
+        {
+            "id": 90121,
+            "Text": "Move the needle up",
+            "Who": "9012",
+            "children": [
+                9016
+            ]
+        },
+        {
+            "id": 90122,
+            "Text": "Move the needle down",
+            "Who": "9012",
+            "children": [
+                907
+            ]
+        },
+        {
+            "id": 90123,
+            "Text": "Pull the needle back",
+            "Who": "9012",
+            "children": [
+                9011
+            ]
+        },
+        {
+            "id": 90124,
+            "Text": "Push the needle deeper",
+            "Who": "9012",
+            "children": [
+                9013
+            ]
+        },
+        {
+            "id": 9013,
+            "Text": "There was a lot of confusion here and you made it go away. Keep going.",
+            "Who": "9013",
+            "children": [
+                90131,
+                90132,
+                90133,
+                90134
+            ]
+        },
+        {
+            "id": 90131,
+            "Text": "Move the needle up",
+            "Who": "9013",
+            "children": [
+                9017
+            ]
+        },
+        {
+            "id": 90132,
+            "Text": "Move the needle down",
+            "Who": "9013",
+            "children": [
+                908
+            ]
+        },
+        {
+            "id": 90133,
+            "Text": "Pull the needle back",
+            "Who": "9013",
+            "children": [
+                9012
+            ]
+        },
+        {
+            "id": 90134,
+            "Text": "Push the needle deeper",
+            "Who": "9013",
+            "children": [
+                9014
+            ]
+        },
+        {
+            "id": 9014,
+            "Text": "...I never really wanted to die...",
+            "Who": "SURVIVOR",
+            "children": [
+
+            ]
+        },
+        {
+            "id": 9015,
+            "Text": "You feel like you're approaching something actually important here. Maybe don't turn that into paste?",
+            "Who": "9015",
+            "children": [
+                90152,
+                90154
+            ]
+        },
+        {
+            "id": 90152,
+            "Text": "Move the needle down",
+            "Who": "9015",
+            "children": [
+                9011
+            ]
+        },
+        {
+            "id": 90154,
+            "Text": "Push the needle deeper",
+            "Who": "9015",
+            "children": [
+                9016
+            ]
+        },
+        {
+            "id": 9016,
+            "Text": "One side of the man's face droops, permanently. Wrong turn.",
+            "Who": "9016",
+            "children": [
+                90162,
+                90163,
+                90164
+            ]
+        },
+        {
+            "id": 90162,
+            "Text": "Move the needle down",
+            "Who": "9016",
+            "children": [
+                9012
+            ]
+        },
+        {
+            "id": 90163,
+            "Text": "Pull the needle back",
+            "Who": "9016",
+            "children": [
+                9015
+            ]
+        },
+        {
+            "id": 90164,
+            "Text": "Push the needle deeper",
+            "Who": "9016",
+            "children": [
+                9017
+            ]
+        },
+        {
+            "id": 9017,
+            "Text": "Spasms contort the survivor's face. This is a bad area to be in.",
+            "Who": "9017",
+            "children": [
+                90172,
+                90173
+            ]
+        },
+        {
+            "id": 90172,
+            "Text": "Move the needle down",
+            "Who": "9017",
+            "children": [
+                9013
+            ]
+        },
+        {
+            "id": 90173,
+            "Text": "Pull the needle back",
+            "Who": "9017",
+            "children": [
+                9016
+            ]
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}
