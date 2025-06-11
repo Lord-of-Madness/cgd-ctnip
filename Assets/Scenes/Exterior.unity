@@ -19163,17 +19163,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 727eba0a6e9cf2a4d87097dd83fc8d6a, type: 3}
---- !u!114 &921450039 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4361387019967790420, guid: 727eba0a6e9cf2a4d87097dd83fc8d6a, type: 3}
-  m_PrefabInstance: {fileID: 921450038}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e31265ce05149e47974678bcfeed284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &921455346
 GameObject:
   m_ObjectHideFlags: 0
@@ -47513,18 +47502,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2826388538896791627, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 921450039}
-    - target: {fileID: 2826388538896791627, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GameLoad
-      objectReference: {fileID: 0}
-    - target: {fileID: 2826388538896791627, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 3092515534567185311, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -47743,7 +47720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5034820248550353245, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -984.314
+      value: -984.31396
       objectReference: {fileID: 0}
     - target: {fileID: 5172833707029566822, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_StaticEditorFlags
