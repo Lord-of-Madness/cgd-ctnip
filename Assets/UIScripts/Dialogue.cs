@@ -34,7 +34,12 @@ public class DialogueTreeNode
                     Debug.LogWarning($"Document type {line.Document.type} not recognized. Adding to Documents.");
                     GameManager.APD.Documents.Add(line.Document);
                 }
+                
             };
+        }
+        if (line.voiceline != null)
+        {
+            callback += () => GameManager.Instance.ActivePlayer.VoiceSource.PlayOneShot(line.voiceline);
         }
     }
 
@@ -105,7 +110,8 @@ public class DialogueTreeNode
             string hex = speakers.ContainsKey(node.Who) ? speakers[node.Who] : GameManager.SpeakerGlobalData.ContainsKey(node.Who) ? GameManager.SpeakerGlobalData[node.Who] : Color.gray.ToHexString();
             string imagePath = $"CharacterPortraits/{node.Who}";
             string documentPath = $"Documents/{node.DocumentName}";
-            nodeDict.Add(node.id, new(new(node.Text, node.Who, Resources.Load<Sprite>(imagePath), hex,Resources.Load<TextAsset>(documentPath))));
+            string voicePath = $"Voiceover/Dialogues/{node.DocumentName}";
+            nodeDict.Add(node.id, new(new(node.Text, node.Who, Resources.Load<Sprite>(imagePath), hex,Resources.Load<TextAsset>(documentPath), Resources.Load<AudioClip>(voicePath))));
         }
         DialogueTreeNode root = nodeDict.ContainsKey(0) ? nodeDict[0] : null;
         if (root == null) Debug.LogError($"No root node found in json");
@@ -209,13 +215,15 @@ public class DialogueLine
     public Sprite Sprite { get; set; }
     public string Hex { get; set; }
     public Document Document { get; set; }
-    public DialogueLine(string text, string who, Sprite sprite, string colorHex, TextAsset document)// TODO
+    public AudioClip voiceline { get; set; }
+    public DialogueLine(string text, string who, Sprite sprite, string colorHex, TextAsset document,AudioClip audioClip)// TODO
     {
         Text = text;
         Who = who;
         Sprite = sprite;
         Hex = colorHex;
         Document = document != null ? JsonUtility.FromJson<Document>(document.text ): null;
+        voiceline = audioClip;
     }
     public DialogueLine(string text, string who, Sprite sprite, Color color)
     {
