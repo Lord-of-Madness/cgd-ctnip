@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     [Header("Beth")]
     [SerializeField]
     [Tooltip("This is an offset of the gun when held in hand. Set only if the character holds a gun. X = horizontal, Y = vertical")]
-    Vector2 weaponOffset = new Vector2(0.2f, 1f);
+    Vector2 weaponOffset = new(0.2f, 1f);
     [SerializeField]
     int gunDamage = 10;
     [SerializeField]
@@ -338,7 +338,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         // and the "Jump" action state, which is a boolean value
 
         Vector2 moveValue = GameManager.Instance.inputActions.Player.Move.ReadValue<Vector2>();
-        MoveByKeyboard(moveValue);
+        if (moveOption == MOVEMENT_OPTION.cameraRelative) MoveByKeyboard(moveValue);
+        else MoveByKeyBoardTank(moveValue);
+
         SetVerticalVelocity();
 
         timeSinceJump += Time.deltaTime;
@@ -350,7 +352,10 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         if (controlledByPlayer && !aimLaserVisible && !meleeAttacking)
         {
             Move();
-            RotateInMoveDir();
+
+            if (moveOption == MOVEMENT_OPTION.cameraRelative) RotateInMoveDir();
+            else RotateTank(moveValue);
+
             SetAnimatorValuesMovement();
 
         }
@@ -377,7 +382,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
 	void SetAnimatorValuesMovement()
     {
-        Vector3 horizontalVelocity = new Vector3(curVelocity.x, 0, curVelocity.z);
+        Vector3 horizontalVelocity = new(curVelocity.x, 0, curVelocity.z);
 
         bodyAnimator.applyRootMotion = true;
 
@@ -406,7 +411,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     {
         if (!controlledByPlayer) { bodyArmature.transform.localRotation = Quaternion.Euler(0f, 0f, 0f); return; }
 
-		Vector3 horizontalVelocity = new Vector3(curVelocity.x, 0, curVelocity.z);
+		Vector3 horizontalVelocity = new(curVelocity.x, 0, curVelocity.z);
 
 		//Rotate in direction of velocity
 		if (horizontalVelocity != Vector3.zero)
@@ -440,6 +445,30 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         }
     }
 
+    void RotateTank(Vector2 dir)
+    {
+		if (!controlledByPlayer) { bodyArmature.transform.localRotation = Quaternion.Euler(0f, 0f, 0f); return; }
+
+
+		//Rotate in direction of keyboard input
+		if (dir.x != 0)
+		{
+			Quaternion bodyRot = bodyArmature.transform.rotation * Quaternion.Euler(new Vector3(0, dir.x, 0).normalized*rotationSpeedTankControls);
+
+
+            Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
+            desiredRotation = bodyRot.normalized;
+			if (Quaternion.Angle(transform.rotation, desiredRotation) < 0.1f)
+			{
+				bodyArmature.transform.rotation = desiredRotation;
+			}
+			else
+			{
+			    bodyArmature.transform.rotation = Quaternion.Slerp(bodyArmature.transform.rotation, desiredRotation, rotationSpeedTankControls);
+			}
+		}
+	}
+
     void MoveByKeyboard(Vector2 dir)
     {
         if (dir == Vector2.zero)
@@ -447,29 +476,31 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
             FootstepsSound.Stop();
         }
         else if(!FootstepsSound.isPlaying) FootstepsSound.Play();
+
         Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y) * speed;
         if (isRunning) moveVelocity *= 2;
 
-        switch (moveOption)
-        {
-            case MOVEMENT_OPTION.cameraRelative:
-				if (Camera.main != null)
-					moveVelocity = Camera.main.transform.rotation * moveVelocity;
-				else //If no camera -> basic iso movement
-					moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
-				break;
-            case MOVEMENT_OPTION.characterRelative:
-                moveVelocity = bodyArmature.transform.rotation * moveVelocity;
-                break;
-            default:
-                break;
-        }
+		if (Camera.main != null)
+			moveVelocity = Camera.main.transform.rotation * moveVelocity;
+		else //If no camera -> basic iso movement
+			moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
 
         curVelocity.x = moveVelocity.x;
         curVelocity.z = moveVelocity.z;
 	}
 
-    void SetVerticalVelocity()
+    void MoveByKeyBoardTank(Vector2 dir)
+    {
+        Vector3 moveVelocity = new Vector3(0,0, dir.y).normalized * speed;
+		if (isRunning) moveVelocity *= 2;
+
+		moveVelocity = bodyArmature.transform.rotation * moveVelocity;
+
+        curVelocity.x = moveVelocity.x;
+        curVelocity.z = moveVelocity.z;
+	}
+
+	void SetVerticalVelocity()
     {
 		//Vertical velocity
 		if (isGrounded)
@@ -711,7 +742,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
 	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
 	{
-		SaveSystem.CharacterSceneData myData = new SaveSystem.CharacterSceneData()
+		SaveSystem.CharacterSceneData myData = new()
 		{
 			name = charName,
 			pos = new Vector3JsonFriendly(transform.position)

@@ -768,7 +768,7 @@ MonoBehaviour:
   controlledByPlayer: 1
   isRunning: 0
   rotationSpeed: 0.8
-  rotationSpeedTankControls: 0.035
+  rotationSpeedTankControls: 4
   weaponOffset: {x: 0.2, y: 1}
   gunDamage: 10
   bulletPrefab: {fileID: 3000684013270221699, guid: 0e6d73da6e5277a418f36478437c1cb1, type: 3}
