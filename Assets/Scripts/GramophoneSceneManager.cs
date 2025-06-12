@@ -21,6 +21,8 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField] Transform generatorPosition;
     [SerializeField] TextAsset DoorDialogueJSON;
     [SerializeField] Transform doorPosition;
+    [SerializeField] Transform AlzbetaScenePosition;
+    [SerializeField] Transform ErikScenePosition;
     [SerializeField] Trigger trigger;
     [SerializeField] bool cinematicMode =false;
     public bool GeneratorFixed { get; set; } = true;
@@ -127,7 +129,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
         doorPosition.gameObject.SetActive(true);
         GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = true;
         GameManager.Instance.ActivePlayer.DisablePlayerControl();
-        GameManager.Instance.ActivePlayer.gameObject.GetComponent<AITarget>().target = generatorPosition;
+        GameManager.Instance.ActivePlayer.GetComponent<AITarget>().target = generatorPosition;
         GameManager.Instance.ActivePlayer.StartFollowingOtherChar();
 
 
@@ -136,7 +138,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     {
         Dialogue.Instance.dialogueEnded.AddListener(() =>
         {
-            GameManager.Instance.ActivePlayer.gameObject.GetComponent<AITarget>().target = doorPosition;
+            GameManager.Instance.ActivePlayer.GetComponent<AITarget>().target = doorPosition;
             Dialogue.Instance.dialogueEnded.RemoveAllListeners();
         });
         Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(GeneratorDialogueJSON));
@@ -145,10 +147,11 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     {
         Dialogue.Instance.dialogueEnded.AddListener(() =>
         {
-            GameManager.Instance.ActivePlayer.StopFollowingOtherChar();
-            GameManager.Instance.ActivePlayer.gameObject.GetComponent<AITarget>().target = GameManager.Instance.OtherPlayer.transform;
-            GameManager.Instance.ActivePlayer.EnablePlayerControl();
-            GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = false;
+            //GameManager.Instance.ActivePlayer.StopFollowingOtherChar();
+            GameManager.Instance.ActivePlayer.GetComponent<AITarget>().target = AlzbetaScenePosition;
+            GameManager.Instance.OtherPlayer.GetComponent<AITarget>().target = ErikScenePosition;
+            //GameManager.Instance.ActivePlayer.EnablePlayerControl();
+            //GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = false;
             Dialogue.Instance.dialogueEnded.RemoveAllListeners();
         });
         Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(DoorDialogueJSON));

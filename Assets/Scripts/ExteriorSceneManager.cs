@@ -1,7 +1,4 @@
-using Mono.Cecil.Cil;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 
 public class ExteriorSceneManager : MonoBehaviour
 {

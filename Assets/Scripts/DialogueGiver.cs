@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueGiver : MonoBehaviour
@@ -20,8 +18,8 @@ public class DialogueGiver : MonoBehaviour
     /// Toggles which source it should prefer for dialogue -> lines in inspector or json file
     /// </summary>
     readonly bool PREFERJSON = true;
-    readonly bool GENERATEJSON = false;
-    readonly bool GENERATEDocJSON = false;
+    //readonly bool GENERATEJSON = false;
+    //readonly bool GENERATEDocJSON = false;
 
     void Start()
     {
@@ -49,7 +47,7 @@ public class DialogueGiver : MonoBehaviour
             {
                 diaLines.Add(new DialogueLine(line, charName, sprite, Color.red));
             }
-            if (GENERATEJSON)
+            /*if (GENERATEJSON)
             {
                 const string path = "IHaveNoClueWhatThisWillDo.json";
                 DialogueTreeNode root = DialogueTreeNode.BuildSimpleTree(diaLines);
@@ -64,11 +62,11 @@ public class DialogueGiver : MonoBehaviour
                 dialogueTree = DialogueTreeNode.DeserializeTree(path);
             }
             else
-            {
+            {*/
                 dialogueTree = DialogueTreeNode.BuildSimpleTree(diaLines);
                 dialogueTree.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") }, Document.DocumentType.Documents);
                 dialogueTree.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") }, Document.DocumentType.Codex);
-            }
+            //}
         }
     }
 
