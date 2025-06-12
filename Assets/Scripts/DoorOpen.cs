@@ -58,7 +58,9 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
 
 	public void LoadSceneSpecific(SaveSystem.AllSavedData data)
 	{
-		bool incomingIsOpen = data.doorData[Utilities.GetFullPathName(gameObject)].isOpen;
+        if (!data.doorData.ContainsKey(Utilities.GetFullPathName(gameObject))) return;
+		
+        bool incomingIsOpen = data.doorData[Utilities.GetFullPathName(gameObject)].isOpen;
 
 
         if (incomingIsOpen) OpenDoor(true);
