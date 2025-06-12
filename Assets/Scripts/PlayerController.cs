@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     float rotationSpeed = 0.8f;
     [SerializeField]
     float rotationSpeedTankControls = 0.035f;
+    bool tankControlsReverseMovement = false;
 
     Vector3 curVelocity = Vector3.zero;
 
@@ -393,8 +394,10 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         else bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
 
 
-
-		bodyAnimator.SetFloat(GlobalConstants.animSpeedID, horizontalVelocity.magnitude * 1);
+        if (moveOption == MOVEMENT_OPTION.characterRelative && tankControlsReverseMovement)
+		    bodyAnimator.SetFloat(GlobalConstants.animSpeedID, -horizontalVelocity.magnitude * 1);
+        else
+            bodyAnimator.SetFloat(GlobalConstants.animSpeedID, horizontalVelocity.magnitude * 1);
     }
     void Move()
     {
@@ -477,13 +480,15 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         }
         else if(!FootstepsSound.isPlaying) FootstepsSound.Play();
 
-        Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y) * speed;
-        if (isRunning) moveVelocity *= 2;
+        Vector3 moveVelocity = new Vector3(dir.x, 0, dir.y).normalized;
 
 		if (Camera.main != null)
-			moveVelocity = Camera.main.transform.rotation * moveVelocity;
+			moveVelocity = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0) * moveVelocity;
 		else //If no camera -> basic iso movement
 			moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
+
+        moveVelocity = moveVelocity.normalized * speed;
+        if (isRunning) moveVelocity *= 2;
 
         curVelocity.x = moveVelocity.x;
         curVelocity.z = moveVelocity.z;
@@ -491,12 +496,19 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
     void MoveByKeyBoardTank(Vector2 dir)
     {
-        Vector3 moveVelocity = new Vector3(0,0, dir.y).normalized * speed;
-		if (isRunning) moveVelocity *= 2;
+        Vector3 moveVelocity = new Vector3(0,0, dir.y).normalized;
+
+        //Going backwards
+        if (moveVelocity.z < 0) tankControlsReverseMovement = true;
+        else tankControlsReverseMovement = false;
 
 		moveVelocity = bodyArmature.transform.rotation * moveVelocity;
 
-        curVelocity.x = moveVelocity.x;
+        moveVelocity = moveVelocity.normalized * speed;
+		if (isRunning) moveVelocity *= 2;
+
+
+            curVelocity.x = moveVelocity.x;
         curVelocity.z = moveVelocity.z;
 	}
 
