@@ -129,7 +129,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
         doorPosition.gameObject.SetActive(true);
         GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = true;
         GameManager.Instance.ActivePlayer.DisablePlayerControl();
-        GameManager.Instance.ActivePlayer.GetComponent<AITarget>().target = generatorPosition;
+        GameManager.Instance.ActivePlayer.aITarget.target = generatorPosition;
         GameManager.Instance.ActivePlayer.StartFollowingOtherChar();
 
 
@@ -138,7 +138,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     {
         Dialogue.Instance.dialogueEnded.AddListener(() =>
         {
-            GameManager.Instance.ActivePlayer.GetComponent<AITarget>().target = doorPosition;
+            GameManager.Instance.ActivePlayer.aITarget.target = doorPosition;
             Dialogue.Instance.dialogueEnded.RemoveAllListeners();
         });
         Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(GeneratorDialogueJSON));
@@ -148,8 +148,9 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
         Dialogue.Instance.dialogueEnded.AddListener(() =>
         {
             //GameManager.Instance.ActivePlayer.StopFollowingOtherChar();
-            GameManager.Instance.ActivePlayer.GetComponent<AITarget>().target = AlzbetaScenePosition;
-            GameManager.Instance.OtherPlayer.GetComponent<AITarget>().target = ErikScenePosition;
+            GameManager.Instance.ActivePlayer.aITarget.target = AlzbetaScenePosition;
+            GameManager.Instance.OtherPlayer.aITarget.target = ErikScenePosition;
+            GameManager.Instance.ActivePlayer.StartFollowingOtherChar();
             //GameManager.Instance.ActivePlayer.EnablePlayerControl();
             //GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = false;
             Dialogue.Instance.dialogueEnded.RemoveAllListeners();

@@ -108,10 +108,12 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     public UnityEvent/*<ReloadEventData>*/ onReload;
     float actionCooldown = 0;
     internal bool unlessIFuckingWantTo = false;
+    public AITarget aITarget;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        aITarget = GetComponent<AITarget>();
         //MyCollider = transform.Find("Capsule").GetComponent<Collider>();
         if (GameManager.Instance.tankControls) { moveOption = MOVEMENT_OPTION.characterRelative; }
         else { moveOption = MOVEMENT_OPTION.cameraRelative; }
@@ -543,14 +545,14 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     public void StopFollowingOtherChar()
     {
         //gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        gameObject.GetComponent<AITarget>().SetFollowing(false);
+        aITarget.SetFollowing(false);
         //gameObject.GetComponent<AgentLinkMover>().enabled = false;
     }
 
     public void StartFollowingOtherChar()
     {
         //gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        gameObject.GetComponent<AITarget>().SetFollowing(true);
+        aITarget.SetFollowing(true);
         //gameObject.GetComponent<AgentLinkMover>().enabled = true;
     }
 
