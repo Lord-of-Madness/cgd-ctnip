@@ -763,13 +763,13 @@ MonoBehaviour:
   jumpForce: 10
   minTimeBetweenJumps: 0.2
   jumpTime: 0.5
-  speed: 3
+  speed: 2
   moveOption: 0
   controlledByPlayer: 1
   isRunning: 0
   rotationSpeed: 0.8
-  rotationSpeedTankControls: 0.035
-  weaponOffset: {x: 0.2, y: 1}
+  rotationSpeedTankControls: 4
+  weaponOffset: {x: 0.45, y: 1.35}
   gunDamage: 10
   bulletPrefab: {fileID: 3000684013270221699, guid: 0e6d73da6e5277a418f36478437c1cb1, type: 3}
   cameraFlashScript: {fileID: 0}
