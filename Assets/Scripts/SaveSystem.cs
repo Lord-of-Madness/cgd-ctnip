@@ -11,10 +11,10 @@ public class SaveSystem:MonoBehaviour
 	static string completeSceneSavePath;
 	static AllSavedData savedSceneData;
 	static AllSavedData savedGenData;
-	static List<ISaveable> allSceneSaveables = new();
+	static readonly List<ISaveable> allSceneSaveables = new();
 	static List<ISaveable> allGenSaveables = new();
 
-	bool firstUpdate = true;
+	//bool firstUpdate = true;
 	private void Awake()
 	{
 		allSceneSaveables.Clear();
@@ -79,8 +79,7 @@ public class SaveSystem:MonoBehaviour
 		UpdateSceneSavePath();
 		if (File.Exists(completeGenericSavePath))
 		{
-			string json = System.IO.File.ReadAllText(completeGenericSavePath);
-			savedGenData = JsonConvert.DeserializeObject<AllSavedData>(json);
+			savedGenData = JsonConvert.DeserializeObject<AllSavedData>(File.ReadAllText(completeGenericSavePath));
 
 			SceneTransitionManager.LoadNewScene(savedGenData.lastActiveScene);
 
@@ -167,11 +166,11 @@ public class SaveSystem:MonoBehaviour
 		UpdateSceneSavePath();
 		if (File.Exists(completeGenericSavePath))
 		{
+
 			string json = File.ReadAllText(completeGenericSavePath);
 			savedGenData = JsonConvert.DeserializeObject<AllSavedData>(json);
 
-			foreach (ISaveable s in allGenSaveables)
-				s.LoadGeneric(savedGenData);
+			allGenSaveables.ForEach(s => s.LoadGeneric(savedGenData));
 		}
 		else
 		{

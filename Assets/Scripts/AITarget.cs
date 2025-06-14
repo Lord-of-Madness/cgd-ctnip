@@ -29,11 +29,11 @@ public class AITarget : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (m_agent == null || !m_agent.enabled) {/* Debug.LogWarning("Agent null or disabled when trying to update AITarget!");*/ return; }
-		if (!m_agent.isOnNavMesh) { /*Debug.LogWarning("Agent not on navmesh when trying to update AITarget!");*/ return; }
+		if (m_agent == null || !m_agent.enabled) {/*Debug.LogWarning("Agent null or disabled when trying to update AITarget!");*/ return; }
+		if (!m_agent.isOnNavMesh) { Debug.LogWarning("Agent not on navmesh when trying to update AITarget!"); return; }
 		if (!m_agent.isActiveAndEnabled) { Debug.LogWarning("Agent not active when trying to update AITarget!"); return; }
 		if (target == null) { Debug.LogWarning("No target set. Agent can't follow!"); return;}
-		m_distance = Vector3.Distance(m_agent.transform.position, target.position);
+		m_distance = Vector3.Distance(transform.position, target.position);
 
 		if (isFollowing)
 		{
@@ -57,8 +57,9 @@ public class AITarget : MonoBehaviour
 			//bodyAnimator.SetBool(GlobalConstants.animGroundedID, m_agent.velocity.y == 0);
 			//bodyAnimator.SetBool(animJumpID, m_agent.velocity.y > 0);
 			//bodyAnimator.SetBool(animFreeFallID, m_agent.velocity.y < 0);
-			if (m_agent.velocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
-			else bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+			//if (m_agent.velocity.magnitude > 0) bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+			//else 
+			bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
 
 			bodyAnimator.SetFloat(GlobalConstants.animSpeedID, m_agent.velocity.magnitude);
 		}

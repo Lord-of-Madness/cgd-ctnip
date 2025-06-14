@@ -9,14 +9,14 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 {
     [Header("CharacterName")]
     public string charName = "Beth";
+    /*
     [Header("Jumping")]
     [SerializeField]
     float jumpForce = 10f;
     [SerializeField]
     float minTimeBetweenJumps = 0.5f;
-    [SerializeField]
-    float jumpTime = 2;
-
+    [SerializeField]float jumpTime = 2;
+    */
     bool isGrounded = true;
     float timeSinceJump = 0;
 
@@ -461,7 +461,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 			Quaternion bodyRot = bodyArmature.transform.rotation * Quaternion.Euler(new Vector3(0, dir.x, 0).normalized*rotationSpeedTankControls);
 
 
-            Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
+            //Debug.Log("Rotating body to " + bodyRot.ToString() + " and curVelocity is: " + curVelocity);
             desiredRotation = bodyRot.normalized;
 			if (Quaternion.Angle(transform.rotation, desiredRotation) < 0.1f)
 			{
@@ -489,7 +489,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 		else //If no camera -> basic iso movement
 			moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
 
-        moveVelocity = moveVelocity.normalized * speed;
+        moveVelocity = moveVelocity.normalized * speed * transform.localScale.x;
         if (isRunning) moveVelocity *= 2;
 
         curVelocity.x = moveVelocity.x;
@@ -506,7 +506,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
 		moveVelocity = bodyArmature.transform.rotation * moveVelocity;
 
-        moveVelocity = moveVelocity.normalized * speed;
+        moveVelocity = speed * transform.localScale.x * moveVelocity.normalized;
 		if (isRunning) moveVelocity *= 2;
 
 
@@ -536,7 +536,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     {
         isRunning = !isRunning;
     }
-
+    /*
     void Jump()
     {
         timeSinceJump = 0;
@@ -546,9 +546,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 
         bodyAnimator.SetBool(GlobalConstants.animJumpID, true);
 
-    }
+    }*/
 
-
+    /*
     //Called from FeetCollider
     public void FeetTriggerStay()
     {
@@ -556,7 +556,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         //This is because collider can collider the next frame after jump and instantly enable jumping again
         if (timeSinceJump > minTimeBetweenJumps)
             isGrounded = true;
-    }
+    }*/
 
     //Called from FeetCollider
     public void FeetTriggerExit()

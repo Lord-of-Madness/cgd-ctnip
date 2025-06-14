@@ -373,6 +373,10 @@ MonoBehaviour:
   charChanged:
     m_PersistentCalls:
       m_Calls: []
+  charsReassigned:
+    m_PersistentCalls:
+      m_Calls: []
+  tankControls: 0
 --- !u!1 &2226896760793993774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1267,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4050558101443588152, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4875097373313170750, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1281,7 +1289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5034820248550353245, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -984.314
+      value: -984.3141
       objectReference: {fileID: 0}
     - target: {fileID: 5351501119770682477, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1361,6 +1369,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8466824825202507957, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
       propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466824825202507957, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}
+      propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8633198521181282688, guid: 213574cccc8aeb845ba37439a1f9094b, type: 3}

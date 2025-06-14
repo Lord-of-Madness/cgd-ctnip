@@ -651,6 +651,10 @@ PrefabInstance:
       propertyPath: cameraFlashScript
       value: 
       objectReference: {fileID: 7861375289807979194}
+    - target: {fileID: 1530958316274769250, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
+      propertyPath: rotationSpeedTankControls
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1624227479835879206, guid: dac31afa2165c4645b3b709348719ad9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0

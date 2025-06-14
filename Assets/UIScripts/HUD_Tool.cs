@@ -28,10 +28,10 @@ public class HUD_Ammo : MonoBehaviour
     }
     void AttachListeners()
     {
-        Debug.Log("Attaching listeners to HUD_Ammo");
+        //Debug.Log("Attaching listeners to HUD_Ammo");
         if (GameManager.Instance.bethPC != null)
         {
-            Debug.Log("BethPC found, attaching listeners");
+            //Debug.Log("BethPC found, attaching listeners");
             GameManager.Instance.bethPC.onToolUsed.AddListener(UpdateAmmoLabel);
             GameManager.Instance.bethPC.onReload.AddListener(UpdateAmmoLabel);
             GameManager.Instance.bethPC.onToolSwitched.AddListener(UpdateAmmoLabel);

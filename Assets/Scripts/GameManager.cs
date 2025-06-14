@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
             {
                 sgd = new Dictionary<string, string>();
                 string json = Resources.Load<TextAsset>("Dialogues/_SPEAKERS").text;
-                Debug.Log(json);
-                SpeakerGlobalSettings speakerGlobalSettings = JsonUtility.FromJson<SpeakerGlobalSettings>(json);
+                //Debug.Log(json);
+                //SpeakerGlobalSettings speakerGlobalSettings = JsonUtility.FromJson<SpeakerGlobalSettings>(json);
 
-                foreach (var pair in speakerGlobalSettings.speakers)
+                foreach (var pair in JsonUtility.FromJson<SpeakerGlobalSettings>(json).speakers)
                 {
                     sgd[pair.Speaker] = pair.Hex;
                 }

@@ -123,6 +123,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	{
 		return; //All info in this manager should transition to all other scenes 
 	}
+    float storedDist;
     public void CinematicStart()
     {
         generatorPosition.gameObject.SetActive(true);
@@ -130,31 +131,41 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
         GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = true;
         GameManager.Instance.ActivePlayer.DisablePlayerControl();
         GameManager.Instance.ActivePlayer.aITarget.target = generatorPosition;
+        GameManager.Instance.OtherPlayer.aITarget.target = generatorPosition;
+        storedDist = GameManager.Instance.ActivePlayer.aITarget.closeEnoughDistance;
+        GameManager.Instance.ActivePlayer.aITarget.closeEnoughDistance = 0;
         GameManager.Instance.ActivePlayer.StartFollowingOtherChar();
 
 
     }
     public void GeneratorReached()
     {
-        Dialogue.Instance.dialogueEnded.AddListener(() =>
-        {
-            GameManager.Instance.ActivePlayer.aITarget.target = doorPosition;
-            Dialogue.Instance.dialogueEnded.RemoveAllListeners();
-        });
+        Dialogue.Instance.dialogueEnded.AddListener(RunToDoor);        
         Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(GeneratorDialogueJSON));
     }
     public void DoorReached()
     {
-        Dialogue.Instance.dialogueEnded.AddListener(() =>
-        {
-            //GameManager.Instance.ActivePlayer.StopFollowingOtherChar();
-            GameManager.Instance.ActivePlayer.aITarget.target = AlzbetaScenePosition;
-            GameManager.Instance.OtherPlayer.aITarget.target = ErikScenePosition;
-            GameManager.Instance.ActivePlayer.StartFollowingOtherChar();
-            //GameManager.Instance.ActivePlayer.EnablePlayerControl();
-            //GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = false;
-            Dialogue.Instance.dialogueEnded.RemoveAllListeners();
-        });
+        Dialogue.Instance.dialogueEnded.AddListener(RunToScenes);
         Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(DoorDialogueJSON));
+    }
+    public void RunToDoor()
+    {
+        GameManager.Instance.ActivePlayer.aITarget.target = doorPosition;
+        GameManager.Instance.OtherPlayer.aITarget.target = doorPosition;
+        Dialogue.Instance.dialogueEnded.RemoveListener(RunToDoor);
+    }
+    public void RunToScenes()
+    {
+        GameManager.Instance.bethPC.aITarget.target = /*ErikScenePosition;*/AlzbetaScenePosition; //GameManager.Instance.OtherPlayer.transform;
+        GameManager.Instance.erikPC.aITarget.target = ErikScenePosition;
+        //GameManager.Instance.bethPC.DisablePlayerControl();
+        // GameManager.Instance.bethPC.StartFollowingOtherChar();
+        /*
+        StartCoroutine(Utilities.CallAfterSomeTime(() => {
+            GameManager.Instance.ActivePlayer.aITarget.closeEnoughDistance = storedDist;
+            GameManager.Instance.ActivePlayer.EnablePlayerControl();
+            GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = false;
+        }, 1.5f));*/
+        Dialogue.Instance.dialogueEnded.RemoveListener(RunToScenes);
     }
 }
