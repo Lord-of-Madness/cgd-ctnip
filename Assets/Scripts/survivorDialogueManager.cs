@@ -25,7 +25,7 @@ public class survivorDialogueManager : MonoBehaviour
             bool help = false;
             GameManager.APD.Codex.ForEach((doc) =>
             {
-                if (doc.name == "MINIGAME")
+                if (doc.name == "A survivor, helped")
                 {
                     help = true;
                 }
@@ -33,6 +33,7 @@ public class survivorDialogueManager : MonoBehaviour
             if (help) {
                 Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(helpJSON));
             }
+            Dialogue.Instance.dialogueEnded.RemoveAllListeners();
         });
 
         if (alt)
