@@ -102,6 +102,7 @@
             "id": 12,
             "Text": "MERCY KILL",
             "Who": "",
+            "DocumentName": "SHOOT",
             "children": [
                 99
             ]
@@ -118,6 +119,7 @@
             "id": 14,
             "Text": "HELP HIM",
             "Who": "",
+            "DocumentName": "MINIGAME",
             "children": [
                 99
             ]
