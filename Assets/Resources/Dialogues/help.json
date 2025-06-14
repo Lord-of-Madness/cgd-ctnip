@@ -1359,6 +1359,150 @@
         {
             "Speaker": "ERIK",
             "Hex": "4980D3FF"
+        },
+        {
+            "Speaker": "MINIGAMESETUP",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "901",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "902",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "903",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "905",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "906",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "1000",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "101",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "103",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "105",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "106",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "107",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "108",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "1100",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "111",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "112",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "114",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "115",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "116",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "117",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "118",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "201",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "203",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "2000",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "205",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "206",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "207",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "208",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "221",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "222",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "224",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "2200",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "225",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "226",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "227",
+            "Hex": "FFFFFF00"
+        },
+        {
+            "Speaker": "228",
+            "Hex": "FFFFFF00"
         }
     ]
 }
