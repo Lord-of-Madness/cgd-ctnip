@@ -6,6 +6,7 @@ public class survivorDialogueManager : MonoBehaviour
     [SerializeField] TextAsset basement_alt;
     [SerializeField] TextAsset basement_secret;
     [SerializeField] TextAsset basement_secret_alt;
+    [SerializeField] TextAsset helpJSON;
     [SerializeField] int howManyDocsThereAre;
     public void StartDialogue()
     {
@@ -17,6 +18,23 @@ public class survivorDialogueManager : MonoBehaviour
             GameManager.Instance.erikPC.playerData.Inventory.Count +
             GameManager.Instance.erikPC.playerData.Documents.Count == howManyDocsThereAre;
         bool secret = GameManager.Instance.secretActivated;
+
+
+        Dialogue.Instance.dialogueEnded.AddListener(() =>
+        {
+            bool help = false;
+            GameManager.APD.Codex.ForEach((doc) =>
+            {
+                if (doc.name == "MINIGAME")
+                {
+                    help = true;
+                }
+            });
+            if (help) {
+                Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(helpJSON));
+            }
+        });
+
         if (alt)
         {
             if(secret)

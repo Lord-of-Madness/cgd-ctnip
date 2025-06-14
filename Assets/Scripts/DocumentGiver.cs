@@ -27,7 +27,7 @@ public class DocumentGiver : MonoBehaviour
         if (document.type == Document.DocumentType.Documents) GameManager.APD.Documents.Add(document);
         else if (document.type == Document.DocumentType.Codex) GameManager.APD.Codex.Add(document);
         else if (document.type == Document.DocumentType.Inventory) GameManager.APD.Inventory.Add(document);
-        else if (document.type == Document.DocumentType.Voiceline) GameManager.APD.Inventory.Add(document);
+        else if (document.type == Document.DocumentType.Voiceline) { }//Do nothing
         else
         {
             Debug.LogWarning($"Document type {document.type} not recognized. Adding to Documents.");

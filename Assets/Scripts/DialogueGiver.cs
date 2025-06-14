@@ -64,8 +64,8 @@ public class DialogueGiver : MonoBehaviour
             else
             {*/
                 dialogueTree = DialogueTreeNode.BuildSimpleTree(diaLines);
-                dialogueTree.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") }, Document.DocumentType.Documents);
-                dialogueTree.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") }, Document.DocumentType.Codex);
+                //dialogueTree.Line.Document = new Document("TestJSON", new List<Page>() { new("Test"), new("TestPage2") }, Document.DocumentType.Documents);
+                //dialogueTree.Children[0].Line.Document = new Document("TestJSON2", new List<Page>() { new("TestX"), new("TestPage2X") }, Document.DocumentType.Codex);
             //}
         }
     }
