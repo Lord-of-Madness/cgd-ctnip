@@ -68,6 +68,7 @@
             "id": 7,
             "Text": "You gently push the eyeball aside. There is a moment of slight resistance and then you feel the tender, quivering tissue beyond.",
             "Who": "MINIGAMESETUP",
+            "DocumentName": "LIEDOWN",
             "children": [
                 8
             ]
@@ -86,20 +87,20 @@
             "Who": "901",
             "children": [
                 9011,
-                9014
+                9013
             ]
         },
         {
             "id": 9011,
-            "Text": "Move the needle up",
+            "Text": "Push the needle deeper",
             "Who": "901",
             "children": [
-                906
+                903
             ]
         },
         {
-            "id": 9014,
-            "Text": "Push the needle deeper",
+            "id": 9013,
+            "Text": "Twist the needle to the left",
             "Who": "901",
             "children": [
                 902
@@ -107,16 +108,16 @@
         },
         {
             "id": 902,
-            "Text": "Something bad just went away. This seems like a good area to poke around.",
+            "Text": "Bad memories, gone. This feels like a good area to poke around.",
             "Who": "902",
             "children": [
-                9023,
+                9022,
                 9021,
                 9024
             ]
         },
         {
-            "id": 9023,
+            "id": 9022,
             "Text": "Pull the needle back",
             "Who": "902",
             "children": [
@@ -125,32 +126,41 @@
         },
         {
             "id": 9021,
-            "Text": "Move the needle up",
+            "Text": "Push the needle deeper",
             "Who": "902",
             "children": [
-                907
+                904
             ]
         },
         {
             "id": 9024,
-            "Text": "Push the needle deeper",
-            "Who": "901",
+            "Text": "Twist the needle to the right",
+            "Who": "902",
             "children": [
                 903
             ]
         },
         {
             "id": 903,
-            "Text": "The patient starts drooling. You probably shouldn't poke around here.",
+            "Text": "Whatever was here, he won't have to worry about anymore. You feel like it's safe to keep going.",
             "Who": "903",
             "children": [
-                9033,
                 9031,
+                9032,
+                9033,
                 9034
             ]
         },
         {
-            "id": 9033,
+            "id": 9031,
+            "Text": "Push the needle deeper",
+            "Who": "903",
+            "children": [
+                905
+            ]
+        },
+        {
+            "id": 9032,
             "Text": "Pull the needle back",
             "Who": "903",
             "children": [
@@ -158,16 +168,16 @@
             ]
         },
         {
-            "id": 9031,
-            "Text": "Move the needle up",
+            "id": 9033,
+            "Text": "Twist the needle to the right",
             "Who": "903",
             "children": [
-                908
+                901
             ]
         },
         {
             "id": 9034,
-            "Text": "Push the needle deeper",
+            "Text": "Twist the needle to the left",
             "Who": "903",
             "children": [
                 904
@@ -175,184 +185,6 @@
         },
         {
             "id": 904,
-            "Text": "The patient's breathing becomes erratic. You severed something you shouldn't have.",
-            "Who": "904",
-            "children": [
-                9043,
-                9041
-            ]
-        },
-        {
-            "id": 9043,
-            "Text": "Pull the needle back",
-            "Who": "904",
-            "children": [
-                903
-            ]
-        },
-        {
-            "id": 9041,
-            "Text": "Move the needle up",
-            "Who": "904",
-            "children": [
-                909
-            ]
-        },
-        {
-            "id": 905,
-            "Text": "Bad memories, gone. This is good.",
-            "Who": "905",
-            "children": [
-                9054,
-                9051
-            ]
-        },
-        {
-            "id": 9054,
-            "Text": "Push the needle deeper",
-            "Who": "905",
-            "children": [
-                906
-            ]
-        },
-        {
-            "id": 9051,
-            "Text": "Move the needle up",
-            "Who": "905",
-            "children": [
-                9010
-            ]
-        },
-        {
-            "id": 906,
-            "Text": "The patient smiles. This feels great.",
-            "Who": "906",
-            "children": [
-                9061,
-                9062,
-                9063,
-                9064
-            ]
-        },
-        {
-            "id": 9061,
-            "Text": "Move the needle up",
-            "Who": "906",
-            "children": [
-                9011
-            ]
-        },
-        {
-            "id": 9062,
-            "Text": "Move the needle down",
-            "Who": "906",
-            "children": [
-                901
-            ]
-        },
-        {
-            "id": 9063,
-            "Text": "Pull the needle back",
-            "Who": "906",
-            "children": [
-                905
-            ]
-        },
-        {
-            "id": 9064,
-            "Text": "Push the needle deeper",
-            "Who": "906",
-            "children": [
-                907
-            ]
-        },
-        {
-            "id": 907,
-            "Text": "...I never really wanted to die...",
-            "Who": "SURVIVOR",
-            "children": [
-
-            ]
-        },
-        {
-            "id": 908,
-            "Text": "This feels good. Whatever was here, this man won't have to worry about it anymore.",
-            "Who": "908",
-            "children": [
-                9081,
-                9082,
-                9083,
-                9084
-            ]
-        },
-        {
-            "id": 9081,
-            "Text": "Move the needle up",
-            "Who": "908",
-            "children": [
-                9013
-            ]
-        },
-        {
-            "id": 9082,
-            "Text": "Move the needle down",
-            "Who": "908",
-            "children": [
-                903
-            ]
-        },
-        {
-            "id": 9083,
-            "Text": "Pull the needle back",
-            "Who": "908",
-            "children": [
-                907
-            ]
-        },
-        {
-            "id": 9084,
-            "Text": "Push the needle deeper",
-            "Who": "908",
-            "children": [
-                909
-            ]
-        },
-        {
-            "id": 909,
-            "Text": "You have no idea what to do here.",
-            "Who": "909",
-            "children": [
-                9091,
-                9092,
-                9093
-            ]
-        },
-        {
-            "id": 9091,
-            "Text": "Move the needle up",
-            "Who": "909",
-            "children": [
-                9014
-            ]
-        },
-        {
-            "id": 9092,
-            "Text": "Move the needle down",
-            "Who": "909",
-            "children": [
-                904
-            ]
-        },
-        {
-            "id": 9093,
-            "Text": "Pull the needle back",
-            "Who": "909",
-            "children": [
-                908
-            ]
-        },
-        {
-            "id": 9010,
             "Text": "...I never really wanted to die...",
             "Who": "SURVIVOR",
             "children": [
@@ -360,224 +192,1162 @@
             ]
         },
         {
-            "id": 9011,
-            "Text": "A wide smile appears on the patient's face.",
-            "Who": "9011",
+            "id": 905,
+            "Text": "The patient's other eye starts twitching violently. These bits are probably too important to disturb.",
+            "Who": "905",
             "children": [
-                90111,
-                90112,
-                90113,
-                90114
+                9051,
+                9052
+
             ]
         },
         {
-            "id": 90111,
-            "Text": "Move the needle up",
-            "Who": "9011",
-            "children": [
-                9015
-            ]
-        },
-        {
-            "id": 90112,
-            "Text": "Move the needle down",
-            "Who": "9011",
+            "id": 9051,
+            "Text": "Push the needle deeper",
+            "Who": "905",
             "children": [
                 906
             ]
         },
         {
-            "id": 90113,
+            "id": 9052,
             "Text": "Pull the needle back",
-            "Who": "9011",
+            "Who": "905",
             "children": [
-                9010
+                903
             ]
         },
         {
-            "id": 90114,
+            "id": 906,
+            "Text": "One side of the patient's face droops, permanently. You severed something you shouldn't have.",
+            "Who": "906",
+            "children": [
+                2000
+            ]
+        },
+        {
+            "id": 1000,
+            "Text": "You're not sure which way to move the needle.",
+            "Who": "1000",
+            "children": [
+                1001,
+                1003,
+                1004
+            ]
+        },
+        {
+            "id": 1001,
             "Text": "Push the needle deeper",
-            "Who": "9011",
+            "Who": "1000",
             "children": [
-                9012
+                105
             ]
         },
         {
-            "id": 9012,
-            "Text": "This feels like a gray area. Could be very good but also very bad.",
-            "Who": "9012",
+            "id": 1003,
+            "Text": "Twist the needle to the left",
+            "Who": "1000",
             "children": [
-                90121,
-                90122,
-                90123,
-                90124
+                101
             ]
         },
         {
-            "id": 90121,
-            "Text": "Move the needle up",
-            "Who": "9012",
+            "id": 1004,
+            "Text": "Twist the needle to the right.",
+            "Who": "1000",
             "children": [
-                9016
+                107
             ]
         },
         {
-            "id": 90122,
-            "Text": "Move the needle down",
-            "Who": "9012",
-            "children": [
-                907
-            ]
-        },
-        {
-            "id": 90123,
-            "Text": "Pull the needle back",
-            "Who": "9012",
-            "children": [
-                9011
-            ]
-        },
-        {
-            "id": 90124,
-            "Text": "Push the needle deeper",
-            "Who": "9012",
-            "children": [
-                9013
-            ]
-        },
-        {
-            "id": 9013,
+            "id": 101,
             "Text": "There was a lot of confusion here and you made it go away. Keep going.",
-            "Who": "9013",
+            "Who": "101",
             "children": [
-                90131,
-                90132,
-                90133,
-                90134
+                1012,
+                1014
             ]
         },
         {
-            "id": 90131,
-            "Text": "Move the needle up",
-            "Who": "9013",
-            "children": [
-                9017
-            ]
-        },
-        {
-            "id": 90132,
-            "Text": "Move the needle down",
-            "Who": "9013",
-            "children": [
-                908
-            ]
-        },
-        {
-            "id": 90133,
+            "id": 1012,
             "Text": "Pull the needle back",
-            "Who": "9013",
+            "Who": "101",
             "children": [
-                9012
+                1000
             ]
         },
         {
-            "id": 90134,
-            "Text": "Push the needle deeper",
-            "Who": "9013",
+            "id": 1014,
+            "Text": "Twist the needle to the right",
+            "Who": "101",
             "children": [
-                9014
+                102
             ]
         },
         {
-            "id": 9014,
-            "Text": "...I never really wanted to die...",
+            "id": 102,
+            "Text": "...but if I may and if I might...",
             "Who": "SURVIVOR",
             "children": [
-
+                1100
             ]
         },
         {
-            "id": 9015,
-            "Text": "You feel like you're approaching something actually important here. Maybe don't turn that into paste?",
-            "Who": "9015",
+            "id": 105,
+            "Text": "False hopes, pipe dreams, little sorrows. All reduced to useless paste in the blink of an eye. Press on.",
+            "Who": "105",
             "children": [
-                90152,
-                90154
+                1051,
+                1052,
+                1053,
+                1054
             ]
         },
         {
-            "id": 90152,
-            "Text": "Move the needle down",
-            "Who": "9015",
-            "children": [
-                9011
-            ]
-        },
-        {
-            "id": 90154,
+            "id": 1051,
             "Text": "Push the needle deeper",
-            "Who": "9015",
+            "Who": "105",
             "children": [
-                9016
+                106
             ]
         },
         {
-            "id": 9016,
-            "Text": "One side of the man's face droops, permanently. Wrong turn.",
-            "Who": "9016",
-            "children": [
-                90162,
-                90163,
-                90164
-            ]
-        },
-        {
-            "id": 90162,
-            "Text": "Move the needle down",
-            "Who": "9016",
-            "children": [
-                9012
-            ]
-        },
-        {
-            "id": 90163,
+            "id": 1052,
             "Text": "Pull the needle back",
-            "Who": "9016",
+            "Who": "105",
             "children": [
-                9015
+                1000
             ]
         },
         {
-            "id": 90164,
+            "id": 1053,
+            "Text": "Twist the needle to the left",
+            "Who": "105",
+            "children": [
+                102
+            ]
+        },
+        {
+            "id": 1054,
+            "Text": "Twist the needle to the right",
+            "Who": "105",
+            "children": [
+                107
+            ]
+        },
+        {
+            "id": 103,
+            "Text": "Capacity for a few minor emotions, lost. He wasn't using them, anyway.",
+            "Who": "103",
+            "children": [
+                1032,
+                1034
+            ]
+        },
+        {
+            "id": 1032,
+            "Text": "Pull the needle back",
+            "Who": "103",
+            "children": [
+                102
+            ]
+        },
+        {
+            "id": 1034,
+            "Text": "103",
+            "Who": "Twist the needle to the right",
+            "children": [
+                106
+            ]
+        },
+        {
+            "id": 106,
+            "Text": "The man's hands begin to twitch. Best not to disturb whatever is here.",
+            "Who": "106",
+            "children": [
+                1062,
+                1063,
+                1064
+            ]
+        },
+        {
+            "id": 1062,
+            "Text": "Pull the needle back",
+            "Who": "106",
+            "children": [
+                105
+            ]
+        },
+        {
+            "id": 1063,
+            "Text": "Twist the needle left",
+            "Who": "106",
+            "children": [
+                103
+            ]
+        },
+        {
+            "id": 1064,
+            "Text": "Twist the needle right",
+            "Who": "106",
+            "children": [
+                108
+            ]
+        },
+        {
+            "id": 107,
+            "Text": "The survivor's legs contort and spasm. Maybe don't poke around here.",
+            "Who": "107",
+            "children": [
+                1073,
+                1071
+            ]
+        },
+        {
+            "id": 1071,
             "Text": "Push the needle deeper",
-            "Who": "9016",
+            "Who": "107",
             "children": [
-                9017
+                108
             ]
         },
         {
-            "id": 9017,
-            "Text": "Spasms contort the survivor's face. This is a bad area to be in.",
-            "Who": "9017",
+            "id": 1073,
+            "Text": "Twist the needle to the left",
+            "Who": "107",
             "children": [
-                90172,
-                90173
+                1000
             ]
         },
         {
-            "id": 90172,
-            "Text": "Move the needle down",
-            "Who": "9017",
+            "id": 108,
+            "Text": "The man's breathing becomes erratic. This part was actually important.",
+            "Who": "108",
             "children": [
-                9013
+                2200
             ]
         },
         {
-            "id": 90173,
+            "id": 1100,
+            "Text": "You're not sure which way to move the needle.",
+            "Who": "1100",
+            "children": [
+                1101,
+                1103,
+                1104
+            ]
+        },
+        {
+            "id": 1101,
+            "Text": "Push the needle deeper",
+            "Who": "1100",
+            "children": [
+                114
+            ]
+        },
+        {
+            "id": 1103,
+            "Text": "Twist the needle to the left",
+            "Who": "1100",
+            "children": [
+                111
+            ]
+        },
+        {
+            "id": 1104,
+            "Text": "Twist the needle to the right",
+            "Who": "1100",
+            "children": [
+                115
+            ]
+        },
+        {
+            "id": 111,
+            "Text": "This is the deepest mote of the man's mind. Longings, long since felt. Feelings, overlong. Be careful. A wrong move here can have lasting damage.",
+            "Who": "111",
+            "children": [
+                1112,
+                1114
+            ]
+        },
+        {
+            "id": 1112,
             "Text": "Pull the needle back",
-            "Who": "9017",
+            "Who": "111",
             "children": [
-                9016
+                1100
+            ]
+        },
+        {
+            "id": 1114,
+            "Text": "Twist the needle right",
+            "Who": "111",
+            "children": [
+                112
+            ]
+        },
+        {
+            "id": 114,
+            "Text": "You tread the knife's edge here. A wrong move here can reduce the man to a drooling mess. Tread carefully.",
+            "Who": "114",
+            "children": [
+                1142,
+                1143,
+                1144
+            ]
+        },
+        {
+            "id": 1142,
+            "Text": "Pull the needle back",
+            "Who": "114",
+            "children": [
+                1100
+            ]
+        },
+        {
+            "id": 1143,
+            "Text": "Twist the needle to the left",
+            "Who": "114",
+            "children": [
+                112
+            ]
+        },
+        {
+            "id": 1144,
+            "Text": "Twist the needle to the right",
+            "Who": "114",
+            "children": [
+                116
+            ]
+        },
+        {
+            "id": 115,
+            "Text": "The needle is too deep for you to work accurately. All bets are off, honestly.",
+            "Who": "115",
+            "children": [
+                1151,
+                1153,
+                1154
+            ]
+        },
+        {
+            "id": 1151,
+            "Text": "Push the needle deeper",
+            "Who": "115",
+            "children": [
+                116
+            ]
+        },
+        {
+            "id": 1153,
+            "Text": "Twist the needle left",
+            "Who": "115",
+            "children": [
+                1100
+            ]
+        },
+        {
+            "id": 1154,
+            "Text": "Twist the needle right",
+            "Who": "115",
+            "children": [
+                117
+            ]
+        },
+        {
+            "id": 116,
+            "Text": "You feel like you are almost done. The last pain is just beyond.",
+            "Who": "115",
+            "children": [
+                1161,
+                1162,
+                1163,
+                1164
+            ]
+        },
+        {
+            "id": 1161,
+            "Text": "Push the needle all the way in",
+            "Who": "116",
+            "children": [
+                119
+            ]
+        },
+        {
+            "id": 1162,
+            "Text": "Pull the needle back",
+            "Who": "116",
+            "children": [
+                115
+            ]
+        },
+        {
+            "id": 1163,
+            "Text": "Twist the needle to the left",
+            "Who": "116",
+            "children": [
+                114
+            ]
+        },
+        {
+            "id": 1164,
+            "Text": "Twist the needle to the right",
+            "Who": "116",
+            "children": [
+                118
+            ]
+        },
+        {
+            "id": 118,
+            "Text": "You are very close to vital centers. One wrong move and he's a vegetable.",
+            "Who": "118",
+            "children": [
+                1182,
+                1183
+            ]
+        },
+        {
+            "id": 1182,
+            "Text": "Pull the needle back",
+            "Who": "118",
+            "children": [
+                117
+            ]
+        },
+        {
+            "id": 1183,
+            "Text": "Twist the needle to the left",
+            "Who": "118",
+            "children": [
+                116
+            ]
+        },
+        {
+            "id": 112,
+            "Text": "This was not a good move. The patient's eyes roll back in a violent spasm.",
+            "Who": "112",
+            "children": [
+                420
+            ]
+        },
+        {
+            "id": 117,
+            "Text": "The patient starts drooling uncontrollably. Something went wrong.",
+            "Who": "117",
+            "children": [
+                420
+            ]
+        },
+        {
+            "id": 119,
+            "Text": "...my heart is open for tonight.",
+            "Who": "SURVIVOR",
+            "children": [
+                991
+            ]
+        },
+        {
+            "id": 2000,
+            "Text": "You're not sure which way to move the needle.",
+            "Who": "2000",
+            "children": [
+                2001,
+                2003,
+                2004
+            ]
+        },
+        {
+            "id": 2001,
+            "Text": "Push the needle deeper",
+            "Who": "2000",
+            "children": [
+                205
+            ]
+        },
+        {
+            "id": 2003,
+            "Text": "Twist the needle to the left",
+            "Who": "2000",
+            "children": [
+                201
+            ]
+        },
+        {
+            "id": 2004,
+            "Text": "Twist the needle to the right.",
+            "Who": "2000",
+            "children": [
+                207
+            ]
+        },
+        {
+            "id": 201,
+            "Text": "There was a lot of confusion here and you made it go away. Keep going.",
+            "Who": "201",
+            "children": [
+                2012,
+                2014
+            ]
+        },
+        {
+            "id": 2012,
+            "Text": "Pull the needle back",
+            "Who": "201",
+            "children": [
+                2000
+            ]
+        },
+        {
+            "id": 2014,
+            "Text": "Twist the needle to the right",
+            "Who": "201",
+            "children": [
+                202
+            ]
+        },
+        {
+            "id": 202,
+            "Text": "...but if I may and if I might...",
+            "Who": "SURVIVOR",
+            "children": [
+                2200
+            ]
+        },
+        {
+            "id": 205,
+            "Text": "False hopes, pipe dreams, little sorrows. All reduced to useless paste in the blink of an eye. Press on.",
+            "Who": "205",
+            "children": [
+                2051,
+                2052,
+                2053,
+                2054
+            ]
+        },
+        {
+            "id": 2051,
+            "Text": "Push the needle deeper",
+            "Who": "205",
+            "children": [
+                206
+            ]
+        },
+        {
+            "id": 2052,
+            "Text": "Pull the needle back",
+            "Who": "205",
+            "children": [
+                2000
+            ]
+        },
+        {
+            "id": 2053,
+            "Text": "Twist the needle to the left",
+            "Who": "205",
+            "children": [
+                202
+            ]
+        },
+        {
+            "id": 2054,
+            "Text": "Twist the needle to the right",
+            "Who": "205",
+            "children": [
+                207
+            ]
+        },
+        {
+            "id": 203,
+            "Text": "Capacity for a few minor emotions, lost. He wasn't using them, anyway.",
+            "Who": "203",
+            "children": [
+                2032,
+                2034
+            ]
+        },
+        {
+            "id": 2032,
+            "Text": "Pull the needle back",
+            "Who": "203",
+            "children": [
+                202
+            ]
+        },
+        {
+            "id": 2034,
+            "Text": "203",
+            "Who": "Twist the needle to the right",
+            "children": [
+                206
+            ]
+        },
+        {
+            "id": 206,
+            "Text": "The man's hands begin to twitch. Best not to disturb whatever is here.",
+            "Who": "206",
+            "children": [
+                2062,
+                2063,
+                2064
+            ]
+        },
+        {
+            "id": 2062,
+            "Text": "Pull the needle back",
+            "Who": "206",
+            "children": [
+                205
+            ]
+        },
+        {
+            "id": 2063,
+            "Text": "Twist the needle left",
+            "Who": "206",
+            "children": [
+                203
+            ]
+        },
+        {
+            "id": 2064,
+            "Text": "Twist the needle right",
+            "Who": "206",
+            "children": [
+                208
+            ]
+        },
+        {
+            "id": 207,
+            "Text": "The survivor's legs contort and spasm. Maybe don't poke around here.",
+            "Who": "207",
+            "children": [
+                2073,
+                2071
+            ]
+        },
+        {
+            "id": 2071,
+            "Text": "Push the needle deeper",
+            "Who": "207",
+            "children": [
+                208
+            ]
+        },
+        {
+            "id": 2073,
+            "Text": "Twist the needle to the left",
+            "Who": "207",
+            "children": [
+                2000
+            ]
+        },
+        {
+            "id": 208,
+            "Text": "The man's breathing becomes erratic. This part was actually important.",
+            "Who": "208",
+            "children": [
+                9991
+            ]
+        },
+        {
+            "id": 2200,
+            "Text": "You're not sure which way to move the needle.",
+            "Who": "2200",
+            "children": [
+                2201,
+                2203,
+                2204
+            ]
+        },
+        {
+            "id": 2201,
+            "Text": "Push the needle deeper",
+            "Who": "2200",
+            "children": [
+                224
+            ]
+        },
+        {
+            "id": 2203,
+            "Text": "Twist the needle to the left",
+            "Who": "2200",
+            "children": [
+                221
+            ]
+        },
+        {
+            "id": 2204,
+            "Text": "Twist the needle to the right",
+            "Who": "2200",
+            "children": [
+                225
+            ]
+        },
+        {
+            "id": 221,
+            "Text": "This is the deepest mote of the man's mind. Longings, long since felt. Feelings, overlong. Be careful. A wrong move here can have lasting damage.",
+            "Who": "221",
+            "children": [
+                2212,
+                2214
+            ]
+        },
+        {
+            "id": 2212,
+            "Text": "Pull the needle back",
+            "Who": "221",
+            "children": [
+                2200
+            ]
+        },
+        {
+            "id": 2214,
+            "Text": "Twist the needle right",
+            "Who": "221",
+            "children": [
+                222
+            ]
+        },
+        {
+            "id": 224,
+            "Text": "You tread the knife's edge here. A wrong move here can reduce the man to a drooling mess. Tread carefully.",
+            "Who": "224",
+            "children": [
+                2242,
+                2243,
+                2244
+            ]
+        },
+        {
+            "id": 2242,
+            "Text": "Pull the needle back",
+            "Who": "224",
+            "children": [
+                2200
+            ]
+        },
+        {
+            "id": 2243,
+            "Text": "Twist the needle to the left",
+            "Who": "224",
+            "children": [
+                222
+            ]
+        },
+        {
+            "id": 2244,
+            "Text": "Twist the needle to the right",
+            "Who": "224",
+            "children": [
+                226
+            ]
+        },
+        {
+            "id": 225,
+            "Text": "The needle is too deep for you to work accurately. All bets are off, honestly.",
+            "Who": "225",
+            "children": [
+                2251,
+                2253,
+                2254
+            ]
+        },
+        {
+            "id": 2251,
+            "Text": "Push the needle deeper",
+            "Who": "225",
+            "children": [
+                226
+            ]
+        },
+        {
+            "id": 2253,
+            "Text": "Twist the needle left",
+            "Who": "225",
+            "children": [
+                2200
+            ]
+        },
+        {
+            "id": 2254,
+            "Text": "Twist the needle right",
+            "Who": "225",
+            "children": [
+                227
+            ]
+        },
+        {
+            "id": 226,
+            "Text": "You feel like you are almost done. The last pain is just beyond.",
+            "Who": "225",
+            "children": [
+                2261,
+                2262,
+                2263,
+                2264
+            ]
+        },
+        {
+            "id": 2261,
+            "Text": "Push the needle all the way in",
+            "Who": "226",
+            "children": [
+                229
+            ]
+        },
+        {
+            "id": 2262,
+            "Text": "Pull the needle back",
+            "Who": "226",
+            "children": [
+                225
+            ]
+        },
+        {
+            "id": 2263,
+            "Text": "Twist the needle to the left",
+            "Who": "226",
+            "children": [
+                224
+            ]
+        },
+        {
+            "id": 2264,
+            "Text": "Twist the needle to the right",
+            "Who": "226",
+            "children": [
+                228
+            ]
+        },
+        {
+            "id": 228,
+            "Text": "You are very close to vital centers. One wrong move and he's a vegetable.",
+            "Who": "228",
+            "children": [
+                2282,
+                2283
+            ]
+        },
+        {
+            "id": 2282,
+            "Text": "Pull the needle back",
+            "Who": "228",
+            "children": [
+                227
+            ]
+        },
+        {
+            "id": 2283,
+            "Text": "Twist the needle to the left",
+            "Who": "228",
+            "children": [
+                226
+            ]
+        },
+        {
+            "id": 222,
+            "Text": "This was not a good move. The patient's eyes roll back in a violent spasm.",
+            "Who": "222",
+            "children": [
+                9991
+            ]
+        },
+        {
+            "id": 227,
+            "Text": "The patient starts drooling uncontrollably. Something went wrong.",
+            "Who": "227",
+            "children": [
+                9991
+            ]
+        },
+        {
+            "id": 229,
+            "Text": "...my heart is open for tonight.",
+            "Who": "SURVIVOR",
+            "children": [
+                420
+            ]
+        },
+        {
+            "id": 420,
+            "Text": "There, all done.",
+            "Who": "ELISABETH",
+            "children": [
+                4201
+            ]
+        },
+        {
+            "id": 4201,
+            "Text": "Hello? Is there anybody in there? Just nod if you can hear me.",
+            "Who": "ELISABETH",
+            "children": [
+                4202
+            ]
+        },
+        {
+            "id": 4202,
+            "Text": "Can you stand up? I do believe it's working.",
+            "Who": "ELISABETH",
+            "children": [
+                4203
+            ]
+        },
+        {
+            "id": 4203,
+            "Text": "I can't feel my body.",
+            "Who": "SURVIVOR",
+            "children": [
+                4204
+            ]
+        },
+        {
+            "id": 4204,
+            "Text": "Can you feel me squeezing your hand?",
+            "Who": "ELISABETH",
+            "children": [
+                4205
+            ]
+        },
+        {
+            "id": 4205,
+            "Text": "No.",
+            "Who": "SURVIVOR",
+            "children": [
+                4206
+            ]
+        },
+        {
+            "id": 4206,
+            "Text": "Hey.",
+            "Who": "ERIK",
+            "children": [
+                4207
+            ]
+        },
+        {
+            "id": 4207,
+            "Text": "Time to go.",
+            "Who": "ERIK",
+            "children": [
+                4208
+            ]
+        },
+        {
+            "id": 4208,
+            "Text": "I...",
+            "Who": "ELISABETH",
+            "children": [
+                4209
+            ]
+        },
+        {
+            "id": 4209,
+            "Text": "You did what you could.",
+            "Who": "ERIK",
+            "children": [
+                42099
+            ]
+        },
+        {
+            "id": 42099,
+            "Text": "Hello? Where are you going?",
+            "Who": "SURVIVOR",
+            "children": [
+                42999
+            ]
+        },
+        {
+            "id": 42999,
+            "Text": "We'll be right back.",
+            "Who": "ELISABETH",
+            "children": [
+                430
+            ]
+        },
+        {
+            "id": 430,
+            "Text": "What did you say? I can't hear you very well.",
+            "Who": "SURVIVOR",
+            "children": [
+                431
+            ]
+        },
+        {
+            "id": 431,
+            "Text": "I can't see either. What's going on? Where has the world gone?",
+            "Who": "SURVIVOR",
+            "children": [
+                4319
+            ]
+        },
+        {
+            "id": 4319,
+            "Text": "Let's find a way out.",
+            "Who": "ERIK",
+            "children": [
+                4320,
+                4399
+            ]
+        },
+        {
+            "id": 4320,
+            "Text": "Yeah, sounds good.",
+            "Who": "ELISABETH",
+            "children": [
+                43299
+            ]
+        },
+        {
+            "id": 43299,
+            "Text": "That grate over there looks like I can pry it open",
+            "Who": "ERIK",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 4399,
+            "Text": "SHOOT HIM",
+            "Who": "",
+            "DocumentName": "SHOOT",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 9991,
+            "Text": "The man spasms on the floor and then finally goes limp.",
+            "Who": "",
+            "children": [
+                9992
+            ]
+        },
+        {
+            "id": 9992,
+            "Text": "He is dead.",
+            "Who": "",
+            "children": [
+                9993
+            ]
+        },
+        {
+            "id": 9993,
+            "Text": "No! Fuck!",
+            "Who": "ELISABETH",
+            "children": [
+                9994
+            ]
+        },
+        {
+            "id": 9994,
+            "Text": "Say something! Please!",
+            "Who": "ELISABETH",
+            "children": [
+                9995
+            ]
+        },
+        {
+            "id": 9995,
+            "Text": "Hey.",
+            "Who": "ERIK",
+            "children": [
+                9996
+            ]
+        },
+        {
+            "id": 9996,
+            "Text": "I think- I think I lost him.",
+            "Who": "ELISABETH",
+            "children": [
+                9997
+            ]
+        },
+        {
+            "id": 9997,
+            "Text": "Hey, it's alright. You did what you could.",
+            "Who": "ERIK",
+            "children": [
+                9998
+            ]
+        },
+        {
+            "id": 9998,
+            "Text": "I'm going to need a minute.",
+            "Who": "ELISABETH",
+            "children": [
+                9999
+            ]
+        },
+        {
+            "id": 9999,
+            "Text": "I'll find us an exit. That grate over there looks like it could be pried open.",
+            "Who": "ERIK",
+            "children": [
+                99999
+            ]
+        },
+        {
+            "id": 99999,
+            "Text": "Thanks.",
+            "Who": "ELISABETH",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 991,
+            "Text": "There, all done. You can stop now.",
+            "Who": "ELISABETH",
+            "children": [
+                992
+            ]
+        },
+        {
+            "id": 992,
+            "Text": "How do you feel?",
+            "Who": "ERIK",
+            "children": [
+                993
+            ]
+        },
+        {
+            "id": 994,
+            "Text": "I feel      .",
+            "Who": "SURVIVOR",
+            "children": [
+                995
+            ]
+        },
+        {
+            "id": 995,
+            "Text": "...Ok, sounds good I guess.",
+            "Who": "ELISABETH",
+            "children": [
+                996
+            ]
+        },
+        {
+            "id": 996,
+            "Text": "Come with us, we'll lead you outside.",
+            "Who": "ERIK",
+            "children": [
+                997
+            ]
+        },
+        {
+            "id": 997,
+            "Text": "I'll try prying that grate over there open. Looks like a good escape route.",
+            "Who": "ERIK",
+            "DocumentName": "LEAD",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "ERIK",
+            "children": [
+                997
             ]
         }
     ],
