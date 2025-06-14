@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ButtonFunctions : MonoBehaviour
@@ -15,5 +16,9 @@ public class ButtonFunctions : MonoBehaviour
 	public static void LoadAfterDeath()
     {
         GameManager.GameLoad();
+    }
+    public static void QuitGame() {
+        SaveSystem.SaveAll();
+        Application.Quit();
     }
 }

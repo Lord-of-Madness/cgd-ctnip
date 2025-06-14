@@ -522,6 +522,7 @@ MonoBehaviour:
   myCollider: {fileID: 4618148952752886478}
   partOfAnimationToPopAttack: 0.32
   timeStaggeredAfterHit: 1.5
+  staggerable: 1
   maxHp: 10
   bodyAnimator: {fileID: 1112546706822765183}
   DamageDealtAudioSource: {fileID: 3873113460660095674}
@@ -530,7 +531,21 @@ MonoBehaviour:
   SoundsAudioSource: {fileID: 7749748000342229553}
   FootstepsAudioSource: {fileID: 7937431041547095856}
   Enemygrowls:
-  - {fileID: 8300000, guid: c21360666757da9499d92dd3b0eba1f2, type: 3}
+  - {fileID: 8300000, guid: 1725518e81495144b9953c75cc88d6a3, type: 3}
+  - {fileID: 8300000, guid: 7a378bf3f77e9934eb6e25a4c7ef48e0, type: 3}
+  - {fileID: 8300000, guid: 2aef0ea8c18b14740bff76117ed6951f, type: 3}
+  EnemyrandomLines:
+  - {fileID: 8300000, guid: 8a4efc12b306b3e4eb774a242906cf8d, type: 3}
+  - {fileID: 8300000, guid: 6d5e4a3f480f1594d80e76d3c43b3bc5, type: 3}
+  - {fileID: 8300000, guid: 1635fa20f7c4acb44be3ae58470a0805, type: 3}
+  - {fileID: 8300000, guid: 6887395b6f222a848b8e4843ae1bbcac, type: 3}
+  - {fileID: 8300000, guid: 7cf7a37dfd46f2245a7843fa87f165cd, type: 3}
+  - {fileID: 8300000, guid: 1b5e802a93d1aad4faf91dbb12170236, type: 3}
+  - {fileID: 8300000, guid: cd6a9ce8a73c0784a976359e5e3ccdcd, type: 3}
+  - {fileID: 8300000, guid: c4e2e7edb43c06647a58e7496ba7b58f, type: 3}
+  - {fileID: 8300000, guid: 76cc7b5b7b763084491e349b9d05c3de, type: 3}
+  - {fileID: 8300000, guid: ce7235f78eba5be41bbce7c34c1846d7, type: 3}
+  Cackle: {fileID: 8300000, guid: 29b275b2ecda58a4db5a2c18f0b5ef07, type: 3}
   aggroed: 0
 --- !u!82 &7749748000342229553 stripped
 AudioSource:

@@ -106,7 +106,7 @@ public class DialogueTreeNode
         foreach (var node in list)
         {
             string hex = speakers.ContainsKey(node.Who) ? speakers[node.Who] : GameManager.SpeakerGlobalData.ContainsKey(node.Who) ? GameManager.SpeakerGlobalData[node.Who] : Color.gray.ToHexString();
-            string imagePath = $"CharacterPortraits/{node.Who}";
+            string imagePath = (node.Who!="")? $"CharacterPortraits/{node.Who}": "CharacterPortraits/blank";
             string documentPath = $"Documents/{node.DocumentName}";
             string voicePath = $"Voiceover/Dialogues/{node.DocumentName}";
             nodeDict.Add(node.id, new(new(node.Text, node.Who, Resources.Load<Sprite>(imagePath), hex,Resources.Load<TextAsset>(documentPath), Resources.Load<AudioClip>(voicePath))));

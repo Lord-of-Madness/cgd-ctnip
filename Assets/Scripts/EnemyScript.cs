@@ -45,6 +45,8 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField] AudioSource FootstepsAudioSource;
 
     [SerializeField] List<AudioClip> Enemygrowls;
+    [SerializeField] List<AudioClip> EnemyrandomLines;
+    [SerializeField] AudioClip Cackle;
 
     float barkdelay;
     bool follwing=false;
@@ -247,10 +249,16 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 		myRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX; //Unfree pos and rotY
 
 	}
-
-	public void Bark()
+    public void PlayCackle()
     {
-        SoundsAudioSource.PlayOneShot(Enemygrowls[Random.Range(0, Enemygrowls.Count - 1)]);
+        SoundsAudioSource.PlayOneShot(Cackle);
+    }
+    public void Bark()
+    {
+        if(Random.Range(0, 1f) < 0.4f)
+            SoundsAudioSource.PlayOneShot(EnemyrandomLines[Random.Range(0, EnemyrandomLines.Count - 1)]);
+        else
+            SoundsAudioSource.PlayOneShot(Enemygrowls[Random.Range(0, Enemygrowls.Count - 1)]);
         barkdelay = Random.Range(2f, 10f);
     }
 

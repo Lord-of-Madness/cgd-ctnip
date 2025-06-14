@@ -42,8 +42,9 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		if (ScaryTriggerTriggered)
 		{
 			ScaryTriggerTriggered = false;
-			scaryEnemy.Bark();
-			ScareHappened = true;
+			scaryEnemy.PlayCackle();
+
+            ScareHappened = true;
         }
 	}
 
