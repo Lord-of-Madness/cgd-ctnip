@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class survivorDialogueManager : MonoBehaviour
+public class SurvivorDialogueManager : MonoBehaviour
 {
     [SerializeField] TextAsset basement;
     [SerializeField] TextAsset basement_alt;
@@ -30,10 +30,13 @@ public class survivorDialogueManager : MonoBehaviour
                     help = true;
                 }
             });
-            if (help) {
+            Dialogue.Instance.dialogueEnded.RemoveAllListeners();
+            if (help)
+            {
+                Dialogue.Instance.dialogueEnded.AddListener(GameManager.EndScreem);
                 Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(helpJSON));
             }
-            Dialogue.Instance.dialogueEnded.RemoveAllListeners();
+            else GameManager.EndScreem();
         });
 
         if (alt)

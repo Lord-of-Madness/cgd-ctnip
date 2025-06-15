@@ -3,6 +3,8 @@ using UnityEngine;
 public class UIScript : MonoBehaviour
 {
     static public UIScript Instance;
+    public GameOverScreenScript GameOver;
+    public GameOverScreenScript ThanksForPlaying;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

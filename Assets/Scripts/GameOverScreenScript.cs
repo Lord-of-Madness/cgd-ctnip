@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class GameOverScreenScript : MonoBehaviour
 {
-    public static GameOverScreenScript instance;
 
 	[SerializeField]
 	Button loadButton;
@@ -18,8 +17,6 @@ public class GameOverScreenScript : MonoBehaviour
 
 	private void Awake()
 	{
-		if (instance == null)
-			instance = this;
 		Hide();
 	}
 

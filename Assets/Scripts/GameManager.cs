@@ -195,14 +195,24 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
         Instance.GiveCommandToActivePlayer(CharacterCommand.HIDE_LASER); 
         
         Time.timeScale = 0;
-        GameOverScreenScript.instance.Show();
+        UIScript.Instance.GameOver.Show();
+    }
+    public static void EndScreem()
+    {
+        Instance.inputActions.Player.Disable();
+
+        //Fixes the player still rotating after death
+        Instance.GiveCommandToActivePlayer(CharacterCommand.HIDE_LASER);
+
+        Time.timeScale = 0;
+        UIScript.Instance.ThanksForPlaying.Show();
     }
 
     public static void GameLoad()
     {
 		Instance.inputActions.Player.Enable();
 		Time.timeScale = 1;
-        GameOverScreenScript.instance.Hide();
+        UIScript.Instance.GameOver.Hide();
         SaveSystem.LoadAll();
     }
 

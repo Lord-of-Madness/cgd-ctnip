@@ -499,7 +499,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e185519938d984d439a86583e17694d4, type: 3}
   - {fileID: 21300000, guid: ce798cd406fc4b34aa16975d0b24a22e, type: 3}
   - {fileID: 21300000, guid: 477bb730f2daeac42a7e2f7720d9d75c, type: 3}
-  - {fileID: 21300000, guid: 477bb730f2daeac42a7e2f7720d9d75c, type: 3}
+  - {fileID: 21300000, guid: 18333b6158d0b314185cd646d1f3b0b5, type: 3}
   Voicelines:
   - {fileID: 8300000, guid: 5d9d78b83889f8f4d808111abe7bca5e, type: 3}
   - {fileID: 8300000, guid: 5e615f9804d5d88468f7fde8eafbd4b1, type: 3}
@@ -582,6 +582,74 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1892258687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1892258689}
+  - component: {fileID: 1892258688}
+  m_Layer: 0
+  m_Name: VideoPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!328 &1892258688
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892258687}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 76df43641646f0645858166a1f565757, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 523687477}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: https://r.mtdv.me/tF1rUXsgJO
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!4 &1892258689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892258687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 822.3737, y: 592.5827, z: 53.11124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -697,3 +765,4 @@ SceneRoots:
   - {fileID: 523687478}
   - {fileID: 2139582012}
   - {fileID: 906558986}
+  - {fileID: 1892258689}

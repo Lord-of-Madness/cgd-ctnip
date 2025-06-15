@@ -17,6 +17,11 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField]
     string lockedText = "It's locked";
 
+    [SerializeField] AudioSource doorAudioSource;
+    [SerializeField] AudioClip DoorOpenSound;
+    [SerializeField] AudioClip DoorCloseSound;
+    [SerializeField] AudioClip DoorLockedSound;
+
     bool isOpen = false;
 
 	private void Start()
@@ -30,6 +35,7 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
         if (locked)
         {
             HUD.Instance.PromptLabel.text = lockedText;
+            doorAudioSource.PlayOneShot(DoorLockedSound);
             return;
         }
         if (isOpen) CloseDoor();
@@ -39,12 +45,14 @@ public class DoorOpen : MonoBehaviour, SaveSystem.ISaveable
     public void OpenDoor(bool front)
     {
         openedPartReference.transform.DOLocalRotate(new Vector3(0, front ? openAngle : -openAngle, 0), openDuration);
+        doorAudioSource.PlayOneShot(DoorOpenSound);
         isOpen = true;
     }
 
     public void CloseDoor()
     {
 		openedPartReference.transform.DOLocalRotate(new Vector3(0, defaultAngle, 0), openDuration);
+        doorAudioSource.PlayOneShot(DoorCloseSound);
         isOpen = false;
     }
 

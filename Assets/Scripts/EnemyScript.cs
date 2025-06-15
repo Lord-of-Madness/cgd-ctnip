@@ -120,7 +120,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
             else
             {
                 Bark();
-                barkdelay = Random.Range(2f, 10f);
+                barkdelay = Random.Range(1f, 4f);
             }
         }
 
@@ -259,7 +259,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
             SoundsAudioSource.PlayOneShot(EnemyrandomLines[Random.Range(0, EnemyrandomLines.Count - 1)]);
         else
             SoundsAudioSource.PlayOneShot(Enemygrowls[Random.Range(0, Enemygrowls.Count - 1)]);
-        barkdelay = Random.Range(2f, 10f);
+        barkdelay = Random.Range(1f, 4f);
     }
 
 	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
