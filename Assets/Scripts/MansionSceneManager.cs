@@ -15,6 +15,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	[SerializeField] EnemyScript scaryEnemy;
 	[SerializeField] Trigger scaryTrigger;
 	[SerializeField] GameObject blockadeOfTransition;
+	[SerializeField] TextAsset KeyDialog;
 
 	bool ScaryTriggerTriggered = false;
 	bool ScareHappened = false;
@@ -59,7 +60,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		GameManager.Instance.GramophoneSceneExternalChange = true;
 		scaryTrigger.gameObject.SetActive(true);
 		blockadeOfTransition.SetActive(false);
-
+		Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(KeyDialog) );
 	}
 
 	public void RevertKeyPickUp()
