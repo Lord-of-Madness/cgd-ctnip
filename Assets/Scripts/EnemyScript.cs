@@ -119,8 +119,7 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
             if (barkdelay > 0) barkdelay -= Time.deltaTime;
             else
             {
-                Bark();
-                barkdelay = Random.Range(1f, 4f);
+                barkdelay = Random.Range(1f, 4f)+ Bark();
             }
         }
 
@@ -253,13 +252,18 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
     {
         SoundsAudioSource.PlayOneShot(Cackle);
     }
-    public void Bark()
+    public float Bark()
     {
-        if(Random.Range(0, 1f) < 0.4f)
-            SoundsAudioSource.PlayOneShot(EnemyrandomLines[Random.Range(0, EnemyrandomLines.Count - 1)]);
-        else
-            SoundsAudioSource.PlayOneShot(Enemygrowls[Random.Range(0, Enemygrowls.Count - 1)]);
+        AudioClip ac;
+        if (Random.Range(0, 1f) < 0.4f) {
+            ac = EnemyrandomLines[Random.Range(0, EnemyrandomLines.Count)];
+        }
+        else {
+            ac = Enemygrowls[Random.Range(0, Enemygrowls.Count)];
+        }
+        SoundsAudioSource.PlayOneShot(ac);
         barkdelay = Random.Range(1f, 4f);
+        return ac.length;
     }
 
 	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
