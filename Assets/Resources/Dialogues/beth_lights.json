@@ -1,0 +1,54 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "That looks like the key from the basement.",
+            "Who": "ELISABETH",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "The lights have gone out!",
+            "Who": "ELISABETH",
+            "children": [
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "Text": "The generator must have died. I should head back.",
+            "Who": "ELISABETH",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "The generator must have died. I should head back.",
+            "Who": "ELISABETH",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "",
+            "children": [
+
+            ]
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}
