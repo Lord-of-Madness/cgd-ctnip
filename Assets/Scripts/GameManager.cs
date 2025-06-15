@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 		inputActions.Player.Attack.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.ATTACK); };
 		inputActions.Player.Reload.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.RELOAD); };
 		inputActions.Player.SwapTools.performed += (ctx) => { GiveCommandToActivePlayer(CharacterCommand.SWITCH_TOOL); };
+        inputActions.Player.Pause.performed += (ctx) => { PauseMenu.Instance.Show(); };
+        inputActions.PauseMenu.UnPause.Disable();
 
         if (onStartChangeChar) { SwapCharacters(); onStartChangeChar = false; }
 	}
