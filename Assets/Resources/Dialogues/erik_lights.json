@@ -1,0 +1,67 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "What the...",
+            "Who": "ERIK",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "Why are there flasks of blood here?",
+            "Who": "ERIK",
+            "children": [
+                2
+            ],
+            "DocumentName": "blood"
+        },
+        {
+            "id": 2,
+            "Text": "What the heck happened here?",
+            "Who": "ERIK",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "...",
+            "Who": "ERIK",
+            "children": [
+                4
+            ]
+        },
+        {
+            "id": 4,
+            "Text": "Damn. The lights died. Elisabeth won't be able to see a thing!",
+            "Who": "ERIK",
+            "children": [
+                5
+            ]
+        },
+        {
+            "id": 5,
+            "Text": "I need to get back to fix the generator.",
+            "Who": "ERIK",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who": "",
+            "children": [
+
+            ]
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}
