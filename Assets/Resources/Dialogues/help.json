@@ -354,8 +354,8 @@
         },
         {
             "id": 1034,
-            "Text": "103",
-            "Who": "Twist the needle to the right",
+            "Text": "Twist the needle to the right",
+            "Who": "103",
             "children": [
                 106
             ]
@@ -775,8 +775,8 @@
         },
         {
             "id": 2034,
-            "Text": "203",
-            "Who": "Twist the needle to the right",
+            "Text": "Twist the needle to the right",
+            "Who": "203",
             "children": [
                 206
             ]
@@ -1347,7 +1347,6 @@
             "Text": "--KONEC--",
             "Who": "ERIK",
             "children": [
-                997
             ]
         }
     ],
