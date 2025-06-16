@@ -25,6 +25,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     [SerializeField] Transform ErikScenePosition;
     [SerializeField] Trigger trigger;
     [SerializeField] bool cinematicMode =false;
+    [SerializeField] GameObject generator;
     public bool GeneratorFixed { get; set; } = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -62,7 +63,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
 	public void TurnGeneratorOff()
     {
-        //if (!GeneratorFixed) return;
+        generator.GetComponent<AudioSource>().Stop();
         doorsToBeDisabledAfterGenFix.enabled = true;
 		sceneTransitionToBeEnableAfterGenFix.SetActive(false);
 
@@ -74,8 +75,8 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
     public void TurnGeneratorOn()
 	{
-        //if (GeneratorFixed) return;
         
+        generator.GetComponent<AudioSource>().Play();
         if (GameManager.Instance.MansionKeyPickedUp)
         {
             doorsToBeDisabledAfterGenFix.enabled = false;
