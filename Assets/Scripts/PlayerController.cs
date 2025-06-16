@@ -406,8 +406,9 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
         //Debug.Log("Moving in dir: " + curVelocity.ToString());
         //transform.position += curVelocity * Time.deltaTime;
 
-		//CharaController version
-		// move the player
+        //CharaController version
+        // move the player
+
 		MyCharController.Move(curVelocity * Time.deltaTime);
 
 	}
