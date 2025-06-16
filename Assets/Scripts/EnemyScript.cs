@@ -137,7 +137,8 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 		{
 			if (c.TryGetComponent(out PlayerData playerData))
 			{
-                playerData.HP--;
+				DamageDealtAudioSource.Play();
+				playerData.HP--;
 			}
 		}
         bodyAnimator.SetBool(GlobalConstants.animAttackID, false); //Set to false to enable trans back
@@ -177,7 +178,6 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
 	}
 	void FinishAttacking()
 	{
-        DamageDealtAudioSource.Play();
         timeAttacking = 0;
 		attacking = false;
         ResumeFollowingTarget();
