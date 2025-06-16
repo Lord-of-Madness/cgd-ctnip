@@ -216,6 +216,7 @@ public class SaveSystem:MonoBehaviour
 		public GameManagerData gameManagerData;
 		public MansionLevelData mansionLevelData;
 		public GramophoneLevelData gramophoneLevelData;
+		public ErikSceneLevelData erikLevelData;
 
 		public Dictionary<string, RemovableObjectData> remObjData = new();
 	}
@@ -292,7 +293,11 @@ public class SaveSystem:MonoBehaviour
 		public bool generatorFixed;
 	}
 
-
+	[SerializeField]
+	public class ErikSceneLevelData
+	{
+		public bool inspectedBlood;
+	}
 }
 
 public struct Vector3JsonFriendly
