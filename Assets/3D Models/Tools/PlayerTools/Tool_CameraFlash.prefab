@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: ffd3f03710d72f242b12545e0e665603, type: 3}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: actionTime
-      value: 0.05
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 696844033401979599, guid: a0681f660e3fbe34295c58101dbbe511, type: 3}
       propertyPath: reloadTime
