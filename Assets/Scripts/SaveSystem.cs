@@ -14,9 +14,12 @@ public class SaveSystem:MonoBehaviour
 	static readonly List<ISaveable> allSceneSaveables = new();
 	static List<ISaveable> allGenSaveables = new();
 
+	public static bool activeInScene = false;
+
 	//bool firstUpdate = true;
 	private void Awake()
 	{
+		activeInScene = true;
 		allSceneSaveables.Clear();
 	}
 	private void Start()
@@ -28,6 +31,11 @@ public class SaveSystem:MonoBehaviour
 
 		UpdateSceneSavePath();
 		
+	}
+
+	private void OnDestroy()
+	{
+		activeInScene = false;
 	}
 
 	public static void CreateSaveDir()

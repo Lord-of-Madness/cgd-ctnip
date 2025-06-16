@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
@@ -20,8 +19,13 @@ public class SceneTransitionManager : MonoBehaviour
 
 	public static void LoadNewScene(string sceneName)
 	{
-		SaveSystem.SaveAll();
-		Instance.StartCoroutine(LoadNewSceneAndThenLoadSave(sceneName));
+		if (SaveSystem.activeInScene)
+		{
+			SaveSystem.SaveAll();
+			Instance.StartCoroutine(LoadNewSceneAndThenLoadSave(sceneName));
+		}
+		else
+			SceneManager.LoadScene(sceneName);
 	}
 
 	private static IEnumerator LoadNewSceneAndThenLoadSave(string sceneName)
