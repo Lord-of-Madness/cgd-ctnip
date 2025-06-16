@@ -27,6 +27,7 @@ public class ExteriorSceneManager : MonoBehaviour
                             GameManager.Instance.erikPC.playerData.Documents.Add(document);
                         break;
                     }
+                Dialogue.Instance.dialogueEnded.RemoveAllListeners();
             });
             Dialogue.Instance.ShowCharacterWithText(MissionBriefDT);
             
