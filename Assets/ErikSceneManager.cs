@@ -11,6 +11,11 @@ public class ErikSceneManager : MonoBehaviour, SaveSystem.ISaveable
         SaveSystem.AddGeneralSaveable(this);
 	}
 
+	private void OnDestroy()
+	{
+		SaveSystem.RemoveGenSaveable(this);	
+	}
+
 	public void BloodInspection()
     {
         Lights.SetActive(false);

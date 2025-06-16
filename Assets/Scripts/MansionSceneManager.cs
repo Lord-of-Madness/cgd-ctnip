@@ -16,6 +16,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 	[SerializeField] Trigger scaryTrigger;
 	[SerializeField] GameObject blockadeOfTransition;
 	[SerializeField] TextAsset KeyDialog;
+	[SerializeField] SceneTransition sceneTrans;
 
 	bool ScaryTriggerTriggered = false;
 	bool ScareHappened = false;
@@ -102,7 +103,10 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 				blockadeOfTransition.SetActive(false);
 			}
 			else
+			{
 				DoThingsAffectedByKeyPickUp();
+			}
+			sceneTrans.loadedSceneName = "GramofonScene";
 		}
 		else RevertKeyPickUp();
 	}

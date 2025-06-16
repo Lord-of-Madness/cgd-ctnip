@@ -3,7 +3,7 @@ using UnityEngine;
 public class SceneTransition : MonoBehaviour
 {
 	[SerializeField]
-	string loadedSceneName = "GramofonScene";
+	public string loadedSceneName = "GramofonScene";
 
 	bool readyToTrans = false;
 	public bool Enabled = true;
