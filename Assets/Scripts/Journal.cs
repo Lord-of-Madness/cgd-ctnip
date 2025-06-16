@@ -27,8 +27,11 @@ public class Journal : MonoBehaviour
     }
     public void Show(string docname = "")
     {
-        //TODO pause game
-        GameManager.Instance.ActivePlayer.VoiceSource.PlayOneShot(PageRustleSound[Random.Range(0,PageRustleSound.Count)]);
+		//Pause Game
+		Time.timeScale = 0;
+
+
+		GameManager.Instance.ActivePlayer.VoiceSource.PlayOneShot(PageRustleSound[Random.Range(0,PageRustleSound.Count)]);
         SwapWasEnabled = GameManager.Instance.inputActions.Player.SwapCharacters.enabled && GameManager.Instance.OtherPlayer!=null;
         if (!SwapWasEnabled )
         {
@@ -78,6 +81,9 @@ public class Journal : MonoBehaviour
     }
     public void Hide()
     {
+		//ÜnPause Game
+		Time.timeScale = 1;
+	
         GameManager.Instance.inputActions.Player.Enable();
         gameObject.SetActive(false);
         HUD.Instance.Show();
