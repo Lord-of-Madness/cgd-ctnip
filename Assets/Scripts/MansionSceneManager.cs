@@ -51,6 +51,12 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
 	public void PickUpKey()
 	{
+		DoThingsAffectedByKeyPickUp();
+		Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(KeyDialog) );
+	}
+
+	void DoThingsAffectedByKeyPickUp()
+	{
 		KeyPickedUp = true;
 		lightsToBeTurnedOff.TurnOffAllChildren();
 		foreach (var door in doorsToBeOpened) door.OpenDoor(true);
@@ -60,7 +66,6 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 		GameManager.Instance.GramophoneSceneExternalChange = true;
 		scaryTrigger.gameObject.SetActive(true);
 		blockadeOfTransition.SetActive(false);
-		Dialogue.Instance.ShowCharacterWithText(DialogueTreeNode.DeserializeTree(KeyDialog) );
 	}
 
 	public void RevertKeyPickUp()
@@ -79,7 +84,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
 	public void SaveGeneric(SaveSystem.AllSavedData saveData)
 	{
-		saveData.mansionLevelData = new SaveSystem.MansionLevelData { keyPickedUp = KeyPickedUp };
+		return; //KeyPickedUp is save via GameManager
 	}
 	public void LoadGeneric(SaveSystem.AllSavedData savedData)
 	{
@@ -97,7 +102,7 @@ public class MansionSceneManager : MonoBehaviour, SaveSystem.ISaveable
 				blockadeOfTransition.SetActive(false);
 			}
 			else
-				PickUpKey();
+				DoThingsAffectedByKeyPickUp();
 		}
 		else RevertKeyPickUp();
 	}

@@ -222,6 +222,8 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
 	public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
 	{
         dataHolder.gameManagerData = new SaveSystem.GameManagerData() { activePlayer = (int)activeChar };
+        dataHolder.mansionLevelData = new SaveSystem.MansionLevelData() { keyPickedUp = MansionKeyPickedUp };
+        dataHolder.gramophoneLevelData = new SaveSystem.GramophoneLevelData() { generatorFixed = GramophoneGenFixed };
 	}
 
 	public void LoadGeneric(SaveSystem.AllSavedData data)

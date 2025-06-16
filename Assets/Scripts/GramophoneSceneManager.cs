@@ -99,7 +99,8 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
 
     public void SaveGeneric(SaveSystem.AllSavedData dataHolder)
 	{
-        dataHolder.gramophoneLevelData = new SaveSystem.GramophoneLevelData { generatorFixed = GeneratorFixed };
+        //dataHolder.gramophoneLevelData = new SaveSystem.GramophoneLevelData { generatorFixed = GeneratorFixed };
+        return; //GenFixState is save via GameManager
 	}
 
 	public void LoadGeneric(SaveSystem.AllSavedData data)
