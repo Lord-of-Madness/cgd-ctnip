@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     public bool MansionKeyPickedUp { get; set; } = false;
     public bool GramophoneGenFixed { get; set; } = true;
     public bool GramophoneSceneExternalChange { get; set; } = false;
+    public bool ErikInspectedBlood { get; set; } = false;
 
     private void Awake()
     {
@@ -224,12 +225,17 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
         dataHolder.gameManagerData = new SaveSystem.GameManagerData() { activePlayer = (int)activeChar };
         dataHolder.mansionLevelData = new SaveSystem.MansionLevelData() { keyPickedUp = MansionKeyPickedUp };
         dataHolder.gramophoneLevelData = new SaveSystem.GramophoneLevelData() { generatorFixed = GramophoneGenFixed };
+        dataHolder.erikLevelData = new SaveSystem.ErikSceneLevelData() { inspectedBlood = ErikInspectedBlood };
 	}
 
 	public void LoadGeneric(SaveSystem.AllSavedData data)
 	{
         if (activeChar != (PlayerCharacter)data.gameManagerData.activePlayer)
             SwapCharacters();
+
+        GramophoneGenFixed = data.gramophoneLevelData.generatorFixed;
+        MansionKeyPickedUp = data.mansionLevelData.keyPickedUp;
+        ErikInspectedBlood = data.erikLevelData.inspectedBlood;
 	}
 
 	public void SaveSceneSpecific(SaveSystem.AllSavedData dataHolder)
