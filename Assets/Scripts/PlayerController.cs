@@ -387,6 +387,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     {
         Vector3 horizontalVelocity = new(curVelocity.x, 0, curVelocity.z);
 
+        horizontalVelocity /= transform.localScale.x; //Because velocity is scaled with the model -> animator is still the same
+
         bodyAnimator.applyRootMotion = true;
 
         //bodyAnimator.SetBool(GlobalConstants.animGroundedID, isGrounded);
@@ -490,7 +492,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 		else //If no camera -> basic iso movement
 			moveVelocity = Quaternion.Euler(0, 45, 0) * moveVelocity;
 
-        moveVelocity = moveVelocity.normalized * speed * transform.localScale.x;
+        moveVelocity = moveVelocity.normalized * speed * transform.localScale.x; //Local scale for scene scaled up
         if (isRunning) moveVelocity *= 2;
 
         curVelocity.x = moveVelocity.x;
@@ -521,6 +523,8 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
 		if (isGrounded)
 			curVelocity.y = -2;
         else curVelocity.y += Physics.gravity.y * Time.deltaTime;
+
+        if (curVelocity.y < -20) curVelocity.y = -20f;
 	}
 
     /// <summary>
