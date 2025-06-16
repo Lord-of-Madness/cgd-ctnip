@@ -239,6 +239,7 @@ public class DialogueLine
     }
     public string SpeakerAnnotation()
     {
+        if(Hex.Length==8 && Hex[6]=='0'&& Hex[7] == '0') return "";
         return $"<color=#{Hex}>{Who}: </color>";
     }
 }
