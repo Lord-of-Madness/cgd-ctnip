@@ -127,6 +127,7 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     float storedDist;
     public void CinematicStart()
     {
+        GameManager.Instance.inputActions.Player.SwapCharacters.Disable();
         generatorPosition.gameObject.SetActive(true);
         doorPosition.gameObject.SetActive(true);
         GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = true;
@@ -157,16 +158,9 @@ public class GramophoneSceneManager : MonoBehaviour, SaveSystem.ISaveable
     }
     public void RunToScenes()
     {
-        GameManager.Instance.bethPC.aITarget.target = /*ErikScenePosition;*/AlzbetaScenePosition; //GameManager.Instance.OtherPlayer.transform;
+        GameManager.Instance.bethPC.aITarget.target = AlzbetaScenePosition;
         GameManager.Instance.erikPC.aITarget.target = ErikScenePosition;
-        //GameManager.Instance.bethPC.DisablePlayerControl();
-        // GameManager.Instance.bethPC.StartFollowingOtherChar();
-        /*
-        StartCoroutine(Utilities.CallAfterSomeTime(() => {
-            GameManager.Instance.ActivePlayer.aITarget.closeEnoughDistance = storedDist;
-            GameManager.Instance.ActivePlayer.EnablePlayerControl();
-            GameManager.Instance.ActivePlayer.unlessIFuckingWantTo = false;
-        }, 1.5f));*/
+        GameManager.Instance.inputActions.Player.SwapCharacters.Enable();
         Dialogue.Instance.dialogueEnded.RemoveListener(RunToScenes);
     }
 }
