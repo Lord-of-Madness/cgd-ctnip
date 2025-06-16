@@ -527,7 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackZoneScript: {fileID: 6072977052886182121}
   myCollider: {fileID: 4618148952752886478}
-  partOfAnimationToPopAttack: 0.32
+  partOfAnimationToPopAttack: 0.55
   timeStaggeredAfterHit: 1.5
   staggerable: 1
   maxHp: 10
@@ -591,15 +591,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb7e424d7a2a15e46bb2b23a3f91d5ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.018000007
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb7e424d7a2a15e46bb2b23a3f91d5ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.109
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb7e424d7a2a15e46bb2b23a3f91d5ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1400001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb7e424d7a2a15e46bb2b23a3f91d5ec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -707,8 +707,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9148604558036182014}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_Controller: {fileID: 9100000, guid: 376ea993e444d174e830b4fbed578ba0, type: 2}
+  m_Avatar: {fileID: 9000000, guid: fb7e424d7a2a15e46bb2b23a3f91d5ec, type: 3}
+  m_Controller: {fileID: 9100000, guid: b7826f073b617c040a5f3cde86953ba1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

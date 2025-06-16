@@ -82,10 +82,13 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         if (attacking) {
             timeAttacking += Time.deltaTime;
             //Attack in middle -> check if anyone is hit
-		    if (animInfo.fullPathHash == GlobalConstants.animAttackStateHash && animInfo.normalizedTime > partOfAnimationToPopAttack  && !checkedHits)
+		    if (animInfo.fullPathHash == GlobalConstants.animAttackStateHash && 
+                animInfo.normalizedTime > partOfAnimationToPopAttack &&
+                animInfo.normalizedTime < 1 &&
+                !checkedHits)
             {
                 CheckHitsAndKill();
-                timeToAttack = animInfo.length; //Update timeToAttack based on animation
+                timeToAttack = animInfo.length * animInfo.speed * animInfo.speedMultiplier; //Update timeToAttack based on animation
 		    }
 
             //Attack finished --> Resume following target
