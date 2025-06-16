@@ -89,4 +89,6 @@ public class AITarget : MonoBehaviour
 		isFollowing = follow;
 
 	}
+
+	public bool IsFollowing() => isFollowing;
 }

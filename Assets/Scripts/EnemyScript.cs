@@ -63,6 +63,9 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         aiTargetScript = GetComponent<AITarget>();
 		bodyAnimator.SetInteger(GlobalConstants.animHpID, hp);
         barkdelay = Random.Range(2f, 10f);
+
+        follwing = aggroed;
+
         SaveSystem.AddSceneSaveable(this);
 
     }
@@ -274,11 +277,13 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         //If this is null when this is called -> probably memory leak in the allSaveables in SaveSystem
         SaveSystem.EnemyData myData = new()
         {
-            following = follwing,
 			hp = hp,
             pos = new Vector3JsonFriendly(transform.position),
             aggroed = aggroed,
 		};
+
+        if (follwing || attacking) myData.following = true;
+        else myData.following = false;
 
         dataHolder.enemyData.Add(Utilities.GetFullPathName(gameObject), myData);
 	}
@@ -306,14 +311,21 @@ public class EnemyScript : MonoBehaviour, SaveSystem.ISaveable
         bodyAnimator.SetBool(GlobalConstants.animRestartId, true);
 		bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 999); //To speed up all animation to get to the desired end state
 
-		StartCoroutine(
-            Utilities.CallAfterSomeTime(() => { 
-                bodyAnimator.SetBool(GlobalConstants.animRestartId, false);
-                bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
-            }, 0.2f) 
-            );
+        if (gameObject.activeInHierarchy)
+            StartCoroutine(
+                Utilities.CallAfterSomeTime(() =>
+                {
+                    bodyAnimator.SetBool(GlobalConstants.animRestartId, false);
+                    bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+                }, 0.2f)
+                );
+        else
+        {
+            bodyAnimator.SetBool(GlobalConstants.animRestartId, false);
+            bodyAnimator.SetFloat(GlobalConstants.animMotionSpeedID, 1);
+        }
 
-        transform.position = myData.pos.GetVector3();
+		transform.position = myData.pos.GetVector3();
 
         }
 
