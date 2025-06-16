@@ -128,7 +128,8 @@ public class GameManager : MonoBehaviour, SaveSystem.ISaveable
     public void SwapCharacters()
     {
         if (OtherPlayer == null) {
-            ActivePlayer.PlayNope();
+            if (!onStartChangeChar)
+                ActivePlayer.PlayNope();
             return; }
         if (followingOn) ActivePlayer.StartFollowingOtherChar();
         ActivePlayer.DisablePlayerControl();

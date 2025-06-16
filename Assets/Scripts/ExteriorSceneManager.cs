@@ -23,7 +23,8 @@ public class ExteriorSceneManager : MonoBehaviour
                 foreach (Document document in GameManager.Instance.ActivePlayer.playerData.Documents)
                     if ("Controls" == document.name)
                     {
-                        GameManager.Instance.erikPC.playerData.Documents.Add(document);
+                        if (GameManager.Instance.erikPC != null)
+                            GameManager.Instance.erikPC.playerData.Documents.Add(document);
                         break;
                     }
             });
