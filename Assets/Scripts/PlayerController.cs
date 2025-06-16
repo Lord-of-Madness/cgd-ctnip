@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour, SaveSystem.ISaveable
     public UnityEvent/*<ReloadEventData>*/ onReload;
     float actionCooldown = 0;
     internal bool unlessIFuckingWantTo = false;
+    [HideInInspector]
     public AITarget aITarget;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
