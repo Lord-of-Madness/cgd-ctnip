@@ -1,0 +1,97 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "Text": "What the fuck is this place?",
+            "Who": "ELISABETH",
+            "children": [
+                1
+            ]
+        },
+        {
+            "id": 1,
+            "Text": "Look at these.",
+            "Who": "ERIK",
+            "children": [
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "Text": "Good lord. That's some fucked up shit.",
+            "Who": "ELISABETH",
+            "children": [
+                3
+            ]
+        },
+        {
+            "id": 3,
+            "Text": "Did you see any survivors?",
+            "Who": "ERIK",
+            "children": [
+                4
+            ]
+        },
+        {
+            "id": 4,
+            "Text": "No. But I did find a key to open the basement.",
+            "Who": "ELISABETH",
+            "children": [
+                5,
+                6
+            ]
+        },
+        {
+            "id": 5,
+            "Text": "Let's check it out, then.",
+            "Who": "ERIK",
+            "children": [
+                7
+            ]
+        },
+        {
+            "id": 6,
+            "Text": "Maybe not?",
+            "Who": "ERIK",
+            "children": [
+                8
+            ]
+        },
+        {
+            "id": 7,
+            "Text": "Let's check it out, then. There could still be some survivors.",
+            "Who": "ERIK",
+            "DocumentName": "basement_route",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 8,
+            "Text": "Maybe we should just get out and run. Burn this place to the ground, so it doesn't eat any more poor souls.",
+            "Who": "ERIK",
+            "DocumentName": "early_route",
+            "children": [
+                99
+            ]
+        },
+        {
+            "id": 99,
+            "Text": "--KONEC--",
+            "Who":"",
+            "children": [
+
+            ]
+        }
+    ],
+    "speakers": [
+        {
+            "Speaker": "ELISABETH",
+            "Hex": "9C3E3EFF"
+        },
+        {
+            "Speaker": "ERIK",
+            "Hex": "4980D3FF"
+        }
+    ]
+}
